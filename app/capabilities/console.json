@@ -1,0 +1,21 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "console",
+  "description": "Permissions for the data console window: the console's app commands (the export's save dialog opens from Rust)",
+  "windows": [
+    "console"
+  ],
+  "permissions": [
+    "core:default",
+    "allow-report-ui-error",
+    "allow-console-run",
+    "allow-console-cancel",
+    "allow-console-schema",
+    "allow-console-parameters",
+    "allow-console-export",
+    "allow-console-saved-list",
+    "allow-console-saved-put",
+    "allow-console-saved-delete",
+    "allow-open-database-folder"
+  ]
+}

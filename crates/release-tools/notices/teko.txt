@@ -1,0 +1,5 @@
+Teko 2.000 (https://github.com/google/fonts/tree/main/ofl/teko), bundled as ui/src/fonts/Teko-Variable.ttf
+
+Copyright 2023 The Teko Project Authors (https://www.github.com/googlefonts/teko)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.

@@ -1,0 +1,481 @@
+/* The data console window: a page styled as a terminal app. Boxed panes
+   with the title set into the top border, the focused pane's border in the
+   ring colour, monospace and dense rows throughout. Colours are the app's
+   theme tokens (console.html is always dark). */
+
+.tui-root {
+  --tui-line: color-mix(in oklch, var(--foreground) 26%, transparent);
+  --tui-accent: var(--ring);
+  --tui-dim: var(--muted-foreground);
+  --tui-select: color-mix(in oklch, var(--ring) 40%, transparent);
+
+  display: grid;
+  grid-template-columns: minmax(24ch, 34ch) minmax(0, 1fr);
+  grid-template-rows: minmax(7rem, 32%) minmax(0, 1fr) auto;
+  gap: 0 1ch;
+  height: 100vh;
+  padding: 0.5rem 1ch 0;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.tui-area-schema {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  min-height: 0;
+}
+
+.tui-area-query {
+  grid-column: 2;
+  grid-row: 1;
+  min-height: 0;
+}
+
+.tui-area-results {
+  grid-column: 2;
+  grid-row: 2;
+  min-height: 0;
+}
+
+.tui-area-keys {
+  grid-column: 1 / 3;
+  grid-row: 3;
+}
+
+/* A pane: the border is the box, the title sits on its top edge. */
+.tui-pane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 0.7em);
+  margin-top: 0.7em;
+  min-width: 0;
+  border: 1px solid var(--tui-line);
+}
+
+.tui-pane-focused {
+  border-color: var(--tui-accent);
+}
+
+.tui-pane-title {
+  position: absolute;
+  top: -0.75em;
+  left: 1ch;
+  right: 1ch;
+  display: flex;
+  gap: 1ch;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tui-pane-title > span {
+  padding: 0 1ch;
+  background: var(--background);
+}
+
+.tui-pane-name {
+  font-weight: 600;
+}
+
+.tui-pane-focused .tui-pane-name {
+  color: var(--tui-accent);
+}
+
+.tui-pane-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0.5em 1ch 0.25em;
+}
+
+/* Text colours. */
+.tui-dim {
+  color: var(--tui-dim);
+}
+
+.tui-warn {
+  color: var(--warning);
+}
+
+.tui-error,
+.tui-error-text {
+  color: var(--destructive);
+}
+
+.tui-error {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.tui-empty {
+  margin: 0;
+  color: var(--tui-dim);
+}
+
+.tui-error:focus,
+.tui-empty:focus {
+  outline: none;
+}
+
+/* Schema pane. */
+.tui-schema {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.tui-heading {
+  margin: 0.6em 0 0.1em;
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--tui-dim);
+}
+
+.tui-heading:first-of-type {
+  margin-top: 0;
+}
+
+.tui-entry-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.tui-entry,
+.tui-toggle,
+.tui-hint {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.tui-entry {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  padding: 0 1ch 0 2ch;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tui-entry-row > .tui-toggle + .tui-entry {
+  padding-left: 0;
+}
+
+.tui-toggle {
+  width: 2ch;
+  color: var(--tui-dim);
+  text-align: left;
+}
+
+.tui-entry:hover {
+  background: color-mix(in oklch, var(--foreground) 8%, transparent);
+}
+
+/* The selected entry: an inverse bar, as a TUI list selection. */
+.tui-entry:focus {
+  outline: none;
+  background: var(--tui-select);
+}
+
+.tui-pane:not(.tui-pane-focused) .tui-entry:focus {
+  background: color-mix(in oklch, var(--foreground) 12%, transparent);
+}
+
+.tui-delete {
+  visibility: hidden;
+}
+
+.tui-entry-row:hover .tui-delete,
+.tui-entry:focus + .tui-delete {
+  visibility: visible;
+}
+
+.tui-entry-none {
+  margin: 0;
+  padding-left: 2ch;
+  color: var(--tui-dim);
+}
+
+.tui-columns {
+  margin: 0 0 0.2em;
+  padding: 0 0 0 4ch;
+  list-style: none;
+}
+
+.tui-column-help {
+  display: block;
+  padding-left: 2ch;
+  color: var(--tui-dim);
+}
+
+/* Query pane. */
+.tui-editor {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  outline: none;
+  resize: none;
+  white-space: pre;
+  caret-color: var(--tui-accent);
+}
+
+.tui-editor::placeholder {
+  color: var(--tui-dim);
+}
+
+/* Results pane. */
+.tui-results {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.4em;
+  min-height: 0;
+}
+
+.tui-params {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em 2ch;
+  padding-bottom: 0.4em;
+  border-bottom: 1px dashed var(--tui-line);
+}
+
+.tui-param {
+  display: flex;
+  align-items: baseline;
+  gap: 1ch;
+}
+
+.tui-param-name {
+  color: var(--tui-dim);
+}
+
+.tui-field {
+  min-width: 16ch;
+  max-width: 40ch;
+  padding: 0 0.5ch;
+  font: inherit;
+  color: inherit;
+  background: color-mix(in oklch, var(--foreground) 6%, transparent);
+  border: 1px solid var(--tui-line);
+  border-radius: 0;
+}
+
+.tui-field:focus {
+  outline: 1px solid var(--tui-accent);
+  outline-offset: 0;
+  border-color: var(--tui-accent);
+}
+
+.tui-field::placeholder {
+  color: var(--tui-dim);
+}
+
+.tui-grid-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.tui-grid-scroll:focus {
+  outline: none;
+}
+
+.tui-grid {
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.tui-grid th,
+.tui-grid td {
+  padding: 0 2ch 0 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* A cell's text, cut at 48ch (the full value is the span's title). */
+.tui-cell {
+  display: inline-block;
+  max-width: 48ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.tui-grid th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-weight: 600;
+  color: var(--tui-accent);
+  background: var(--background);
+}
+
+.tui-grid tbody tr:hover {
+  background: color-mix(in oklch, var(--foreground) 6%, transparent);
+}
+
+.tui-grid .tui-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Key bar. */
+.tui-keybar {
+  display: flex;
+  align-items: center;
+  gap: 2ch;
+  min-height: 1.8em;
+  padding: 0 1ch;
+  white-space: nowrap;
+}
+
+.tui-prompt {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 2ch;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.tui-hint {
+  color: var(--tui-dim);
+}
+
+.tui-hint:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.tui-key {
+  color: var(--tui-accent);
+}
+
+/* The export, delete and replace prompts take focus so their letters answer them. */
+.tui-prompt:focus {
+  outline: none;
+}
+
+.tui-prompt-field {
+  min-width: 24ch;
+}
+
+.tui-status {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Results view toggle, in the pane's top border. */
+.tui-view-toggle {
+  display: flex;
+  gap: 1ch;
+  margin-left: auto;
+  pointer-events: auto;
+}
+
+.tui-view {
+  font: inherit;
+  color: var(--tui-dim);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.tui-view-on {
+  color: var(--tui-accent);
+}
+
+/* Results chart: accent marks, dim labels, faint gridlines, sharp ends. */
+.tui-chart {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.4em;
+  min-height: 0;
+}
+
+.tui-chart:focus {
+  outline: none;
+}
+
+.tui-chart-title {
+  display: flex;
+  gap: 2ch;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* The SVG is placed absolutely so its size never feeds back into the measured box. */
+.tui-chart-plot {
+  position: relative;
+  flex: 1;
+  min-height: 6em;
+  overflow: hidden;
+}
+
+.tui-chart-svg {
+  position: absolute;
+  inset: 0;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+.tui-chart-gridline {
+  stroke: var(--tui-line);
+  stroke-dasharray: 2 3;
+}
+
+.tui-chart-baseline {
+  stroke: var(--tui-line);
+}
+
+.tui-chart-label {
+  fill: var(--tui-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.tui-chart-bar,
+.tui-chart-marker {
+  fill: var(--tui-accent);
+}
+
+.tui-chart-line {
+  fill: none;
+  stroke: var(--tui-accent);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.tui-chart-hit {
+  fill: transparent;
+}
+
+.tui-chart-point:hover .tui-chart-hit {
+  fill: color-mix(in oklch, var(--foreground) 6%, transparent);
+}
+
+.tui-chart-point:hover .tui-chart-bar,
+.tui-chart-point:hover .tui-chart-marker {
+  fill: var(--foreground);
+}

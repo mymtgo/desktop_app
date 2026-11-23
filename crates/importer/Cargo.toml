@@ -1,0 +1,28 @@
+[package]
+name = "importer"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+store.workspace = true
+mtgo-log.workspace = true
+decks.workspace = true
+limited.workspace = true
+# `hooks` gives the progress handler that time-limits reads of the 0.x
+# database (no extra crates).
+rusqlite = { workspace = true, features = ["hooks"] }
+serde_json.workspace = true
+chrono.workspace = true
+sync-bundles.workspace = true
+mymtgo-api.workspace = true
+replay.workspace = true
+
+[dev-dependencies]
+archetypes.workspace = true
+fixture-tools.workspace = true
+zstd.workspace = true
+chrono-tz.workspace = true
+
+[lints]
+workspace = true

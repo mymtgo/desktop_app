@@ -1,0 +1,3 @@
+fixtures/** -text
+*.snap text eol=lf
+*.sql text eol=lf

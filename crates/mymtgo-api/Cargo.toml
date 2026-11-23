@@ -1,0 +1,28 @@
+[package]
+name = "mymtgo-api"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+base64.workspace = true
+chrono.workspace = true
+archetypes.workspace = true
+cards.workspace = true
+decks.workspace = true
+flate2.workspace = true
+regex.workspace = true
+replay.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+specta.workspace = true
+chrono-tz.workspace = true
+zstd.workspace = true
+
+[dev-dependencies]
+# Only to prove `CAST_METHODS` matches the sync bundles' list.
+sync-bundles.workspace = true
+
+[lints]
+workspace = true

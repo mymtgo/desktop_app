@@ -1,0 +1,318 @@
+MyMTGO Desktop: Terms, Data and Licence
+
+Please read the following before installing MyMTGO. By clicking "I Agree"
+you accept these terms, the MyMTGO Terms at https://mymtgo.com/terms, and
+the licence at the end of this page.
+
+
+1. USE AT YOUR OWN RISK
+
+MyMTGO is provided "as is", without warranty of any kind, express or
+implied, including any warranty of merchantability, fitness for a particular
+purpose or non-infringement.
+
+You install and use MyMTGO entirely at your own risk. As far as the law
+allows, the author of MyMTGO accepts no liability for any loss or damage
+arising from installing or using it, including loss of data, damage to your
+computer or its software, or any effect on your Magic: The Gathering Online
+account.
+
+MyMTGO only reads the log and deck files that Magic: The Gathering Online
+writes on your computer. It does not automate play or interact with the
+MTGO client.
+
+The statistics MyMTGO shows can be incomplete or wrong.
+
+
+2. UNOFFICIAL
+
+MyMTGO is unofficial. It is not produced, endorsed, supported or affiliated
+with Wizards of the Coast or Daybreak Games. Magic: The Gathering and Magic:
+The Gathering Online are trademarks of their respective owners.
+
+
+3. YOUR DATA, ONLINE AND OFFLINE MODE
+
+MyMTGO records your matches on your computer whether or not you have a
+MyMTGO account. You can turn offline mode on at any time in Settings, Data
+& Privacy. Leaving offline mode switched off means you agree to your data
+being sent as described below.
+
+Kept on this computer
+
+  Everything the app records is stored in a database on this computer: your
+  matches, games, decks, leagues, drafts, notes, archetypes and settings. It
+  is built by reading files MTGO writes here: mtgo.log, your deck files,
+  MTGO's game log files, its match history files when you import them, and
+  its card files for token names. A MyMTGO 0.x database is only read, never
+  changed, when you import it.
+
+  The folders you choose, the app's own log files (one per day, the last 7
+  kept) and any card images you download also stay here. The app's log files
+  can contain MTGO usernames, yours and your opponents'. Your sign-in and
+  this device's API key are kept in the system keychain or, on Linux without
+  one, in an obscured file in the app's data folder, which is not real
+  encryption.
+
+Sent when offline mode is off
+
+  When your deck's archetype cannot be confidently detected on this
+  computer, its decklist and format are sent to the API for an estimate. The
+  app also checks for updates to the archetypes it holds by sending their
+  IDs and versions, and asks for metagame shares and archetype decklists
+  when the Metagame page, an archetype or the game overlay needs them.
+
+  With the game overlay on (it is off by default), the app sends your
+  current opponent's MTGO username and the format to look up their known
+  archetype, and may send the cards they have revealed so far for an
+  estimate. This feature sends a lookup as well as receiving one.
+
+  After each match, the app sends your MTGO username and login ID, the match
+  result, the format and a timestamp, the app version, your decklist and its
+  detected archetype, your opponent's MTGO username and detected archetype,
+  and any league or tournament token and round number. For every game it
+  also sends the turn count, start and end times and your opening hand: the
+  exact cards you kept, how many hands you mulliganed, whether you were on
+  the play, and your opponent's mulligan count. Matches you enter by hand
+  are not reported.
+
+  Your opponent's decklist goes with that data: the cards the app saw them
+  use, up to four copies of each. This is another player's data rather than
+  yours, and it is submitted so the community archetype database stays
+  current.
+
+  Tournament observations are sent for any MTGO tournament event your client
+  syncs, including events you only browse in the lobby rather than enter.
+  Most of them carry a player roster for that event, containing other
+  players' MTGO usernames, numeric login IDs and avatar IDs. Round by round
+  they also carry everyone's standings (rank and points), elimination
+  status, and the round's match pairings, including a match ID and token for
+  every game in the round, exactly as MTGO broadcasts them rather than only
+  the games you played. These are MTGO's own messages passed through
+  unfiltered, so they can contain more than the list above, including a
+  human readable event name that MTGO puts in the same raw message. As with
+  the opponent decklist, this is other players' data rather than yours.
+
+  A closing report is sent when an event ends, carrying one further MTGO
+  login ID, which may identify another competitor or your own account.
+
+  Per game, per card statistics are sent with your deck's archetype and the
+  archetype they were observed against, the format, the result, whether you
+  were on the play, whether it was a sideboarded game and the date. They
+  carry no username or match ID. To show a tournament's real name, the app
+  sends its MTGO event ID; the name is looked up from mymtgo's own
+  tournament records, not read back from what you sent.
+
+  None of this needs a MyMTGO account: signed out, it goes with this
+  device's identifier (see below). Matches played while offline mode was on
+  are sent once you turn it off.
+
+Sent only while signed in
+
+  Signing in opens mymtgo.com in your browser, which hands the result back
+  to the app on this computer only. Cloud sync then runs every 30 minutes
+  and shortly after each match, and downloads what your other devices have
+  synced. It uploads your decks that are not archived (draft and sealed
+  decks only with Supporter): their names, formats, every version's
+  decklist, sideboard guides, matchup notes and archetype. For the decks you
+  choose to sync, it also uploads their matches and leagues: results, games
+  and timings, the cards each side played and saw, opening hands and
+  mulligans, the game states replays are built from, your notes, your
+  opponent's MTGO username and, for leagues, your drafts and picks.
+
+  The app also tells MyMTGO which MTGO accounts (login ID and username) it
+  has seen on this computer, so synced matches show under the right player.
+
+  Sharing a replay, when you choose Share, uploads that match's game states,
+  game log and sideboarding, its format, date and archetypes, and your MTGO
+  login ID, with each opponent's name replaced by "Opponent". Your own
+  username stays in it, and in the link. The replay opens on an unlisted
+  page that anyone with the link can watch, without signing in; search
+  engines are asked not to list it. You can switch the link off later, and
+  it stops working within a few minutes.
+
+  With "Publish live overlay" on, the app sends your league card for your
+  current MTGO account: the event name and format, your record, the current
+  match's game results, your deck's name, archetype and label, and a link to
+  its art, plus your custom background image if you set one. It is sent on
+  each change and every 30 seconds. Turning it off asks MyMTGO to remove it.
+
+Sent always, even in offline mode
+
+  MTGO card identifiers and card or token names, looked up against the API
+  to get card names, mana costs and an image link so your decks keep
+  rendering. No match, result or player data is attached to these lookups.
+
+  Signed out, every request above, card lookups included, carries a
+  generated device identifier and a short lived API key the app gets by
+  registering that identifier. Registration keeps happening while offline
+  mode is on because card lookups depend on it. Signed in, requests carry
+  your account's sign-in token instead, so the API knows which account sent
+  them.
+
+Not affected by offline mode
+
+  App updates. The app checks releases.mymtgo.com shortly after it starts
+  and every hour, downloads a newer version in the background and installs
+  it only when you choose. The check carries no account or device
+  identifier; the server sees your IP address and whether you are on the
+  stable or edge channel. Offline mode never blocks updates.
+
+  Error reporting. Crash and error reports go to Sentry, a third party error
+  tracking service, whatever offline mode is set to. There is no setting to
+  turn them off. A report holds the error and where in the app it happened,
+  the app version, your operating system and its version, your processor
+  type and recent app log messages. Before a report is sent, the MTGO
+  usernames the app knows or finds in it are replaced with "<player>" and
+  your home folder with "~", and your computer's name and user details are
+  left out. A report that cannot be cleaned this way is not sent. MyMTGO's
+  error reporting service does not store your IP address.
+
+  Card images. Once a card's image link is known, the app loads the image
+  from Scryfall's servers rather than ours. Scryfall is a third party, and
+  it sees your IP address and, in near real time, which cards you are
+  looking at. This is outside our control. Turning on "Download card images
+  locally" in Settings avoids it after the first download by keeping the
+  images on your computer instead.
+
+Only when you ask
+
+  "Download report data" in Get help saves a zip file to a place you choose;
+  nothing is uploaded. It holds the newest mtgo.log, the three newest MyMTGO
+  log files and a summary (app version, update channel, operating system,
+  watcher state, offline mode, whether you are signed in, and match and game
+  counts). The logs are not cleaned, so they contain MTGO usernames, yours
+  and your opponents'. It never holds the database, settings, deck files or
+  sign-in details.
+
+What offline mode gives up
+
+  Archetype estimates and updates, metagame shares, opponent scouting,
+  tournament names, cloud sync, replay sharing and the published overlay all
+  rely on the traffic above, so expect them to go stale or become
+  unavailable while offline mode is on. After you turn offline mode off, it
+  cannot be turned on again until the next day.
+
+Deleting your data
+
+  Signing out removes your sign-in from this computer and stops cloud sync,
+  replay sharing and the published overlay. It does not delete what MyMTGO
+  already holds, and it does not stop match reports; offline mode does.
+  "Delete all imported" on the Import page removes the matches imported from
+  MTGO's history files. Turning off "Download card images locally" deletes
+  the downloaded images.
+
+  To remove everything from this computer, sign out, then uninstall. On
+  Windows, tick "Delete the application data" in the uninstaller, or the
+  data folder (%APPDATA%\com.mymtgo.desktop) stays. On Linux, delete
+  ~/.local/share/com.mymtgo.desktop yourself. This device's API key stays in
+  the system keychain after uninstalling; to remove it, delete the
+  com.mymtgo.desktop entries in Credential Manager on Windows or in your
+  keyring on Linux.
+
+
+4. CHANGES
+
+These terms may change. The current version of the MyMTGO Terms is always
+at https://mymtgo.com/terms.
+
+
+5. LICENCE
+
+MyMTGO Source-Available Licence, Version 1.0
+
+Copyright (c) 2026 Alec Ritson. All rights reserved.
+
+This software is source-available, not open source. The source is published
+so that anyone can read it, audit what the app does with their data, and
+build it for themselves. It is not published so that it can be redistributed,
+rebranded, or built into a competing product.
+
+1. DEFINITIONS
+
+   "Software" means the source code, build scripts, assets, and documentation
+   in this repository, excluding Third-Party Components (section 7).
+
+   "Licensor" means Alec Ritson.
+
+   "You" means the individual or entity exercising the rights in this Licence.
+
+   "Derivative" means any work based on, adapted from, or containing any part
+   of the Software, including a fork, a port, or a modified build.
+
+2. GRANT
+
+   Subject to sections 3 to 6, the Licensor grants You a worldwide,
+   royalty-free, non-exclusive, non-transferable, revocable licence to:
+
+   a. read, study, and privately discuss the Software;
+   b. reproduce the Software for the purposes in (a), (c), and (d);
+   c. compile, install, and run the Software on hardware You own or control,
+      for Your own personal, non-commercial use;
+   d. modify the Software for the purposes in (c), and submit those
+      modifications to the Licensor as a Contribution.
+
+3. RESTRICTIONS
+
+   You may not:
+
+   a. distribute, publish, sell, sublicense, host, or otherwise make
+      available the Software or any Derivative, in source or binary form, to
+      any third party;
+   b. use the Software or any Derivative for any commercial purpose, or in
+      the operation of any service offered to third parties, whether or not
+      for a fee;
+   c. operate, publish, or distribute a client, bot, or service that
+      interoperates with the MyMTGO API using credentials, protocol details,
+      or endpoints derived from the Software, other than an unmodified build
+      of the Software run under section 2(c);
+   d. remove, obscure, or alter any copyright, licence, or attribution notice
+      in the Software;
+   e. use the Software to circumvent any access control, entitlement check,
+      rate limit, or paid tier enforced by the MyMTGO API or website.
+
+4. CONTRIBUTIONS
+
+   If You submit a Contribution to the Licensor, You grant the Licensor a
+   perpetual, worldwide, royalty-free, irrevocable licence to use, reproduce,
+   modify, distribute, sublicense, and relicense that Contribution, in whole
+   or in part, under any terms, including terms different from this Licence.
+   You confirm You have the right to grant that licence. You retain copyright
+   in Your Contribution.
+
+5. TRADE MARKS
+
+   This Licence grants no rights in the names "MyMTGO" or "mymtgo", the
+   MyMTGO logo, or any other Licensor mark, domain, or branding. Those may
+   not be used in any Derivative, or in any way likely to suggest affiliation
+   with or endorsement by the Licensor.
+
+6. TERMINATION
+
+   This Licence terminates automatically if You breach any of its terms. On
+   termination You must cease all use of the Software and destroy all copies
+   in Your possession. Sections 4, 8, and 9 survive termination.
+
+7. THIRD-PARTY COMPONENTS
+
+   The Software depends on and includes third-party components distributed
+   under their own licences. Nothing in this Licence alters those licences,
+   and nothing in them grants rights in the Software beyond this Licence.
+
+8. NO WARRANTY
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+9. LIMITATION OF LIABILITY
+
+   TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE LICENSOR SHALL NOT BE LIABLE
+   FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT, OR
+   OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE
+   USE OF OR OTHER DEALINGS IN THE SOFTWARE.
+
+10. PERMISSIONS BEYOND THIS LICENCE
+
+   For any use not granted here, including commercial use or redistribution,
+   contact the Licensor at alec@neondigital.com.

@@ -1,0 +1,33 @@
+{
+    "version": 2,
+    "meta": {
+        "format": "modern",
+        "played_at": "2026-09-20T18:00:00+00:00",
+        "games_in_match": 3,
+        "local_archetype": "Boros Energy",
+        "opponent_archetype": null
+    },
+    "games": [
+        {
+            "game_number": 1,
+            "won": true,
+            "frames": [
+                {
+                    "timestamp": "2026-09-20T18:00:01+00:00",
+                    "content": {
+                        "Players": [
+                            {"Id": 1, "Name": "local.player"},
+                            {"Id": 2, "Name": "Opponent"}
+                        ],
+                        "Cards": [
+                            {"Id": 10, "CatalogID": 1234, "Zone": "Battlefield", "Owner": 2, "name": "Ragavan, Nimble Pilferer", "type": "Legendary Creature", "image": "https://cards.scryfall.io/normal/front/a/b/ab.jpg"}
+                        ]
+                    }
+                }
+            ],
+            "log": [
+                {"timestamp": "2026-09-20T18:00:01+00:00", "message": "Opponent casts Ragavan, Nimble Pilferer."}
+            ]
+        }
+    ]
+}

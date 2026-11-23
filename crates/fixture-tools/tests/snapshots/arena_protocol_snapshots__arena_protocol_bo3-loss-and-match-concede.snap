@@ -1,0 +1,266 @@
+---
+source: crates/fixture-tools/tests/arena_protocol_snapshots.rs
+expression: summary
+---
+{
+  "entries": 1465,
+  "kinds": {
+    "authenticated": 2,
+    "courses": 4,
+    "deck_set": 2,
+    "deck_submitted": 4,
+    "detailed_logs": 1,
+    "first_turn": 6,
+    "game_info": 13,
+    "login": 1,
+    "mulligan": 5,
+    "rank": 4,
+    "room_state": 4,
+    "season": 3
+  },
+  "ranks": [
+    {
+      "event": {
+        "constructed": {
+          "class": "Bronze",
+          "level": 4,
+          "lost": 1,
+          "mythic_percentile": null,
+          "mythic_placement": null,
+          "season": 89,
+          "step": 0,
+          "won": 0
+        },
+        "kind": "rank",
+        "limited": {
+          "class": "Bronze",
+          "level": 4,
+          "lost": 0,
+          "mythic_percentile": null,
+          "mythic_placement": null,
+          "season": 89,
+          "step": 0,
+          "won": 0
+        }
+      },
+      "offset": 737858
+    },
+    {
+      "event": {
+        "constructed": {
+          "class": "Bronze",
+          "level": 4,
+          "lost": 0,
+          "mythic_percentile": null,
+          "mythic_placement": null,
+          "season": 95,
+          "step": 0,
+          "won": 0
+        },
+        "kind": "rank",
+        "limited": {
+          "class": "Bronze",
+          "level": 4,
+          "lost": 0,
+          "mythic_percentile": null,
+          "mythic_placement": null,
+          "season": 95,
+          "step": 0,
+          "won": 0
+        }
+      },
+      "offset": 1885359
+    },
+    {
+      "event": {
+        "constructed": {
+          "class": "Bronze",
+          "level": 4,
+          "lost": 1,
+          "mythic_percentile": null,
+          "mythic_placement": null,
+          "season": 95,
+          "step": 0,
+          "won": 0
+        },
+        "kind": "rank",
+        "limited": {
+          "class": "Bronze",
+          "level": 4,
+          "lost": 0,
+          "mythic_percentile": null,
+          "mythic_placement": null,
+          "season": 95,
+          "step": 0,
+          "won": 0
+        }
+      },
+      "offset": 7294682
+    },
+    {
+      "event": {
+        "constructed": {
+          "class": "Bronze",
+          "level": 4,
+          "lost": 1,
+          "mythic_percentile": null,
+          "mythic_placement": null,
+          "season": 95,
+          "step": 0,
+          "won": 0
+        },
+        "kind": "rank",
+        "limited": {
+          "class": "Bronze",
+          "level": 4,
+          "lost": 0,
+          "mythic_percentile": null,
+          "mythic_placement": null,
+          "season": 95,
+          "step": 0,
+          "won": 0
+        }
+      },
+      "offset": 7364904
+    }
+  ],
+  "room_states": [
+    {
+      "event": {
+        "at_ms": 1793709133013,
+        "completed": false,
+        "kind": "room_state",
+        "match_id": "bf62b620-6924-4a6b-901a-275c36778f67",
+        "players": [
+          {
+            "event_id": "Traditional_Explorer_Ladder",
+            "name": "Player",
+            "seat": 1,
+            "team": 1,
+            "user_id": "PLAYER0000000000000000000A"
+          },
+          {
+            "event_id": "Traditional_Explorer_Ladder",
+            "name": "Opponent",
+            "seat": 2,
+            "team": 2,
+            "user_id": "OPPONENT00000000000000000B"
+          }
+        ],
+        "results": []
+      },
+      "offset": 2139967
+    },
+    {
+      "event": {
+        "at_ms": 1793709885302,
+        "completed": true,
+        "kind": "room_state",
+        "match_id": "bf62b620-6924-4a6b-901a-275c36778f67",
+        "players": [
+          {
+            "event_id": "Traditional_Explorer_Ladder",
+            "name": "Player",
+            "seat": 1,
+            "team": 1,
+            "user_id": "PLAYER0000000000000000000A"
+          },
+          {
+            "event_id": "Traditional_Explorer_Ladder",
+            "name": "Opponent",
+            "seat": 2,
+            "team": 2,
+            "user_id": "OPPONENT00000000000000000B"
+          }
+        ],
+        "results": [
+          {
+            "reason": "ResultReason_Concede",
+            "scope": "game",
+            "winning_team": 2
+          },
+          {
+            "reason": "ResultReason_Concede",
+            "scope": "game",
+            "winning_team": 1
+          },
+          {
+            "reason": "ResultReason_Concede",
+            "scope": "game",
+            "winning_team": 2
+          },
+          {
+            "reason": "ResultReason_Concede",
+            "scope": "match",
+            "winning_team": 2
+          }
+        ]
+      },
+      "offset": 7159967
+    },
+    {
+      "event": {
+        "at_ms": 1793710183212,
+        "completed": false,
+        "kind": "room_state",
+        "match_id": "85d265dc-f113-429f-a8c4-89e89c258b66",
+        "players": [
+          {
+            "event_id": "Traditional_Explorer_Ladder",
+            "name": "Opponent2",
+            "seat": 1,
+            "team": 1,
+            "user_id": "OPPONENT00000000000000000C"
+          },
+          {
+            "event_id": "Traditional_Explorer_Ladder",
+            "name": "Player",
+            "seat": 2,
+            "team": 2,
+            "user_id": "PLAYER0000000000000000000A"
+          }
+        ],
+        "results": []
+      },
+      "offset": 7662143
+    },
+    {
+      "event": {
+        "at_ms": 1793710214936,
+        "completed": true,
+        "kind": "room_state",
+        "match_id": "85d265dc-f113-429f-a8c4-89e89c258b66",
+        "players": [
+          {
+            "event_id": "Traditional_Explorer_Ladder",
+            "name": "Opponent2",
+            "seat": 1,
+            "team": 1,
+            "user_id": "OPPONENT00000000000000000C"
+          },
+          {
+            "event_id": "Traditional_Explorer_Ladder",
+            "name": "Player",
+            "seat": 2,
+            "team": 2,
+            "user_id": "PLAYER0000000000000000000A"
+          }
+        ],
+        "results": [
+          {
+            "reason": "ResultReason_Concede",
+            "scope": "game",
+            "winning_team": 1
+          },
+          {
+            "reason": "ResultReason_Concede",
+            "scope": "match",
+            "winning_team": 1
+          }
+        ]
+      },
+      "offset": 7715649
+    }
+  ],
+  "with_json": 1462
+}

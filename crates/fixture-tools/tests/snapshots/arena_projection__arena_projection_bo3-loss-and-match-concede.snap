@@ -1,0 +1,249 @@
+---
+source: crates/fixture-tools/tests/arena_projection.rs
+expression: summary
+---
+{
+  "account": {
+    "display_name": null,
+    "user_id": "PLAYER0000000000000000000A",
+    "username": "Player#00001"
+  },
+  "deck_uses": [
+    {
+      "deck_id": "7a208116-3d8d-4cff-92b7-fe6747707f59",
+      "deck_name": "AZ Control",
+      "format_code": "CPIONEER",
+      "main_cards": 61,
+      "main_lines": 27,
+      "match_token": "bf62b620-6924-4a6b-901a-275c36778f67",
+      "side_cards": 15
+    },
+    {
+      "deck_id": "e645ee20-605c-4f2f-a5a8-4a523e0e956e",
+      "deck_name": "Imported Deck (2)",
+      "format_code": "CPIONEER",
+      "main_cards": 60,
+      "main_lines": 24,
+      "match_token": "85d265dc-f113-429f-a8c4-89e89c258b66",
+      "side_cards": 15
+    }
+  ],
+  "opponents": [
+    [
+      "arena:OPPONENT00000000000000000B",
+      "Opponent"
+    ],
+    [
+      "arena:OPPONENT00000000000000000C",
+      "Opponent2"
+    ]
+  ],
+  "rank": [
+    {
+      "at_ms": 1793708920000,
+      "file_id": 1,
+      "ladder": "constructed",
+      "offset": 1885359,
+      "reading": {
+        "class": "Bronze",
+        "level": 4,
+        "lost": 0,
+        "mythic_percentile": null,
+        "mythic_placement": null,
+        "season": 95,
+        "step": 0,
+        "won": 0
+      },
+      "seq": 0
+    },
+    {
+      "at_ms": 1793708920000,
+      "file_id": 1,
+      "ladder": "limited",
+      "offset": 1885359,
+      "reading": {
+        "class": "Bronze",
+        "level": 4,
+        "lost": 0,
+        "mythic_percentile": null,
+        "mythic_placement": null,
+        "season": 95,
+        "step": 0,
+        "won": 0
+      },
+      "seq": 0
+    },
+    {
+      "at_ms": 1793709900000,
+      "file_id": 1,
+      "ladder": "constructed",
+      "offset": 7294682,
+      "reading": {
+        "class": "Bronze",
+        "level": 4,
+        "lost": 1,
+        "mythic_percentile": null,
+        "mythic_placement": null,
+        "season": 95,
+        "step": 0,
+        "won": 0
+      },
+      "seq": 0
+    },
+    {
+      "at_ms": 1793709900000,
+      "file_id": 1,
+      "ladder": "limited",
+      "offset": 7294682,
+      "reading": {
+        "class": "Bronze",
+        "level": 4,
+        "lost": 0,
+        "mythic_percentile": null,
+        "mythic_placement": null,
+        "season": 95,
+        "step": 0,
+        "won": 0
+      },
+      "seq": 0
+    },
+    {
+      "at_ms": 1793709929000,
+      "file_id": 1,
+      "ladder": "constructed",
+      "offset": 7364904,
+      "reading": {
+        "class": "Bronze",
+        "level": 4,
+        "lost": 1,
+        "mythic_percentile": null,
+        "mythic_placement": null,
+        "season": 95,
+        "step": 0,
+        "won": 0
+      },
+      "seq": 0
+    },
+    {
+      "at_ms": 1793709929000,
+      "file_id": 1,
+      "ladder": "limited",
+      "offset": 7364904,
+      "reading": {
+        "class": "Bronze",
+        "level": 4,
+        "lost": 0,
+        "mythic_percentile": null,
+        "mythic_placement": null,
+        "season": 95,
+        "step": 0,
+        "won": 0
+      },
+      "seq": 0
+    }
+  ],
+  "views": [
+    {
+      "ended_at_ms": 1793709885302,
+      "format": "CPIONEER",
+      "game_structure": "bo3",
+      "games": [
+        {
+          "end_reason": "concede",
+          "ended_at_ms": 1793709416331,
+          "game_number": 1,
+          "local_die_roll": null,
+          "local_mulligans": 2,
+          "mtgo_game_id": null,
+          "on_play": false,
+          "opp_die_roll": null,
+          "opp_mulligans": null,
+          "result": "loss",
+          "started_at_ms": 1793709133068,
+          "turn_count": null
+        },
+        {
+          "end_reason": "concede",
+          "ended_at_ms": 1793709726202,
+          "game_number": 2,
+          "local_die_roll": null,
+          "local_mulligans": 0,
+          "mtgo_game_id": null,
+          "on_play": true,
+          "opp_die_roll": null,
+          "opp_mulligans": null,
+          "result": "win",
+          "started_at_ms": 1793709479046,
+          "turn_count": null
+        },
+        {
+          "end_reason": "concede",
+          "ended_at_ms": 1793709885301,
+          "game_number": 3,
+          "local_die_roll": null,
+          "local_mulligans": 0,
+          "mtgo_game_id": null,
+          "on_play": false,
+          "opp_die_roll": null,
+          "opp_mulligans": null,
+          "result": "loss",
+          "started_at_ms": 1793709747921,
+          "turn_count": null
+        }
+      ],
+      "last_activity_ms": 1793709885302,
+      "league_token": null,
+      "local_username": "Player#00001",
+      "losses": 2,
+      "match_type": "ranked",
+      "mtgo_match_id": null,
+      "opponent": "arena:OPPONENT00000000000000000B",
+      "outcome": "loss",
+      "resolution": "signal",
+      "started_at_ms": 1793709133013,
+      "state": "complete",
+      "tentative_outcome": null,
+      "token": "bf62b620-6924-4a6b-901a-275c36778f67",
+      "tournament_event_id": null,
+      "tournament_round": null,
+      "wins": 1
+    },
+    {
+      "ended_at_ms": 1793710214936,
+      "format": "CPIONEER",
+      "game_structure": "bo3",
+      "games": [
+        {
+          "end_reason": "concede",
+          "ended_at_ms": 1793710210124,
+          "game_number": 1,
+          "local_die_roll": null,
+          "local_mulligans": null,
+          "mtgo_game_id": null,
+          "on_play": null,
+          "opp_die_roll": null,
+          "opp_mulligans": null,
+          "result": "loss",
+          "started_at_ms": 1793710183252,
+          "turn_count": null
+        }
+      ],
+      "last_activity_ms": 1793710214936,
+      "league_token": null,
+      "local_username": "Player#00001",
+      "losses": 1,
+      "match_type": "ranked",
+      "mtgo_match_id": null,
+      "opponent": "arena:OPPONENT00000000000000000C",
+      "outcome": "loss",
+      "resolution": "signal",
+      "started_at_ms": 1793710183212,
+      "state": "complete",
+      "tentative_outcome": null,
+      "token": "85d265dc-f113-429f-a8c4-89e89c258b66",
+      "tournament_event_id": null,
+      "tournament_round": null,
+      "wins": 0
+    }
+  ]
+}

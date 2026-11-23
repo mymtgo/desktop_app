@@ -1,0 +1,391 @@
+@import 'tailwindcss';
+
+@import 'tw-animate-css';
+@import './replay.css';
+/* The vendored .mtgr viewer (Arena replays): its own copy of the surface
+   classes, a superset of ./replay.css with the same shared rules. */
+@import '../replay-mtgr/replay.css';
+@source '../replay-mtgr';
+
+
+@font-face {
+    font-family: 'Bungee';
+    src: url('../fonts/Bungee-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Teko';
+    src: url('../fonts/Teko-Variable.ttf') format('truetype');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    /* The event card's own font stack (event overlay spec 10): set on the card root, never the page's. */
+    --font-card: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --radius-2xl: calc(var(--radius) + 8px);
+    --radius-3xl: calc(var(--radius) + 16px);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-chart-indigo: var(--chart-indigo);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+:root {
+    --radius: 0.625rem;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.48 0.14 230);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0.005 230);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.96 0.01 230);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.645 0.246 16.439);
+    --destructive-foreground: oklch(0.985 0 0);
+    --success: oklch(0.696 0.17 162.48);
+    --success-foreground: oklch(0.985 0 0);
+    --warning: oklch(0.769 0.158 70.08);
+    --warning-foreground: oklch(0.145 0 0);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.55 0.12 230);
+    --chart-1: oklch(0.55 0.15 230);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.646 0.222 41.116);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+    --chart-indigo: oklch(0.46 0.21 276);
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.48 0.14 230);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.96 0.01 230);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.55 0.12 230);
+}
+
+.dark {
+    --background: var(--color-neutral-900);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.269 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.52 0.12 235);
+    --primary-foreground: oklch(0.97 0.01 235);
+    --secondary: oklch(0.269 0.01 230);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.30 0.02 230);
+    --accent-foreground: oklch(0.985 0 0);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.60 0.12 230);
+    --chart-1: oklch(0.62 0.14 230);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --chart-indigo: oklch(0.7 0.17 282);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.62 0.14 230);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.30 0.02 230);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.60 0.12 230);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground font-sans;
+    }
+
+    /* The main window scrolls inside its layout, never the document. On
+       macOS (and WebKitGTK) an overscroll past the end would otherwise
+       rubber-band the whole page, status bar included, and show the window
+       behind it. Only the main window (`index.html`) has this class: the
+       overlay windows share this file. */
+    html.app-window,
+    html.app-window body {
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+    }
+
+    /* WebKit (the macOS and Linux webviews) paints a collapsed table border
+       once from each side of it, so a translucent divider such as
+       `--border` shows at double strength. Chromium (0.x and Windows)
+       paints it once. Separate borders are painted once everywhere, but a
+       row draws no border in that model, so cells take their row's top and
+       bottom border instead. A border set on the cell itself still wins. */
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+    tfoot > tr:first-child {
+        border-top: inherit;
+    }
+    td,
+    th {
+        border-top: inherit;
+        border-bottom: inherit;
+    }
+
+    /* Native date and time pickers draw their own icon and popup. Without a
+       colour scheme they assume a light page, leaving a black icon on dark. */
+    .dark input[type='date'],
+    .dark input[type='time'],
+    .dark input[type='datetime-local'],
+    .dark select {
+        color-scheme: dark;
+    }
+
+    /* A native select's open list is drawn by the OS. On Windows (WebView2)
+       it keeps a white background while the options inherit the light text
+       colour, so the list reads as blank. Give the options the app's own
+       colours. */
+    .dark select option {
+        background-color: var(--popover);
+        color: var(--popover-foreground);
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+        background: #4a5568;
+        border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #5a6a80;
+    }
+}
+
+@layer {
+    .texture-bg {
+        @apply bg-background;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.02' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    }
+
+    .bevel {
+        @apply relative;
+        @apply after:shadow-[0_1px_0_0_rgba(0,0,0,0.1)];
+        @apply after:bg-transparent;
+        @apply after:content-[''];
+        @apply after:block;
+        @apply after:inset-0;
+        @apply after:absolute;
+        @apply after:bottom-0;
+        @apply after:rounded-[inherit];
+        @apply before:shadow-[0_-1px_0_0_rgba(255,255,255,0.1)];
+        @apply before:bg-transparent;
+        @apply before:content-[''];
+        @apply before:block;
+        @apply before:inset-0;
+        @apply before:absolute;
+        @apply before:bottom-0;
+        @apply before:rounded-[inherit];
+        @apply after:translate-y-[-1px];
+        @apply before:translate-y-[1px];
+        @apply active:translate-y-[1px];
+        @apply active:translate-x-[1px];
+    }
+}
+
+@layer {
+    /* Canonical "pressed in" selection state, taken from the deck view side panel. */
+    .nav-item-active {
+        @apply border border-black/50 bg-black/10 text-foreground shadow-inner shadow-black/50 outline outline-white/5;
+    }
+
+    .nav-item-inactive {
+        @apply border border-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground;
+    }
+
+    .nav-icon-active {
+        color: #38bdf8;
+        filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.7)) drop-shadow(0 0 8px rgba(56, 189, 248, 0.35));
+    }
+
+    /* The dark line with a faint light line under it, the edge between two
+       raised panels. */
+    .divider-bevel {
+        @apply border-b border-black/60 shadow-[0_1px_0_0_rgba(255,255,255,0.05)];
+    }
+
+    /* The header bar across the top of a Card panel. */
+    .panel-header {
+        @apply flex items-center gap-3 border-b border-black/60 px-4 py-2.5 shadow-[0_1px_0_0_rgba(255,255,255,0.05)];
+    }
+
+    /* A raised tile (the Card look) that presses in when chosen, through a
+       tab's `data-state` or a toggle's `aria-pressed`. */
+    .toggle-tile {
+        @apply rounded-md border border-white/5 bg-black/40 text-muted-foreground shadow outline-1 outline-black/60 transition-colors hover:bg-black/25 hover:text-foreground;
+    }
+
+    .toggle-tile[data-state='active'],
+    .toggle-tile[aria-pressed='true'] {
+        @apply border-black/50 bg-black/10 text-foreground shadow-inner shadow-black/50 outline-white/5;
+    }
+}
+
+/* Rendered markdown on /whats-new. Hand-rolled instead of the typography
+   plugin so it follows the app's tokens without a new dependency. */
+@layer components {
+    .markdown-content {
+        @apply flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground;
+    }
+
+    .markdown-content h1 {
+        @apply text-2xl font-semibold text-foreground;
+    }
+
+    .markdown-content h2 {
+        @apply pt-4 text-lg font-semibold text-foreground;
+    }
+
+    .markdown-content h3 {
+        @apply pt-2 text-base font-semibold text-foreground;
+    }
+
+    .markdown-content strong {
+        @apply font-semibold text-foreground;
+    }
+
+    .markdown-content a {
+        @apply text-primary underline underline-offset-2 hover:text-primary/80;
+    }
+
+    .markdown-content ul {
+        @apply flex list-disc flex-col gap-1 pl-5;
+    }
+
+    .markdown-content ol {
+        @apply flex list-decimal flex-col gap-1 pl-5;
+    }
+
+    .markdown-content img {
+        @apply w-full rounded-md border;
+    }
+
+    .markdown-content code {
+        @apply rounded bg-muted px-1 py-0.5 font-mono text-xs text-foreground;
+    }
+
+    .markdown-content pre {
+        @apply overflow-x-auto rounded-md border bg-muted p-3;
+    }
+
+    .markdown-content pre code {
+        @apply bg-transparent p-0;
+    }
+
+    .markdown-content table {
+        @apply w-full text-left;
+    }
+
+    .markdown-content th,
+    .markdown-content td {
+        @apply border-b px-3 py-2;
+    }
+
+    .markdown-content th {
+        @apply font-semibold text-foreground;
+    }
+
+    .markdown-content blockquote {
+        @apply border-l-2 border-primary pl-4 italic;
+    }
+}

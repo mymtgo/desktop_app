@@ -1,0 +1,21 @@
+[package]
+name = "overlay"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+archetypes.workspace = true
+cards.workspace = true
+decks.workspace = true
+game-detail.workspace = true
+leagues.workspace = true
+mtgo-match.workspace = true
+regex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+specta.workspace = true
+specta-typescript.workspace = true
+
+[lints]
+workspace = true

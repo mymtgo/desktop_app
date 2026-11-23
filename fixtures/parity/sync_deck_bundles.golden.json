@@ -1,0 +1,135 @@
+{
+    "bundles": [
+        {
+            "mtgo_id": "12345",
+            "input": {
+                "mtgo_id": "12345",
+                "name": "Qdeck Burn",
+                "original_name": "Qdeck Burn Original",
+                "format": "Modern",
+                "color_identity": "R",
+                "cover_catalog_id": 98765,
+                "versions": [
+                    {
+                        "signature": "MTAwMTo0OmZhbHNlfDEwMDI6Mjp0cnVl",
+                        "modified_at_ms": 1787216400000
+                    },
+                    {
+                        "signature": "MTAwMTozOmZhbHNlfDEwMDM6MTpmYWxzZQ==",
+                        "modified_at_ms": 1787133605000
+                    },
+                    {
+                        "signature": "MjAwMTo0OmZhbHNl",
+                        "modified_at_ms": 1787315400000
+                    },
+                    {
+                        "signature": "MTAwMTo0OmZhbHNlfDEwMDQ6MTp0cnVl",
+                        "modified_at_ms": 1787315400000
+                    }
+                ],
+                "archetype_uuid": "cccccccc-1111-4111-8111-111111111111",
+                "guides": [
+                    {
+                        "archetype_uuid": "bbbbbbbb-0000-4000-8000-000000000000",
+                        "cards": [
+                            {
+                                "oracle_id": "o-zzz",
+                                "direction": "in",
+                                "quantity": 2
+                            },
+                            {
+                                "oracle_id": "o-aaa",
+                                "direction": "out",
+                                "quantity": 3
+                            },
+                            {
+                                "oracle_id": "o-bbb",
+                                "direction": "in",
+                                "quantity": 1
+                            }
+                        ]
+                    },
+                    {
+                        "archetype_uuid": "aaaaaaaa-0000-4000-8000-000000000000",
+                        "cards": []
+                    }
+                ],
+                "notes": [
+                    {
+                        "archetype_uuid": "bbbbbbbb-0000-4000-8000-000000000000",
+                        "body": "Qnote: board out the fourth removal",
+                        "created_at_ms": 1787212800000
+                    },
+                    {
+                        "archetype_uuid": "aaaaaaaa-0000-4000-8000-000000000000",
+                        "body": "Qnote: same second, sorted by body",
+                        "created_at_ms": 1787216400000
+                    },
+                    {
+                        "archetype_uuid": "aaaaaaaa-0000-4000-8000-000000000000",
+                        "body": "Qnote: keep the counters in",
+                        "created_at_ms": 1787216400000
+                    }
+                ]
+            },
+            "client_id": "12345",
+            "canonical": "{\"deck\":{\"archetype_uuid\":\"cccccccc-1111-4111-8111-111111111111\",\"color_identity\":\"R\",\"cover_mtgo_id\":\"98765\",\"format\":\"Modern\",\"mtgo_id\":\"12345\",\"name\":\"Qdeck Burn\",\"original_name\":\"Qdeck Burn Original\"},\"guides\":[{\"archetype_uuid\":\"aaaaaaaa-0000-4000-8000-000000000000\",\"cards\":[]},{\"archetype_uuid\":\"bbbbbbbb-0000-4000-8000-000000000000\",\"cards\":[{\"direction\":\"in\",\"oracle_id\":\"o-bbb\",\"quantity\":1},{\"direction\":\"in\",\"oracle_id\":\"o-zzz\",\"quantity\":2},{\"direction\":\"out\",\"oracle_id\":\"o-aaa\",\"quantity\":3}]}],\"notes\":[{\"archetype_uuid\":\"aaaaaaaa-0000-4000-8000-000000000000\",\"body\":\"Qnote: keep the counters in\",\"created_at\":\"2026-08-20T09:00:00Z\"},{\"archetype_uuid\":\"aaaaaaaa-0000-4000-8000-000000000000\",\"body\":\"Qnote: same second, sorted by body\",\"created_at\":\"2026-08-20T09:00:00Z\"},{\"archetype_uuid\":\"bbbbbbbb-0000-4000-8000-000000000000\",\"body\":\"Qnote: board out the fourth removal\",\"created_at\":\"2026-08-20T08:00:00Z\"}],\"versions\":[{\"modified_at\":\"2026-08-19T10:00:05Z\",\"signature\":\"MTAwMTozOmZhbHNlfDEwMDM6MTpmYWxzZQ==\"},{\"modified_at\":\"2026-08-20T09:00:00Z\",\"signature\":\"MTAwMTo0OmZhbHNlfDEwMDI6Mjp0cnVl\"},{\"modified_at\":\"2026-08-21T12:30:00Z\",\"signature\":\"MTAwMTo0OmZhbHNlfDEwMDQ6MTp0cnVl\"},{\"modified_at\":\"2026-08-21T12:30:00Z\",\"signature\":\"MjAwMTo0OmZhbHNl\"}]}",
+            "hash": "ef70c2d0ede16e1209aae3db86cb3235db7ef15518ecfb20215f32706fb3b17d",
+            "sidecar": {
+                "name": "Qdeck Burn",
+                "format": "Modern",
+                "color_identity": "R"
+            }
+        },
+        {
+            "mtgo_id": "limited:791bacca-caea-4d88-b6c7-3bc067d412c2",
+            "input": {
+                "mtgo_id": "limited:791bacca-caea-4d88-b6c7-3bc067d412c2",
+                "name": "Qdr\u00e4ft / Sealed \u00f8 \u2028line\u0001",
+                "original_name": null,
+                "format": "Limited",
+                "color_identity": null,
+                "cover_catalog_id": null,
+                "versions": [
+                    {
+                        "signature": "MzAwMToxOmZhbHNlfDMwMDI6MTc6ZmFsc2U=",
+                        "modified_at_ms": 1787424310000
+                    }
+                ],
+                "archetype_uuid": null,
+                "guides": [],
+                "notes": []
+            },
+            "client_id": "limited_791bacca-caea-4d88-b6c7-3bc067d412c2",
+            "canonical": "{\"deck\":{\"archetype_uuid\":null,\"color_identity\":null,\"cover_mtgo_id\":null,\"format\":\"Limited\",\"mtgo_id\":\"limited:791bacca-caea-4d88-b6c7-3bc067d412c2\",\"name\":\"Qdr\u00e4ft / Sealed \u00f8 \\u2028line\\u0001\",\"original_name\":null},\"guides\":[],\"notes\":[],\"versions\":[{\"modified_at\":\"2026-08-22T18:45:10Z\",\"signature\":\"MzAwMToxOmZhbHNlfDMwMDI6MTc6ZmFsc2U=\"}]}",
+            "hash": "a03755dcb746dc3307083646dc1a442c47323202f030039ff298009cde679812",
+            "sidecar": {
+                "name": "Qdr\u00e4ft / Sealed \u00f8 \u2028line\u0001",
+                "format": "Limited"
+            }
+        },
+        {
+            "mtgo_id": "777",
+            "input": {
+                "mtgo_id": "777",
+                "name": "Qempty",
+                "original_name": "Qempty",
+                "format": "Pauper",
+                "color_identity": "WU",
+                "cover_catalog_id": null,
+                "versions": [],
+                "archetype_uuid": null,
+                "guides": [],
+                "notes": []
+            },
+            "client_id": "777",
+            "canonical": "{\"deck\":{\"archetype_uuid\":null,\"color_identity\":\"WU\",\"cover_mtgo_id\":null,\"format\":\"Pauper\",\"mtgo_id\":\"777\",\"name\":\"Qempty\",\"original_name\":\"Qempty\"},\"guides\":[],\"notes\":[],\"versions\":[]}",
+            "hash": "04869fbe103ceb4015d880977ef268dfa441d1cd0750450332f756bfb04718ea",
+            "sidecar": {
+                "name": "Qempty",
+                "format": "Pauper",
+                "color_identity": "WU"
+            }
+        }
+    ]
+}

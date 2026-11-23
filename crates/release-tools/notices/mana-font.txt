@@ -1,0 +1,15 @@
+mana-font 1.18.0 (https://github.com/andrewgioia/mana)
+
+Mana font by Andrew Gioia (https://mana.andrewgioia.com), as the font's own
+metadata names its designer; the font carries no separate copyright line.
+
+The package ships no licence file; its README says:
+
+All mana, tap, and card type symbol images are copyright Wizards of the Coast (http://magicthegathering.com)
+
+The Mana font is licensed under the the SIL OFL 1.1 (http://scripts.sil.org/OFL)
+
+Mana CSS, LESS, and Sass files are licensed under the MIT License (http://opensource.org/licenses/mit-license.html)
+
+The SIL Open Font License 1.1 follows.
+

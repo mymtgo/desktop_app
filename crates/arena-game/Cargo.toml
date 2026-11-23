@@ -1,0 +1,21 @@
+[package]
+name = "arena-game"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+cards.workspace = true
+game-detail.workspace = true
+mtgr.workspace = true
+arena-protocol.workspace = true
+
+[dev-dependencies]
+insta.workspace = true
+fixture-tools.workspace = true
+arena-match.workspace = true
+
+[lints]
+workspace = true

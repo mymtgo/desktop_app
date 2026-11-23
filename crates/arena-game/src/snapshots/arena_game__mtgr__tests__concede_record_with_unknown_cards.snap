@@ -1,0 +1,91 @@
+---
+source: crates/arena-game/src/mtgr/tests.rs
+assertion_line: 75
+expression: "::mtgr::write(record)"
+---
+[Mtgr "0.3.0"]
+[Event "Traditional_Explorer_Ladder"]
+[Site "Arena"]
+[Date "2026.11.03"]
+[Round "-"]
+[Player1 "Opponent2"]
+[Player2 "Player"]
+[Result "1-0"]
+[Format "Explorer"]
+[Match "bo3-loss-and-match-concede-1"]
+[Game "1"]
+[Perspective "Player"]
+[ARENA_MatchId "bo3-loss-and-match-concede-1"]
+[Omits "costs"]
+[Partial "library effects"]
+[Termination "concession"]
+
+0:00 deck "Player"
+0:00   main 1 "Atraxa, Grand Unifier"
+0:00   main 4 "Censor"
+0:00   main 4 "Deduce"
+0:00   main 4 "Indomitable Creativity"
+0:00   main 1 "Island"
+0:00   main 2 "Mirrex"
+0:00   main 3 "Mountain"
+0:00   main 2 "Narset, Parter of Veils"
+0:00   main 1 "Otawara, Soaring City"
+0:00   main 4 "Prismari Command"
+0:00   main 1 "Raph & Mikey, Troublemakers"
+0:00   main 4 "Riverglide Pathway // Lavaglide Pathway"
+0:00   main 1 "Riverpyre Verge"
+0:00   main 1 "Sokenzan, Crucible of Defiance"
+0:00   main 1 "Spell Pierce"
+0:00   main 4 "Spirebluff Canal"
+0:00   main 3 "Temple of Epiphany"
+0:00   main 3 "Unable to Scream"
+0:00   main 1 "Valgavoth, Terror Eater"
+0:00   main 4 "Volcanic Spite"
+0:00   main 3 ? src arena:66125
+0:00   main 4 ? src arena:68738
+0:00   main 4 ? src arena:79570
+0:00   side 4 "Aether Gust"
+0:00   side 2 "Chandra's Defeat"
+0:00   side 2 "Hullbreaker Horror"
+0:00   side 2 "Make Disappear"
+0:00   side 2 "Mystical Dispute"
+0:00   side 2 "Narset, Parter of Veils"
+0:00   side 1 "Portal to Phyrexia"
+0:00 pregame
+0:00   keyframe
+0:00     player "Opponent2" life 20 poison 0 library 60
+0:00     player "Player" life 20 poison 0 library 60
+0:00   "Opponent2" roll 13
+0:00   "Player" roll 10
+0:13   "Opponent2" choose first "Opponent2"
+0:13   new hidden #1 owner "Opponent2" in library top 1
+0:13   #1 move library -> hand as draw by rule:opening-hand
+0:13   new hidden #2 owner "Opponent2" in library top 1
+0:13   #2 move library -> hand as draw by rule:opening-hand
+0:13   new hidden #3 owner "Opponent2" in library top 1
+0:13   #3 move library -> hand as draw by rule:opening-hand
+0:13   new hidden #4 owner "Opponent2" in library top 1
+0:13   #4 move library -> hand as draw by rule:opening-hand
+0:13   new hidden #5 owner "Opponent2" in library top 1
+0:13   #5 move library -> hand as draw by rule:opening-hand
+0:13   new hidden #6 owner "Opponent2" in library top 1
+0:13   #6 move library -> hand as draw by rule:opening-hand
+0:13   new hidden #7 owner "Opponent2" in library top 1
+0:13   #7 move library -> hand as draw by rule:opening-hand
+0:13   new card #8 ? owner "Player" in library top 1 src arena:68738
+0:13   #8 move library -> hand as draw by rule:opening-hand
+0:13   new card #9 "Riverglide Pathway // Lavaglide Pathway" owner "Player" in library top 1 src arena:73481
+0:13   #9 "Riverglide Pathway // Lavaglide Pathway" move library -> hand as draw by rule:opening-hand
+0:13   new card #10 ? owner "Player" in library top 1 src arena:66125
+0:13   #10 move library -> hand as draw by rule:opening-hand
+0:13   new card #11 "Deduce" owner "Player" in library top 1 src arena:88971
+0:13   #11 "Deduce" move library -> hand as draw by rule:opening-hand
+0:13   new card #12 "Atraxa, Grand Unifier" owner "Player" in library top 1 src arena:83896
+0:13   #12 "Atraxa, Grand Unifier" move library -> hand as draw by rule:opening-hand
+0:13   new card #13 ? owner "Player" in library top 1 src arena:79570
+0:13   #13 move library -> hand as draw by rule:opening-hand
+0:13   new card #14 "Prismari Command" owner "Player" in library top 1 src arena:76622
+0:13   #14 "Prismari Command" move library -> hand as draw by rule:opening-hand
+0:26   "Opponent2" keep
+0:27   "Player" concede
+1-0

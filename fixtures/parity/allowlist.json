@@ -1,0 +1,410 @@
+[
+  {
+    "fixture": "draft_hobbit",
+    "token": "08efb7ad-3670-4fab-b015-97cea823cde1",
+    "field": "games[959764088].local_mulligans",
+    "reason": "0.x starts each player's mulligan count at 0 and counts 'mulligans to' lines (ExtractCardsFromGameLog.php:342-355); v1 reads 'begins the game with N cards' as spec 5.5 says. This game has neither line in mtgo.log, so 0.x reports 0 and v1 reports unknown"
+  },
+  {
+    "fixture": "draft_hobbit",
+    "token": "08efb7ad-3670-4fab-b015-97cea823cde1",
+    "field": "games[959764088].opp_mulligans",
+    "reason": "0.x starts each player's mulligan count at 0 and counts 'mulligans to' lines (ExtractCardsFromGameLog.php:342-355); v1 reads 'begins the game with N cards' as spec 5.5 says. This game has neither line in mtgo.log, so 0.x reports 0 and v1 reports unknown"
+  },
+  {
+    "fixture": "match_report",
+    "token": "*",
+    "field": "games[].clock_remaining_ms",
+    "reason": "0.x clock columns dropped (target schema section 6)"
+  },
+  {
+    "fixture": "match_report",
+    "token": "*",
+    "field": "games[].opponent_clock_remaining_ms",
+    "reason": "0.x clock columns dropped (target schema section 6)"
+  },
+  {
+    "fixture": "match_report",
+    "token": "*",
+    "field": "games[].timed_out",
+    "reason": "0.x clock columns dropped (target schema section 6)"
+  },
+  {
+    "fixture": "match_report",
+    "token": "*",
+    "field": "games[].opponent_timed_out",
+    "reason": "0.x clock columns dropped (target schema section 6)"
+  },
+  {
+    "fixture": "match_report",
+    "token": "*",
+    "field": "league_client_id",
+    "reason": "v1 adds the league's sync client id to a league match's report (left out when the league has none), so the server groups a run by it rather than by league_run, a per-device id that two devices can share for two runs (server spec 2026-10-23 league run identity)"
+  },
+  {
+    "fixture": "match_report",
+    "token": "*",
+    "field": "league_playevent_id",
+    "reason": "v1 adds MTGO's league offering id (the log's EventId, stored as leagues.event_id, the id in mtgo.com's league decklist page names) to a league match's report when known, so the server can tell league offerings apart; left out for manual leagues and matches with no league"
+  },
+  {
+    "fixture": "sync_match_bundles",
+    "token": "*",
+    "field": "players[].deck_json order",
+    "reason": "v1 lists a game's deck_json in catalog id order (game_cards keeps one row per card, no list order); 0.x writes the registered list's order (CreateGames::buildLocalDeck). The goldens are seeded in v1's order. A log match that 0.x and v1 both track and push hashes differently until 0.x is retired (ruling 5)"
+  },
+  {
+    "fixture": "sync_match_bundles",
+    "token": "*",
+    "field": "players[].opening_hand_json order",
+    "reason": "hands in catalog id order, each copy repeated (target schema section 17: no dealt order); 0.x keeps the order entered. Same bundle bytes only when the hand was entered in that order. v1 pushes a manual match it made, and a pulled or 0.x-synced one only after a local edit (07 ruling 5, Plan Q task 11 review), so the server then holds this form"
+  },
+  {
+    "fixture": "sync_match_bundles",
+    "token": "*",
+    "field": "match.mtgo_id (manual)",
+    "reason": "a manual match has no MTGO id in v1: the bundle writes manual_ and the token's first 24 letters and digits; 0.x wrote manual_ and 24 random characters, which the 0.x import does not keep. v1 pushes a manual match it made, and a pulled or 0.x-synced one only after a local edit (07 ruling 5, Plan Q task 11 review), so the server then holds this form"
+  },
+  {
+    "fixture": "sync_match_bundles",
+    "token": "*",
+    "field": "games[].mtgo_id (manual)",
+    "reason": "a manual game has no MTGO game id in v1: the bundle writes {token}-{game number}; 0.x wrote a random UUID, which the 0.x import does not keep. v1 pushes a manual match it made, and a pulled or 0.x-synced one only after a local edit (07 ruling 5, Plan Q task 11 review), so the server then holds this form"
+  },
+  {
+    "fixture": "sync_match_bundles",
+    "token": "*",
+    "field": "card_stats (manual)",
+    "reason": "v1 keeps no card stats for a manual match (0.x RecomputeManualMatchStats derived them), so its bundle has none. v1 pushes a manual match it made, and a pulled or 0.x-synced one only after a local edit (07 ruling 5, Plan Q task 11 review), so the server then holds this form"
+  },
+  {
+    "fixture": "sync_match_bundles",
+    "token": "*",
+    "field": "players[].starting_hand_size (unknown)",
+    "reason": "v1 writes 7 for an unknown starting hand size, 0.x's column default"
+  },
+  {
+    "fixture": "sync_match_bundles",
+    "token": "*",
+    "field": "match.result (imported)",
+    "reason": "v1 has no result column: an imported match gets the games' score text as a tracked one does, where 0.x's own imports had none; v1 never pushes a row it does not own (ruling 5), so this only shows if the row is pulled back"
+  },
+  {
+    "fixture": "sync_league_bundles",
+    "token": "*",
+    "field": "snapshots[].source",
+    "reason": "v1's imported registered decks are written as registered, the only source 0.x ever wrote"
+  },
+  {
+    "fixture": "sync_league_bundles",
+    "token": "*",
+    "field": "league.deck_change_detected",
+    "reason": "the column is dropped (target schema section 8): it rides in the carry, else false"
+  },
+  {
+    "fixture": "sync_league_bundles",
+    "token": "*",
+    "field": "drafts[].picks (detached)",
+    "reason": "a detached pick (kept only for its note) is not part of the draft and is not sent"
+  },
+  {
+    "fixture": "card_stats_draft_hobbit",
+    "token": "959762288",
+    "field": "cards[q-oracle-125769].kept",
+    "reason": "deliberate fix of a 0.x bug, ruled by the owner (2026-10-09): kept is the hand kept before any extra draw, and the turn 1 draw on the draw is a blind card, never kept. 0.x ExtractGameHandData counted the turn 1 draw as kept; v1 stores it as first_draw and sends starting_hand as kept, as the Card Stats tab reads it"
+  },
+  {
+    "fixture": "card_stats",
+    "token": "*",
+    "field": "timeframe applied",
+    "reason": "the Card Stats timeframe filter filters the matches read (cards ruling 4); 0.x showed it and ignored it"
+  },
+  {
+    "fixture": "card_stats",
+    "token": "*",
+    "field": "unresolved cards shown",
+    "reason": "a card without card data shows as \"Card {id}\", grouped by catalog id (cards ruling 5); 0.x's inner join dropped it"
+  },
+  {
+    "fixture": "card_stats",
+    "token": "*",
+    "field": "imported postboard rule",
+    "reason": "postboard games of a history match (a v1 history import, or a 0.x copy with 0.x's matches.imported flag; a 0.x database without the flag predates 0.x's history import, so none of its matches is one; frames decide nothing, issue #313) with a deck version and a game log are rebuilt from the deck version (issue #6, cards ruling 7); 0.x kept its seen-only deck_json and left sideboarding out"
+  },
+  {
+    "fixture": "card_stats",
+    "token": "*",
+    "field": "imported postboard rule: sided in seen",
+    "reason": "the imported postboard rule also raises a sided in card's seen to its copies seen (0.x dropped the row)"
+  },
+  {
+    "fixture": "card_stats",
+    "token": "*",
+    "field": "community stats not ported",
+    "reason": "community card stats are not ported (cards ruling 10): no lookup, switch, freshness badge or error toasts, and no source, refreshedAt or externalError in the payload. Informational"
+  },
+  {
+    "fixture": "card_stats",
+    "token": "*",
+    "field": "0.x image files copied, never moved",
+    "reason": "v1 keeps its images in its own folder and copies 0.x's existing image files into it on import (cards ruling 3); 0.x's files are only read, never moved, changed or deleted. Informational"
+  },
+  {
+    "fixture": "card_stats",
+    "token": "*",
+    "field": "seen (sideboard card postboard)",
+    "reason": "a sideboard card seen in a postboard game of a log match (a Wish or a Lessons fetch, say) keeps seen > 0 in v1; 0.x gave it a zero row with seen 0 (Plan S task 8 re-review)"
+  },
+  {
+    "fixture": "card_stats",
+    "token": "*",
+    "field": "zone counters cap",
+    "reason": "each zone counter is capped at the row's main plus side copies, as v1's seen is; 0.x capped at the main (as played) quantity, so a card in both whose instance id changes mid-game can read one higher (Plan S task 6 review). Otherwise the zone counters equal 0.x's (card_stats_draft_hobbit golden)"
+  },
+  {
+    "fixture": "card_stats",
+    "token": "*",
+    "field": "colour identity in WUBRG order",
+    "reason": "Card Stats and the sideboard guide show a card's colour identity in WUBRG order, each letter once (cards::normalize_colors, as every other v1 page); 0.x ColorIdentity::normalize kept first-appearance order, so a card served as R,W showed R,W and now shows W,R. Display only: stored values and sync bundles are unchanged (owner ruling, audit A6). Informational"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "pushed events, no polls",
+    "reason": "every overlay window patches from pushed events (spec 6, ruling 3); 0.x polled the game overlay and the league card every 5 s and the draft notes every 1 s"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "one entry page per window",
+    "reason": "the three windows are pages of one overlay.html entry (spec 5.1); 0.x opened Inertia routes"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "sideboarding by log position",
+    "reason": "sideboarding is a transition into a SideboardingState after the newest game's first frame in log order, (log_file_id, byte_offset) (spec 7.7, ruling 7); 0.x compared timestamps rebuilt from HH:MM:SS, so a same-second transition depended on its started_at and ended_at anchors"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "no community rates",
+    "reason": "the sideboard guide shows no community Field rates or recommendations from them (cards ruling 10, spec ruling 6): History order and badges come from the player's own games"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "unmet archetypes in the picker",
+    "reason": "the archetype picker also lists the format's archetypes the player never met, from the 90-day metagame list when online, and picking one creates a stub row (spec 7.3, ruling 5); 0.x listed only its held catalog"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "league window position remembered",
+    "reason": "the league window reopens where it was left (ruling 8); 0.x did not remember its position"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "deck labels in a column",
+    "reason": "a league card deck label is decks.overlay_label (ruling 9); 0.x kept a settings map keyed by deck id (imported by mtgo_id, spec 12)"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "unlinked draft notes",
+    "reason": "a draft not linked to a league can take pick notes (Plan N keys them by draft token, ruling 12); 0.x refused with a message"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "scouting failures cached",
+    "reason": "a failed opponent scouting lookup is cached 5 minutes (ruling 15); 0.x cached only answers (1 hour, kept)"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "windows open without focus",
+    "reason": "every overlay window opens without taking focus so MTGO keeps the keyboard (ruling 10); 0.x set no focus option, so its NativePHP (Electron) windows took focus when they opened, the Electron default"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "windows reopen at their saved position",
+    "reason": "all three windows reopen at their saved position, programmatic closes included; centred only when the saved monitor is gone or the window never opened (spec 5.2, ruling 8); 0.x reopened windows centred"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "overlay windows unavailable on native Wayland",
+    "reason": "on a native Wayland backend no overlay window opens and the Overlays page shows them unavailable with the GDK_BACKEND=x11 note; the hosted OBS overlay stays (spec 5.3, ruling 2); 0.x had no Linux build"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "game overlay only for matches announced this session",
+    "reason": "the game overlay opens only for a match whose live events the tracker announced in this session (LiveEventsStored), so a restart mid-game reopens it at the next frame (spec 17); 0.x opened it at boot for any in-progress match row, stale ones included"
+  },
+  {
+    "fixture": "overlay",
+    "token": "*",
+    "field": "debug simulator dropped",
+    "reason": "0.x's /debug/overlay simulator (CreateFakeOverlayMatch, AdvanceFakeOverlayPhase, TeardownFakeOverlayMatches, OverlaySimulatorTest) is not ported in any form (ruling 13)"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "no catalog download",
+    "reason": "no catalog download, version probe, banner or refresh page: the definitions change check replaces them (archetypes spec section 5). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "opponent none is input",
+    "reason": "a match's opponent set to none is recorded (matches.opponent_archetype_none) and no re-detection refills it, \"Detect\" by hand included, until an archetype is set by hand; 0.x re-detected when asked (spec sections 4 and 8, ruling 12, final review I2). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "local detection from definitions",
+    "reason": "local detection evaluates the server's definitions (rules, then 0.x's scorer over held lists) instead of 0.x's sample decks (spec section 6.1, ruling 1). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "archetype_deck_id dropped",
+    "reason": "a match row keeps no sample deck id and archetype_match_attempts is not kept, so per-variant facing win rates are not shown (ruling 9). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "server moves move history",
+    "reason": "an archetype the server moves takes its matches, decks, merge children, guides and notes to the new uuid; 0.x asked the player per removal and cascaded guides and notes away (rulings 10 and 18). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "move onto an unheld retired target",
+    "reason": "when the server moves an archetype onto a target v1 does not hold and the check answers that target as retired, v1 retires the old row and moves nothing; 0.x remapped onto the target first (spec section 19, #300 F8). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "merge carried by a move",
+    "reason": "a merge the moved row carried lands on the target only when the target has no merge and no children, so no chain is made (spec section 7: no chains); 0.x's remap could chain (spec section 19, #300 F8). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "rerun restores deletions",
+    "reason": "rerunning the 0.x import restores what v1 deleted (a hand-set archetype, a deck's archetype link, guides, notes, an opponent seat emptied by deleting its archetype); v1 keeps no record of deletions. Intended, owner ruling 2026-10-10 (#301 item 5; spec section 15, #300 F16). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "downloaded archetypes not renamed",
+    "reason": "only manual archetypes are renamed or re-coloured by hand; 0.x let a downloaded one be edited until its next refresh overwrote it (ruling 3). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "deck prefill by catalog id",
+    "reason": "the deck archetype prefill sends catalog ids; 0.x sent oracle ids (spec section 6). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "detection waits and is paced",
+    "reason": "detection waits for the game sync and runs one match at a time, 2 s after each API call (spec section 6.3, ruling 16); 0.x ran on every match event. Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "Metagame area pages",
+    "reason": "the Metagame page, archetype detail and manage screen replace 0.x's archetype index and show pages (spec sections 9 to 11). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "Cards page met archetypes",
+    "reason": "the Cards page popularity and archetype sheet count held archetypes only (the player's met and manual ones), so the numbers are smaller than 0.x's (ruling 8). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "import skips the catalog",
+    "reason": "the 0.x import brings the referenced and manual archetypes only, not 0.x's catalog or sample decks (ruling 4). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "guides on the archetype page",
+    "reason": "sideboard guides and matchup notes show on the archetype page as well as the deck tab, and the guide editor has no community Field column (rulings 14 and 19). Informational"
+  },
+  {
+    "fixture": "archetypes",
+    "token": "*",
+    "field": "manual archetype edit refusals",
+    "reason": "manage-screen refusals 0.x answered with a 404 or a redirect are v1 messages; a duplicate variant refuses the whole edit (name included); export without a list takes the first variant; the manage format filter hides the fallbacks; a variant cannot be reassigned into a downloaded archetype (Plan T task 7). Informational"
+  },
+  {
+    "fixture": "sync_deck_bundles",
+    "token": "*",
+    "field": "deck.archetype_uuid (pull)",
+    "reason": "a pulled deck's archetype fills only a deck without one (a set decks.archetype_id is input, global constraints); 0.x replaced it, and cleared it on a null. The bundle bytes are 0.x's either way"
+  },
+  {
+    "fixture": "sync_deck_bundles",
+    "token": "*",
+    "field": "guides and notes (pull, checks)",
+    "reason": "a pulled guide card or note that breaks a v1 CHECK (an empty body, a quantity outside 1 to 99, an unknown direction) is skipped with a log line, as is a second guide for one archetype; 0.x inserted them as sent (spec section 21.5)"
+  },
+  {
+    "fixture": "sync_deck_bundles",
+    "token": "*",
+    "field": "unknown uuid without a format (pull)",
+    "reason": "an unknown archetype uuid is stubbed as a downloaded row in the deck's (or match's) format, where 0.x stubbed it without a format; with no constructed format to stub in (a limited or blank-format deck, a limited match), the deck's archetype uuid, guides and notes and the match's archetype rows naming it stay in the row's carry and every push sends them back unchanged, so they are never deleted on the server"
+  },
+  {
+    "fixture": "sync_match_bundles",
+    "token": "*",
+    "field": "archetypes (pull)",
+    "reason": "a pulled match's archetype rows: a hand-set row replaces a detected local row, a detected row fills only a seat with no row, and an empty opponent seat this device decided stays empty; 0.x deleted and reinserted the match's rows (spec section 14, Review Focus 1)"
+  },
+  {
+    "fixture": "replays",
+    "token": "*",
+    "field": "games[].frames (repeats dropped)",
+    "reason": "a frame identical to the one before it is dropped, keeping the first one's time, except a game's last frame, which is always kept (replays spec ruling 4); 0.x shared every game_state_update. The test checks that v1's frames are exactly 0.x's with that rule applied: same scrubber positions, same board at every position, a same-second freeze of 250 ms / speed gone"
+  },
+  {
+    "fixture": "replays",
+    "token": "*",
+    "field": "games[].sideboard order",
+    "reason": "a game's sideboard lists the local game_cards rows in catalog id order (one row per card, no list order); 0.x listed the recorded deck_json in the registered list's order (GetLocalSideboard). Same entries and quantities; the viewer sorts sideboard changes itself, so only the snapshot's list order differs"
+  },
+  {
+    "fixture": "replays",
+    "token": "*",
+    "field": "meta.played_at",
+    "reason": "played_at is the first game's start; a v1 game starts at its first sign of life, the earliest of its first state frame and its first game log entry (mtgo-match games.rs), where 0.x started a game at its first state frame (CreateGames). The die roll is logged up to a second before the first frame, so played_at can be that much earlier"
+  },
+  {
+    "fixture": "replays",
+    "token": "*",
+    "field": "log line on a dropped repeat's second",
+    "reason": "note (no golden sees it, the viewer pairs log lines with frames): frameForTimestamp pairs a log line with the first frame in or after its second, so a log line (or, for old frames without ActivePlayer, a Turn N: boundary) whose second held only a dropped repeat now seeks to the next changed frame (replays spec ruling 4)"
+  },
+  {
+    "fixture": "replays",
+    "token": "*",
+    "field": "old frame times trimmed to the time of day",
+    "reason": "note (imported matches only): a 0.x game_timelines.timestamp written as Y-m-d H:i:s keeps only its HH:MM:SS (replays spec ruling 5), since the viewer reads a time of day and pairs log lines by their first eight characters; HH:MM:SS and HH:MM:SS.mmm are kept as written"
+  },
+  {
+    "fixture": "leagues",
+    "token": "*",
+    "field": "run card counts matches with no deck",
+    "reason": "a constructed run card (Leagues page, home dashboard, prizes) counts every complete match linked to the run whatever its deck; 0.x FormatLeagueRuns joined deck_versions, so a run of matches with no deck link showed 0-0 with no rows while GetLeagueKpis counted those matches. Deck pages still count only the deck's own matches (owner agreed 2026-10-16, issue #390)"
+  }
+]

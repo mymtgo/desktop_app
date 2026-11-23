@@ -1,0 +1,138 @@
+/*
+ * Surface treatments for the replay viewer. Namespaced so they never collide
+ * with a host's own .texture-bg or .bevel, which differ between hosts.
+ */
+@layer {
+    /*
+     * The desktop app's dark palette, set on the viewer's own root. Both hosts
+     * map bg-accent, text-muted-foreground and the rest to these variables,
+     * so the viewer looks the same wherever it is mounted.
+     */
+    .replay-theme {
+        --background: var(--color-neutral-900);
+        --foreground: oklch(0.985 0 0);
+        --card: oklch(0.205 0 0);
+        --card-foreground: oklch(0.985 0 0);
+        --popover: oklch(0.269 0 0);
+        --popover-foreground: oklch(0.985 0 0);
+        --primary: oklch(0.52 0.12 235);
+        --primary-foreground: oklch(0.97 0.01 235);
+        --secondary: oklch(0.269 0.01 230);
+        --secondary-foreground: oklch(0.985 0 0);
+        --muted: oklch(0.269 0 0);
+        --muted-foreground: oklch(0.708 0 0);
+        --accent: oklch(0.30 0.02 230);
+        --accent-foreground: oklch(0.985 0 0);
+        --border: oklch(1 0 0 / 10%);
+        --input: oklch(1 0 0 / 15%);
+        --ring: oklch(0.60 0.12 230);
+        /* The opponent's colour wherever a player is told apart: their dot, avatar, area and turns on the timeline. You are --primary. */
+        --replay-opponent: oklch(0.56 0.13 330);
+        /* The result's colours: both areas take one when the replay reaches the end. */
+        --replay-win: #facc15;
+        --replay-loss: #e5484d;
+    }
+
+    .replay-texture-bg {
+        @apply bg-background;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.02' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    }
+
+    .replay-bevel {
+        @apply relative;
+        @apply after:shadow-[0_1px_0_0_rgba(0,0,0,0.1)];
+        @apply after:bg-transparent;
+        @apply after:content-[''];
+        @apply after:block;
+        @apply after:inset-0;
+        @apply after:absolute;
+        @apply after:bottom-0;
+        @apply after:rounded-[inherit];
+        @apply before:shadow-[0_-1px_0_0_rgba(255,255,255,0.1)];
+        @apply before:bg-transparent;
+        @apply before:content-[''];
+        @apply before:block;
+        @apply before:inset-0;
+        @apply before:absolute;
+        @apply before:bottom-0;
+        @apply before:rounded-[inherit];
+        @apply after:translate-y-[-1px];
+        @apply before:translate-y-[1px];
+        @apply active:translate-y-[1px];
+        @apply active:translate-x-[1px];
+    }
+
+    /* Pressed-in selection state. */
+    .replay-inset {
+        @apply border border-black/50 bg-black/10 text-foreground shadow-inner shadow-black/50 outline outline-white/5;
+    }
+
+    /*
+     * A player's half of the table: a faint honeycomb in the player's own
+     * colour on black, fading in toward the centre line, which is a firm
+     * rule in that colour. The honeycomb and the fade are masks on a layer
+     * behind the content, so one pattern takes either player's colour.
+     */
+    .replay-area {
+        --area: var(--replay-opponent);
+        position: relative;
+        isolation: isolate;
+        border-color: color-mix(in oklab, var(--area) 75%, black);
+        background-color: #000;
+    }
+
+    .replay-area::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-color: color-mix(in oklab, var(--area) 15%, transparent);
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24.249' height='42'%3E%3Cpath d='M0 7.0L12.1245 0L24.249 7.0V21.0L12.1245 28L0 21.0ZM12.1245 28V42' fill='none' stroke='black' stroke-width='1'/%3E%3C/svg%3E"), linear-gradient(var(--area-dir, to bottom), transparent, #000);
+        mask-size: 24.249px 42px, 100% 100%;
+        mask-composite: intersect;
+    }
+
+    .replay-area-local {
+        --area: var(--primary);
+        --area-dir: to top;
+    }
+
+    .replay-result-win .replay-area {
+        --area: var(--replay-win);
+    }
+
+    .replay-result-loss .replay-area {
+        --area: var(--replay-loss);
+    }
+
+    .replay-glow {
+        color: #38bdf8;
+        filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.7)) drop-shadow(0 0 8px rgba(56, 189, 248, 0.35));
+    }
+}
+
+/*
+ * Bottom sheet enter and leave: the backdrop fades while the panel slides.
+ * Vue's Transition puts the class on the sheet's root for the first and
+ * last frame, and the children's own transitions do the moving.
+ */
+@layer {
+    .replay-sheet-backdrop,
+    .replay-sheet {
+        transition-duration: 200ms;
+        transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .replay-sheet-backdrop {
+        transition-property: opacity;
+    }
+
+    .replay-sheet-hidden .replay-sheet-backdrop {
+        opacity: 0;
+    }
+
+    .replay-sheet-hidden .replay-sheet {
+        transform: translateY(100%) !important;
+    }
+}

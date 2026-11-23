@@ -1,0 +1,205 @@
+{
+    "bundles": [
+        {
+            "token": "q-golden-run-token",
+            "input": {
+                "token": "q-golden-run-token",
+                "name": "Qleague Modern",
+                "format": "CMODERN",
+                "started_at_ms": 1787389200000,
+                "joined_at_ms": 1787389202000,
+                "dropped_at_ms": null,
+                "completed_at_ms": 1787398200000,
+                "state": "complete",
+                "notes": "Qnote: 4-1",
+                "manual": false,
+                "kind": "constructed",
+                "set_code": null,
+                "mtgo_course_id": null,
+                "deck_mtgo_id": "12345",
+                "deck_version_signature": "MTAwMToyOmZhbHNlfDEwMDU6MjpmYWxzZXwxMDAyOjE6dHJ1ZQ==",
+                "drafts": [],
+                "snapshots": []
+            },
+            "client_id": "q-golden-run-token_20260822T090000Z",
+            "canonical": "{\"drafts\":[],\"league\":{\"completed_at\":\"2026-08-22T11:30:00Z\",\"deck_change_detected\":true,\"deck_mtgo_id\":\"12345\",\"deck_version_signature\":\"MTAwMToyOmZhbHNlfDEwMDU6MjpmYWxzZXwxMDAyOjE6dHJ1ZQ==\",\"dropped_at\":null,\"format\":\"CMODERN\",\"joined_at\":\"2026-08-22T09:00:02Z\",\"kind\":\"constructed\",\"manual\":false,\"mtgo_course_id\":null,\"name\":\"Qleague Modern\",\"notes\":\"Qnote: 4-1\",\"set_code\":null,\"started_at\":\"2026-08-22T09:00:00Z\",\"state\":\"complete\",\"token\":\"q-golden-run-token\"},\"snapshots\":[]}",
+            "hash": "9beb4ed22533ceb608b9ef66cc1d8fd8d9a2f008aa102411443bd009329ac432",
+            "sidecar": {
+                "occurred_at": "2026-08-22T09:00:00Z",
+                "name": "Qleague Modern",
+                "format": "CMODERN",
+                "state": "complete",
+                "deck_client_id": "12345"
+            }
+        },
+        {
+            "token": "q-golden-draft-token",
+            "input": {
+                "token": "q-golden-draft-token",
+                "name": "Qleague DSK Draft",
+                "format": "DDSK",
+                "started_at_ms": 1787511600000,
+                "joined_at_ms": 1787511601000,
+                "dropped_at_ms": 1787519400000,
+                "completed_at_ms": null,
+                "state": "dropped",
+                "notes": null,
+                "manual": false,
+                "kind": "draft",
+                "set_code": "DSK",
+                "mtgo_course_id": 4242,
+                "deck_mtgo_id": null,
+                "deck_version_signature": null,
+                "drafts": [
+                    {
+                        "draft_token": "11111111-2222-4333-8444-555555555555",
+                        "mtgo_draft_id": 6123456,
+                        "pod_token": "66666666-7777-4888-8999-000000000000",
+                        "seat_count": 8,
+                        "seat_index": 3,
+                        "booster_catalog_id": 90001,
+                        "state": "finished",
+                        "pack_size": 14,
+                        "picks_expected": 42,
+                        "started_at_ms": 1787511660000,
+                        "ended_at_ms": 1787513700000,
+                        "picks": [
+                            {
+                                "ordinal": 1,
+                                "pack_number": 1,
+                                "pick_number": 1,
+                                "pack_id": 143000001,
+                                "direction": 0,
+                                "cards_available": [
+                                    5,
+                                    6
+                                ],
+                                "picked_catalog_id": 5,
+                                "picked_card_id": 900000001,
+                                "reservations": [
+                                    [
+                                        6,
+                                        1787511670000
+                                    ],
+                                    [
+                                        5,
+                                        1787511672000
+                                    ]
+                                ],
+                                "shown_at_ms": 1787511665000,
+                                "deadline_at_ms": 1787511705000,
+                                "picked_at_ms": 1787511673000,
+                                "note": "Qnote: take the bomb"
+                            },
+                            {
+                                "ordinal": 2,
+                                "pack_number": 1,
+                                "pick_number": 2,
+                                "pack_id": 143000002,
+                                "direction": 1,
+                                "cards_available": [
+                                    7,
+                                    8,
+                                    9
+                                ],
+                                "picked_catalog_id": 8,
+                                "picked_card_id": 900000002,
+                                "reservations": [],
+                                "shown_at_ms": 1787511700000,
+                                "deadline_at_ms": null,
+                                "picked_at_ms": 1787511710000,
+                                "note": null
+                            },
+                            {
+                                "ordinal": 3,
+                                "pack_number": 1,
+                                "pick_number": 3,
+                                "pack_id": null,
+                                "direction": null,
+                                "cards_available": [],
+                                "picked_catalog_id": null,
+                                "picked_card_id": null,
+                                "reservations": [],
+                                "shown_at_ms": null,
+                                "deadline_at_ms": null,
+                                "picked_at_ms": null,
+                                "note": null
+                            }
+                        ]
+                    }
+                ],
+                "snapshots": [
+                    {
+                        "cards": [
+                            {
+                                "catalog_id": 5,
+                                "quantity": 1,
+                                "sideboard": false
+                            }
+                        ],
+                        "signature": "q-sig-a",
+                        "captured_at_ms": 1787515200000,
+                        "match_token": "q-golden-draft-match-1"
+                    },
+                    {
+                        "cards": [
+                            {
+                                "catalog_id": 5,
+                                "quantity": 1,
+                                "sideboard": false
+                            },
+                            {
+                                "catalog_id": 8,
+                                "quantity": 1,
+                                "sideboard": true
+                            }
+                        ],
+                        "signature": "q-sig-b",
+                        "captured_at_ms": 1787515200000,
+                        "match_token": "q-golden-draft-match-2"
+                    }
+                ]
+            },
+            "client_id": "q-golden-draft-token_20260823T190000Z",
+            "canonical": "{\"drafts\":[{\"booster_catalog_id\":90001,\"draft_token\":\"11111111-2222-4333-8444-555555555555\",\"ended_at\":\"2026-08-23T19:35:00Z\",\"mtgo_draft_id\":6123456,\"pack_size\":14,\"picks\":[{\"cards_available\":[5,6],\"deadline_at\":\"2026-08-23T19:01:45Z\",\"direction\":0,\"note\":\"Qnote: take the bomb\",\"ordinal\":1,\"pack_id\":143000001,\"pack_number\":1,\"pick_number\":1,\"picked_at\":\"2026-08-23T19:01:13Z\",\"picked_card_id\":900000001,\"picked_catalog_id\":5,\"reservations\":[{\"at\":\"2026-08-23T19:01:10+00:00\",\"catalog_id\":6},{\"at\":\"2026-08-23T19:01:12+00:00\",\"catalog_id\":5}],\"shown_at\":\"2026-08-23T19:01:05Z\"},{\"cards_available\":[7,8,9],\"deadline_at\":null,\"direction\":1,\"note\":null,\"ordinal\":2,\"pack_id\":143000002,\"pack_number\":1,\"pick_number\":2,\"picked_at\":\"2026-08-23T19:01:50Z\",\"picked_card_id\":900000002,\"picked_catalog_id\":8,\"reservations\":[],\"shown_at\":\"2026-08-23T19:01:40Z\"},{\"cards_available\":[],\"deadline_at\":null,\"direction\":null,\"note\":null,\"ordinal\":3,\"pack_id\":null,\"pack_number\":1,\"pick_number\":3,\"picked_at\":null,\"picked_card_id\":null,\"picked_catalog_id\":null,\"reservations\":[],\"shown_at\":null}],\"picks_expected\":42,\"pod_token\":\"66666666-7777-4888-8999-000000000000\",\"seat_count\":8,\"seat_index\":3,\"started_at\":\"2026-08-23T19:01:00Z\",\"state\":\"finished\"}],\"league\":{\"completed_at\":null,\"deck_change_detected\":false,\"deck_mtgo_id\":null,\"deck_version_signature\":null,\"dropped_at\":\"2026-08-23T21:10:00Z\",\"format\":\"DDSK\",\"joined_at\":\"2026-08-23T19:00:01Z\",\"kind\":\"draft\",\"manual\":false,\"mtgo_course_id\":4242,\"name\":\"Qleague DSK Draft\",\"notes\":null,\"set_code\":\"DSK\",\"started_at\":\"2026-08-23T19:00:00Z\",\"state\":\"dropped\",\"token\":\"q-golden-draft-token\"},\"snapshots\":[{\"captured_at\":\"2026-08-23T20:00:00Z\",\"cards\":[{\"catalog_id\":5,\"quantity\":1,\"sideboard\":false}],\"match_token\":\"q-golden-draft-match-1\",\"signature\":\"q-sig-a\",\"source\":\"registered\"},{\"captured_at\":\"2026-08-23T20:00:00Z\",\"cards\":[{\"catalog_id\":5,\"quantity\":1,\"sideboard\":false},{\"catalog_id\":8,\"quantity\":1,\"sideboard\":true}],\"match_token\":\"q-golden-draft-match-2\",\"signature\":\"q-sig-b\",\"source\":\"registered\"}]}",
+            "hash": "c85146b25015c2929fa1e18fd6f563f0b5022aa1a63783562035b5babf66118d",
+            "sidecar": {
+                "occurred_at": "2026-08-23T19:00:00Z",
+                "name": "Qleague DSK Draft",
+                "format": "DDSK",
+                "state": "dropped"
+            }
+        },
+        {
+            "token": "manual_Qq0Zr9Wm3XyT2bN8cV5dL1sK",
+            "input": {
+                "token": "manual_Qq0Zr9Wm3XyT2bN8cV5dL1sK",
+                "name": "Qleague by hand",
+                "format": "CPAUPER",
+                "started_at_ms": 1787572800000,
+                "joined_at_ms": null,
+                "dropped_at_ms": null,
+                "completed_at_ms": null,
+                "state": "complete",
+                "notes": null,
+                "manual": true,
+                "kind": "constructed",
+                "set_code": null,
+                "mtgo_course_id": null,
+                "deck_mtgo_id": null,
+                "deck_version_signature": null,
+                "drafts": [],
+                "snapshots": []
+            },
+            "client_id": "manual_Qq0Zr9Wm3XyT2bN8cV5dL1sK_20260824T120000Z",
+            "canonical": "{\"drafts\":[],\"league\":{\"completed_at\":null,\"deck_change_detected\":false,\"deck_mtgo_id\":null,\"deck_version_signature\":null,\"dropped_at\":null,\"format\":\"CPAUPER\",\"joined_at\":null,\"kind\":\"constructed\",\"manual\":true,\"mtgo_course_id\":null,\"name\":\"Qleague by hand\",\"notes\":null,\"set_code\":null,\"started_at\":\"2026-08-24T12:00:00Z\",\"state\":\"complete\",\"token\":\"manual_Qq0Zr9Wm3XyT2bN8cV5dL1sK\"},\"snapshots\":[]}",
+            "hash": "9f9fa43360ae03f7bdf6086e738272c161e503a92a79bd679c4ae0cf7c37e78b",
+            "sidecar": {
+                "occurred_at": "2026-08-24T12:00:00Z",
+                "name": "Qleague by hand",
+                "format": "CPAUPER",
+                "state": "complete"
+            }
+        }
+    ]
+}

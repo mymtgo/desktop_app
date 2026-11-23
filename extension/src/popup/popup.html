@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MyMTGO for Endstep</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: oklch(0.205 0 0);
+    --card: oklch(0.245 0 0);
+    --fg: oklch(0.985 0 0);
+    --muted: oklch(0.708 0 0);
+    --border: oklch(1 0 0 / 10%);
+    --primary: oklch(0.52 0.12 235);
+    --ring: oklch(0.62 0.14 230);
+    --success: oklch(0.696 0.17 162.48);
+    --warning: oklch(0.769 0.158 70.08);
+    --danger: oklch(0.645 0.246 16.439);
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; width: 330px; background: var(--bg); color: var(--fg); font: 13px/1.4 ui-sans-serif, system-ui, sans-serif; }
+  header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+  header img { width: 32px; height: 32px; border-radius: 7px; }
+  .title { font-weight: 650; font-size: 14px; }
+  .subtitle { color: var(--muted); font-size: 11.5px; }
+  main { padding: 12px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .banner { margin: 0; padding: 8px 12px; border-radius: var(--radius); font-size: 12px; color: var(--danger); background: oklch(0.645 0.246 16.439 / 12%); border: 1px solid oklch(0.645 0.246 16.439 / 35%); overflow-wrap: anywhere; }
+  .banner[hidden] { display: none; }
+  .banner.notice { color: var(--warning); background: oklch(0.769 0.158 70.08 / 12%); border-color: oklch(0.769 0.158 70.08 / 35%); }
+  button.link { margin-left: 6px; padding: 0; border: 0; background: none; color: var(--muted); font: inherit; font-size: 11.5px; font-weight: 400; text-decoration: underline; cursor: pointer; }
+  .toggle { display: flex; align-items: center; justify-content: space-between; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; font-weight: 550; cursor: pointer; }
+  .toggle input { position: absolute; opacity: 0; pointer-events: none; }
+  .switch { width: 34px; height: 20px; border-radius: 999px; background: oklch(1 0 0 / 18%); position: relative; flex: none; transition: background 0.15s; }
+  .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform 0.15s; }
+  .toggle input:checked + .switch { background: var(--primary); }
+  .toggle input:checked + .switch::after { transform: translateX(14px); }
+  .toggle input:focus-visible + .switch { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .helper { display: flex; align-items: center; gap: 9px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--warning); box-shadow: 0 0 0 3px oklch(0.769 0.158 70.08 / 22%); }
+  .dot.ok { background: var(--success); box-shadow: 0 0 0 3px oklch(0.696 0.17 162.48 / 22%); }
+  .dot.error { background: var(--danger); box-shadow: 0 0 0 3px oklch(0.645 0.246 16.439 / 22%); }
+  .version { margin-left: auto; color: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+  .row { display: flex; justify-content: space-between; gap: 12px; padding: 7px 12px; }
+  .row + .row, #waiting + .row { border-top: 1px solid var(--border); }
+  .label { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .value { font-variant-numeric: tabular-nums; font-weight: 550; text-align: right; white-space: nowrap; flex: none; }
+  .recording::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--ring); animation: pulse 1.6s infinite; }
+  @keyframes pulse { 50% { opacity: 0.35; } }
+  #waiting { list-style: none; margin: 0; padding: 0; }
+  #waiting li { padding: 6px 12px; border-top: 1px solid var(--border); color: var(--muted); font-size: 11.5px; overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<header>
+  <img src="icons/icon-128.png" alt="">
+  <div>
+    <div class="title">MyMTGO for Endstep</div>
+    <div class="subtitle">Your Endstep matches, tracked in MyMTGO</div>
+  </div>
+</header>
+<main>
+  <p id="storage-error" class="banner" hidden>MyMTGO for Endstep cannot use the browser's storage, so matches are not being captured.<span id="firefox-hint" hidden> In Firefox, this happens when history is set to never be remembered.</span></p>
+  <p id="store-error" class="banner" hidden></p>
+  <p id="background-error" class="banner" hidden></p>
+  <p id="access-error" class="banner" hidden></p>
+  <p id="reload-hint" class="banner notice" hidden>This Endstep tab was open before the extension started. Reload it to capture its matches.</p>
+  <label class="toggle">
+    <span>Capture Endstep matches</span>
+    <input type="checkbox" id="capture-enabled">
+    <span class="switch"></span>
+  </label>
+  <div class="card">
+    <div class="helper"><span id="helper-dot" class="dot"></span><span id="helper">Checking for MyMTGO...</span><span id="helper-version" class="version"></span></div>
+    <div class="row"><span class="label">Recording</span><span id="recording" class="value">-</span></div>
+    <div class="row"><span class="label">Waiting to send</span><span id="waiting-count" class="value">-</span></div>
+    <ul id="waiting"></ul>
+    <div class="row"><span class="label">Last capture sent</span><span id="last-sent" class="value">-</span></div>
+    <div class="row" id="dropped-row"><span class="label">Skipped</span><span class="value"><span id="dropped">-</span> <button type="button" id="dropped-reset" class="link" hidden>Reset</button></span></div>
+  </div>
+</main>
+<script src="popup.js"></script>
+</body>
+</html>

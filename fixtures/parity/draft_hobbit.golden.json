@@ -1,0 +1,128 @@
+{
+    "fixture": "draft_hobbit",
+    "matches": [
+        {
+            "token": "c0d8ff76-dc13-480b-bdf0-a228a6cd20f8",
+            "mtgo_id": 289328158,
+            "state": "complete",
+            "outcome": "loss",
+            "games_won": 1,
+            "games_lost": 2,
+            "format": "CMODERN",
+            "match_type": "Modern",
+            "opponent": "Qsxxxx",
+            "started_at": 1787396493000,
+            "ended_at": 1787397127000,
+            "games": [
+                {
+                    "mtgo_id": 959762288,
+                    "won": false,
+                    "local_on_play": false,
+                    "local_mulligans": null,
+                    "opp_mulligans": null,
+                    "local_die_roll": null,
+                    "opp_die_roll": null
+                },
+                {
+                    "mtgo_id": 959762636,
+                    "won": true,
+                    "local_on_play": true,
+                    "local_mulligans": null,
+                    "opp_mulligans": null,
+                    "local_die_roll": null,
+                    "opp_die_roll": null
+                },
+                {
+                    "mtgo_id": 959762762,
+                    "won": false,
+                    "local_on_play": false,
+                    "local_mulligans": null,
+                    "opp_mulligans": null,
+                    "local_die_roll": null,
+                    "opp_die_roll": null
+                }
+            ]
+        },
+        {
+            "token": "08efb7ad-3670-4fab-b015-97cea823cde1",
+            "mtgo_id": 289328482,
+            "state": "complete",
+            "outcome": "loss",
+            "games_won": 0,
+            "games_lost": 2,
+            "format": "DHOBHOBHOB",
+            "match_type": "HOBx3",
+            "opponent": "Qoexxxxxxxxxxxxx",
+            "started_at": 1787398160000,
+            "ended_at": 1787398664000,
+            "games": [
+                {
+                    "mtgo_id": 959763634,
+                    "won": false,
+                    "local_on_play": false,
+                    "local_mulligans": 1,
+                    "opp_mulligans": 0,
+                    "local_die_roll": 2,
+                    "opp_die_roll": 6
+                },
+                {
+                    "mtgo_id": 959764088,
+                    "won": false,
+                    "local_on_play": false,
+                    "local_mulligans": 0,
+                    "opp_mulligans": 0,
+                    "local_die_roll": null,
+                    "opp_die_roll": null
+                }
+            ]
+        },
+        {
+            "token": "614c280d-a378-4c64-bcd1-73f1739fd192",
+            "mtgo_id": 289328793,
+            "state": "complete",
+            "outcome": "win",
+            "games_won": 1,
+            "games_lost": 0,
+            "format": "DHOBHOBHOB",
+            "match_type": "HOBx3",
+            "opponent": "Qvixxxx",
+            "started_at": 1787399335000,
+            "ended_at": 1787399379000,
+            "games": [
+                {
+                    "mtgo_id": 959764748,
+                    "won": true,
+                    "local_on_play": true,
+                    "local_mulligans": 0,
+                    "opp_mulligans": 0,
+                    "local_die_roll": 4,
+                    "opp_die_roll": 3
+                }
+            ]
+        },
+        {
+            "token": "6250e242-fcec-4d44-b642-9268b6581719",
+            "mtgo_id": 289328829,
+            "state": "complete",
+            "outcome": "loss",
+            "games_won": 0,
+            "games_lost": 1,
+            "format": "DHOBHOBHOB",
+            "match_type": "HOBx3",
+            "opponent": "Qvbxx",
+            "started_at": 1787399516000,
+            "ended_at": 1787399934000,
+            "games": [
+                {
+                    "mtgo_id": 959764884,
+                    "won": false,
+                    "local_on_play": false,
+                    "local_mulligans": 0,
+                    "opp_mulligans": 0,
+                    "local_die_roll": 2,
+                    "opp_die_roll": 6
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,790 @@
+{
+    "bundles": [
+        {
+            "token": "q-golden-log-match",
+            "input": {
+                "token": "q-golden-log-match",
+                "mtgo_match_id": 285746550,
+                "source": "log",
+                "format": "CMODERN",
+                "match_type": "Constructed",
+                "state": "complete",
+                "outcome": "win",
+                "started_at_ms": 1787133630000,
+                "ended_at_ms": 1787136000000,
+                "notes": "Qnote: kept a risky hand",
+                "games_won_imported": null,
+                "games_lost_imported": null,
+                "deck_mtgo_id": "12345",
+                "deck_version_signature": "MTAwMToyOmZhbHNlfDEwMDU6MjpmYWxzZXwxMDAyOjE6dHJ1ZQ==",
+                "registered": [],
+                "league_client_id": "q-golden-league-token_20260819T100005Z",
+                "tournament_event_id": 9001,
+                "tournament_round": 2,
+                "local_username": "Qplayer",
+                "opponent_username": "Qfoe",
+                "games": [
+                    {
+                        "game_number": 1,
+                        "mtgo_game_id": 945500844,
+                        "result": "win",
+                        "on_play": true,
+                        "local_mulligans": 1,
+                        "opp_mulligans": 0,
+                        "local_die_roll": 5,
+                        "opp_die_roll": 2,
+                        "turn_count": 7,
+                        "local_starting_hand_size": 6,
+                        "opp_starting_hand_size": 7,
+                        "started_at_ms": 1787133630000,
+                        "ended_at_ms": 1787134230000,
+                        "cards": [
+                            {
+                                "opponent": false,
+                                "catalog_id": 1001,
+                                "oracle_id": "q-oracle-bolt",
+                                "main_qty": 2,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 2,
+                                "bottomed": 1,
+                                "starting_hand": 1,
+                                "seen": 2,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 1,
+                                "played": 0,
+                                "activated": 0
+                            },
+                            {
+                                "opponent": false,
+                                "catalog_id": 1002,
+                                "oracle_id": null,
+                                "main_qty": 0,
+                                "side_qty": 1,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 0,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            },
+                            {
+                                "opponent": false,
+                                "catalog_id": 1005,
+                                "oracle_id": "q-oracle-bolt",
+                                "main_qty": 2,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 1,
+                                "bottomed": 0,
+                                "starting_hand": 1,
+                                "seen": 1,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 1,
+                                "played": 0,
+                                "activated": 0
+                            },
+                            {
+                                "opponent": true,
+                                "catalog_id": 2001,
+                                "oracle_id": "q-oracle-foe",
+                                "main_qty": 0,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 1,
+                                "pregame_revealed": 1,
+                                "pregame_played": 0,
+                                "cast": 1,
+                                "played": 1,
+                                "activated": 2
+                            },
+                            {
+                                "opponent": true,
+                                "catalog_id": 2002,
+                                "oracle_id": null,
+                                "main_qty": 0,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 1,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            }
+                        ],
+                        "casts": [
+                            {
+                                "opponent": false,
+                                "catalog_id": 1005,
+                                "method": "kicked",
+                                "count": 1
+                            }
+                        ],
+                        "mulligans": [],
+                        "frames": [
+                            {
+                                "at_ms": 1787133661000,
+                                "content": {
+                                    "Players": [
+                                        {
+                                            "Name": "Qplayer",
+                                            "Id": 7
+                                        },
+                                        {
+                                            "Name": "Qfoe",
+                                            "Id": 9
+                                        }
+                                    ],
+                                    "note": "alpha"
+                                }
+                            },
+                            {
+                                "at_ms": 1787133661000,
+                                "content": {
+                                    "note": "bravo"
+                                }
+                            },
+                            {
+                                "at_ms": 1787133660750,
+                                "content": {
+                                    "note": "charlie",
+                                    "Cards": [
+                                        {
+                                            "CatalogID": 1001,
+                                            "Zone": "Hand/Library"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "game_number": 2,
+                        "mtgo_game_id": 945500845,
+                        "result": "loss",
+                        "on_play": false,
+                        "local_mulligans": 0,
+                        "opp_mulligans": 0,
+                        "local_die_roll": null,
+                        "opp_die_roll": null,
+                        "turn_count": 8,
+                        "local_starting_hand_size": 7,
+                        "opp_starting_hand_size": 7,
+                        "started_at_ms": 1787134350000,
+                        "ended_at_ms": 1787134950000,
+                        "cards": [
+                            {
+                                "opponent": false,
+                                "catalog_id": 1001,
+                                "oracle_id": "q-oracle-bolt",
+                                "main_qty": 2,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 2,
+                                "bottomed": 1,
+                                "starting_hand": 1,
+                                "seen": 2,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 1,
+                                "played": 0,
+                                "activated": 0
+                            },
+                            {
+                                "opponent": false,
+                                "catalog_id": 1002,
+                                "oracle_id": "q-oracle-sideboard",
+                                "main_qty": 1,
+                                "side_qty": 0,
+                                "sided_in": 1,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 0,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            },
+                            {
+                                "opponent": false,
+                                "catalog_id": 1005,
+                                "oracle_id": "q-oracle-bolt",
+                                "main_qty": 1,
+                                "side_qty": 1,
+                                "sided_in": 0,
+                                "sided_out": 1,
+                                "opening_hand": 1,
+                                "bottomed": 0,
+                                "starting_hand": 1,
+                                "seen": 1,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 1,
+                                "played": 0,
+                                "activated": 0
+                            },
+                            {
+                                "opponent": true,
+                                "catalog_id": 2001,
+                                "oracle_id": "q-oracle-foe",
+                                "main_qty": 0,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 2,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 1,
+                                "played": 1,
+                                "activated": 2
+                            },
+                            {
+                                "opponent": true,
+                                "catalog_id": 2002,
+                                "oracle_id": null,
+                                "main_qty": 0,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 1,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            }
+                        ],
+                        "casts": [],
+                        "mulligans": [],
+                        "frames": [
+                            {
+                                "at_ms": 1787134510000,
+                                "content": {
+                                    "turn": 1
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "game_number": 3,
+                        "mtgo_game_id": 945500846,
+                        "result": "win",
+                        "on_play": true,
+                        "local_mulligans": 0,
+                        "opp_mulligans": 0,
+                        "local_die_roll": null,
+                        "opp_die_roll": null,
+                        "turn_count": 9,
+                        "local_starting_hand_size": 7,
+                        "opp_starting_hand_size": 7,
+                        "started_at_ms": 1787135070000,
+                        "ended_at_ms": 1787135670000,
+                        "cards": [
+                            {
+                                "opponent": false,
+                                "catalog_id": 1001,
+                                "oracle_id": "q-oracle-bolt",
+                                "main_qty": 2,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 2,
+                                "bottomed": 1,
+                                "starting_hand": 1,
+                                "seen": 2,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 1,
+                                "played": 0,
+                                "activated": 0
+                            },
+                            {
+                                "opponent": false,
+                                "catalog_id": 1002,
+                                "oracle_id": "q-oracle-sideboard",
+                                "main_qty": 1,
+                                "side_qty": 0,
+                                "sided_in": 1,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 0,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            },
+                            {
+                                "opponent": false,
+                                "catalog_id": 1005,
+                                "oracle_id": "q-oracle-bolt",
+                                "main_qty": 1,
+                                "side_qty": 1,
+                                "sided_in": 0,
+                                "sided_out": 1,
+                                "opening_hand": 1,
+                                "bottomed": 0,
+                                "starting_hand": 1,
+                                "seen": 1,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 1,
+                                "played": 0,
+                                "activated": 0
+                            },
+                            {
+                                "opponent": true,
+                                "catalog_id": 2001,
+                                "oracle_id": "q-oracle-foe",
+                                "main_qty": 0,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 3,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 1,
+                                "played": 1,
+                                "activated": 2
+                            },
+                            {
+                                "opponent": true,
+                                "catalog_id": 2002,
+                                "oracle_id": null,
+                                "main_qty": 0,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 1,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            }
+                        ],
+                        "casts": [],
+                        "mulligans": [],
+                        "frames": []
+                    }
+                ],
+                "archetypes": [
+                    {
+                        "uuid": "bbbbbbbb-0000-4000-8000-000000000000",
+                        "confidence": 0.5,
+                        "manual": false,
+                        "opponent": true
+                    },
+                    {
+                        "uuid": "aaaaaaaa-0000-4000-8000-000000000000",
+                        "confidence": 1.0,
+                        "manual": false,
+                        "opponent": false
+                    }
+                ]
+            },
+            "client_id": "q-golden-log-match",
+            "canonical": "{\"archetypes\":[{\"confidence\":\"1.00\",\"manual\":false,\"player_is_player\":true,\"player_username\":\"Qplayer\",\"uuid\":\"aaaaaaaa-0000-4000-8000-000000000000\"},{\"confidence\":\"0.50\",\"manual\":false,\"player_is_player\":false,\"player_username\":\"Qfoe\",\"uuid\":\"bbbbbbbb-0000-4000-8000-000000000000\"}],\"card_stats\":[{\"activated\":0,\"bargained\":0,\"bestowed\":0,\"buyback\":0,\"cast\":2,\"casualty\":0,\"dashed\":0,\"disturb\":0,\"escaped\":0,\"evoked\":0,\"flashback\":0,\"foretold\":0,\"free_cast\":0,\"game\":\"945500844\",\"gifted\":0,\"is_postboard\":false,\"kept\":2,\"kicked\":1,\"madness\":0,\"mayhem\":0,\"miracle\":0,\"ninjutsu\":0,\"opponent\":false,\"oracle_id\":\"q-oracle-bolt\",\"played\":0,\"pregame_played\":false,\"pregame_revealed\":false,\"quantity\":4,\"rebound\":0,\"replicated\":0,\"retraced\":0,\"seen\":3,\"sided_in\":false,\"sided_out\":false,\"spectacle\":0,\"suspended\":0,\"warp\":0,\"won\":true},{\"activated\":2,\"bargained\":0,\"bestowed\":0,\"buyback\":0,\"cast\":1,\"casualty\":0,\"dashed\":0,\"disturb\":0,\"escaped\":0,\"evoked\":0,\"flashback\":0,\"foretold\":0,\"free_cast\":0,\"game\":\"945500844\",\"gifted\":0,\"is_postboard\":false,\"kept\":0,\"kicked\":0,\"madness\":0,\"mayhem\":0,\"miracle\":0,\"ninjutsu\":0,\"opponent\":true,\"oracle_id\":\"q-oracle-foe\",\"played\":1,\"pregame_played\":false,\"pregame_revealed\":true,\"quantity\":0,\"rebound\":0,\"replicated\":0,\"retraced\":0,\"seen\":1,\"sided_in\":false,\"sided_out\":false,\"spectacle\":0,\"suspended\":0,\"warp\":0,\"won\":true},{\"activated\":0,\"bargained\":0,\"bestowed\":0,\"buyback\":0,\"cast\":2,\"casualty\":0,\"dashed\":0,\"disturb\":0,\"escaped\":0,\"evoked\":0,\"flashback\":0,\"foretold\":0,\"free_cast\":0,\"game\":\"945500845\",\"gifted\":0,\"is_postboard\":true,\"kept\":2,\"kicked\":0,\"madness\":0,\"mayhem\":0,\"miracle\":0,\"ninjutsu\":0,\"opponent\":false,\"oracle_id\":\"q-oracle-bolt\",\"played\":0,\"pregame_played\":false,\"pregame_revealed\":false,\"quantity\":3,\"rebound\":0,\"replicated\":0,\"retraced\":0,\"seen\":3,\"sided_in\":false,\"sided_out\":true,\"spectacle\":0,\"suspended\":0,\"warp\":0,\"won\":false},{\"activated\":2,\"bargained\":0,\"bestowed\":0,\"buyback\":0,\"cast\":1,\"casualty\":0,\"dashed\":0,\"disturb\":0,\"escaped\":0,\"evoked\":0,\"flashback\":0,\"foretold\":0,\"free_cast\":0,\"game\":\"945500845\",\"gifted\":0,\"is_postboard\":true,\"kept\":0,\"kicked\":0,\"madness\":0,\"mayhem\":0,\"miracle\":0,\"ninjutsu\":0,\"opponent\":true,\"oracle_id\":\"q-oracle-foe\",\"played\":1,\"pregame_played\":false,\"pregame_revealed\":false,\"quantity\":0,\"rebound\":0,\"replicated\":0,\"retraced\":0,\"seen\":2,\"sided_in\":false,\"sided_out\":false,\"spectacle\":0,\"suspended\":0,\"warp\":0,\"won\":false},{\"activated\":0,\"bargained\":0,\"bestowed\":0,\"buyback\":0,\"cast\":0,\"casualty\":0,\"dashed\":0,\"disturb\":0,\"escaped\":0,\"evoked\":0,\"flashback\":0,\"foretold\":0,\"free_cast\":0,\"game\":\"945500845\",\"gifted\":0,\"is_postboard\":true,\"kept\":0,\"kicked\":0,\"madness\":0,\"mayhem\":0,\"miracle\":0,\"ninjutsu\":0,\"opponent\":false,\"oracle_id\":\"q-oracle-sideboard\",\"played\":0,\"pregame_played\":false,\"pregame_revealed\":false,\"quantity\":1,\"rebound\":0,\"replicated\":0,\"retraced\":0,\"seen\":0,\"sided_in\":true,\"sided_out\":false,\"spectacle\":0,\"suspended\":0,\"warp\":0,\"won\":false},{\"activated\":0,\"bargained\":0,\"bestowed\":0,\"buyback\":0,\"cast\":2,\"casualty\":0,\"dashed\":0,\"disturb\":0,\"escaped\":0,\"evoked\":0,\"flashback\":0,\"foretold\":0,\"free_cast\":0,\"game\":\"945500846\",\"gifted\":0,\"is_postboard\":true,\"kept\":2,\"kicked\":0,\"madness\":0,\"mayhem\":0,\"miracle\":0,\"ninjutsu\":0,\"opponent\":false,\"oracle_id\":\"q-oracle-bolt\",\"played\":0,\"pregame_played\":false,\"pregame_revealed\":false,\"quantity\":3,\"rebound\":0,\"replicated\":0,\"retraced\":0,\"seen\":3,\"sided_in\":false,\"sided_out\":true,\"spectacle\":0,\"suspended\":0,\"warp\":0,\"won\":true},{\"activated\":2,\"bargained\":0,\"bestowed\":0,\"buyback\":0,\"cast\":1,\"casualty\":0,\"dashed\":0,\"disturb\":0,\"escaped\":0,\"evoked\":0,\"flashback\":0,\"foretold\":0,\"free_cast\":0,\"game\":\"945500846\",\"gifted\":0,\"is_postboard\":true,\"kept\":0,\"kicked\":0,\"madness\":0,\"mayhem\":0,\"miracle\":0,\"ninjutsu\":0,\"opponent\":true,\"oracle_id\":\"q-oracle-foe\",\"played\":1,\"pregame_played\":false,\"pregame_revealed\":false,\"quantity\":0,\"rebound\":0,\"replicated\":0,\"retraced\":0,\"seen\":3,\"sided_in\":false,\"sided_out\":false,\"spectacle\":0,\"suspended\":0,\"warp\":0,\"won\":true},{\"activated\":0,\"bargained\":0,\"bestowed\":0,\"buyback\":0,\"cast\":0,\"casualty\":0,\"dashed\":0,\"disturb\":0,\"escaped\":0,\"evoked\":0,\"flashback\":0,\"foretold\":0,\"free_cast\":0,\"game\":\"945500846\",\"gifted\":0,\"is_postboard\":true,\"kept\":0,\"kicked\":0,\"madness\":0,\"mayhem\":0,\"miracle\":0,\"ninjutsu\":0,\"opponent\":false,\"oracle_id\":\"q-oracle-sideboard\",\"played\":0,\"pregame_played\":false,\"pregame_revealed\":false,\"quantity\":1,\"rebound\":0,\"replicated\":0,\"retraced\":0,\"seen\":0,\"sided_in\":true,\"sided_out\":false,\"spectacle\":0,\"suspended\":0,\"warp\":0,\"won\":true}],\"games\":[{\"ended_at\":\"2026-08-19T10:10:30Z\",\"mtgo_id\":\"945500844\",\"started_at\":\"2026-08-19T10:00:30Z\",\"turn_count\":7,\"won\":true},{\"ended_at\":\"2026-08-19T10:22:30Z\",\"mtgo_id\":\"945500845\",\"started_at\":\"2026-08-19T10:12:30Z\",\"turn_count\":8,\"won\":false},{\"ended_at\":\"2026-08-19T10:34:30Z\",\"mtgo_id\":\"945500846\",\"started_at\":\"2026-08-19T10:24:30Z\",\"turn_count\":9,\"won\":true}],\"match\":{\"deck_mtgo_id\":\"12345\",\"deck_version_signature\":\"MTAwMToyOmZhbHNlfDEwMDU6MjpmYWxzZXwxMDAyOjE6dHJ1ZQ==\",\"ended_at\":\"2026-08-19T10:40:00Z\",\"format\":\"CMODERN\",\"games_lost\":1,\"games_won\":2,\"imported\":false,\"league_client_id\":\"q-golden-league-token_20260819T100005Z\",\"manual\":false,\"match_type\":\"Constructed\",\"mtgo_id\":\"285746550\",\"notes\":\"Qnote: kept a risky hand\",\"outcome\":\"win\",\"result\":\"2-1\",\"started_at\":\"2026-08-19T10:00:30Z\",\"state\":\"complete\",\"token\":\"q-golden-log-match\",\"tournament_mtgo_event_id\":9001,\"tournament_round\":2},\"players\":[{\"deck_json\":[{\"mtgo_id\":2001,\"quantity\":1,\"sideboard\":false},{\"mtgo_id\":2002,\"quantity\":1,\"sideboard\":false}],\"dice_roll\":2,\"game\":\"945500844\",\"is_local\":false,\"mulligan_count\":0,\"on_play\":false,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qfoe\"},{\"deck_json\":[{\"mtgo_id\":1001,\"quantity\":2,\"sideboard\":false},{\"mtgo_id\":1002,\"quantity\":1,\"sideboard\":true},{\"mtgo_id\":1005,\"quantity\":2,\"sideboard\":false}],\"dice_roll\":5,\"game\":\"945500844\",\"is_local\":true,\"mulligan_count\":1,\"on_play\":true,\"opening_hand_json\":null,\"starting_hand_size\":6,\"username\":\"Qplayer\"},{\"deck_json\":[{\"mtgo_id\":2001,\"quantity\":2,\"sideboard\":false},{\"mtgo_id\":2002,\"quantity\":1,\"sideboard\":false}],\"dice_roll\":null,\"game\":\"945500845\",\"is_local\":false,\"mulligan_count\":0,\"on_play\":true,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qfoe\"},{\"deck_json\":[{\"mtgo_id\":1001,\"quantity\":2,\"sideboard\":false},{\"mtgo_id\":1002,\"quantity\":1,\"sideboard\":false},{\"mtgo_id\":1005,\"quantity\":1,\"sideboard\":false},{\"mtgo_id\":1005,\"quantity\":1,\"sideboard\":true}],\"dice_roll\":null,\"game\":\"945500845\",\"is_local\":true,\"mulligan_count\":0,\"on_play\":false,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qplayer\"},{\"deck_json\":[{\"mtgo_id\":2001,\"quantity\":3,\"sideboard\":false},{\"mtgo_id\":2002,\"quantity\":1,\"sideboard\":false}],\"dice_roll\":null,\"game\":\"945500846\",\"is_local\":false,\"mulligan_count\":0,\"on_play\":false,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qfoe\"},{\"deck_json\":[{\"mtgo_id\":1001,\"quantity\":2,\"sideboard\":false},{\"mtgo_id\":1002,\"quantity\":1,\"sideboard\":false},{\"mtgo_id\":1005,\"quantity\":1,\"sideboard\":false},{\"mtgo_id\":1005,\"quantity\":1,\"sideboard\":true}],\"dice_roll\":null,\"game\":\"945500846\",\"is_local\":true,\"mulligan_count\":0,\"on_play\":true,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qplayer\"}],\"timelines\":[{\"content\":{\"Cards\":[{\"CatalogID\":1001,\"Zone\":\"Hand/Library\"}],\"note\":\"charlie\"},\"game\":\"945500844\",\"timestamp\":\"2026-08-19T10:01:00Z\"},{\"content\":{\"Players\":[{\"Id\":7,\"Name\":\"Qplayer\"},{\"Id\":9,\"Name\":\"Qfoe\"}],\"note\":\"alpha\"},\"game\":\"945500844\",\"timestamp\":\"2026-08-19T10:01:01Z\"},{\"content\":{\"note\":\"bravo\"},\"game\":\"945500844\",\"timestamp\":\"2026-08-19T10:01:01Z\"},{\"content\":{\"turn\":1},\"game\":\"945500845\",\"timestamp\":\"2026-08-19T10:15:10Z\"}]}",
+            "hash": "fea7f7a0bc5fce15e7707fdae5cfb1016b6b1dffa8aacbe92e3d90a835f3b85d",
+            "sidecar": {
+                "occurred_at": "2026-08-19T10:00:30Z",
+                "format": "CMODERN",
+                "match_type": "Constructed",
+                "result": "2-1",
+                "outcome": "win",
+                "games_won": 2,
+                "games_lost": 1,
+                "deck_client_id": "12345",
+                "archetype_uuid": "aaaaaaaa-0000-4000-8000-000000000000",
+                "opponent_archetype_uuid": "bbbbbbbb-0000-4000-8000-000000000000"
+            }
+        },
+        {
+            "token": "q-golden-manual-match",
+            "input": {
+                "token": "q-golden-manual-match",
+                "mtgo_match_id": null,
+                "source": "manual",
+                "format": "CPAUPER",
+                "match_type": "Constructed",
+                "state": "complete",
+                "outcome": "draw",
+                "started_at_ms": 1787248800000,
+                "ended_at_ms": 1787251800000,
+                "notes": null,
+                "games_won_imported": null,
+                "games_lost_imported": null,
+                "deck_mtgo_id": "777",
+                "deck_version_signature": "MTAxOjQ6ZmFsc2V8MTAyOjQ6ZmFsc2V8MzAxOjI6dHJ1ZQ==",
+                "registered": [
+                    {
+                        "catalog_id": 101,
+                        "quantity": 4,
+                        "sideboard": false
+                    },
+                    {
+                        "catalog_id": 102,
+                        "quantity": 4,
+                        "sideboard": false
+                    },
+                    {
+                        "catalog_id": 301,
+                        "quantity": 2,
+                        "sideboard": true
+                    }
+                ],
+                "league_client_id": null,
+                "tournament_event_id": null,
+                "tournament_round": null,
+                "local_username": "Qplayer",
+                "opponent_username": "Qfoe",
+                "games": [
+                    {
+                        "game_number": 1,
+                        "mtgo_game_id": null,
+                        "result": "win",
+                        "on_play": true,
+                        "local_mulligans": 1,
+                        "opp_mulligans": 0,
+                        "local_die_roll": null,
+                        "opp_die_roll": null,
+                        "turn_count": null,
+                        "local_starting_hand_size": 6,
+                        "opp_starting_hand_size": null,
+                        "started_at_ms": 1787248800000,
+                        "ended_at_ms": 1787250300000,
+                        "cards": [
+                            {
+                                "opponent": false,
+                                "catalog_id": 101,
+                                "oracle_id": null,
+                                "main_qty": 0,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 3,
+                                "bottomed": 0,
+                                "starting_hand": 3,
+                                "seen": 0,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            },
+                            {
+                                "opponent": false,
+                                "catalog_id": 102,
+                                "oracle_id": null,
+                                "main_qty": 0,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 4,
+                                "bottomed": 1,
+                                "starting_hand": 3,
+                                "seen": 0,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            }
+                        ],
+                        "casts": [],
+                        "mulligans": [
+                            [
+                                1,
+                                101,
+                                4
+                            ],
+                            [
+                                1,
+                                102,
+                                3
+                            ]
+                        ],
+                        "frames": []
+                    },
+                    {
+                        "game_number": 2,
+                        "mtgo_game_id": null,
+                        "result": "loss",
+                        "on_play": false,
+                        "local_mulligans": 0,
+                        "opp_mulligans": 0,
+                        "local_die_roll": null,
+                        "opp_die_roll": null,
+                        "turn_count": null,
+                        "local_starting_hand_size": null,
+                        "opp_starting_hand_size": null,
+                        "started_at_ms": 1787250300000,
+                        "ended_at_ms": 1787251800000,
+                        "cards": [
+                            {
+                                "opponent": false,
+                                "catalog_id": 101,
+                                "oracle_id": null,
+                                "main_qty": 4,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 0,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            },
+                            {
+                                "opponent": false,
+                                "catalog_id": 102,
+                                "oracle_id": null,
+                                "main_qty": 3,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 0,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            },
+                            {
+                                "opponent": false,
+                                "catalog_id": 301,
+                                "oracle_id": null,
+                                "main_qty": 1,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 0,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            },
+                            {
+                                "opponent": true,
+                                "catalog_id": 501,
+                                "oracle_id": null,
+                                "main_qty": 0,
+                                "side_qty": 0,
+                                "sided_in": 0,
+                                "sided_out": 0,
+                                "opening_hand": 0,
+                                "bottomed": 0,
+                                "starting_hand": 0,
+                                "seen": 2,
+                                "pregame_revealed": 0,
+                                "pregame_played": 0,
+                                "cast": 0,
+                                "played": null,
+                                "activated": null
+                            }
+                        ],
+                        "casts": [],
+                        "mulligans": [],
+                        "frames": []
+                    }
+                ],
+                "archetypes": [
+                    {
+                        "uuid": "bbbbbbbb-0000-4000-8000-000000000000",
+                        "confidence": 1.0,
+                        "manual": true,
+                        "opponent": true
+                    }
+                ]
+            },
+            "client_id": "q-golden-manual-match",
+            "canonical": "{\"archetypes\":[{\"confidence\":\"1.00\",\"manual\":true,\"player_is_player\":false,\"player_username\":\"Qfoe\",\"uuid\":\"bbbbbbbb-0000-4000-8000-000000000000\"}],\"card_stats\":[],\"games\":[{\"ended_at\":\"2026-08-20T18:25:00Z\",\"mtgo_id\":\"q-golden-manual-match-1\",\"started_at\":\"2026-08-20T18:00:00Z\",\"turn_count\":null,\"won\":true},{\"ended_at\":\"2026-08-20T18:50:00Z\",\"mtgo_id\":\"q-golden-manual-match-2\",\"started_at\":\"2026-08-20T18:25:00Z\",\"turn_count\":null,\"won\":false}],\"match\":{\"deck_mtgo_id\":\"777\",\"deck_version_signature\":\"MTAxOjQ6ZmFsc2V8MTAyOjQ6ZmFsc2V8MzAxOjI6dHJ1ZQ==\",\"ended_at\":\"2026-08-20T18:50:00Z\",\"format\":\"CPAUPER\",\"games_lost\":1,\"games_won\":1,\"imported\":false,\"league_client_id\":null,\"manual\":true,\"match_type\":\"Constructed\",\"mtgo_id\":\"manual_qgoldenmanualmatch\",\"notes\":null,\"outcome\":\"draw\",\"result\":null,\"started_at\":\"2026-08-20T18:00:00Z\",\"state\":\"complete\",\"token\":\"q-golden-manual-match\",\"tournament_mtgo_event_id\":null,\"tournament_round\":null},\"players\":[{\"deck_json\":[],\"dice_roll\":null,\"game\":\"q-golden-manual-match-1\",\"is_local\":false,\"mulligan_count\":0,\"on_play\":false,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qfoe\"},{\"deck_json\":[],\"dice_roll\":null,\"game\":\"q-golden-manual-match-1\",\"is_local\":true,\"mulligan_count\":1,\"on_play\":true,\"opening_hand_json\":{\"bottomed\":[102],\"kept\":[101,101,101,102,102,102],\"mulligans\":[[101,101,101,101,102,102,102]]},\"starting_hand_size\":6,\"username\":\"Qplayer\"},{\"deck_json\":[{\"mtgo_id\":501,\"quantity\":2}],\"dice_roll\":null,\"game\":\"q-golden-manual-match-2\",\"is_local\":false,\"mulligan_count\":0,\"on_play\":true,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qfoe\"},{\"deck_json\":[{\"mtgo_id\":101,\"quantity\":4,\"sideboard\":false},{\"mtgo_id\":102,\"quantity\":3,\"sideboard\":false},{\"mtgo_id\":301,\"quantity\":1,\"sideboard\":false},{\"mtgo_id\":102,\"quantity\":1,\"sideboard\":true},{\"mtgo_id\":301,\"quantity\":1,\"sideboard\":true}],\"dice_roll\":null,\"game\":\"q-golden-manual-match-2\",\"is_local\":true,\"mulligan_count\":0,\"on_play\":false,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qplayer\"}],\"timelines\":[]}",
+            "hash": "0cbd22d8b71654c20f793ae09df00ccfb2edf90a28fdfbc94ef511bc0b345ef9",
+            "sidecar": {
+                "occurred_at": "2026-08-20T18:00:00Z",
+                "format": "CPAUPER",
+                "match_type": "Constructed",
+                "outcome": "draw",
+                "games_won": 1,
+                "games_lost": 1,
+                "deck_client_id": "777",
+                "opponent_archetype_uuid": "bbbbbbbb-0000-4000-8000-000000000000"
+            }
+        },
+        {
+            "token": "q-golden-history-match",
+            "input": {
+                "token": "q-golden-history-match",
+                "mtgo_match_id": 285746551,
+                "source": "history",
+                "format": "DZNR",
+                "match_type": "Draft",
+                "state": "abandoned",
+                "outcome": "win",
+                "started_at_ms": 1787342400000,
+                "ended_at_ms": null,
+                "notes": null,
+                "games_won_imported": 2,
+                "games_lost_imported": 0,
+                "deck_mtgo_id": null,
+                "deck_version_signature": null,
+                "registered": [],
+                "league_client_id": null,
+                "tournament_event_id": null,
+                "tournament_round": null,
+                "local_username": "Qplayer",
+                "opponent_username": null,
+                "games": [],
+                "archetypes": []
+            },
+            "client_id": "q-golden-history-match",
+            "canonical": "{\"archetypes\":[],\"card_stats\":[],\"games\":[],\"match\":{\"deck_mtgo_id\":null,\"deck_version_signature\":null,\"ended_at\":null,\"format\":\"DZNR\",\"games_lost\":0,\"games_won\":2,\"imported\":true,\"league_client_id\":null,\"manual\":false,\"match_type\":\"Draft\",\"mtgo_id\":\"285746551\",\"notes\":null,\"outcome\":\"win\",\"result\":\"2-0\",\"started_at\":\"2026-08-21T20:00:00Z\",\"state\":\"abandoned\",\"token\":\"q-golden-history-match\",\"tournament_mtgo_event_id\":null,\"tournament_round\":null},\"players\":[],\"timelines\":[]}",
+            "hash": "83854d64448f7e604db953eee994e6d464b465256a65909dd7c2751c565f433a",
+            "sidecar": {
+                "occurred_at": "2026-08-21T20:00:00Z",
+                "format": "DZNR",
+                "match_type": "Draft",
+                "result": "2-0",
+                "outcome": "win",
+                "games_won": 2,
+                "games_lost": 0
+            }
+        },
+        {
+            "token": "q-golden-imported-match",
+            "input": {
+                "token": "q-golden-imported-match",
+                "mtgo_match_id": 285746552,
+                "source": "imported",
+                "format": "CMODERN",
+                "match_type": "Constructed",
+                "state": "complete",
+                "outcome": "win",
+                "started_at_ms": 1790462400000,
+                "ended_at_ms": 1790463670000,
+                "notes": null,
+                "games_won_imported": null,
+                "games_lost_imported": null,
+                "deck_mtgo_id": null,
+                "deck_version_signature": null,
+                "registered": [],
+                "league_client_id": null,
+                "tournament_event_id": null,
+                "tournament_round": null,
+                "local_username": "Qplayer",
+                "opponent_username": "Qfoe",
+                "timezone": "Europe/London",
+                "archetypes": [],
+                "games": [
+                    {
+                        "game_number": 1,
+                        "mtgo_game_id": 945500900,
+                        "result": "win",
+                        "on_play": true,
+                        "local_mulligans": 0,
+                        "opp_mulligans": 0,
+                        "local_die_roll": null,
+                        "opp_die_roll": null,
+                        "turn_count": 9,
+                        "local_starting_hand_size": 7,
+                        "opp_starting_hand_size": 7,
+                        "started_at_ms": 1790462400000,
+                        "ended_at_ms": 1790463670000,
+                        "cards": [],
+                        "casts": [],
+                        "mulligans": [],
+                        "frames": [
+                            {
+                                "at_ms": 1790462887000,
+                                "content": {
+                                    "note": "opening-hand"
+                                },
+                                "time": "23:48:07"
+                            },
+                            {
+                                "at_ms": 1790463599500,
+                                "content": {
+                                    "note": "before-midnight"
+                                },
+                                "time": "23:59:59.500"
+                            },
+                            {
+                                "at_ms": 1790463639250,
+                                "content": {
+                                    "note": "after-midnight"
+                                },
+                                "time": "00:00:39.250"
+                            },
+                            {
+                                "at_ms": 1790463665000,
+                                "content": {
+                                    "note": "last"
+                                },
+                                "time": "00:01:05"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "client_id": "q-golden-imported-match",
+            "canonical": "{\"archetypes\":[],\"card_stats\":[],\"games\":[{\"ended_at\":\"2026-09-26T23:01:10Z\",\"mtgo_id\":\"945500900\",\"started_at\":\"2026-09-26T22:40:00Z\",\"turn_count\":9,\"won\":true}],\"match\":{\"deck_mtgo_id\":null,\"deck_version_signature\":null,\"ended_at\":\"2026-09-26T23:01:10Z\",\"format\":\"CMODERN\",\"games_lost\":0,\"games_won\":1,\"imported\":false,\"league_client_id\":null,\"manual\":false,\"match_type\":\"Constructed\",\"mtgo_id\":\"285746552\",\"notes\":null,\"outcome\":\"win\",\"result\":\"1-0\",\"started_at\":\"2026-09-26T22:40:00Z\",\"state\":\"complete\",\"token\":\"q-golden-imported-match\",\"tournament_mtgo_event_id\":null,\"tournament_round\":null},\"players\":[{\"deck_json\":[],\"dice_roll\":null,\"game\":\"945500900\",\"is_local\":false,\"mulligan_count\":0,\"on_play\":false,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qfoe\"},{\"deck_json\":[],\"dice_roll\":null,\"game\":\"945500900\",\"is_local\":true,\"mulligan_count\":0,\"on_play\":true,\"opening_hand_json\":null,\"starting_hand_size\":7,\"username\":\"Qplayer\"}],\"timelines\":[{\"content\":{\"note\":\"opening-hand\"},\"game\":\"945500900\",\"timestamp\":\"2026-09-26T22:48:07Z\"},{\"content\":{\"note\":\"before-midnight\"},\"game\":\"945500900\",\"timestamp\":\"2026-09-26T22:59:59Z\"},{\"content\":{\"note\":\"after-midnight\"},\"game\":\"945500900\",\"timestamp\":\"2026-09-26T23:00:39Z\"},{\"content\":{\"note\":\"last\"},\"game\":\"945500900\",\"timestamp\":\"2026-09-26T23:01:05Z\"}]}",
+            "hash": "f2c9c153516b86aff746741a36ec0c27fdd57c9024b7089316c49a78ad5135b1",
+            "sidecar": {
+                "occurred_at": "2026-09-26T22:40:00Z",
+                "format": "CMODERN",
+                "match_type": "Constructed",
+                "result": "1-0",
+                "outcome": "win",
+                "games_won": 1,
+                "games_lost": 0
+            }
+        }
+    ]
+}

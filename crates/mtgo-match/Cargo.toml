@@ -1,0 +1,23 @@
+[package]
+name = "mtgo-match"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+mtgo-protocol.workspace = true
+regex.workspace = true
+serde.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+fixture-tools.workspace = true
+insta.workspace = true
+serde_json.workspace = true
+
+[[bench]]
+name = "projection"
+harness = false
+
+[lints]
+workspace = true

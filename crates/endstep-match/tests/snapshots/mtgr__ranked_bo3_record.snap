@@ -1,0 +1,1850 @@
+---
+source: crates/endstep-match/tests/mtgr.rs
+expression: snapshot_text(&record)
+---
+[Mtgr "0.3.0"]
+[Event "Ranked"]
+[Site "Endstep"]
+[Date "2026.11.10"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "1-0"]
+[Format "Modern"]
+[Match "00000000-0000-4000-8000-e0000000003a"]
+[Game "1"]
+[Perspective "Player"]
+[ENDSTEP_MatchId "00000000-0000-4000-8000-e0000000003a"]
+[Omits "mana costs priority effects"]
+[Partial "damage library"]
+
+0:00 deck "Player"
+0:00   main 1 "Abstergo Entertainment"
+0:00   main 4 "Devourer of Destiny"
+0:00   main 2 "Dismember"
+0:00   main 4 "Eldrazi Temple"
+0:00   main 4 "Expedition Map"
+0:00   main 2 "Forest"
+0:00   main 3 "Giant's Boulder"
+0:00   main 4 "Karn, the Great Creator"
+0:00   main 4 "Kozilek's Command"
+0:00   main 1 "Sire of Seven Deaths"
+0:00   main 4 "Sowing Mycospawn"
+0:00   main 4 "Talisman of Resilience"
+0:00   main 2 "Trinisphere"
+0:00   main 4 "Ugin's Labyrinth"
+0:00   main 4 "Ugin, Eye of the Storms"
+0:00   main 1 "Ulamog, the Ceaseless Hunger"
+0:00   main 4 "Urza's Mine"
+0:00   main 4 "Urza's Power Plant"
+0:00   main 4 "Urza's Tower"
+0:00   side 1 "Chalice of the Void"
+0:00   side 1 "Cursed Totem"
+0:00   side 1 "Disruptor Flute"
+0:00   side 1 "Ensnaring Bridge"
+0:00   side 1 "Extinguisher Battleship"
+0:00   side 1 "Grafdigger's Cage"
+0:00   side 1 "Haywire Mite"
+0:00   side 1 "Liquimetal Coating"
+0:00   side 1 "The Filigree Sylex"
+0:00   side 1 "The Stone Brain"
+0:00   side 1 "The Ten Rings"
+0:00   side 1 "Tormod's Crypt"
+0:00   side 1 "Torpor Orb"
+0:00   side 1 "Trinisphere"
+0:00   side 1 "Walking Ballista"
+0:00 pregame
+0:00   keyframe
+0:00     player "Player" life 20 poison 0 library 60
+0:00     player "Opponent" life 20 poison 0 library 60
+0:00   new card #1 "Eldrazi Temple" owner "Player" in library
+0:00   #1 "Eldrazi Temple" move library -> hand as draw by rule:opening-hand
+0:00   new card #2 "Giant's Boulder" owner "Player" in library
+0:00   #2 "Giant's Boulder" move library -> hand as draw by rule:opening-hand
+0:00   new card #3 "Expedition Map" owner "Player" in library
+0:00   #3 "Expedition Map" move library -> hand as draw by rule:opening-hand
+0:00   new card #4 "Kozilek's Command" owner "Player" in library
+0:00   #4 "Kozilek's Command" move library -> hand as draw by rule:opening-hand
+0:00   new card #5 "Trinisphere" owner "Player" in library
+0:00   #5 "Trinisphere" move library -> hand as draw by rule:opening-hand
+0:00   new card #6 "Urza's Mine" owner "Player" in library
+0:00   #6 "Urza's Mine" move library -> hand as draw by rule:opening-hand
+0:00   new card #7 "Kozilek's Command" owner "Player" in library
+0:00   #7 "Kozilek's Command" move library -> hand as draw by rule:opening-hand
+0:00   new hidden #8 owner "Opponent" in library
+0:00   #8 move library -> hand as draw by rule:opening-hand
+0:00   new hidden #9 owner "Opponent" in library
+0:00   #9 move library -> hand as draw by rule:opening-hand
+0:00   new hidden #10 owner "Opponent" in library
+0:00   #10 move library -> hand as draw by rule:opening-hand
+0:00   new hidden #11 owner "Opponent" in library
+0:00   #11 move library -> hand as draw by rule:opening-hand
+0:00   new hidden #12 owner "Opponent" in library
+0:00   #12 move library -> hand as draw by rule:opening-hand
+0:00   new hidden #13 owner "Opponent" in library
+0:00   #13 move library -> hand as draw by rule:opening-hand
+0:00   new hidden #14 owner "Opponent" in library
+0:00   #14 move library -> hand as draw by rule:opening-hand
+0:03   "Opponent" mulligan
+0:03   #8 move hand -> library by rule:mulligan
+0:03   #9 move hand -> library by rule:mulligan
+0:03   #10 move hand -> library by rule:mulligan
+0:03   #11 move hand -> library by rule:mulligan
+0:03   #12 move hand -> library by rule:mulligan
+0:03   #13 move hand -> library by rule:mulligan
+0:03   #14 move hand -> library by rule:mulligan
+0:03   "Opponent" shuffle by rule:mulligan
+0:03   new hidden #15 owner "Opponent" in library
+0:03   #15 move library -> hand as draw by rule:mulligan
+0:03   new hidden #16 owner "Opponent" in library
+0:03   #16 move library -> hand as draw by rule:mulligan
+0:03   new hidden #17 owner "Opponent" in library
+0:03   #17 move library -> hand as draw by rule:mulligan
+0:03   new hidden #18 owner "Opponent" in library
+0:03   #18 move library -> hand as draw by rule:mulligan
+0:03   new hidden #19 owner "Opponent" in library
+0:03   #19 move library -> hand as draw by rule:mulligan
+0:03   new hidden #20 owner "Opponent" in library
+0:03   #20 move library -> hand as draw by rule:mulligan
+0:03   new hidden #21 owner "Opponent" in library
+0:03   #21 move library -> hand as draw by rule:mulligan
+0:08   "Player" keep
+0:11   "Opponent" keep
+0:13   #15 move hand -> library bottom by rule:mulligan
+0:13 turn 1 "Opponent"
+0:13   keyframe
+0:13     player "Player" life 20 poison 0 library 53
+0:13     player "Opponent" life 20 poison 0 library 54
+0:13     #1 "Eldrazi Temple" hand "Player"
+0:13     #2 "Giant's Boulder" hand "Player"
+0:13     #3 "Expedition Map" hand "Player"
+0:13     #4 "Kozilek's Command" hand "Player"
+0:13     #5 "Trinisphere" hand "Player"
+0:13     #6 "Urza's Mine" hand "Player"
+0:13     #7 "Kozilek's Command" hand "Player"
+0:13     #15 library "Opponent" bottom 1
+0:13     #16 hand "Opponent"
+0:13     #17 hand "Opponent"
+0:13     #18 hand "Opponent"
+0:13     #19 hand "Opponent"
+0:13     #20 hand "Opponent"
+0:13     #21 hand "Opponent"
+0:13   untap
+0:13   upkeep
+0:21   draw
+0:21   precombat-main
+0:23     #16 identify "Hedge Maze"
+0:23     #16 "Hedge Maze" play from hand tapped types land
+0:23     new ability #22 triggered of #16 "Hedge Maze" "When Hedge Maze enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)" controller "Opponent" in stack
+0:30     #22 resolve
+0:30     new card #23 "Shardless Agent" owner "Opponent" in library
+0:30     #23 "Shardless Agent" move library -> graveyard as mill by #22
+0:30     #22 cease by rule:resolve
+0:31   beginning-of-combat
+0:31   declare-attackers
+0:31   declare-blockers
+0:31   combat-damage
+0:31   end-of-combat
+0:31   postcombat-main
+0:32   end
+0:34   cleanup
+0:34 turn 2 "Player"
+0:34   keyframe
+0:34     player "Player" life 20 poison 0 library 53
+0:34     player "Opponent" life 20 poison 0 library 53
+0:34     #1 "Eldrazi Temple" hand "Player"
+0:34     #2 "Giant's Boulder" hand "Player"
+0:34     #3 "Expedition Map" hand "Player"
+0:34     #4 "Kozilek's Command" hand "Player"
+0:34     #5 "Trinisphere" hand "Player"
+0:34     #6 "Urza's Mine" hand "Player"
+0:34     #7 "Kozilek's Command" hand "Player"
+0:34     #15 library "Opponent" bottom 1
+0:34     #16 "Hedge Maze" battlefield "Opponent" types land tapped
+0:34     #17 hand "Opponent"
+0:34     #18 hand "Opponent"
+0:34     #19 hand "Opponent"
+0:34     #20 hand "Opponent"
+0:34     #21 hand "Opponent"
+0:34     #23 "Shardless Agent" graveyard "Opponent"
+0:34   untap
+0:34   upkeep
+0:34   draw
+0:34     new card #24 "Sowing Mycospawn" owner "Player" in library
+0:34     #24 "Sowing Mycospawn" move library -> hand as draw by rule:draw
+0:34   precombat-main
+0:41     #6 "Urza's Mine" play from hand types land
+0:42     #6 "Urza's Mine" tap by ?
+0:44     #3 "Expedition Map" cast from hand
+0:46     #3 "Expedition Map" resolve
+0:46     #3 "Expedition Map" move stack -> battlefield types artifact by rule:resolve
+0:47   beginning-of-combat
+0:48   declare-attackers
+0:48   declare-blockers
+0:48   combat-damage
+0:48   end-of-combat
+0:48   postcombat-main
+0:48   end
+0:49   cleanup
+0:49 turn 3 "Opponent"
+0:49   keyframe
+0:49     player "Player" life 20 poison 0 library 52
+0:49     player "Opponent" life 20 poison 0 library 53
+0:49     #1 "Eldrazi Temple" hand "Player"
+0:49     #2 "Giant's Boulder" hand "Player"
+0:49     #3 "Expedition Map" battlefield "Player" types artifact
+0:49     #4 "Kozilek's Command" hand "Player"
+0:49     #5 "Trinisphere" hand "Player"
+0:49     #6 "Urza's Mine" battlefield "Player" types land tapped
+0:49     #7 "Kozilek's Command" hand "Player"
+0:49     #15 library "Opponent" bottom 1
+0:49     #16 "Hedge Maze" battlefield "Opponent" types land tapped
+0:49     #17 hand "Opponent"
+0:49     #18 hand "Opponent"
+0:49     #19 hand "Opponent"
+0:49     #20 hand "Opponent"
+0:49     #21 hand "Opponent"
+0:49     #23 "Shardless Agent" graveyard "Opponent"
+0:49     #24 "Sowing Mycospawn" hand "Player"
+0:49   untap
+0:49     #16 "Hedge Maze" untap by rule:untap
+0:49   upkeep
+0:49   draw
+0:49     new hidden #25 owner "Opponent" in library
+0:49     #25 move library -> hand as draw by rule:draw
+0:49   precombat-main
+0:55     #17 identify "Oliphaunt"
+0:55     #17 "Oliphaunt" move hand -> graveyard as discard by ?
+0:55     new ability #26 activated of #17 "Oliphaunt" "Oliphaunt - Opponent searches their library for a Mountain card, reveals it, puts it into their hand, then shuffles." controller "Opponent" in stack
+0:55     #16 "Hedge Maze" tap by ?
+1:00     #26 resolve
+1:00     new card #27 "Thundering Falls" owner "Opponent" in library
+1:00     #27 "Thundering Falls" move library -> hand by #26
+1:00     #27 "Thundering Falls" reveal by #26
+1:00     "Opponent" shuffle by #26
+1:00     #26 cease by rule:resolve
+1:01     #27 "Thundering Falls" play from hand tapped types land
+1:01     new ability #28 triggered of #27 "Thundering Falls" "When Thundering Falls enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)" controller "Opponent" in stack
+1:08     #28 resolve
+1:08     new card #29 "Subtlety" owner "Opponent" in library
+1:08     #29 "Subtlety" move library -> graveyard as mill by #28
+1:08     #28 cease by rule:resolve
+1:11   beginning-of-combat
+1:11   declare-attackers
+1:11   declare-blockers
+1:11   combat-damage
+1:11   end-of-combat
+1:11   postcombat-main
+1:11   end
+1:13   cleanup
+1:13 turn 4 "Player"
+1:13   keyframe
+1:13     player "Player" life 20 poison 0 library 52
+1:13     player "Opponent" life 20 poison 0 library 50
+1:13     #1 "Eldrazi Temple" hand "Player"
+1:13     #2 "Giant's Boulder" hand "Player"
+1:13     #3 "Expedition Map" battlefield "Player" types artifact
+1:13     #4 "Kozilek's Command" hand "Player"
+1:13     #5 "Trinisphere" hand "Player"
+1:13     #6 "Urza's Mine" battlefield "Player" types land tapped
+1:13     #7 "Kozilek's Command" hand "Player"
+1:13     #16 "Hedge Maze" battlefield "Opponent" types land tapped
+1:13     #17 "Oliphaunt" graveyard "Opponent"
+1:13     #18 hand "Opponent"
+1:13     #19 hand "Opponent"
+1:13     #20 hand "Opponent"
+1:13     #21 hand "Opponent"
+1:13     #23 "Shardless Agent" graveyard "Opponent"
+1:13     #24 "Sowing Mycospawn" hand "Player"
+1:13     #25 hand "Opponent"
+1:13     #27 "Thundering Falls" battlefield "Opponent" types land tapped
+1:13     #29 "Subtlety" graveyard "Opponent"
+1:13   untap
+1:13     #6 "Urza's Mine" untap by rule:untap
+1:13   upkeep
+1:13   draw
+1:13     new card #30 "Urza's Power Plant" owner "Player" in library
+1:13     #30 "Urza's Power Plant" move library -> hand as draw by rule:draw
+1:13   precombat-main
+1:19     #30 "Urza's Power Plant" play from hand types land
+1:20   beginning-of-combat
+1:21   declare-attackers
+1:21   declare-blockers
+1:21   combat-damage
+1:21   end-of-combat
+1:21   postcombat-main
+1:21   end
+1:24   cleanup
+1:24 turn 5 "Opponent"
+1:24   keyframe
+1:24     player "Player" life 20 poison 0 library 51
+1:24     player "Opponent" life 20 poison 0 library 50
+1:24     #1 "Eldrazi Temple" hand "Player"
+1:24     #2 "Giant's Boulder" hand "Player"
+1:24     #3 "Expedition Map" battlefield "Player" types artifact
+1:24     #4 "Kozilek's Command" hand "Player"
+1:24     #5 "Trinisphere" hand "Player"
+1:24     #6 "Urza's Mine" battlefield "Player" types land
+1:24     #7 "Kozilek's Command" hand "Player"
+1:24     #16 "Hedge Maze" battlefield "Opponent" types land tapped
+1:24     #17 "Oliphaunt" graveyard "Opponent"
+1:24     #18 hand "Opponent"
+1:24     #19 hand "Opponent"
+1:24     #20 hand "Opponent"
+1:24     #21 hand "Opponent"
+1:24     #23 "Shardless Agent" graveyard "Opponent"
+1:24     #24 "Sowing Mycospawn" hand "Player"
+1:24     #25 hand "Opponent"
+1:24     #27 "Thundering Falls" battlefield "Opponent" types land tapped
+1:24     #29 "Subtlety" graveyard "Opponent"
+1:24     #30 "Urza's Power Plant" battlefield "Player" types land
+1:24   untap
+1:24     #16 "Hedge Maze" untap by rule:untap
+1:24     #27 "Thundering Falls" untap by rule:untap
+1:24   upkeep
+1:24   draw
+1:24     new hidden #31 owner "Opponent" in library
+1:24     #31 move library -> hand as draw by rule:draw
+1:24   precombat-main
+1:27     #18 identify "Forest"
+1:27     #18 "Forest" play from hand types land
+1:28   beginning-of-combat
+1:28   declare-attackers
+1:29   declare-blockers
+1:29   combat-damage
+1:29   end-of-combat
+1:29   postcombat-main
+1:29   end
+1:30     #3 "Expedition Map" tap by ?
+1:31     #6 "Urza's Mine" tap by ?
+1:31     #3 "Expedition Map" move battlefield -> graveyard by ?
+1:31     new ability #32 activated of #3 "Expedition Map" "Expedition Map - Player searches their library for a land card, reveals it, puts it into their hand, then shuffles." controller "Player" in stack
+1:31     #30 "Urza's Power Plant" tap by ?
+1:40     #32 resolve
+1:40     new card #33 "Urza's Tower" owner "Player" in library
+1:40     #33 "Urza's Tower" move library -> hand by #32
+1:40     #33 "Urza's Tower" reveal by #32
+1:40     "Player" shuffle by #32
+1:40     #32 cease by rule:resolve
+1:43   cleanup
+1:43 turn 6 "Player"
+1:43   keyframe
+1:43     player "Player" life 20 poison 0 library 50
+1:43     player "Opponent" life 20 poison 0 library 49
+1:43     #1 "Eldrazi Temple" hand "Player"
+1:43     #2 "Giant's Boulder" hand "Player"
+1:43     #3 "Expedition Map" graveyard "Player"
+1:43     #4 "Kozilek's Command" hand "Player"
+1:43     #5 "Trinisphere" hand "Player"
+1:43     #6 "Urza's Mine" battlefield "Player" types land tapped
+1:43     #7 "Kozilek's Command" hand "Player"
+1:43     #16 "Hedge Maze" battlefield "Opponent" types land
+1:43     #17 "Oliphaunt" graveyard "Opponent"
+1:43     #18 "Forest" battlefield "Opponent" types land
+1:43     #19 hand "Opponent"
+1:43     #20 hand "Opponent"
+1:43     #21 hand "Opponent"
+1:43     #23 "Shardless Agent" graveyard "Opponent"
+1:43     #24 "Sowing Mycospawn" hand "Player"
+1:43     #25 hand "Opponent"
+1:43     #27 "Thundering Falls" battlefield "Opponent" types land
+1:43     #29 "Subtlety" graveyard "Opponent"
+1:43     #30 "Urza's Power Plant" battlefield "Player" types land tapped
+1:43     #31 hand "Opponent"
+1:43     #33 "Urza's Tower" hand "Player"
+1:43   untap
+1:43     #6 "Urza's Mine" untap by rule:untap
+1:43     #30 "Urza's Power Plant" untap by rule:untap
+1:43   upkeep
+1:43   draw
+1:43     new card #34 "Talisman of Resilience" owner "Player" in library
+1:43     #34 "Talisman of Resilience" move library -> hand as draw by rule:draw
+1:43   precombat-main
+1:44     #33 "Urza's Tower" play from hand types land
+1:50     #33 "Urza's Tower" tap by ?
+1:59     #5 "Trinisphere" cast from hand
+2:24     #19 identify "Force of Negation"
+2:28     #20 identify "Shardless Agent"
+2:28     #20 "Shardless Agent" move hand -> exile by ?
+2:28     #19 "Force of Negation" cast from hand
+2:28     #19 "Force of Negation" target #5 "Trinisphere"
+2:35     #19 "Force of Negation" resolve
+2:35     #5 "Trinisphere" countered by #19
+2:35     #5 "Trinisphere" move stack -> exile by #19
+2:35     #19 "Force of Negation" move stack -> graveyard by rule:resolve
+2:36   beginning-of-combat
+2:36   declare-attackers
+2:37   declare-blockers
+2:37   combat-damage
+2:37   end-of-combat
+2:37   postcombat-main
+2:37   end
+2:40     #21 identify "Violent Outburst"
+2:41     #21 "Violent Outburst" cast from hand
+2:41     new ability #35 triggered of #21 "Violent Outburst" "Cascade - Violent Outburst" controller "Opponent" in stack
+2:41     #16 "Hedge Maze" tap by ?
+2:41     #27 "Thundering Falls" tap by ?
+2:41     #18 "Forest" tap by ?
+2:46     new card #36 "Street Wraith" owner "Opponent" in library
+2:46     #36 "Street Wraith" look "Player" by ?
+2:46     new card #37 "Oliphaunt" owner "Opponent" in library
+2:46     #37 "Oliphaunt" look "Player" by ?
+2:46     new card #38 "Subtlety" owner "Opponent" in library
+2:46     #38 "Subtlety" look "Player" by ?
+2:46     new card #39 "Violent Outburst" owner "Opponent" in library
+2:46     #39 "Violent Outburst" look "Player" by ?
+2:46     new card #40 "Breeding Pool" owner "Opponent" in library
+2:46     #40 "Breeding Pool" look "Player" by ?
+2:46     new card #41 "Colossal Skyturtle" owner "Opponent" in library
+2:46     #41 "Colossal Skyturtle" look "Player" by ?
+2:46     new card #42 "Steam Vents" owner "Opponent" in library
+2:46     #42 "Steam Vents" look "Player" by ?
+2:46     new card #43 "Sacred Foundry" owner "Opponent" in library
+2:46     #43 "Sacred Foundry" look "Player" by ?
+2:46     new card #44 "Wistfulness" owner "Opponent" in library
+2:46     #44 "Wistfulness" look "Player" by ?
+2:46     new card #45 "Violent Outburst" owner "Opponent" in library
+2:46     #45 "Violent Outburst" look "Player" by ?
+2:46     new card #46 "Wistfulness" owner "Opponent" in library
+2:46     #46 "Wistfulness" look "Player" by ?
+2:46     new card #47 "Oliphaunt" owner "Opponent" in library
+2:46     #47 "Oliphaunt" look "Player" by ?
+2:46     new card #48 "Commercial District" owner "Opponent" in library
+2:46     #48 "Commercial District" look "Player" by ?
+2:46     new card #49 "Valakut Awakening" owner "Opponent" in library
+2:46     #49 "Valakut Awakening" look "Player" by ?
+2:46     new card #50 "Sink into Stupor" owner "Opponent" in library
+2:46     #50 "Sink into Stupor" look "Player" by ?
+2:46     new card #51 "Curator of Mysteries" owner "Opponent" in library
+2:46     #51 "Curator of Mysteries" look "Player" by ?
+2:46     new card #52 "Force of Negation" owner "Opponent" in library
+2:46     #52 "Force of Negation" look "Player" by ?
+2:46     new card #53 "Misty Rainforest" owner "Opponent" in library
+2:46     #53 "Misty Rainforest" look "Player" by ?
+2:46     new card #54 "Striped Riverwinder" owner "Opponent" in library
+2:46     #54 "Striped Riverwinder" look "Player" by ?
+2:46     new card #55 "Striped Riverwinder" owner "Opponent" in library
+2:46     #55 "Striped Riverwinder" look "Player" by ?
+2:46     new card #56 "Living End" owner "Opponent" in library
+2:46     #56 "Living End" look "Player" by ?
+2:46     #36 "Street Wraith" move library -> exile by ?
+2:46     #37 "Oliphaunt" move library -> exile by ?
+2:46     #38 "Subtlety" move library -> exile by ?
+2:46     #39 "Violent Outburst" move library -> exile by ?
+2:46     #40 "Breeding Pool" move library -> exile by ?
+2:46     #41 "Colossal Skyturtle" move library -> exile by ?
+2:46     #42 "Steam Vents" move library -> exile by ?
+2:46     #43 "Sacred Foundry" move library -> exile by ?
+2:46     #44 "Wistfulness" move library -> exile by ?
+2:46     #45 "Violent Outburst" move library -> exile by ?
+2:46     #46 "Wistfulness" move library -> exile by ?
+2:46     #47 "Oliphaunt" move library -> exile by ?
+2:46     #48 "Commercial District" move library -> exile by ?
+2:46     #49 "Valakut Awakening" move library -> exile by ?
+2:46     #50 "Sink into Stupor" move library -> exile by ?
+2:46     #51 "Curator of Mysteries" move library -> exile by ?
+2:46     #52 "Force of Negation" move library -> exile by ?
+2:46     #53 "Misty Rainforest" move library -> exile by ?
+2:46     #54 "Striped Riverwinder" move library -> exile by ?
+2:46     #55 "Striped Riverwinder" move library -> exile by ?
+2:46     #56 "Living End" move library -> exile by ?
+2:49     #35 resolve
+2:49     #56 "Living End" cast from exile by #35
+2:49     #39 "Violent Outburst" move exile -> library by #35
+2:49     #54 "Striped Riverwinder" move exile -> library by #35
+2:49     #38 "Subtlety" move exile -> library by #35
+2:49     #50 "Sink into Stupor" move exile -> library by #35
+2:49     #53 "Misty Rainforest" move exile -> library by #35
+2:49     #55 "Striped Riverwinder" move exile -> library by #35
+2:49     #42 "Steam Vents" move exile -> library by #35
+2:49     #45 "Violent Outburst" move exile -> library by #35
+2:49     #49 "Valakut Awakening" move exile -> library by #35
+2:49     #47 "Oliphaunt" move exile -> library by #35
+2:49     #51 "Curator of Mysteries" move exile -> library by #35
+2:49     #40 "Breeding Pool" move exile -> library by #35
+2:49     #52 "Force of Negation" move exile -> library by #35
+2:49     #44 "Wistfulness" move exile -> library by #35
+2:49     #46 "Wistfulness" move exile -> library by #35
+2:49     #41 "Colossal Skyturtle" move exile -> library by #35
+2:49     #48 "Commercial District" move exile -> library by #35
+2:49     #37 "Oliphaunt" move exile -> library by #35
+2:49     #43 "Sacred Foundry" move exile -> library by #35
+2:49     #36 "Street Wraith" move exile -> library by #35
+2:49     #35 cease by rule:resolve
+2:54     #30 "Urza's Power Plant" tap by ?
+2:54     #6 "Urza's Mine" tap by ?
+3:05     #4 "Kozilek's Command" cast from hand
+3:05     #4 "Kozilek's Command" target "Player"
+3:05     #4 "Kozilek's Command" target #29 "Subtlety"
+3:05     #4 "Kozilek's Command" target #17 "Oliphaunt"
+3:10     #4 "Kozilek's Command" resolve
+3:10     new token #57 "Eldrazi Spawn Token" owner "Player" in battlefield types creature pt 0/1 by #4
+3:10     new token #58 "Eldrazi Spawn Token" owner "Player" in battlefield types creature pt 0/1 by #4
+3:10     #29 "Subtlety" move graveyard -> exile by #4
+3:10     #17 "Oliphaunt" move graveyard -> exile by #4
+3:10     #4 "Kozilek's Command" move stack -> graveyard by rule:resolve
+3:12     #56 "Living End" resolve
+3:12     #23 "Shardless Agent" move graveyard -> exile by #56
+3:12     #57 "Eldrazi Spawn Token" move battlefield -> graveyard by #56
+3:12     #58 "Eldrazi Spawn Token" move battlefield -> graveyard by #56
+3:12     #23 "Shardless Agent" move exile -> battlefield types artifact creature pt 2/2 by #56
+3:12     #56 "Living End" move stack -> graveyard by rule:resolve
+3:12     #57 "Eldrazi Spawn Token" cease by ?
+3:12     #58 "Eldrazi Spawn Token" cease by ?
+3:15     #21 "Violent Outburst" resolve
+3:15     #21 "Violent Outburst" move stack -> graveyard by rule:resolve
+3:15     #23 "Shardless Agent" pt 2/2 -> 3/2 by ?
+3:16   cleanup
+3:16 turn 7 "Opponent"
+3:16   keyframe
+3:16     player "Player" life 20 poison 0 library 49
+3:16     player "Opponent" life 20 poison 0 library 48
+3:16     #1 "Eldrazi Temple" hand "Player"
+3:16     #2 "Giant's Boulder" hand "Player"
+3:16     #3 "Expedition Map" graveyard "Player"
+3:16     #4 "Kozilek's Command" graveyard "Player"
+3:16     #5 "Trinisphere" exile
+3:16     #6 "Urza's Mine" battlefield "Player" types land tapped
+3:16     #7 "Kozilek's Command" hand "Player"
+3:16     #16 "Hedge Maze" battlefield "Opponent" types land tapped
+3:16     #17 "Oliphaunt" exile
+3:16     #18 "Forest" battlefield "Opponent" types land tapped
+3:16     #19 "Force of Negation" graveyard "Opponent"
+3:16     #20 "Shardless Agent" exile
+3:16     #21 "Violent Outburst" graveyard "Opponent"
+3:16     #23 "Shardless Agent" battlefield "Opponent" types artifact creature pt 3/2
+3:16     #24 "Sowing Mycospawn" hand "Player"
+3:16     #25 hand "Opponent"
+3:16     #27 "Thundering Falls" battlefield "Opponent" types land tapped
+3:16     #29 "Subtlety" exile
+3:16     #30 "Urza's Power Plant" battlefield "Player" types land tapped
+3:16     #31 hand "Opponent"
+3:16     #33 "Urza's Tower" battlefield "Player" types land tapped
+3:16     #34 "Talisman of Resilience" hand "Player"
+3:16     #36 "Street Wraith" library "Opponent"
+3:16     #37 "Oliphaunt" library "Opponent"
+3:16     #38 "Subtlety" library "Opponent"
+3:16     #39 "Violent Outburst" library "Opponent"
+3:16     #40 "Breeding Pool" library "Opponent"
+3:16     #41 "Colossal Skyturtle" library "Opponent"
+3:16     #42 "Steam Vents" library "Opponent"
+3:16     #43 "Sacred Foundry" library "Opponent"
+3:16     #44 "Wistfulness" library "Opponent"
+3:16     #45 "Violent Outburst" library "Opponent"
+3:16     #46 "Wistfulness" library "Opponent"
+3:16     #47 "Oliphaunt" library "Opponent"
+3:16     #48 "Commercial District" library "Opponent"
+3:16     #49 "Valakut Awakening" library "Opponent"
+3:16     #50 "Sink into Stupor" library "Opponent"
+3:16     #51 "Curator of Mysteries" library "Opponent"
+3:16     #52 "Force of Negation" library "Opponent"
+3:16     #53 "Misty Rainforest" library "Opponent"
+3:16     #54 "Striped Riverwinder" library "Opponent"
+3:16     #55 "Striped Riverwinder" library "Opponent"
+3:16     #56 "Living End" graveyard "Opponent"
+3:16   untap
+3:16     #16 "Hedge Maze" untap by rule:untap
+3:16     #27 "Thundering Falls" untap by rule:untap
+3:16     #18 "Forest" untap by rule:untap
+3:16   upkeep
+3:16   draw
+3:16     new hidden #59 owner "Opponent" in library
+3:16     #59 move library -> hand as draw by rule:draw
+3:16   precombat-main
+3:16     #23 "Shardless Agent" pt 3/2 -> 2/2 by ?
+3:21   beginning-of-combat
+3:21   declare-attackers
+3:23     #23 "Shardless Agent" attack "Player"
+3:23     #23 "Shardless Agent" tap by ?
+3:24   declare-blockers
+3:25   combat-damage
+3:25     #23 "Shardless Agent" damage "Player" 2 by rule:combat-damage
+3:25     "Player" life 20 -> 18 by rule:combat-damage
+3:26   end-of-combat
+3:26   postcombat-main
+3:26   end
+3:27   cleanup
+3:27 turn 8 "Player"
+3:27   keyframe
+3:27     player "Player" life 18 poison 0 library 49
+3:27     player "Opponent" life 20 poison 0 library 47
+3:27     #1 "Eldrazi Temple" hand "Player"
+3:27     #2 "Giant's Boulder" hand "Player"
+3:27     #3 "Expedition Map" graveyard "Player"
+3:27     #4 "Kozilek's Command" graveyard "Player"
+3:27     #5 "Trinisphere" exile
+3:27     #6 "Urza's Mine" battlefield "Player" types land tapped
+3:27     #7 "Kozilek's Command" hand "Player"
+3:27     #16 "Hedge Maze" battlefield "Opponent" types land
+3:27     #17 "Oliphaunt" exile
+3:27     #18 "Forest" battlefield "Opponent" types land
+3:27     #19 "Force of Negation" graveyard "Opponent"
+3:27     #20 "Shardless Agent" exile
+3:27     #21 "Violent Outburst" graveyard "Opponent"
+3:27     #23 "Shardless Agent" battlefield "Opponent" types artifact creature pt 2/2 tapped
+3:27     #24 "Sowing Mycospawn" hand "Player"
+3:27     #25 hand "Opponent"
+3:27     #27 "Thundering Falls" battlefield "Opponent" types land
+3:27     #29 "Subtlety" exile
+3:27     #30 "Urza's Power Plant" battlefield "Player" types land tapped
+3:27     #31 hand "Opponent"
+3:27     #33 "Urza's Tower" battlefield "Player" types land tapped
+3:27     #34 "Talisman of Resilience" hand "Player"
+3:27     #36 "Street Wraith" library "Opponent"
+3:27     #37 "Oliphaunt" library "Opponent"
+3:27     #38 "Subtlety" library "Opponent"
+3:27     #39 "Violent Outburst" library "Opponent"
+3:27     #40 "Breeding Pool" library "Opponent"
+3:27     #41 "Colossal Skyturtle" library "Opponent"
+3:27     #42 "Steam Vents" library "Opponent"
+3:27     #43 "Sacred Foundry" library "Opponent"
+3:27     #44 "Wistfulness" library "Opponent"
+3:27     #45 "Violent Outburst" library "Opponent"
+3:27     #46 "Wistfulness" library "Opponent"
+3:27     #47 "Oliphaunt" library "Opponent"
+3:27     #48 "Commercial District" library "Opponent"
+3:27     #49 "Valakut Awakening" library "Opponent"
+3:27     #50 "Sink into Stupor" library "Opponent"
+3:27     #51 "Curator of Mysteries" library "Opponent"
+3:27     #52 "Force of Negation" library "Opponent"
+3:27     #53 "Misty Rainforest" library "Opponent"
+3:27     #54 "Striped Riverwinder" library "Opponent"
+3:27     #55 "Striped Riverwinder" library "Opponent"
+3:27     #56 "Living End" graveyard "Opponent"
+3:27     #59 hand "Opponent"
+3:27   untap
+3:27     #6 "Urza's Mine" untap by rule:untap
+3:27     #30 "Urza's Power Plant" untap by rule:untap
+3:27     #33 "Urza's Tower" untap by rule:untap
+3:27   upkeep
+3:27   draw
+3:27     new card #60 "Forest" owner "Player" in library
+3:27     #60 "Forest" move library -> hand as draw by rule:draw
+3:27   precombat-main
+3:30     #1 "Eldrazi Temple" play from hand types land
+3:32     #30 "Urza's Power Plant" tap by ?
+3:35     #34 "Talisman of Resilience" cast from hand
+3:38     #34 "Talisman of Resilience" resolve
+3:38     #34 "Talisman of Resilience" move stack -> battlefield types artifact by rule:resolve
+3:45   beginning-of-combat
+3:46   declare-attackers
+3:46   declare-blockers
+3:46   combat-damage
+3:46   end-of-combat
+3:46   postcombat-main
+3:46   end
+3:51     #25 identify "Endurance"
+3:53     #25 "Endurance" cast from hand
+3:53     #16 "Hedge Maze" tap by ?
+3:53     #27 "Thundering Falls" tap by ?
+3:53     #18 "Forest" tap by ?
+3:56     #25 "Endurance" resolve
+3:56     #25 "Endurance" move stack -> battlefield types creature pt 3/4 by rule:resolve
+4:00     new ability #61 triggered of #25 "Endurance" "When Endurance enters, up to one target player puts all the cards from their graveyard on the bottom of their library in a random order." controller "Opponent" in stack
+4:00     #61 target "Player"
+4:03     #61 resolve
+4:03     #3 "Expedition Map" move graveyard -> library by #61
+4:03     #4 "Kozilek's Command" move graveyard -> library by #61
+4:03     #61 cease by rule:resolve
+4:06   cleanup
+4:06 turn 9 "Opponent"
+4:06   keyframe
+4:06     player "Player" life 18 poison 0 library 50
+4:06     player "Opponent" life 20 poison 0 library 47
+4:06     #1 "Eldrazi Temple" battlefield "Player" types land
+4:06     #2 "Giant's Boulder" hand "Player"
+4:06     #3 "Expedition Map" library "Player"
+4:06     #4 "Kozilek's Command" library "Player"
+4:06     #5 "Trinisphere" exile
+4:06     #6 "Urza's Mine" battlefield "Player" types land
+4:06     #7 "Kozilek's Command" hand "Player"
+4:06     #16 "Hedge Maze" battlefield "Opponent" types land tapped
+4:06     #17 "Oliphaunt" exile
+4:06     #18 "Forest" battlefield "Opponent" types land tapped
+4:06     #19 "Force of Negation" graveyard "Opponent"
+4:06     #20 "Shardless Agent" exile
+4:06     #21 "Violent Outburst" graveyard "Opponent"
+4:06     #23 "Shardless Agent" battlefield "Opponent" types artifact creature pt 2/2 tapped
+4:06     #24 "Sowing Mycospawn" hand "Player"
+4:06     #25 "Endurance" battlefield "Opponent" types creature pt 3/4
+4:06     #27 "Thundering Falls" battlefield "Opponent" types land tapped
+4:06     #29 "Subtlety" exile
+4:06     #30 "Urza's Power Plant" battlefield "Player" types land tapped
+4:06     #31 hand "Opponent"
+4:06     #33 "Urza's Tower" battlefield "Player" types land
+4:06     #34 "Talisman of Resilience" battlefield "Player" types artifact
+4:06     #36 "Street Wraith" library "Opponent"
+4:06     #37 "Oliphaunt" library "Opponent"
+4:06     #38 "Subtlety" library "Opponent"
+4:06     #39 "Violent Outburst" library "Opponent"
+4:06     #40 "Breeding Pool" library "Opponent"
+4:06     #41 "Colossal Skyturtle" library "Opponent"
+4:06     #42 "Steam Vents" library "Opponent"
+4:06     #43 "Sacred Foundry" library "Opponent"
+4:06     #44 "Wistfulness" library "Opponent"
+4:06     #45 "Violent Outburst" library "Opponent"
+4:06     #46 "Wistfulness" library "Opponent"
+4:06     #47 "Oliphaunt" library "Opponent"
+4:06     #48 "Commercial District" library "Opponent"
+4:06     #49 "Valakut Awakening" library "Opponent"
+4:06     #50 "Sink into Stupor" library "Opponent"
+4:06     #51 "Curator of Mysteries" library "Opponent"
+4:06     #52 "Force of Negation" library "Opponent"
+4:06     #53 "Misty Rainforest" library "Opponent"
+4:06     #54 "Striped Riverwinder" library "Opponent"
+4:06     #55 "Striped Riverwinder" library "Opponent"
+4:06     #56 "Living End" graveyard "Opponent"
+4:06     #59 hand "Opponent"
+4:06     #60 "Forest" hand "Player"
+4:06   untap
+4:06     #16 "Hedge Maze" untap by rule:untap
+4:06     #27 "Thundering Falls" untap by rule:untap
+4:06     #18 "Forest" untap by rule:untap
+4:06     #23 "Shardless Agent" untap by rule:untap
+4:06   upkeep
+4:06   draw
+4:06     new hidden #62 owner "Opponent" in library
+4:06     #62 move library -> hand as draw by rule:draw
+4:06   precombat-main
+4:10   beginning-of-combat
+4:10   declare-attackers
+4:13     #25 "Endurance" attack "Player"
+4:13     #23 "Shardless Agent" attack "Player"
+4:13     #23 "Shardless Agent" tap by ?
+4:13     #25 "Endurance" tap by ?
+4:15   declare-blockers
+4:16   combat-damage
+4:16     #25 "Endurance" damage "Player" 3 by rule:combat-damage
+4:16     #23 "Shardless Agent" damage "Player" 2 by rule:combat-damage
+4:16     "Player" life 18 -> 13 by rule:combat-damage
+4:17   end-of-combat
+4:17   postcombat-main
+4:17   end
+4:20     #1 "Eldrazi Temple" tap by ?
+4:20     #6 "Urza's Mine" tap by ?
+4:21     #33 "Urza's Tower" tap by ?
+4:57     #7 "Kozilek's Command" cast from hand
+5:00     #31 identify "Force of Negation"
+5:03     #31 "Force of Negation" cast from hand
+5:03     #16 "Hedge Maze" tap by ?
+5:03     #27 "Thundering Falls" tap by ?
+5:03     #18 "Forest" tap by ?
+5:03     #31 "Force of Negation" target #7 "Kozilek's Command"
+5:05     #31 "Force of Negation" resolve
+5:05     #7 "Kozilek's Command" countered by #31
+5:05     #7 "Kozilek's Command" move stack -> exile by #31
+5:05     #31 "Force of Negation" move stack -> graveyard by rule:resolve
+5:08   cleanup
+5:08 turn 10 "Player"
+5:08   keyframe
+5:08     player "Player" life 13 poison 0 library 50
+5:08     player "Opponent" life 20 poison 0 library 46
+5:08     #1 "Eldrazi Temple" battlefield "Player" types land tapped
+5:08     #2 "Giant's Boulder" hand "Player"
+5:08     #3 "Expedition Map" library "Player"
+5:08     #4 "Kozilek's Command" library "Player"
+5:08     #5 "Trinisphere" exile
+5:08     #6 "Urza's Mine" battlefield "Player" types land tapped
+5:08     #7 "Kozilek's Command" exile
+5:08     #16 "Hedge Maze" battlefield "Opponent" types land tapped
+5:08     #17 "Oliphaunt" exile
+5:08     #18 "Forest" battlefield "Opponent" types land tapped
+5:08     #19 "Force of Negation" graveyard "Opponent"
+5:08     #20 "Shardless Agent" exile
+5:08     #21 "Violent Outburst" graveyard "Opponent"
+5:08     #23 "Shardless Agent" battlefield "Opponent" types artifact creature pt 2/2 tapped
+5:08     #24 "Sowing Mycospawn" hand "Player"
+5:08     #25 "Endurance" battlefield "Opponent" types creature pt 3/4 tapped
+5:08     #27 "Thundering Falls" battlefield "Opponent" types land tapped
+5:08     #29 "Subtlety" exile
+5:08     #30 "Urza's Power Plant" battlefield "Player" types land tapped
+5:08     #31 "Force of Negation" graveyard "Opponent"
+5:08     #33 "Urza's Tower" battlefield "Player" types land tapped
+5:08     #34 "Talisman of Resilience" battlefield "Player" types artifact
+5:08     #36 "Street Wraith" library "Opponent"
+5:08     #37 "Oliphaunt" library "Opponent"
+5:08     #38 "Subtlety" library "Opponent"
+5:08     #39 "Violent Outburst" library "Opponent"
+5:08     #40 "Breeding Pool" library "Opponent"
+5:08     #41 "Colossal Skyturtle" library "Opponent"
+5:08     #42 "Steam Vents" library "Opponent"
+5:08     #43 "Sacred Foundry" library "Opponent"
+5:08     #44 "Wistfulness" library "Opponent"
+5:08     #45 "Violent Outburst" library "Opponent"
+5:08     #46 "Wistfulness" library "Opponent"
+5:08     #47 "Oliphaunt" library "Opponent"
+5:08     #48 "Commercial District" library "Opponent"
+5:08     #49 "Valakut Awakening" library "Opponent"
+5:08     #50 "Sink into Stupor" library "Opponent"
+5:08     #51 "Curator of Mysteries" library "Opponent"
+5:08     #52 "Force of Negation" library "Opponent"
+5:08     #53 "Misty Rainforest" library "Opponent"
+5:08     #54 "Striped Riverwinder" library "Opponent"
+5:08     #55 "Striped Riverwinder" library "Opponent"
+5:08     #56 "Living End" graveyard "Opponent"
+5:08     #59 hand "Opponent"
+5:08     #60 "Forest" hand "Player"
+5:08     #62 hand "Opponent"
+5:08   untap
+5:08     #6 "Urza's Mine" untap by rule:untap
+5:08     #30 "Urza's Power Plant" untap by rule:untap
+5:08     #33 "Urza's Tower" untap by rule:untap
+5:08     #1 "Eldrazi Temple" untap by rule:untap
+5:08   upkeep
+5:08   draw
+5:08     new card #63 "Urza's Power Plant" owner "Player" in library
+5:08     #63 "Urza's Power Plant" move library -> hand as draw by rule:draw
+5:08   precombat-main
+5:11     #60 "Forest" play from hand types land
+5:13     #34 "Talisman of Resilience" tap by ?
+5:15     #2 "Giant's Boulder" cast from hand
+5:20     #2 "Giant's Boulder" resolve
+5:20     #2 "Giant's Boulder" move stack -> battlefield types artifact by rule:resolve
+5:20     new ability #64 triggered of #2 "Giant's Boulder" "When this artifact enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)" controller "Player" in stack
+5:30     #64 resolve
+5:30     #64 cease by rule:resolve
+5:34     #24 "Sowing Mycospawn" cast from hand
+5:34     #6 "Urza's Mine" tap by ?
+5:34     #30 "Urza's Power Plant" tap by ?
+5:34     #1 "Eldrazi Temple" tap by ?
+5:34     #60 "Forest" tap by ?
+5:42     new ability #65 triggered of #24 "Sowing Mycospawn" "When you cast this spell, if it was kicked, exile target land." controller "Player" in stack
+5:42     new ability #66 triggered of #24 "Sowing Mycospawn" "When you cast this spell, search your library for a land card, put it onto the battlefield, then shuffle." controller "Player" in stack
+5:42     #65 target #27 "Thundering Falls"
+5:59     #66 resolve
+5:59     new card #67 "Abstergo Entertainment" owner "Player" in library
+5:59     #67 "Abstergo Entertainment" move library -> battlefield types land by #66
+5:59     "Player" shuffle by #66
+5:59     #66 cease by rule:resolve
+6:02     #65 resolve
+6:02     #27 "Thundering Falls" move battlefield -> exile by #65
+6:02     #65 cease by rule:resolve
+6:04     #24 "Sowing Mycospawn" resolve
+6:04     #24 "Sowing Mycospawn" move stack -> battlefield types creature pt 3/3 by rule:resolve
+6:05   beginning-of-combat
+6:06   declare-attackers
+6:06   declare-blockers
+6:06   combat-damage
+6:06   end-of-combat
+6:06   postcombat-main
+6:06   end
+6:07   cleanup
+6:07 turn 11 "Opponent"
+6:07   keyframe
+6:07     player "Player" life 13 poison 0 library 48
+6:07     player "Opponent" life 20 poison 0 library 46
+6:07     #1 "Eldrazi Temple" battlefield "Player" types land tapped
+6:07     #2 "Giant's Boulder" battlefield "Player" types artifact
+6:07     #5 "Trinisphere" exile
+6:07     #6 "Urza's Mine" battlefield "Player" types land tapped
+6:07     #7 "Kozilek's Command" exile
+6:07     #16 "Hedge Maze" battlefield "Opponent" types land tapped
+6:07     #17 "Oliphaunt" exile
+6:07     #18 "Forest" battlefield "Opponent" types land tapped
+6:07     #19 "Force of Negation" graveyard "Opponent"
+6:07     #20 "Shardless Agent" exile
+6:07     #21 "Violent Outburst" graveyard "Opponent"
+6:07     #23 "Shardless Agent" battlefield "Opponent" types artifact creature pt 2/2 tapped
+6:07     #24 "Sowing Mycospawn" battlefield "Player" types creature pt 3/3
+6:07     #25 "Endurance" battlefield "Opponent" types creature pt 3/4 tapped
+6:07     #27 "Thundering Falls" exile
+6:07     #29 "Subtlety" exile
+6:07     #30 "Urza's Power Plant" battlefield "Player" types land tapped
+6:07     #31 "Force of Negation" graveyard "Opponent"
+6:07     #33 "Urza's Tower" battlefield "Player" types land
+6:07     #34 "Talisman of Resilience" battlefield "Player" types artifact tapped
+6:07     #36 "Street Wraith" library "Opponent"
+6:07     #37 "Oliphaunt" library "Opponent"
+6:07     #38 "Subtlety" library "Opponent"
+6:07     #39 "Violent Outburst" library "Opponent"
+6:07     #40 "Breeding Pool" library "Opponent"
+6:07     #41 "Colossal Skyturtle" library "Opponent"
+6:07     #42 "Steam Vents" library "Opponent"
+6:07     #43 "Sacred Foundry" library "Opponent"
+6:07     #44 "Wistfulness" library "Opponent"
+6:07     #45 "Violent Outburst" library "Opponent"
+6:07     #46 "Wistfulness" library "Opponent"
+6:07     #47 "Oliphaunt" library "Opponent"
+6:07     #48 "Commercial District" library "Opponent"
+6:07     #49 "Valakut Awakening" library "Opponent"
+6:07     #50 "Sink into Stupor" library "Opponent"
+6:07     #51 "Curator of Mysteries" library "Opponent"
+6:07     #52 "Force of Negation" library "Opponent"
+6:07     #53 "Misty Rainforest" library "Opponent"
+6:07     #54 "Striped Riverwinder" library "Opponent"
+6:07     #55 "Striped Riverwinder" library "Opponent"
+6:07     #56 "Living End" graveyard "Opponent"
+6:07     #59 hand "Opponent"
+6:07     #60 "Forest" battlefield "Player" types land tapped
+6:07     #62 hand "Opponent"
+6:07     #63 "Urza's Power Plant" hand "Player"
+6:07     #67 "Abstergo Entertainment" battlefield "Player" types land
+6:07   untap
+6:07     #16 "Hedge Maze" untap by rule:untap
+6:07     #18 "Forest" untap by rule:untap
+6:07     #23 "Shardless Agent" untap by rule:untap
+6:07     #25 "Endurance" untap by rule:untap
+6:07   upkeep
+6:07   draw
+6:07     new hidden #68 owner "Opponent" in library
+6:07     #68 move library -> hand as draw by rule:draw
+6:07   precombat-main
+6:10   beginning-of-combat
+6:10   declare-attackers
+6:13     #25 "Endurance" attack "Player"
+6:13     #23 "Shardless Agent" attack "Player"
+6:13     #23 "Shardless Agent" tap by ?
+6:13     #25 "Endurance" tap by ?
+6:15   declare-blockers
+6:17     #24 "Sowing Mycospawn" block #23 "Shardless Agent"
+6:19   combat-damage
+6:19     #25 "Endurance" damage "Player" 3 by rule:combat-damage
+6:19     #23 "Shardless Agent" damage #24 "Sowing Mycospawn" 2 by rule:combat-damage
+6:19     #24 "Sowing Mycospawn" damage #23 "Shardless Agent" 3 by rule:combat-damage
+6:19     "Player" life 13 -> 10 by rule:combat-damage
+6:19     #23 "Shardless Agent" move battlefield -> graveyard by ?
+6:20   end-of-combat
+6:20   postcombat-main
+6:23     #59 identify "Stomping Ground"
+6:23     #59 "Stomping Ground" play from hand tapped types land
+6:24   end
+6:25   cleanup
+6:25 turn 12 "Player"
+6:25   keyframe
+6:25     player "Player" life 10 poison 0 library 48
+6:25     player "Opponent" life 20 poison 0 library 45
+6:25     #1 "Eldrazi Temple" battlefield "Player" types land tapped
+6:25     #2 "Giant's Boulder" battlefield "Player" types artifact
+6:25     #5 "Trinisphere" exile
+6:25     #6 "Urza's Mine" battlefield "Player" types land tapped
+6:25     #7 "Kozilek's Command" exile
+6:25     #16 "Hedge Maze" battlefield "Opponent" types land
+6:25     #17 "Oliphaunt" exile
+6:25     #18 "Forest" battlefield "Opponent" types land
+6:25     #19 "Force of Negation" graveyard "Opponent"
+6:25     #20 "Shardless Agent" exile
+6:25     #21 "Violent Outburst" graveyard "Opponent"
+6:25     #23 "Shardless Agent" graveyard "Opponent"
+6:25     #24 "Sowing Mycospawn" battlefield "Player" types creature pt 3/3
+6:25     #25 "Endurance" battlefield "Opponent" types creature pt 3/4 tapped
+6:25     #27 "Thundering Falls" exile
+6:25     #29 "Subtlety" exile
+6:25     #30 "Urza's Power Plant" battlefield "Player" types land tapped
+6:25     #31 "Force of Negation" graveyard "Opponent"
+6:25     #33 "Urza's Tower" battlefield "Player" types land
+6:25     #34 "Talisman of Resilience" battlefield "Player" types artifact tapped
+6:25     #36 "Street Wraith" library "Opponent"
+6:25     #37 "Oliphaunt" library "Opponent"
+6:25     #38 "Subtlety" library "Opponent"
+6:25     #39 "Violent Outburst" library "Opponent"
+6:25     #40 "Breeding Pool" library "Opponent"
+6:25     #41 "Colossal Skyturtle" library "Opponent"
+6:25     #42 "Steam Vents" library "Opponent"
+6:25     #43 "Sacred Foundry" library "Opponent"
+6:25     #44 "Wistfulness" library "Opponent"
+6:25     #45 "Violent Outburst" library "Opponent"
+6:25     #46 "Wistfulness" library "Opponent"
+6:25     #47 "Oliphaunt" library "Opponent"
+6:25     #48 "Commercial District" library "Opponent"
+6:25     #49 "Valakut Awakening" library "Opponent"
+6:25     #50 "Sink into Stupor" library "Opponent"
+6:25     #51 "Curator of Mysteries" library "Opponent"
+6:25     #52 "Force of Negation" library "Opponent"
+6:25     #53 "Misty Rainforest" library "Opponent"
+6:25     #54 "Striped Riverwinder" library "Opponent"
+6:25     #55 "Striped Riverwinder" library "Opponent"
+6:25     #56 "Living End" graveyard "Opponent"
+6:25     #59 "Stomping Ground" battlefield "Opponent" types land tapped
+6:25     #60 "Forest" battlefield "Player" types land tapped
+6:25     #62 hand "Opponent"
+6:25     #63 "Urza's Power Plant" hand "Player"
+6:25     #67 "Abstergo Entertainment" battlefield "Player" types land
+6:25     #68 hand "Opponent"
+6:25   untap
+6:25     #6 "Urza's Mine" untap by rule:untap
+6:25     #30 "Urza's Power Plant" untap by rule:untap
+6:25     #1 "Eldrazi Temple" untap by rule:untap
+6:25     #34 "Talisman of Resilience" untap by rule:untap
+6:25     #60 "Forest" untap by rule:untap
+6:25   upkeep
+6:25   draw
+6:25     new card #69 "Ugin, Eye of the Storms" owner "Player" in library
+6:25     #69 "Ugin, Eye of the Storms" move library -> hand as draw by rule:draw
+6:25   precombat-main
+6:27     #63 "Urza's Power Plant" play from hand types land
+6:28     #63 "Urza's Power Plant" tap by ?
+6:29     #30 "Urza's Power Plant" tap by ?
+6:29     #33 "Urza's Tower" tap by ?
+6:31     #69 "Ugin, Eye of the Storms" cast from hand
+6:32     new ability #70 triggered of #69 "Ugin, Eye of the Storms" "When you cast this spell, exile up to one target permanent that's one or more colors." controller "Player" in stack
+6:32     #70 target #25 "Endurance"
+6:44     "Opponent" concede
+1-0
+
+[Mtgr "0.3.0"]
+[Event "Ranked"]
+[Site "Endstep"]
+[Date "2026.11.10"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "0-1"]
+[Format "Modern"]
+[Match "00000000-0000-4000-8000-e0000000003a"]
+[Game "2"]
+[Perspective "Player"]
+[ENDSTEP_MatchId "00000000-0000-4000-8000-e0000000003a"]
+[Omits "mana costs priority effects"]
+[Partial "damage library"]
+
+0:00 deck "Player"
+0:00   main 1 "Abstergo Entertainment"
+0:00   main 1 "Chalice of the Void"
+0:00   main 4 "Devourer of Destiny"
+0:00   main 2 "Dismember"
+0:00   main 1 "Disruptor Flute"
+0:00   main 4 "Eldrazi Temple"
+0:00   main 4 "Expedition Map"
+0:00   main 2 "Forest"
+0:00   main 1 "Giant's Boulder"
+0:00   main 4 "Karn, the Great Creator"
+0:00   main 4 "Kozilek's Command"
+0:00   main 1 "Sire of Seven Deaths"
+0:00   main 4 "Sowing Mycospawn"
+0:00   main 4 "Talisman of Resilience"
+0:00   main 2 "Trinisphere"
+0:00   main 4 "Ugin's Labyrinth"
+0:00   main 4 "Ugin, Eye of the Storms"
+0:00   main 1 "Ulamog, the Ceaseless Hunger"
+0:00   main 4 "Urza's Mine"
+0:00   main 4 "Urza's Power Plant"
+0:00   main 4 "Urza's Tower"
+0:00   side 1 "Cursed Totem"
+0:00   side 1 "Ensnaring Bridge"
+0:00   side 1 "Extinguisher Battleship"
+0:00   side 2 "Giant's Boulder"
+0:00   side 1 "Grafdigger's Cage"
+0:00   side 1 "Haywire Mite"
+0:00   side 1 "Liquimetal Coating"
+0:00   side 1 "The Filigree Sylex"
+0:00   side 1 "The Stone Brain"
+0:00   side 1 "The Ten Rings"
+0:00   side 1 "Tormod's Crypt"
+0:00   side 1 "Torpor Orb"
+0:00   side 1 "Trinisphere"
+0:00   side 1 "Walking Ballista"
+0:35 pregame
+0:35   keyframe
+0:35     player "Player" life 20 poison 0 library 60
+0:35     player "Opponent" life 20 poison 0 library 60
+0:37   "Opponent" choose first "Opponent"
+0:37   new card #1 "Talisman of Resilience" owner "Player" in library
+0:37   #1 "Talisman of Resilience" move library -> hand as draw by rule:opening-hand
+0:37   new card #2 "Kozilek's Command" owner "Player" in library
+0:37   #2 "Kozilek's Command" move library -> hand as draw by rule:opening-hand
+0:37   new card #3 "Urza's Power Plant" owner "Player" in library
+0:37   #3 "Urza's Power Plant" move library -> hand as draw by rule:opening-hand
+0:37   new card #4 "Forest" owner "Player" in library
+0:37   #4 "Forest" move library -> hand as draw by rule:opening-hand
+0:37   new card #5 "Eldrazi Temple" owner "Player" in library
+0:37   #5 "Eldrazi Temple" move library -> hand as draw by rule:opening-hand
+0:37   new card #6 "Forest" owner "Player" in library
+0:37   #6 "Forest" move library -> hand as draw by rule:opening-hand
+0:37   new card #7 "Devourer of Destiny" owner "Player" in library
+0:37   #7 "Devourer of Destiny" move library -> hand as draw by rule:opening-hand
+0:37   new hidden #8 owner "Opponent" in library
+0:37   #8 move library -> hand as draw by rule:opening-hand
+0:37   new hidden #9 owner "Opponent" in library
+0:37   #9 move library -> hand as draw by rule:opening-hand
+0:37   new hidden #10 owner "Opponent" in library
+0:37   #10 move library -> hand as draw by rule:opening-hand
+0:37   new hidden #11 owner "Opponent" in library
+0:37   #11 move library -> hand as draw by rule:opening-hand
+0:37   new hidden #12 owner "Opponent" in library
+0:37   #12 move library -> hand as draw by rule:opening-hand
+0:37   new hidden #13 owner "Opponent" in library
+0:37   #13 move library -> hand as draw by rule:opening-hand
+0:37   new hidden #14 owner "Opponent" in library
+0:37   #14 move library -> hand as draw by rule:opening-hand
+0:42   "Opponent" keep
+1:12   "Player" keep
+1:14   #7 "Devourer of Destiny" reveal by ?
+1:14 turn 1 "Opponent"
+1:14   keyframe
+1:14     player "Player" life 20 poison 0 library 53
+1:14     player "Opponent" life 20 poison 0 library 53
+1:14     #1 "Talisman of Resilience" hand "Player"
+1:14     #2 "Kozilek's Command" hand "Player"
+1:14     #3 "Urza's Power Plant" hand "Player"
+1:14     #4 "Forest" hand "Player"
+1:14     #5 "Eldrazi Temple" hand "Player"
+1:14     #6 "Forest" hand "Player"
+1:14     #7 "Devourer of Destiny" hand "Player"
+1:14     #8 hand "Opponent"
+1:14     #9 hand "Opponent"
+1:14     #10 hand "Opponent"
+1:14     #11 hand "Opponent"
+1:14     #12 hand "Opponent"
+1:14     #13 hand "Opponent"
+1:14     #14 hand "Opponent"
+1:14   untap
+1:14   upkeep
+1:14   draw
+1:14   precombat-main
+1:17     #8 identify "Misty Rainforest"
+1:17     #8 "Misty Rainforest" play from hand types land
+1:18   beginning-of-combat
+1:18   declare-attackers
+1:18   declare-blockers
+1:18   combat-damage
+1:18   end-of-combat
+1:18   postcombat-main
+1:18   end
+1:19   cleanup
+1:20 turn 2 "Player"
+1:20   keyframe
+1:20     player "Player" life 20 poison 0 library 53
+1:20     player "Opponent" life 20 poison 0 library 53
+1:20     #1 "Talisman of Resilience" hand "Player"
+1:20     #2 "Kozilek's Command" hand "Player"
+1:20     #3 "Urza's Power Plant" hand "Player"
+1:20     #4 "Forest" hand "Player"
+1:20     #5 "Eldrazi Temple" hand "Player"
+1:20     #6 "Forest" hand "Player"
+1:20     #7 "Devourer of Destiny" hand "Player"
+1:20     #8 "Misty Rainforest" battlefield "Opponent" types land
+1:20     #9 hand "Opponent"
+1:20     #10 hand "Opponent"
+1:20     #11 hand "Opponent"
+1:20     #12 hand "Opponent"
+1:20     #13 hand "Opponent"
+1:20     #14 hand "Opponent"
+1:20   untap
+1:20   upkeep
+1:22     new card #15 "Urza's Power Plant" owner "Player" in library
+1:22     new card #16 "Ugin, Eye of the Storms" owner "Player" in library
+1:22     new card #17 "Trinisphere" owner "Player" in library
+1:22     new card #18 "Ugin, Eye of the Storms" owner "Player" in library
+1:27     #15 "Urza's Power Plant" move library -> exile by ?
+1:27     #16 "Ugin, Eye of the Storms" move library -> exile by ?
+1:27     #18 "Ugin, Eye of the Storms" move library -> exile by ?
+1:27   draw
+1:27     #17 "Trinisphere" move library -> hand as draw by rule:draw
+1:27   precombat-main
+1:31     #5 "Eldrazi Temple" play from hand types land
+1:32   beginning-of-combat
+1:33   declare-attackers
+1:33   declare-blockers
+1:33   combat-damage
+1:33   end-of-combat
+1:33   postcombat-main
+1:33   end
+1:53     #8 "Misty Rainforest" tap by ?
+1:55     "Opponent" life 20 -> 19 by ?
+1:55     #8 "Misty Rainforest" move battlefield -> graveyard by ?
+1:55     new ability #19 activated of #8 "Misty Rainforest" "Misty Rainforest - Opponent searches their library for a Forest or Island card, puts it onto the battlefield, then shuffles." controller "Opponent" in stack
+2:00     #19 resolve
+2:00     new card #20 "Hedge Maze" owner "Opponent" in library
+2:00     #20 "Hedge Maze" move library -> battlefield tapped types land by #19
+2:00     "Opponent" shuffle by #19
+2:00     #19 cease by rule:resolve
+2:00     new ability #21 triggered of #20 "Hedge Maze" "When Hedge Maze enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)" controller "Opponent" in stack
+2:05     #21 resolve
+2:05     #21 cease by rule:resolve
+2:07   cleanup
+2:07 turn 3 "Opponent"
+2:07   keyframe
+2:07     player "Player" life 20 poison 0 library 49
+2:07     player "Opponent" life 19 poison 0 library 52
+2:07     #1 "Talisman of Resilience" hand "Player"
+2:07     #2 "Kozilek's Command" hand "Player"
+2:07     #3 "Urza's Power Plant" hand "Player"
+2:07     #4 "Forest" hand "Player"
+2:07     #5 "Eldrazi Temple" battlefield "Player" types land
+2:07     #6 "Forest" hand "Player"
+2:07     #7 "Devourer of Destiny" hand "Player"
+2:07     #8 "Misty Rainforest" graveyard "Opponent"
+2:07     #9 hand "Opponent"
+2:07     #10 hand "Opponent"
+2:07     #11 hand "Opponent"
+2:07     #12 hand "Opponent"
+2:07     #13 hand "Opponent"
+2:07     #14 hand "Opponent"
+2:07     #15 "Urza's Power Plant" exile
+2:07     #16 "Ugin, Eye of the Storms" exile
+2:07     #17 "Trinisphere" hand "Player"
+2:07     #18 "Ugin, Eye of the Storms" exile
+2:07     #20 "Hedge Maze" battlefield "Opponent" types land tapped
+2:07   untap
+2:07     #20 "Hedge Maze" untap by rule:untap
+2:07   upkeep
+2:07   draw
+2:07     new hidden #22 owner "Opponent" in library
+2:07     #22 move library -> hand as draw by rule:draw
+2:07   precombat-main
+2:11     #9 identify "Generous Ent"
+2:11     #9 "Generous Ent" move hand -> graveyard as discard by ?
+2:11     new ability #23 activated of #9 "Generous Ent" "Generous Ent - Opponent searches their library for a Forest card, reveals it, puts it into their hand, then shuffles." controller "Opponent" in stack
+2:11     #20 "Hedge Maze" tap by ?
+2:17     #23 resolve
+2:17     new card #24 "Temple Garden" owner "Opponent" in library
+2:17     #24 "Temple Garden" move library -> hand by #23
+2:17     #24 "Temple Garden" reveal by #23
+2:17     "Opponent" shuffle by #23
+2:17     #23 cease by rule:resolve
+2:22     "Opponent" life 19 -> 17 by ?
+2:22     #24 "Temple Garden" play from hand types land
+2:24   beginning-of-combat
+2:24   declare-attackers
+2:24   declare-blockers
+2:24   combat-damage
+2:24   end-of-combat
+2:24   postcombat-main
+2:24   end
+2:25   cleanup
+2:25 turn 4 "Player"
+2:25   keyframe
+2:25     player "Player" life 20 poison 0 library 49
+2:25     player "Opponent" life 17 poison 0 library 50
+2:25     #1 "Talisman of Resilience" hand "Player"
+2:25     #2 "Kozilek's Command" hand "Player"
+2:25     #3 "Urza's Power Plant" hand "Player"
+2:25     #4 "Forest" hand "Player"
+2:25     #5 "Eldrazi Temple" battlefield "Player" types land
+2:25     #6 "Forest" hand "Player"
+2:25     #7 "Devourer of Destiny" hand "Player"
+2:25     #8 "Misty Rainforest" graveyard "Opponent"
+2:25     #9 "Generous Ent" graveyard "Opponent"
+2:25     #10 hand "Opponent"
+2:25     #11 hand "Opponent"
+2:25     #12 hand "Opponent"
+2:25     #13 hand "Opponent"
+2:25     #14 hand "Opponent"
+2:25     #15 "Urza's Power Plant" exile
+2:25     #16 "Ugin, Eye of the Storms" exile
+2:25     #17 "Trinisphere" hand "Player"
+2:25     #18 "Ugin, Eye of the Storms" exile
+2:25     #20 "Hedge Maze" battlefield "Opponent" types land tapped
+2:25     #22 hand "Opponent"
+2:25     #24 "Temple Garden" battlefield "Opponent" types land
+2:25   untap
+2:25   upkeep
+2:25   draw
+2:25     new card #25 "Urza's Power Plant" owner "Player" in library
+2:25     #25 "Urza's Power Plant" move library -> hand as draw by rule:draw
+2:25   precombat-main
+2:30     #25 "Urza's Power Plant" play from hand types land
+2:31   beginning-of-combat
+2:32   declare-attackers
+2:33   declare-blockers
+2:33   combat-damage
+2:33   end-of-combat
+2:33   postcombat-main
+2:33   end
+2:41     #10 identify "Generous Ent"
+2:41     #10 "Generous Ent" move hand -> graveyard as discard by ?
+2:41     new ability #26 activated of #10 "Generous Ent" "Generous Ent - Opponent searches their library for a Forest card, reveals it, puts it into their hand, then shuffles." controller "Opponent" in stack
+2:41     #24 "Temple Garden" tap by ?
+2:46     #26 resolve
+2:46     new card #27 "Stomping Ground" owner "Opponent" in library
+2:46     #27 "Stomping Ground" move library -> hand by #26
+2:46     #27 "Stomping Ground" reveal by #26
+2:46     "Opponent" shuffle by #26
+2:46     #26 cease by rule:resolve
+2:49   cleanup
+2:49 turn 5 "Opponent"
+2:49   keyframe
+2:49     player "Player" life 20 poison 0 library 48
+2:49     player "Opponent" life 17 poison 0 library 49
+2:49     #1 "Talisman of Resilience" hand "Player"
+2:49     #2 "Kozilek's Command" hand "Player"
+2:49     #3 "Urza's Power Plant" hand "Player"
+2:49     #4 "Forest" hand "Player"
+2:49     #5 "Eldrazi Temple" battlefield "Player" types land
+2:49     #6 "Forest" hand "Player"
+2:49     #7 "Devourer of Destiny" hand "Player"
+2:49     #8 "Misty Rainforest" graveyard "Opponent"
+2:49     #9 "Generous Ent" graveyard "Opponent"
+2:49     #10 "Generous Ent" graveyard "Opponent"
+2:49     #11 hand "Opponent"
+2:49     #12 hand "Opponent"
+2:49     #13 hand "Opponent"
+2:49     #14 hand "Opponent"
+2:49     #15 "Urza's Power Plant" exile
+2:49     #16 "Ugin, Eye of the Storms" exile
+2:49     #17 "Trinisphere" hand "Player"
+2:49     #18 "Ugin, Eye of the Storms" exile
+2:49     #20 "Hedge Maze" battlefield "Opponent" types land tapped
+2:49     #22 hand "Opponent"
+2:49     #24 "Temple Garden" battlefield "Opponent" types land tapped
+2:49     #25 "Urza's Power Plant" battlefield "Player" types land
+2:49     #27 "Stomping Ground" hand "Opponent"
+2:49   untap
+2:49     #20 "Hedge Maze" untap by rule:untap
+2:49     #24 "Temple Garden" untap by rule:untap
+2:49   upkeep
+2:49   draw
+2:49     new hidden #28 owner "Opponent" in library
+2:49     #28 move library -> hand as draw by rule:draw
+2:49   precombat-main
+2:53     "Opponent" life 17 -> 15 by ?
+2:53     #27 "Stomping Ground" play from hand types land
+2:54   beginning-of-combat
+2:54   declare-attackers
+2:54   declare-blockers
+2:54   combat-damage
+2:54   end-of-combat
+2:54   postcombat-main
+2:54   end
+2:56   cleanup
+2:56 turn 6 "Player"
+2:56   keyframe
+2:56     player "Player" life 20 poison 0 library 48
+2:56     player "Opponent" life 15 poison 0 library 48
+2:56     #1 "Talisman of Resilience" hand "Player"
+2:56     #2 "Kozilek's Command" hand "Player"
+2:56     #3 "Urza's Power Plant" hand "Player"
+2:56     #4 "Forest" hand "Player"
+2:56     #5 "Eldrazi Temple" battlefield "Player" types land
+2:56     #6 "Forest" hand "Player"
+2:56     #7 "Devourer of Destiny" hand "Player"
+2:56     #8 "Misty Rainforest" graveyard "Opponent"
+2:56     #9 "Generous Ent" graveyard "Opponent"
+2:56     #10 "Generous Ent" graveyard "Opponent"
+2:56     #11 hand "Opponent"
+2:56     #12 hand "Opponent"
+2:56     #13 hand "Opponent"
+2:56     #14 hand "Opponent"
+2:56     #15 "Urza's Power Plant" exile
+2:56     #16 "Ugin, Eye of the Storms" exile
+2:56     #17 "Trinisphere" hand "Player"
+2:56     #18 "Ugin, Eye of the Storms" exile
+2:56     #20 "Hedge Maze" battlefield "Opponent" types land
+2:56     #22 hand "Opponent"
+2:56     #24 "Temple Garden" battlefield "Opponent" types land
+2:56     #25 "Urza's Power Plant" battlefield "Player" types land
+2:56     #27 "Stomping Ground" battlefield "Opponent" types land
+2:56     #28 hand "Opponent"
+2:56   untap
+2:56   upkeep
+2:56   draw
+2:56     new card #29 "Ugin's Labyrinth" owner "Player" in library
+2:56     #29 "Ugin's Labyrinth" move library -> hand as draw by rule:draw
+2:56   precombat-main
+2:57     #29 "Ugin's Labyrinth" play from hand types land
+2:57     new ability #30 triggered of #29 "Ugin's Labyrinth" "Imprint - When Ugin's Labyrinth enters, you may exile a colorless card with mana value 7 or greater from your hand." controller "Player" in stack
+3:03     #30 resolve
+3:03     #7 "Devourer of Destiny" move hand -> exile by #30
+3:03     #30 cease by rule:resolve
+3:10     #29 "Ugin's Labyrinth" tap by ?
+3:17     #29 "Ugin's Labyrinth" untap by ?
+3:18   beginning-of-combat
+3:18   declare-attackers
+3:19   declare-blockers
+3:19   combat-damage
+3:19   end-of-combat
+3:19   postcombat-main
+3:19   end
+3:22     #11 identify "Violent Outburst"
+3:23     #11 "Violent Outburst" cast from hand
+3:23     new ability #31 triggered of #11 "Violent Outburst" "Cascade - Violent Outburst" controller "Opponent" in stack
+3:23     #20 "Hedge Maze" tap by ?
+3:23     #24 "Temple Garden" tap by ?
+3:23     #27 "Stomping Ground" tap by ?
+3:26     new card #32 "Violent Outburst" owner "Opponent" in library
+3:26     #32 "Violent Outburst" look "Player" by ?
+3:26     new card #33 "Living End" owner "Opponent" in library
+3:26     #33 "Living End" look "Player" by ?
+3:26     #32 "Violent Outburst" move library -> exile by ?
+3:26     #33 "Living End" move library -> exile by ?
+3:28     #31 resolve
+3:28     #33 "Living End" cast from exile by #31
+3:28     #32 "Violent Outburst" move exile -> library by #31
+3:28     #31 cease by rule:resolve
+3:31     #5 "Eldrazi Temple" tap by ?
+3:32     #29 "Ugin's Labyrinth" tap by ?
+3:42     #2 "Kozilek's Command" cast from hand
+3:42     #2 "Kozilek's Command" target "Player"
+3:42     #2 "Kozilek's Command" target #10 "Generous Ent"
+3:42     #2 "Kozilek's Command" target #9 "Generous Ent"
+3:47     #12 identify "Force of Negation"
+3:50     #13 identify "Shardless Agent"
+3:50     #13 "Shardless Agent" move hand -> exile by ?
+3:50     #12 "Force of Negation" cast from hand
+3:50     #12 "Force of Negation" target #2 "Kozilek's Command"
+3:52     "Player" concede
+0-1
+
+[Mtgr "0.3.0"]
+[Event "Ranked"]
+[Site "Endstep"]
+[Date "2026.11.10"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "0-1"]
+[Format "Modern"]
+[Match "00000000-0000-4000-8000-e0000000003a"]
+[Game "3"]
+[Perspective "Player"]
+[ENDSTEP_MatchId "00000000-0000-4000-8000-e0000000003a"]
+[Omits "mana costs priority effects"]
+[Partial "damage library"]
+
+0:00 deck "Player"
+0:00   main 1 "Abstergo Entertainment"
+0:00   main 1 "Chalice of the Void"
+0:00   main 4 "Devourer of Destiny"
+0:00   main 2 "Dismember"
+0:00   main 1 "Disruptor Flute"
+0:00   main 4 "Eldrazi Temple"
+0:00   main 4 "Expedition Map"
+0:00   main 2 "Forest"
+0:00   main 1 "Giant's Boulder"
+0:00   main 4 "Karn, the Great Creator"
+0:00   main 4 "Kozilek's Command"
+0:00   main 1 "Sire of Seven Deaths"
+0:00   main 4 "Sowing Mycospawn"
+0:00   main 4 "Talisman of Resilience"
+0:00   main 2 "Trinisphere"
+0:00   main 4 "Ugin's Labyrinth"
+0:00   main 4 "Ugin, Eye of the Storms"
+0:00   main 1 "Ulamog, the Ceaseless Hunger"
+0:00   main 4 "Urza's Mine"
+0:00   main 4 "Urza's Power Plant"
+0:00   main 4 "Urza's Tower"
+0:00   side 1 "Cursed Totem"
+0:00   side 1 "Ensnaring Bridge"
+0:00   side 1 "Extinguisher Battleship"
+0:00   side 2 "Giant's Boulder"
+0:00   side 1 "Grafdigger's Cage"
+0:00   side 1 "Haywire Mite"
+0:00   side 1 "Liquimetal Coating"
+0:00   side 1 "The Filigree Sylex"
+0:00   side 1 "The Stone Brain"
+0:00   side 1 "The Ten Rings"
+0:00   side 1 "Tormod's Crypt"
+0:00   side 1 "Torpor Orb"
+0:00   side 1 "Trinisphere"
+0:00   side 1 "Walking Ballista"
+0:03 pregame
+0:03   keyframe
+0:03     player "Player" life 20 poison 0 library 60
+0:03     player "Opponent" life 20 poison 0 library 60
+0:04   "Player" choose first "Player"
+0:04   new card #1 "Trinisphere" owner "Player" in library
+0:04   #1 "Trinisphere" move library -> hand as draw by rule:opening-hand
+0:04   new card #2 "Sowing Mycospawn" owner "Player" in library
+0:04   #2 "Sowing Mycospawn" move library -> hand as draw by rule:opening-hand
+0:04   new card #3 "Expedition Map" owner "Player" in library
+0:04   #3 "Expedition Map" move library -> hand as draw by rule:opening-hand
+0:04   new card #4 "Ugin, Eye of the Storms" owner "Player" in library
+0:04   #4 "Ugin, Eye of the Storms" move library -> hand as draw by rule:opening-hand
+0:04   new card #5 "Talisman of Resilience" owner "Player" in library
+0:04   #5 "Talisman of Resilience" move library -> hand as draw by rule:opening-hand
+0:04   new card #6 "Forest" owner "Player" in library
+0:04   #6 "Forest" move library -> hand as draw by rule:opening-hand
+0:04   new card #7 "Karn, the Great Creator" owner "Player" in library
+0:04   #7 "Karn, the Great Creator" move library -> hand as draw by rule:opening-hand
+0:04   new hidden #8 owner "Opponent" in library
+0:04   #8 move library -> hand as draw by rule:opening-hand
+0:04   new hidden #9 owner "Opponent" in library
+0:04   #9 move library -> hand as draw by rule:opening-hand
+0:04   new hidden #10 owner "Opponent" in library
+0:04   #10 move library -> hand as draw by rule:opening-hand
+0:04   new hidden #11 owner "Opponent" in library
+0:04   #11 move library -> hand as draw by rule:opening-hand
+0:04   new hidden #12 owner "Opponent" in library
+0:04   #12 move library -> hand as draw by rule:opening-hand
+0:04   new hidden #13 owner "Opponent" in library
+0:04   #13 move library -> hand as draw by rule:opening-hand
+0:04   new hidden #14 owner "Opponent" in library
+0:04   #14 move library -> hand as draw by rule:opening-hand
+0:07   "Player" mulligan
+0:07   #1 "Trinisphere" move hand -> library by rule:mulligan
+0:07   #2 "Sowing Mycospawn" move hand -> library by rule:mulligan
+0:07   #3 "Expedition Map" move hand -> library by rule:mulligan
+0:07   #4 "Ugin, Eye of the Storms" move hand -> library by rule:mulligan
+0:07   #5 "Talisman of Resilience" move hand -> library by rule:mulligan
+0:07   #6 "Forest" move hand -> library by rule:mulligan
+0:07   #7 "Karn, the Great Creator" move hand -> library by rule:mulligan
+0:07   #4 "Ugin, Eye of the Storms" move library -> hand as draw by rule:mulligan
+0:07   #2 "Sowing Mycospawn" move library -> hand as draw by rule:mulligan
+0:07   new card #15 "Eldrazi Temple" owner "Player" in library
+0:07   #15 "Eldrazi Temple" move library -> hand as draw by rule:mulligan
+0:07   new card #16 "Karn, the Great Creator" owner "Player" in library
+0:07   #16 "Karn, the Great Creator" move library -> hand as draw by rule:mulligan
+0:07   new card #17 "Eldrazi Temple" owner "Player" in library
+0:07   #17 "Eldrazi Temple" move library -> hand as draw by rule:mulligan
+0:07   new card #18 "Disruptor Flute" owner "Player" in library
+0:07   #18 "Disruptor Flute" move library -> hand as draw by rule:mulligan
+0:07   new card #19 "Kozilek's Command" owner "Player" in library
+0:07   #19 "Kozilek's Command" move library -> hand as draw by rule:mulligan
+0:10   "Opponent" keep
+0:13   "Player" keep
+0:23   #16 "Karn, the Great Creator" move hand -> library bottom by rule:mulligan
+0:23 turn 1 "Player"
+0:23   keyframe
+0:23     player "Player" life 20 poison 0 library 54
+0:23     player "Opponent" life 20 poison 0 library 53
+0:23     #1 "Trinisphere" library "Player"
+0:23     #2 "Sowing Mycospawn" hand "Player"
+0:23     #3 "Expedition Map" library "Player"
+0:23     #4 "Ugin, Eye of the Storms" hand "Player"
+0:23     #5 "Talisman of Resilience" library "Player"
+0:23     #6 "Forest" library "Player"
+0:23     #7 "Karn, the Great Creator" library "Player"
+0:23     #8 hand "Opponent"
+0:23     #9 hand "Opponent"
+0:23     #10 hand "Opponent"
+0:23     #11 hand "Opponent"
+0:23     #12 hand "Opponent"
+0:23     #13 hand "Opponent"
+0:23     #14 hand "Opponent"
+0:23     #15 "Eldrazi Temple" hand "Player"
+0:23     #16 "Karn, the Great Creator" library "Player" bottom 1
+0:23     #17 "Eldrazi Temple" hand "Player"
+0:23     #18 "Disruptor Flute" hand "Player"
+0:23     #19 "Kozilek's Command" hand "Player"
+0:23   untap
+0:23   upkeep
+0:23   draw
+0:23   precombat-main
+0:24     #15 "Eldrazi Temple" play from hand types land
+0:25   beginning-of-combat
+0:26   declare-attackers
+0:26   declare-blockers
+0:26   combat-damage
+0:26   end-of-combat
+0:26   postcombat-main
+0:26   end
+0:29   cleanup
+0:29 turn 2 "Opponent"
+0:29   keyframe
+0:29     player "Player" life 20 poison 0 library 54
+0:29     player "Opponent" life 20 poison 0 library 53
+0:29     #1 "Trinisphere" library "Player"
+0:29     #2 "Sowing Mycospawn" hand "Player"
+0:29     #3 "Expedition Map" library "Player"
+0:29     #4 "Ugin, Eye of the Storms" hand "Player"
+0:29     #5 "Talisman of Resilience" library "Player"
+0:29     #6 "Forest" library "Player"
+0:29     #7 "Karn, the Great Creator" library "Player"
+0:29     #8 hand "Opponent"
+0:29     #9 hand "Opponent"
+0:29     #10 hand "Opponent"
+0:29     #11 hand "Opponent"
+0:29     #12 hand "Opponent"
+0:29     #13 hand "Opponent"
+0:29     #14 hand "Opponent"
+0:29     #15 "Eldrazi Temple" battlefield "Player" types land
+0:29     #16 "Karn, the Great Creator" library "Player" bottom 1
+0:29     #17 "Eldrazi Temple" hand "Player"
+0:29     #18 "Disruptor Flute" hand "Player"
+0:29     #19 "Kozilek's Command" hand "Player"
+0:29   untap
+0:29   upkeep
+0:29   draw
+0:29     new hidden #20 owner "Opponent" in library
+0:29     #20 move library -> hand as draw by rule:draw
+0:29   precombat-main
+0:32     #8 identify "Misty Rainforest"
+0:32     #8 "Misty Rainforest" play from hand types land
+0:33   beginning-of-combat
+0:33   declare-attackers
+0:33   declare-blockers
+0:33   combat-damage
+0:33   end-of-combat
+0:33   postcombat-main
+0:33   end
+0:34   cleanup
+0:34 turn 3 "Player"
+0:34   keyframe
+0:34     player "Player" life 20 poison 0 library 54
+0:34     player "Opponent" life 20 poison 0 library 52
+0:34     #1 "Trinisphere" library "Player"
+0:34     #2 "Sowing Mycospawn" hand "Player"
+0:34     #3 "Expedition Map" library "Player"
+0:34     #4 "Ugin, Eye of the Storms" hand "Player"
+0:34     #5 "Talisman of Resilience" library "Player"
+0:34     #6 "Forest" library "Player"
+0:34     #7 "Karn, the Great Creator" library "Player"
+0:34     #8 "Misty Rainforest" battlefield "Opponent" types land
+0:34     #9 hand "Opponent"
+0:34     #10 hand "Opponent"
+0:34     #11 hand "Opponent"
+0:34     #12 hand "Opponent"
+0:34     #13 hand "Opponent"
+0:34     #14 hand "Opponent"
+0:34     #15 "Eldrazi Temple" battlefield "Player" types land
+0:34     #16 "Karn, the Great Creator" library "Player" bottom 1
+0:34     #17 "Eldrazi Temple" hand "Player"
+0:34     #18 "Disruptor Flute" hand "Player"
+0:34     #19 "Kozilek's Command" hand "Player"
+0:34     #20 hand "Opponent"
+0:34   untap
+0:34   upkeep
+0:34   draw
+0:34     new card #21 "Expedition Map" owner "Player" in library
+0:34     #21 "Expedition Map" move library -> hand as draw by rule:draw
+0:34   precombat-main
+0:35     #17 "Eldrazi Temple" play from hand types land
+0:36   beginning-of-combat
+0:36   declare-attackers
+0:37   declare-blockers
+0:37   combat-damage
+0:37   end-of-combat
+0:37   postcombat-main
+0:37   end
+0:39     #8 "Misty Rainforest" tap by ?
+0:40     "Opponent" life 20 -> 19 by ?
+0:40     #8 "Misty Rainforest" move battlefield -> graveyard by ?
+0:40     new ability #22 activated of #8 "Misty Rainforest" "Misty Rainforest - Opponent searches their library for a Forest or Island card, puts it onto the battlefield, then shuffles." controller "Opponent" in stack
+0:50     #22 resolve
+0:50     new card #23 "Temple Garden" owner "Opponent" in library
+0:50     #23 "Temple Garden" move library -> battlefield tapped types land by #22
+0:50     "Opponent" shuffle by #22
+0:50     #22 cease by rule:resolve
+0:52   cleanup
+0:52 turn 4 "Opponent"
+0:52   keyframe
+0:52     player "Player" life 20 poison 0 library 53
+0:52     player "Opponent" life 19 poison 0 library 51
+0:52     #1 "Trinisphere" library "Player"
+0:52     #2 "Sowing Mycospawn" hand "Player"
+0:52     #3 "Expedition Map" library "Player"
+0:52     #4 "Ugin, Eye of the Storms" hand "Player"
+0:52     #5 "Talisman of Resilience" library "Player"
+0:52     #6 "Forest" library "Player"
+0:52     #7 "Karn, the Great Creator" library "Player"
+0:52     #8 "Misty Rainforest" graveyard "Opponent"
+0:52     #9 hand "Opponent"
+0:52     #10 hand "Opponent"
+0:52     #11 hand "Opponent"
+0:52     #12 hand "Opponent"
+0:52     #13 hand "Opponent"
+0:52     #14 hand "Opponent"
+0:52     #15 "Eldrazi Temple" battlefield "Player" types land
+0:52     #16 "Karn, the Great Creator" library "Player" bottom 1
+0:52     #17 "Eldrazi Temple" battlefield "Player" types land
+0:52     #18 "Disruptor Flute" hand "Player"
+0:52     #19 "Kozilek's Command" hand "Player"
+0:52     #20 hand "Opponent"
+0:52     #21 "Expedition Map" hand "Player"
+0:52     #23 "Temple Garden" battlefield "Opponent" types land tapped
+0:52   untap
+0:52     #23 "Temple Garden" untap by rule:untap
+0:52   upkeep
+0:52   draw
+0:52     new hidden #24 owner "Opponent" in library
+0:52     #24 move library -> hand as draw by rule:draw
+0:52   precombat-main
+0:58     #9 identify "Oliphaunt"
+0:58     #9 "Oliphaunt" move hand -> graveyard as discard by ?
+0:58     new ability #25 activated of #9 "Oliphaunt" "Oliphaunt - Opponent searches their library for a Mountain card, reveals it, puts it into their hand, then shuffles." controller "Opponent" in stack
+0:58     #23 "Temple Garden" tap by ?
+1:08     #25 resolve
+1:08     new card #26 "Thundering Falls" owner "Opponent" in library
+1:08     #26 "Thundering Falls" move library -> hand by #25
+1:08     #26 "Thundering Falls" reveal by #25
+1:08     "Opponent" shuffle by #25
+1:08     #25 cease by rule:resolve
+1:09     #26 "Thundering Falls" play from hand tapped types land
+1:09     new ability #27 triggered of #26 "Thundering Falls" "When Thundering Falls enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)" controller "Opponent" in stack
+1:15     #27 resolve
+1:15     new card #28 "Misty Rainforest" owner "Opponent" in library
+1:15     #28 "Misty Rainforest" move library -> graveyard as mill by #27
+1:15     #27 cease by rule:resolve
+1:16   beginning-of-combat
+1:16   declare-attackers
+1:16   declare-blockers
+1:16   combat-damage
+1:16   end-of-combat
+1:16   postcombat-main
+1:16   end
+1:19     #17 "Eldrazi Temple" tap by ?
+1:20     #15 "Eldrazi Temple" tap by ?
+1:22     #18 "Disruptor Flute" cast from hand
+1:25     #10 identify "Force of Negation"
+1:35     #18 "Disruptor Flute" resolve
+1:35     #18 "Disruptor Flute" move stack -> battlefield types artifact by rule:resolve
+1:39   cleanup
+1:39 turn 5 "Player"
+1:39   keyframe
+1:39     player "Player" life 20 poison 0 library 53
+1:39     player "Opponent" life 19 poison 0 library 48
+1:39     #1 "Trinisphere" library "Player"
+1:39     #2 "Sowing Mycospawn" hand "Player"
+1:39     #3 "Expedition Map" library "Player"
+1:39     #4 "Ugin, Eye of the Storms" hand "Player"
+1:39     #5 "Talisman of Resilience" library "Player"
+1:39     #6 "Forest" library "Player"
+1:39     #7 "Karn, the Great Creator" library "Player"
+1:39     #8 "Misty Rainforest" graveyard "Opponent"
+1:39     #9 "Oliphaunt" graveyard "Opponent"
+1:39     #10 "Force of Negation" hand "Opponent"
+1:39     #11 hand "Opponent"
+1:39     #12 hand "Opponent"
+1:39     #13 hand "Opponent"
+1:39     #14 hand "Opponent"
+1:39     #15 "Eldrazi Temple" battlefield "Player" types land tapped
+1:39     #16 "Karn, the Great Creator" library "Player" bottom 1
+1:39     #17 "Eldrazi Temple" battlefield "Player" types land tapped
+1:39     #18 "Disruptor Flute" battlefield "Player" types artifact
+1:39     #19 "Kozilek's Command" hand "Player"
+1:39     #20 hand "Opponent"
+1:39     #21 "Expedition Map" hand "Player"
+1:39     #23 "Temple Garden" battlefield "Opponent" types land tapped
+1:39     #24 hand "Opponent"
+1:39     #26 "Thundering Falls" battlefield "Opponent" types land tapped
+1:39     #28 "Misty Rainforest" graveyard "Opponent"
+1:39   untap
+1:39     #15 "Eldrazi Temple" untap by rule:untap
+1:39     #17 "Eldrazi Temple" untap by rule:untap
+1:39   upkeep
+1:39   draw
+1:39     new card #29 "Karn, the Great Creator" owner "Player" in library
+1:39     #29 "Karn, the Great Creator" move library -> hand as draw by rule:draw
+1:39   precombat-main
+1:41   beginning-of-combat
+1:42   declare-attackers
+1:42   declare-blockers
+1:42   combat-damage
+1:42   end-of-combat
+1:42   postcombat-main
+1:42   end
+1:47   cleanup
+1:47 turn 6 "Opponent"
+1:47   keyframe
+1:47     player "Player" life 20 poison 0 library 52
+1:47     player "Opponent" life 19 poison 0 library 48
+1:47     #1 "Trinisphere" library "Player"
+1:47     #2 "Sowing Mycospawn" hand "Player"
+1:47     #3 "Expedition Map" library "Player"
+1:47     #4 "Ugin, Eye of the Storms" hand "Player"
+1:47     #5 "Talisman of Resilience" library "Player"
+1:47     #6 "Forest" library "Player"
+1:47     #7 "Karn, the Great Creator" library "Player"
+1:47     #8 "Misty Rainforest" graveyard "Opponent"
+1:47     #9 "Oliphaunt" graveyard "Opponent"
+1:47     #10 "Force of Negation" hand "Opponent"
+1:47     #11 hand "Opponent"
+1:47     #12 hand "Opponent"
+1:47     #13 hand "Opponent"
+1:47     #14 hand "Opponent"
+1:47     #15 "Eldrazi Temple" battlefield "Player" types land
+1:47     #16 "Karn, the Great Creator" library "Player" bottom 1
+1:47     #17 "Eldrazi Temple" battlefield "Player" types land
+1:47     #18 "Disruptor Flute" battlefield "Player" types artifact
+1:47     #19 "Kozilek's Command" hand "Player"
+1:47     #20 hand "Opponent"
+1:47     #21 "Expedition Map" hand "Player"
+1:47     #23 "Temple Garden" battlefield "Opponent" types land tapped
+1:47     #24 hand "Opponent"
+1:47     #26 "Thundering Falls" battlefield "Opponent" types land tapped
+1:47     #28 "Misty Rainforest" graveyard "Opponent"
+1:47     #29 "Karn, the Great Creator" hand "Player"
+1:47   untap
+1:47     #23 "Temple Garden" untap by rule:untap
+1:47     #26 "Thundering Falls" untap by rule:untap
+1:47   upkeep
+1:47   draw
+1:47     new hidden #30 owner "Opponent" in library
+1:47     #30 move library -> hand as draw by rule:draw
+1:47   precombat-main
+1:53     "Opponent" life 19 -> 17 by ?
+1:53     #11 identify "Stomping Ground"
+1:53     #11 "Stomping Ground" play from hand types land
+1:56     #12 identify "Wistfulness"
+1:57     #11 "Stomping Ground" tap by ?
+1:59     #12 "Wistfulness" cast from hand
+1:59     #23 "Temple Garden" tap by ?
+2:00     #12 "Wistfulness" resolve
+2:00     #12 "Wistfulness" move stack -> battlefield types creature pt 6/5 by rule:resolve
+2:02     new ability #31 triggered of #12 "Wistfulness" "Evoke (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)" controller "Opponent" in stack
+2:02     new ability #32 triggered of #12 "Wistfulness" "When this creature enters, if {G}{G} was spent to cast it, exile target artifact or enchantment an opponent controls." controller "Opponent" in stack
+2:02     #32 target #18 "Disruptor Flute"
+2:04     #32 resolve
+2:04     #18 "Disruptor Flute" move battlefield -> exile by #32
+2:04     #32 cease by rule:resolve
+2:06     #31 resolve
+2:06     #12 "Wistfulness" move battlefield -> graveyard by #31
+2:06     #31 cease by rule:resolve
+2:09   beginning-of-combat
+2:09   declare-attackers
+2:10   declare-blockers
+2:10   combat-damage
+2:10   end-of-combat
+2:10   postcombat-main
+2:10   end
+2:12     #17 "Eldrazi Temple" tap by ?
+2:12     #15 "Eldrazi Temple" tap by ?
+2:25     #19 "Kozilek's Command" cast from hand
+2:25     #19 "Kozilek's Command" target "Player"
+2:25     #19 "Kozilek's Command" target #9 "Oliphaunt"
+2:25     #19 "Kozilek's Command" target #12 "Wistfulness"
+2:31     #19 "Kozilek's Command" resolve
+2:31     new token #33 "Eldrazi Spawn Token" owner "Player" in battlefield types creature pt 0/1 by #19
+2:31     new token #34 "Eldrazi Spawn Token" owner "Player" in battlefield types creature pt 0/1 by #19
+2:31     #9 "Oliphaunt" move graveyard -> exile by #19
+2:31     #12 "Wistfulness" move graveyard -> exile by #19
+2:31     #19 "Kozilek's Command" move stack -> graveyard by rule:resolve
+2:34   cleanup
+2:34 turn 7 "Player"
+2:34   keyframe
+2:34     player "Player" life 20 poison 0 library 52
+2:34     player "Opponent" life 17 poison 0 library 47
+2:34     #1 "Trinisphere" library "Player"
+2:34     #2 "Sowing Mycospawn" hand "Player"
+2:34     #3 "Expedition Map" library "Player"
+2:34     #4 "Ugin, Eye of the Storms" hand "Player"
+2:34     #5 "Talisman of Resilience" library "Player"
+2:34     #6 "Forest" library "Player"
+2:34     #7 "Karn, the Great Creator" library "Player"
+2:34     #8 "Misty Rainforest" graveyard "Opponent"
+2:34     #9 "Oliphaunt" exile
+2:34     #10 "Force of Negation" hand "Opponent"
+2:34     #11 "Stomping Ground" battlefield "Opponent" types land tapped
+2:34     #12 "Wistfulness" exile
+2:34     #13 hand "Opponent"
+2:34     #14 hand "Opponent"
+2:34     #15 "Eldrazi Temple" battlefield "Player" types land tapped
+2:34     #16 "Karn, the Great Creator" library "Player" bottom 1
+2:34     #17 "Eldrazi Temple" battlefield "Player" types land tapped
+2:34     #18 "Disruptor Flute" exile
+2:34     #19 "Kozilek's Command" graveyard "Player"
+2:34     #20 hand "Opponent"
+2:34     #21 "Expedition Map" hand "Player"
+2:34     #23 "Temple Garden" battlefield "Opponent" types land tapped
+2:34     #24 hand "Opponent"
+2:34     #26 "Thundering Falls" battlefield "Opponent" types land
+2:34     #28 "Misty Rainforest" graveyard "Opponent"
+2:34     #29 "Karn, the Great Creator" hand "Player"
+2:34     #30 hand "Opponent"
+2:34     #33 "Eldrazi Spawn Token" battlefield "Player" types creature pt 0/1
+2:34     #34 "Eldrazi Spawn Token" battlefield "Player" types creature pt 0/1
+2:34   untap
+2:34     #15 "Eldrazi Temple" untap by rule:untap
+2:34     #17 "Eldrazi Temple" untap by rule:untap
+2:34   upkeep
+2:34   draw
+2:34     new card #35 "Ugin, Eye of the Storms" owner "Player" in library
+2:34     #35 "Ugin, Eye of the Storms" move library -> hand as draw by rule:draw
+2:34   precombat-main
+2:39     #17 "Eldrazi Temple" tap by ?
+2:43     #21 "Expedition Map" cast from hand
+2:45     #21 "Expedition Map" resolve
+2:45     #21 "Expedition Map" move stack -> battlefield types artifact by rule:resolve
+2:45   beginning-of-combat
+2:46   declare-attackers
+2:46   declare-blockers
+2:46   combat-damage
+2:46   end-of-combat
+2:46   postcombat-main
+2:46   end
+2:50     #13 identify "Curator of Mysteries"
+2:50     #13 "Curator of Mysteries" move hand -> graveyard as discard by ?
+2:50     new ability #36 activated of #13 "Curator of Mysteries" "Curator of Mysteries - Opponent draws a card." controller "Opponent" in stack
+2:50     #26 "Thundering Falls" tap by ?
+2:52     "Player" concede
+0-1

@@ -1,0 +1,17 @@
+[package]
+name = "sync-bundles"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+chrono.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+
+[dev-dependencies]
+# The goldens hold floats such as 1.0e+25: read them exactly (no new crate).
+serde_json = { workspace = true, features = ["float_roundtrip"] }
+
+[lints]
+workspace = true

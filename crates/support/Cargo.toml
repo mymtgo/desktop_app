@@ -1,0 +1,12 @@
+[package]
+name = "support"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+chrono.workspace = true
+flate2.workspace = true
+
+[lints]
+workspace = true

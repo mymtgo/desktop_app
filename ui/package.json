@@ -1,0 +1,46 @@
+{
+  "name": "mymtgo-ui",
+  "private": true,
+  "version": "1.4.0-rc.1",
+  "type": "module",
+  "packageManager": "pnpm@10.26.2",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "check": "vue-tsc --noEmit -p tsconfig.app.json && vue-tsc --noEmit -p tsconfig.node.json",
+    "test": "vitest run",
+    "tauri": "tauri"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "dependencies": {
+    "@internationalized/date": "^3.12.4",
+    "@tanstack/vue-query": "^5.104.1",
+    "@tauri-apps/api": "^2.12.1",
+    "@tauri-apps/plugin-autostart": "^2.7.0",
+    "@vueuse/core": "^15.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "html-to-image": "1.11.13",
+    "lucide-vue-next": "^1.0.0",
+    "mana-font": "1.18.0",
+    "reka-ui": "^2.11.0",
+    "tailwind-merge": "^3.7.0",
+    "vue": "^3.5.43",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@tauri-apps/cli": "^2.12.1",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "tailwindcss": "^4.3.3",
+    "tw-animate-css": "^1.4.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.7",
+    "vitest": "^5.0.3",
+    "vue-tsc": "^3.3.12"
+  }
+}

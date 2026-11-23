@@ -1,0 +1,148 @@
+---
+source: crates/endstep-match/tests/mtgr.rs
+expression: snapshot_text(&record)
+---
+[Mtgr "0.3.0"]
+[Event "Casual"]
+[Site "Endstep"]
+[Date "2027.01.15"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "1-0"]
+[Format "modern"]
+[Match "synthetic-match"]
+[Game "1"]
+[Perspective "Player"]
+[ENDSTEP_MatchId "synthetic-match"]
+[Omits "mana costs priority effects"]
+[Partial "damage library"]
+
+0:00 deck "Player"
+0:00   main 1 "Bear"
+0:00   main 1 "Forest"
+0:00   main 1 "Island"
+0:00   main 1 "Sword"
+0:01 pregame
+0:01   keyframe
+0:01     player "Player" life 20 poison 0 library 10
+0:01     player "Opponent" life 20 poison 0 library 10
+0:01   "Player" choose first "Player"
+0:01   new card #1 "Forest" owner "Player" in library
+0:01   #1 "Forest" move library -> hand as draw by rule:opening-hand
+0:01   new card #2 "Bear" owner "Player" in library
+0:01   #2 "Bear" move library -> hand as draw by rule:opening-hand
+0:01   new card #3 "Sword" owner "Player" in library
+0:01   #3 "Sword" move library -> hand as draw by rule:opening-hand
+0:01   new hidden #4 owner "Opponent" in library
+0:01   #4 move library -> hand as draw by rule:opening-hand
+0:01   new hidden #5 owner "Opponent" in library
+0:01   #5 move library -> hand as draw by rule:opening-hand
+0:01   new hidden #6 owner "Opponent" in library
+0:01   #6 move library -> hand as draw by rule:opening-hand
+0:02   "Player" keep
+0:03   "Opponent" keep
+0:04 turn 1 "Player"
+0:04   keyframe
+0:04     player "Player" life 20 poison 0 library 7
+0:04     player "Opponent" life 20 poison 0 library 7
+0:04     #1 "Forest" hand "Player"
+0:04     #2 "Bear" hand "Player"
+0:04     #3 "Sword" hand "Player"
+0:04     #4 hand "Opponent"
+0:04     #5 hand "Opponent"
+0:04     #6 hand "Opponent"
+0:05   untap
+0:06   upkeep
+0:07   precombat-main
+0:08     #1 "Forest" play from hand types land
+0:11 turn 2 "Opponent"
+0:11   keyframe
+0:11     player "Player" life 20 poison 0 library 7
+0:11     player "Opponent" life 20 poison 0 library 7
+0:11     #1 "Forest" battlefield "Player" types land
+0:11     #2 "Bear" hand "Player"
+0:11     #3 "Sword" hand "Player"
+0:11     #4 hand "Opponent"
+0:11     #5 hand "Opponent"
+0:11     #6 hand "Opponent"
+0:12   untap
+0:13   upkeep
+0:14   draw
+0:15     new hidden #7 owner "Opponent" in library
+0:15     #7 move library -> hand as draw by rule:draw
+0:17   precombat-main
+0:18     #4 identify "Swamp"
+0:18     #4 "Swamp" play from hand types land
+0:21 turn 3 "Player"
+0:21   keyframe
+0:21     player "Player" life 20 poison 0 library 7
+0:21     player "Opponent" life 20 poison 0 library 6
+0:21     #1 "Forest" battlefield "Player" types land
+0:21     #2 "Bear" hand "Player"
+0:21     #3 "Sword" hand "Player"
+0:21     #4 "Swamp" battlefield "Opponent" types land
+0:21     #5 hand "Opponent"
+0:21     #6 hand "Opponent"
+0:21     #7 hand "Opponent"
+0:22   untap
+0:23   upkeep
+0:24   draw
+0:25     new card #8 "Island" owner "Player" in library
+0:25     #8 "Island" move library -> hand as draw by rule:draw
+0:27   precombat-main
+0:29     #2 "Bear" cast from hand
+0:30     #1 "Forest" tap by ?
+0:31     #2 "Bear" resolve
+0:32     #2 "Bear" move stack -> battlefield types creature pt 2/2 by rule:resolve
+0:34     #2 "Bear" pt 2/2 -> 3/3 by ?
+0:34     #2 "Bear" counters "+1/+1" 0 -> 1 by ?
+0:35 turn 4 "Opponent"
+0:35   keyframe
+0:35     player "Player" life 20 poison 0 library 6
+0:35     player "Opponent" life 20 poison 0 library 6
+0:35     #1 "Forest" battlefield "Player" types land tapped
+0:35     #2 "Bear" battlefield "Player" types creature pt 3/3 counters "+1/+1" 1
+0:35     #3 "Sword" hand "Player"
+0:35     #4 "Swamp" battlefield "Opponent" types land
+0:35     #5 hand "Opponent"
+0:35     #6 hand "Opponent"
+0:35     #7 hand "Opponent"
+0:35     #8 "Island" hand "Player"
+0:36   untap
+0:37   upkeep
+0:38   draw
+0:39     new hidden #9 owner "Opponent" in library
+0:39     #9 move library -> hand as draw by rule:draw
+0:41   precombat-main
+0:43     new token #10 "Zombie Token" owner "Opponent" in battlefield types creature pt 2/2 by ?
+0:44     #2 "Bear" control "Opponent" by ?
+0:44     "Player" life 20 -> 18 by ?
+0:44     "Player" poison 0 -> 1 by ?
+0:45 turn 5 "Player"
+0:45   keyframe
+0:45     player "Player" life 18 poison 1 library 6
+0:45     player "Opponent" life 20 poison 0 library 5
+0:45     #1 "Forest" battlefield "Player" types land tapped
+0:45     #2 "Bear" battlefield "Opponent" types creature pt 3/3 counters "+1/+1" 1
+0:45     #3 "Sword" hand "Player"
+0:45     #4 "Swamp" battlefield "Opponent" types land
+0:45     #5 hand "Opponent"
+0:45     #6 hand "Opponent"
+0:45     #7 hand "Opponent"
+0:45     #8 "Island" hand "Player"
+0:45     #9 hand "Opponent"
+0:45     #10 "Zombie Token" battlefield "Opponent" types creature pt 2/2
+0:45   untap
+0:45     #1 "Forest" untap by rule:untap
+0:47   upkeep
+0:48   draw
+0:49     new card #11 "Island" owner "Player" in library
+0:49     #11 "Island" move library -> hand as draw by rule:draw
+0:51   precombat-main
+0:52     #3 "Sword" move hand -> battlefield types artifact by ?
+0:53     #3 "Sword" attach #10 "Zombie Token" by ?
+0:54     #3 "Sword" unattach by ?
+0:55     #10 "Zombie Token" cease by ?
+0:56     "Opponent" concede
+1-0

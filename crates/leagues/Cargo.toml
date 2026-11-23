@@ -1,0 +1,17 @@
+[package]
+name = "leagues"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+arena-protocol.workspace = true
+chrono.workspace = true
+chrono-tz.workspace = true
+decks.workspace = true
+limited.workspace = true
+mtgo-match.workspace = true
+mtgo-protocol.workspace = true
+
+[lints]
+workspace = true

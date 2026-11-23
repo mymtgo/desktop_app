@@ -1,0 +1,57 @@
+---
+source: crates/mtgo-match/tests/projection.rs
+expression: projector.views()
+---
+[
+  {
+    "token": "f5e33a1f-c2e7-4678-b30d-309b63f17a40",
+    "mtgo_match_id": 285746550,
+    "local_username": "Qrdxxxxxxx",
+    "opponent": "Quxxxxx",
+    "format": "CMODERN",
+    "match_type": "Modern",
+    "tournament_event_id": null,
+    "tournament_round": null,
+    "league_token": "d2050286-53fd-4072-804f-190d6a3c030a",
+    "game_structure": "Modern",
+    "state": "complete",
+    "resolution": "signal",
+    "outcome": "loss",
+    "tentative_outcome": null,
+    "wins": 0,
+    "losses": 2,
+    "started_at_ms": 1787401549000,
+    "ended_at_ms": 1787401664000,
+    "last_activity_ms": 1787401665000,
+    "games": [
+      {
+        "mtgo_game_id": 945500844,
+        "game_number": 1,
+        "result": "loss",
+        "end_reason": "win",
+        "on_play": false,
+        "local_mulligans": 0,
+        "opp_mulligans": 0,
+        "local_die_roll": 4,
+        "opp_die_roll": 5,
+        "turn_count": 1,
+        "started_at_ms": 1787401549000,
+        "ended_at_ms": 1787401619000
+      },
+      {
+        "mtgo_game_id": 945500946,
+        "game_number": 2,
+        "result": "loss",
+        "end_reason": "win",
+        "on_play": null,
+        "local_mulligans": null,
+        "opp_mulligans": null,
+        "local_die_roll": null,
+        "opp_die_roll": null,
+        "turn_count": null,
+        "started_at_ms": 1787401655000,
+        "ended_at_ms": 1787401664000
+      }
+    ]
+  }
+]

@@ -1,0 +1,13 @@
+[package]
+name = "mtgo-history"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+chrono.workspace = true
+chrono-tz.workspace = true
+mtgo-protocol.workspace = true
+
+[lints]
+workspace = true

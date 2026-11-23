@@ -1,0 +1,34 @@
+---
+source: crates/fixture-tools/tests/protocol_snapshots.rs
+expression: summary
+---
+{
+  "entry_types": {},
+  "events": 1862,
+  "first_at_ms": 1783599982000,
+  "kinds": {
+    "draft_created": 1,
+    "draft_ended": 1,
+    "draft_joined": 1,
+    "draft_league_standing": 1,
+    "draft_pack_opened": 3,
+    "draft_pending_pick": 42,
+    "draft_pick_committed": 42,
+    "draft_pod_state": 1,
+    "draft_selection": 127,
+    "draft_state_changed": 129,
+    "league_join_request": 1,
+    "league_joined": 7,
+    "league_pool_granted": 1,
+    "login": 1,
+    "match_state_changed": 1289,
+    "tournament_ended": 3,
+    "tournament_player_eliminated": 3,
+    "tournament_player_state": 4,
+    "tournament_round_info": 3,
+    "tournament_round_result": 3,
+    "tournament_state_changed": 106,
+    "tournament_sync": 93
+  },
+  "last_at_ms": 1783602067000
+}

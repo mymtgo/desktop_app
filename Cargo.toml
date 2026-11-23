@@ -1,0 +1,97 @@
+[workspace]
+resolver = "3"
+members = ["crates/mtgo-protocol", "crates/mtgo-match", "crates/fixture-tools", "crates/mtgo-log", "crates/store", "crates/tracker", "crates/log-player", "crates/release-tools", "crates/importer", "crates/decks", "crates/leagues", "crates/game-detail", "crates/mtgo-history", "crates/limited", "crates/mymtgo-api", "crates/sync-bundles", "crates/cards", "crates/overlay", "crates/replay", "crates/archetypes", "crates/support", "crates/arena-protocol", "crates/arena-match", "crates/arena-log", "crates/arena-game", "crates/mtgr", "crates/recorder", "crates/endstep-capture", "crates/endstep-host", "crates/endstep-protocol", "crates/endstep-match", "app"]
+
+[workspace.package]
+version = "1.4.0-rc.1"
+edition = "2024"
+publish = false
+
+[workspace.dependencies]
+regex = "1.11"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4.41", default-features = false, features = ["std"] }
+chrono-tz = "0.10"
+# Benchmarks (spec 7.8): measured and reported, never a CI gate.
+criterion = { version = "0.8", default-features = false, features = ["cargo_bench_support"] }
+insta = { version = "1.43", features = ["json"] }
+zstd = "0.13"
+rusqlite = { version = "0.40", features = ["bundled"] }
+rusqlite_migration = "2.6"
+anyhow = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-appender = "0.2"
+# Error reports (spec 9). ureq with rustls uses ring, the TLS provider the
+# updater already uses; the default reqwest transport would add aws-lc-rs.
+sentry = { version = "0.49", default-features = false, features = ["backtrace", "contexts", "panic", "tracing", "ureq", "rustls"] }
+iana-time-zone = "0.1"
+# MyMTGO API (issue #169): rustls only, no gzip, json or multipart features
+# (flate2, serde_json and a hand-built multipart cover those).
+ureq = { version = "3.4.2", default-features = false, features = ["rustls"] }
+# The only randomness source (07 spec ruling 10, app/src/api/random.rs).
+getrandom = "0.3.4"
+# OS keychain for the device key and tokens (07 spec section 4, owner chose
+# the 4.x line on 2026-10-08). `v1` = macOS Keychain, Windows Credential
+# Manager and the zbus (pure Rust, no libdbus) Secret Service with
+# crypto-rust (no OpenSSL) on Linux.
+keyring = { version = "=4.2.0", default-features = false, features = ["v1"] }
+# The secrets fallback file's keystream and tag (07 spec ruling 9).
+sha2 = "0.10.9"
+# Tournament observation bodies are gzip JSON (issue #169; 07 spec section 8).
+flate2 = "1.1.10"
+# Fetched sync blobs are base64 (issue #169; 07 spec section 10).
+base64 = "0.22.1"
+tauri = { version = "2.12", features = ["tray-icon", "macos-private-api"] }
+tauri-build = "2.7"
+tauri-plugin-single-instance = "2.5"
+tauri-plugin-autostart = "2.7"
+tauri-plugin-window-state = "2.5"
+tauri-plugin-dialog = "2.8"
+tauri-plugin-updater = "2.13"
+tauri-plugin-opener = "2.7"
+# Release candidates with unstable APIs: pinned exactly (spec 3).
+tauri-specta = { version = "=2.0.0-rc.25", features = ["derive", "typescript"] }
+specta = { version = "=2.0.0-rc.25", features = ["derive"] }
+specta-typescript = "=0.0.12"
+mtgo-protocol = { path = "crates/mtgo-protocol" }
+mtgo-match = { path = "crates/mtgo-match" }
+fixture-tools = { path = "crates/fixture-tools" }
+mtgo-log = { path = "crates/mtgo-log" }
+store = { path = "crates/store" }
+tracker = { path = "crates/tracker" }
+log-player = { path = "crates/log-player" }
+importer = { path = "crates/importer" }
+decks = { path = "crates/decks" }
+leagues = { path = "crates/leagues" }
+game-detail = { path = "crates/game-detail" }
+mtgo-history = { path = "crates/mtgo-history" }
+limited = { path = "crates/limited" }
+mymtgo-api = { path = "crates/mymtgo-api" }
+sync-bundles = { path = "crates/sync-bundles" }
+replay = { path = "crates/replay" }
+cards = { path = "crates/cards" }
+overlay = { path = "crates/overlay" }
+archetypes = { path = "crates/archetypes" }
+support = { path = "crates/support" }
+arena-protocol = { path = "crates/arena-protocol" }
+arena-match = { path = "crates/arena-match" }
+arena-log = { path = "crates/arena-log" }
+arena-game = { path = "crates/arena-game" }
+mtgr = { path = "crates/mtgr" }
+recorder = { path = "crates/recorder" }
+endstep-capture = { path = "crates/endstep-capture" }
+endstep-protocol = { path = "crates/endstep-protocol" }
+endstep-match = { path = "crates/endstep-match" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+# Smaller, faster debug builds: line tables for our crates (panics keep
+# file and line), no debug info for dependencies.
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+debug = false

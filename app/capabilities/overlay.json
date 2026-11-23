@@ -1,0 +1,27 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "overlay",
+  "description": "Permissions for the overlay windows: events, dragging by their drag strips, minimising from the right-click menu (#510), and the app commands their pages call (#389)",
+  "windows": [
+    "game-overlay",
+    "draft-notes",
+    "league-overlay"
+  ],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "core:window:allow-minimize",
+    "allow-report-ui-error",
+    "allow-game-overlay",
+    "allow-fit-game-overlay",
+    "allow-set-game-overlay-collapsed",
+    "allow-overlay-archetype-options",
+    "allow-set-overlay-opponent-archetype",
+    "allow-add-overlay-note",
+    "allow-delete-overlay-note",
+    "allow-draft-notes",
+    "allow-set-pick-note",
+    "allow-league-overlay",
+    "allow-set-overlay-deck-label"
+  ]
+}

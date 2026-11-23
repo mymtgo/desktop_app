@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "MyMTGO",
+  "version": "1.4.0-rc.1",
+  "identifier": "com.mymtgo.desktop",
+  "build": {
+    "frontendDist": "../ui/dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build"
+  },
+  "app": {
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "MyMTGO",
+        "width": 1600,
+        "height": 900,
+        "minWidth": 1200,
+        "minHeight": 800,
+        "dragDropEnabled": false,
+        "create": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self' ipc: http://ipc.localhost; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cards.scryfall.io https://mymtgo.com https://cards.mymtgo.com https://api.scryfall.com card: http://card.localhost deckcover: http://deckcover.localhost overlay: http://overlay.localhost; connect-src 'self' ipc: http://ipc.localhost https://cards.scryfall.io https://cards.mymtgo.com card: http://card.localhost; font-src 'self' data:",
+      "devCsp": null
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDU3QkI0ODE0OUQ4QzFEOUMKUldTY0hZeWRGRWk3VnlkSDVUa1JFc3FMb1VEUnBaemN4cTR0OW5VTXYyWjlKUWgrdTZBU1RuYU4K",
+      "endpoints": ["https://releases.mymtgo.com/stable/latest.json"],
+      "windows": { "installMode": "passive" }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "appimage"],
+    "category": "Utility",
+    "shortDescription": "Tracks your Magic: The Gathering Online matches",
+    "licenseFile": "installer/terms.txt",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "installerIcon": "icons/icon.ico",
+        "installerHooks": "installer/hooks.nsh",
+        "headerImage": "icons/nsis/header.bmp",
+        "sidebarImage": "icons/nsis/sidebar.bmp"
+      }
+    }
+  }
+}

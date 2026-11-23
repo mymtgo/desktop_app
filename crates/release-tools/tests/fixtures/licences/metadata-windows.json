@@ -1,0 +1,47 @@
+{
+  "packages": [
+    {"name": "app", "version": "1.0.0", "id": "path+file:///ws/app#1.0.0", "license": null, "license_file": null, "source": null, "manifest_path": "/ws/app/Cargo.toml"},
+    {"name": "store", "version": "1.0.0", "id": "path+file:///ws/crates/store#1.0.0", "license": null, "license_file": null, "source": null, "manifest_path": "/ws/crates/store/Cargo.toml"},
+    {"name": "release-tools", "version": "1.0.0", "id": "path+file:///ws/crates/release-tools#1.0.0", "license": null, "license_file": null, "source": null, "manifest_path": "/ws/crates/release-tools/Cargo.toml"},
+    {"name": "serde", "version": "1.0.200", "id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.200", "license": "MIT OR Apache-2.0", "license_file": null, "source": "registry+https://github.com/rust-lang/crates.io-index", "manifest_path": "/registry/serde-1.0.200/Cargo.toml"},
+    {"name": "cc", "version": "1.2.0", "id": "registry+https://github.com/rust-lang/crates.io-index#cc@1.2.0", "license": "MIT OR Apache-2.0", "license_file": null, "source": "registry+https://github.com/rust-lang/crates.io-index", "manifest_path": "/registry/cc-1.2.0/Cargo.toml"},
+    {"name": "windows-sys", "version": "0.59.0", "id": "registry+https://github.com/rust-lang/crates.io-index#windows-sys@0.59.0", "license": "MIT OR Apache-2.0", "license_file": null, "source": "registry+https://github.com/rust-lang/crates.io-index", "manifest_path": "/registry/windows-sys-0.59.0/Cargo.toml"},
+    {"name": "odd-licence", "version": "0.1.0", "id": "registry+https://github.com/rust-lang/crates.io-index#odd-licence@0.1.0", "license": null, "license_file": "COPYRIGHT.txt", "source": "registry+https://github.com/rust-lang/crates.io-index", "manifest_path": "/registry/odd-licence-0.1.0/Cargo.toml"},
+    {"name": "insta", "version": "1.40.0", "id": "registry+https://github.com/rust-lang/crates.io-index#insta@1.40.0", "license": "Apache-2.0", "license_file": null, "source": "registry+https://github.com/rust-lang/crates.io-index", "manifest_path": "/registry/insta-1.40.0/Cargo.toml"},
+    {"name": "similar", "version": "2.6.0", "id": "registry+https://github.com/rust-lang/crates.io-index#similar@2.6.0", "license": "Apache-2.0", "license_file": null, "source": "registry+https://github.com/rust-lang/crates.io-index", "manifest_path": "/registry/similar-2.6.0/Cargo.toml"},
+    {"name": "release-only", "version": "0.3.0", "id": "registry+https://github.com/rust-lang/crates.io-index#release-only@0.3.0", "license": "MIT", "license_file": null, "source": "registry+https://github.com/rust-lang/crates.io-index", "manifest_path": "/registry/release-only-0.3.0/Cargo.toml"}
+  ],
+  "workspace_members": [
+    "path+file:///ws/app#1.0.0",
+    "path+file:///ws/crates/store#1.0.0",
+    "path+file:///ws/crates/release-tools#1.0.0"
+  ],
+  "resolve": {
+    "root": null,
+    "nodes": [
+      {"id": "path+file:///ws/app#1.0.0", "deps": [
+        {"name": "store", "pkg": "path+file:///ws/crates/store#1.0.0", "dep_kinds": [{"kind": null, "target": null}]},
+        {"name": "windows_sys", "pkg": "registry+https://github.com/rust-lang/crates.io-index#windows-sys@0.59.0", "dep_kinds": [{"kind": null, "target": "cfg(windows)"}]},
+        {"name": "odd_licence", "pkg": "registry+https://github.com/rust-lang/crates.io-index#odd-licence@0.1.0", "dep_kinds": [{"kind": null, "target": null}]},
+        {"name": "insta", "pkg": "registry+https://github.com/rust-lang/crates.io-index#insta@1.40.0", "dep_kinds": [{"kind": "dev", "target": null}]}
+      ]},
+      {"id": "path+file:///ws/crates/store#1.0.0", "deps": [
+        {"name": "serde", "pkg": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.200", "dep_kinds": [{"kind": null, "target": null}]}
+      ]},
+      {"id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.200", "deps": [
+        {"name": "cc", "pkg": "registry+https://github.com/rust-lang/crates.io-index#cc@1.2.0", "dep_kinds": [{"kind": "build", "target": null}]}
+      ]},
+      {"id": "path+file:///ws/crates/release-tools#1.0.0", "deps": [
+        {"name": "release_only", "pkg": "registry+https://github.com/rust-lang/crates.io-index#release-only@0.3.0", "dep_kinds": [{"kind": null, "target": null}]}
+      ]},
+      {"id": "registry+https://github.com/rust-lang/crates.io-index#cc@1.2.0", "deps": []},
+      {"id": "registry+https://github.com/rust-lang/crates.io-index#windows-sys@0.59.0", "deps": []},
+      {"id": "registry+https://github.com/rust-lang/crates.io-index#odd-licence@0.1.0", "deps": []},
+      {"id": "registry+https://github.com/rust-lang/crates.io-index#insta@1.40.0", "deps": [
+        {"name": "similar", "pkg": "registry+https://github.com/rust-lang/crates.io-index#similar@2.6.0", "dep_kinds": [{"kind": null, "target": null}]}
+      ]},
+      {"id": "registry+https://github.com/rust-lang/crates.io-index#similar@2.6.0", "deps": []},
+      {"id": "registry+https://github.com/rust-lang/crates.io-index#release-only@0.3.0", "deps": []}
+    ]
+  }
+}

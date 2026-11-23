@@ -1,0 +1,38 @@
+{
+    "fixture": "league_join_drop",
+    "matches": [
+        {
+            "token": "f5e33a1f-c2e7-4678-b30d-309b63f17a40",
+            "mtgo_id": 285746550,
+            "state": "complete",
+            "outcome": "loss",
+            "games_won": 0,
+            "games_lost": 2,
+            "format": "CMODERN",
+            "match_type": "Modern",
+            "opponent": "Quxxxxx",
+            "started_at": 1787401549000,
+            "ended_at": 1787401664000,
+            "games": [
+                {
+                    "mtgo_id": 945500844,
+                    "won": false,
+                    "local_on_play": false,
+                    "local_mulligans": null,
+                    "opp_mulligans": null,
+                    "local_die_roll": null,
+                    "opp_die_roll": null
+                },
+                {
+                    "mtgo_id": 945500946,
+                    "won": false,
+                    "local_on_play": false,
+                    "local_mulligans": null,
+                    "opp_mulligans": null,
+                    "local_die_roll": null,
+                    "opp_die_roll": null
+                }
+            ]
+        }
+    ]
+}

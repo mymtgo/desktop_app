@@ -1,0 +1,15 @@
+[package]
+name = "arena-log"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+arena-protocol.workspace = true
+mtgo-log.workspace = true
+
+[dev-dependencies]
+fixture-tools.workspace = true
+
+[lints]
+workspace = true

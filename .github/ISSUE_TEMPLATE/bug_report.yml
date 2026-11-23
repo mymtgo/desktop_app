@@ -1,0 +1,42 @@
+name: Bug report
+description: Something in MyMTGO is wrong or broken
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Issues are public, so please do not attach game logs (`mtgo.log`, `Player.log`) or the app's **Get help** report: they contain other players' names. If we need the report, we will tell you how to send it privately.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: MyMTGO version
+      description: Settings, About.
+      placeholder: 1.4.0
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Game
+      multiple: true
+      options:
+        - Magic Online (MTGO)
+        - MTG Arena
+        - Endstep
+        - Not game specific

@@ -1,0 +1,13 @@
+[package]
+name = "arena-match"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+arena-protocol.workspace = true
+mtgo-match.workspace = true
+serde.workspace = true
+
+[lints]
+workspace = true

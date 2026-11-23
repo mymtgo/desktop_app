@@ -1,0 +1,47 @@
+---
+source: crates/fixture-tools/tests/protocol_snapshots.rs
+expression: summary
+---
+{
+  "entry_types": {
+    "begins_game": 10,
+    "chooses_to_play": 5,
+    "conceded_game": 7,
+    "joined": 14,
+    "other": 123,
+    "rolled": 10,
+    "turn": 38,
+    "wins_game": 7
+  },
+  "events": 4855,
+  "first_at_ms": 1787396328000,
+  "kinds": {
+    "deck_used": 11,
+    "draft_created": 1,
+    "draft_ended": 1,
+    "draft_joined": 1,
+    "draft_league_standing": 1,
+    "draft_pack_opened": 3,
+    "draft_pending_pick": 42,
+    "draft_pick_committed": 42,
+    "draft_pod_state": 1,
+    "draft_selection": 130,
+    "draft_state_changed": 129,
+    "game_management_json": 1025,
+    "game_state_update": 667,
+    "league_join_request": 1,
+    "league_joined": 7,
+    "league_pool_granted": 1,
+    "login": 1,
+    "match_deck_registered": 5,
+    "match_state_changed": 2640,
+    "tournament_ended": 2,
+    "tournament_player_eliminated": 8,
+    "tournament_player_state": 7,
+    "tournament_round_info": 7,
+    "tournament_round_result": 4,
+    "tournament_state_changed": 66,
+    "tournament_sync": 52
+  },
+  "last_at_ms": 1787399976000
+}

@@ -1,0 +1,16 @@
+[package]
+name = "mtgo-log"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+chrono.workspace = true
+decks.workspace = true
+mtgo-protocol.workspace = true
+
+[dev-dependencies]
+fixture-tools.workspace = true
+
+[lints]
+workspace = true

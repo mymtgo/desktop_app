@@ -1,0 +1,9 @@
+{
+  "MIT": [
+    {"name": "vue", "versions": ["3.5.43"], "paths": ["/ui/node_modules/.pnpm/vue@3.5.43/node_modules/vue"], "license": "MIT", "author": "Qauthor", "homepage": "https://example.test", "description": "a framework"},
+    {"name": "@scope/pair", "versions": ["1.0.0", "2.0.0"], "paths": ["/ui/node_modules/.pnpm/@scope+pair@1.0.0/node_modules/@scope/pair", "/ui/node_modules/.pnpm/@scope+pair@2.0.0/node_modules/@scope/pair"], "license": "MIT"}
+  ],
+  "ISC": [
+    {"name": "tiny", "versions": ["0.1.0"], "paths": ["/ui/node_modules/.pnpm/tiny@0.1.0/node_modules/tiny"], "license": "ISC"}
+  ]
+}

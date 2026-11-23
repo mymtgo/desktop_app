@@ -1,0 +1,148 @@
+<script setup lang="ts">
+import { Crosshair, Layers, Timer, Trophy } from 'lucide-vue-next';
+import { computed } from 'vue';
+import { useReplayContext } from './replayContext';
+import ReplayLifeHistory from './ReplayLifeHistory.vue';
+import ReplayPlayerCounters from './ReplayPlayerCounters.vue';
+import ReplayTargetMark from './ReplayTargetMark.vue';
+import ReplayToggleButton from './ReplayToggleButton.vue';
+import { playerMark, zoneMark } from './replayTargets';
+import { hudZones } from './replayZones';
+import type { ReplayPlayerView, ReplayZone } from './types';
+import ReplayPanel from './ui/ReplayPanel.vue';
+
+const LOW_CLOCK_MS = 5 * 60 * 1000;
+
+const props = defineProps<{
+    player: ReplayPlayerView;
+    opponent: boolean;
+    active: boolean;
+    priority: boolean;
+    /** Won this game. */
+    winner: boolean;
+    zoneCounts: Record<ReplayZone, number>;
+    /** Offer the sideboard: when the game lists this player's deck. */
+    sideboard: boolean;
+    /** Zones of this player with a window open. */
+    openZones: ReplayZone[];
+}>();
+
+const emit = defineEmits<{
+    toggleZone: [zone: ReplayZone, event: MouseEvent];
+}>();
+
+const { highlightedTargets } = useReplayContext();
+
+const clock = computed(() => {
+    if (props.player.clock === null) {
+        return null;
+    }
+
+    const seconds = Math.max(0, Math.round(props.player.clock / 1000));
+
+    return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+});
+
+const clockClass = computed(() => {
+    if ((props.player.clock ?? Infinity) < LOW_CLOCK_MS) {
+        return 'text-[#e5484d]';
+    }
+
+    return props.priority ? 'text-foreground' : 'text-muted-foreground';
+});
+
+const zones = computed(() => hudZones(props.opponent, props.sideboard, true));
+</script>
+
+<template>
+    <!--
+        A bar across the board by default. Once the viewer is wide enough it
+        becomes a column beside the board, handing the bar's height to the cards.
+        The groups are display:contents in bar mode, so the bar lays out flat.
+    -->
+    <ReplayPanel
+        :class="highlightedTargets.has(playerMark(player.id)) ? 'ring-2 ring-[#e5484d] ring-offset-2 ring-offset-transparent' : ''"
+        class="relative h-11.5 flex-none flex-row items-center gap-3.5 px-3.5 py-0 @7xl:h-auto @7xl:max-h-full @7xl:w-60 @7xl:flex-col @7xl:items-stretch @7xl:gap-3 @7xl:overflow-y-auto @7xl:p-3"
+    >
+        <ReplayTargetMark v-if="highlightedTargets.has(playerMark(player.id))" variant="inset" />
+
+        <div class="contents @7xl:flex @7xl:min-w-0 @7xl:items-center @7xl:gap-2.5">
+            <div
+                class="grid size-6.5 flex-none place-items-center rounded-full text-xs font-bold transition-shadow"
+                :class="[
+                    opponent ? 'bg-(--replay-opponent) text-white' : 'bg-primary text-primary-foreground',
+                    active ? (opponent ? 'ring-2 ring-(--replay-opponent)' : 'ring-2 ring-primary') + ' ring-offset-2 ring-offset-transparent' : '',
+                ]"
+            >
+                {{ player.name.charAt(0).toUpperCase() }}
+            </div>
+
+            <!-- The deck sits beside the name in the bar and under it in the column. -->
+            <div class="flex min-w-0 flex-[0_1_auto] items-baseline gap-1.5 overflow-hidden @7xl:flex-1 @7xl:flex-col @7xl:items-start @7xl:gap-0">
+                <span class="flex min-w-0 max-w-full items-baseline gap-1.5">
+                    <span class="truncate text-sm font-semibold">{{ player.name }}</span>
+                    <span v-if="player.local" class="text-[11px] text-muted-foreground">you</span>
+                </span>
+                <span v-if="player.archetype" :title="player.archetype" class="max-w-full truncate text-xs text-muted-foreground">{{ player.archetype }}</span>
+            </div>
+
+            <!-- Always laid out so the stats beside it never shift as priority passes. -->
+            <span
+                title="Holds priority"
+                :aria-hidden="!priority"
+                class="inline-flex h-5 flex-none items-center gap-1.25 rounded-full bg-primary/15 px-1.75 text-[11px] font-semibold transition-opacity duration-150"
+                :class="priority ? 'opacity-100' : 'opacity-0'"
+            >
+                <span class="size-1.5 animate-pulse rounded-full bg-primary" />
+                Priority
+            </span>
+        </div>
+
+        <div class="contents @7xl:flex @7xl:flex-wrap @7xl:items-center @7xl:gap-x-3.5 @7xl:gap-y-2">
+            <ReplayLifeHistory :player="player" :opponent="opponent" />
+
+            <ReplayPlayerCounters :player="player" :size="14" />
+
+            <div v-if="clock" title="Chess clock" class="flex flex-none items-center gap-1" :class="clockClass">
+                <Timer :size="14" />
+                <span class="min-w-[5ch] font-mono text-[12.5px] tabular-nums">{{ clock }}</span>
+            </div>
+
+            <div title="Cards in library" class="flex flex-none items-center gap-1 text-muted-foreground">
+                <Layers :size="14" />
+                <span class="min-w-[2ch] text-foreground tabular-nums">{{ player.librarySize }}</span>
+            </div>
+
+            <div
+                v-if="player.attackers"
+                :title="`Attacked by ${player.attackers} ${player.attackers === 1 ? 'creature' : 'creatures'}`"
+                class="flex h-5 flex-none items-center gap-1 rounded-full bg-[#e5484d] px-1.75 text-[11px] font-bold text-white"
+            >
+                <Crosshair :size="12" :stroke-width="2.5" />
+                <span class="tabular-nums">{{ player.attackers }}</span>
+            </div>
+
+            <div v-if="winner" title="Won this game" class="flex flex-none items-center gap-1 text-[12.5px] font-semibold text-yellow-400">
+                <Trophy :size="14" />
+                <span>Winner</span>
+            </div>
+        </div>
+
+        <div class="min-w-0 flex-1 @7xl:hidden" />
+
+        <div class="contents @7xl:flex @7xl:flex-wrap @7xl:gap-1.5">
+            <ReplayToggleButton
+                v-for="item in zones"
+                :key="item.zone"
+                :active="openZones.includes(item.zone)"
+                :icon="item.icon"
+                :targeted="highlightedTargets.has(zoneMark(player.id, item.zone))"
+                :title="item.zone === 'Hand' ? (opponent ? 'Their hand: known cards face up' : 'Your hand') : undefined"
+                @click="emit('toggleZone', item.zone, $event)"
+            >
+                <span>{{ item.label }}</span>
+                <span class="text-muted-foreground tabular-nums">{{ item.zone === 'Hand' ? player.handCount : zoneCounts[item.zone] }}</span>
+            </ReplayToggleButton>
+        </div>
+    </ReplayPanel>
+</template>

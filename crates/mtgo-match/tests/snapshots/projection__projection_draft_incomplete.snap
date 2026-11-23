@@ -1,0 +1,5 @@
+---
+source: crates/mtgo-match/tests/projection.rs
+expression: projector.views()
+---
+[]

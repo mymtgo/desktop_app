@@ -1,0 +1,6 @@
+mtg-vectors e5fb84f (https://github.com/Investigamer/mtg-vectors), bundled as ui/src/assets/platforms/mtgo.svg (from svg/optimized/set/MTGO/WM.svg) and ui/src/assets/platforms/arena.svg (from svg/optimized/set/MTGA/C.svg)
+
+Copyright (c) Investigamer and the mtg-vectors contributors (https://github.com/Investigamer/mtg-vectors)
+
+Both files are used under the Mozilla Public License Version 2.0. mtgo.svg is unmodified. arena.svg has its white backing path removed, so the logo keeps its cut-out when shown as a single colour; it remains under the Mozilla Public License Version 2.0, and its source is the file itself.
+

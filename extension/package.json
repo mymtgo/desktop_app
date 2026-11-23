@@ -1,0 +1,24 @@
+{
+  "name": "mymtgo-endstep-extension",
+  "version": "1.0.2",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:store": "node scripts/build.mjs --store",
+    "package": "node scripts/package.mjs",
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "firefox": "web-ext run -s dist/firefox"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.7",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.7",
+    "vitest": "^5.0.3",
+    "web-ext": "^10.8.0"
+  }
+}

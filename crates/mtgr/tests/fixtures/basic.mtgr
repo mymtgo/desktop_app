@@ -1,0 +1,139 @@
+[Mtgr "0.3.0"]
+[Event "Conformance"]
+[Site "?"]
+[Date "2026.11.02"]
+[Round "-"]
+[Player1 "PlayerA"]
+[Player2 "PlayerB"]
+[Result "1-0"]
+[Format "Modern"]
+[Match "conformance-basic"]
+[Game "1"]
+[Perspective "PlayerA"]
+[Termination "concession"]
+
+0:00 deck "PlayerA" unknown
+0:00 pregame
+0:00   keyframe
+0:00     player "PlayerA" life 20 poison 0 library 60
+0:00     player "PlayerB" life 20 poison 0 library 60
+0:01   "PlayerA" roll d6 5
+0:01   "PlayerB" roll d6 2
+0:02   "PlayerA" choose first "PlayerA"
+0:03   new card #1 "Swamp" owner "PlayerA" in library
+0:03   #1 "Swamp" move library -> hand as draw by rule:opening-hand
+0:03   new card #2 "Thoughtseize" owner "PlayerA" in library
+0:03   #2 "Thoughtseize" move library -> hand as draw by rule:opening-hand
+0:03   new card #3 "Island" owner "PlayerA" in library
+0:03   #3 "Island" move library -> hand as draw by rule:opening-hand
+0:03   new card #4 "Counterspell" owner "PlayerA" in library
+0:03   #4 "Counterspell" move library -> hand as draw by rule:opening-hand
+0:03   new card #5 "Polluted Delta" owner "PlayerA" in library
+0:03   #5 "Polluted Delta" move library -> hand as draw by rule:opening-hand
+0:03   new card #6 "Consider" owner "PlayerA" in library
+0:03   #6 "Consider" move library -> hand as draw by rule:opening-hand
+0:03   new card #7 "Murktide Regent" owner "PlayerA" in library
+0:03   #7 "Murktide Regent" move library -> hand as draw by rule:opening-hand
+0:03   new hidden #8 owner "PlayerB" in library
+0:03   #8 move library -> hand as draw by rule:opening-hand
+0:03   new hidden #9 owner "PlayerB" in library
+0:03   #9 move library -> hand as draw by rule:opening-hand
+0:03   new hidden #10 owner "PlayerB" in library
+0:03   #10 move library -> hand as draw by rule:opening-hand
+0:03   new hidden #11 owner "PlayerB" in library
+0:03   #11 move library -> hand as draw by rule:opening-hand
+0:03   new hidden #12 owner "PlayerB" in library
+0:03   #12 move library -> hand as draw by rule:opening-hand
+0:03   new hidden #13 owner "PlayerB" in library
+0:03   #13 move library -> hand as draw by rule:opening-hand
+0:03   new hidden #14 owner "PlayerB" in library
+0:03   #14 move library -> hand as draw by rule:opening-hand
+0:10   "PlayerA" keep
+0:12   "PlayerB" keep
+0:12 turn 1 "PlayerA"
+0:12   keyframe
+0:12     player "PlayerA" life 20 poison 0 library 53
+0:12     player "PlayerB" life 20 poison 0 library 53
+0:12     #1 "Swamp" hand "PlayerA"
+0:12     #2 "Thoughtseize" hand "PlayerA"
+0:12     #3 "Island" hand "PlayerA"
+0:12     #4 "Counterspell" hand "PlayerA"
+0:12     #5 "Polluted Delta" hand "PlayerA"
+0:12     #6 "Consider" hand "PlayerA"
+0:12     #7 "Murktide Regent" hand "PlayerA"
+0:12     #8 hand "PlayerB"
+0:12     #9 hand "PlayerB"
+0:12     #10 hand "PlayerB"
+0:12     #11 hand "PlayerB"
+0:12     #12 hand "PlayerB"
+0:12     #13 hand "PlayerB"
+0:12     #14 hand "PlayerB"
+0:12   untap
+0:12   upkeep
+0:12   precombat-main
+0:15     #1 "Swamp" play from hand types land
+0:16     new ability #15 mana of #1 "Swamp" "({T}: Add {B}.)" controller "PlayerA"
+0:16     #1 "Swamp" tap by cost:#15
+0:16     "PlayerA" add {B} by #15
+0:17     #2 "Thoughtseize" cast from hand
+0:17     #2 "Thoughtseize" target "PlayerB"
+0:17     "PlayerA" pay {B} by cost:#2
+0:17     "PlayerA" priority
+0:17       stack
+0:17         #2 "Thoughtseize" controller "PlayerA" target "PlayerB"
+0:17     "PlayerA" pass
+0:17     "PlayerB" priority
+0:17       stack
+0:17         #2 "Thoughtseize" controller "PlayerA" target "PlayerB"
+0:20     "PlayerB" pass
+0:20     #2 "Thoughtseize" resolve
+0:20     #8 identify "Ragavan, Nimble Pilferer"
+0:20     #8 "Ragavan, Nimble Pilferer" reveal by #2
+0:20     #9 identify "Lightning Bolt"
+0:20     #9 "Lightning Bolt" reveal by #2
+0:20     #10 identify "Mountain"
+0:20     #10 "Mountain" reveal by #2
+0:20     #11 identify "Sacred Foundry"
+0:20     #11 "Sacred Foundry" reveal by #2
+0:20     #12 identify "Arid Mesa"
+0:20     #12 "Arid Mesa" reveal by #2
+0:20     #13 identify "Guide of Souls"
+0:20     #13 "Guide of Souls" reveal by #2
+0:20     #14 identify "Mountain"
+0:20     #14 "Mountain" reveal by #2
+0:25     #2 "Thoughtseize" choose object #8 "Ragavan, Nimble Pilferer"
+0:25     #8 "Ragavan, Nimble Pilferer" move hand -> graveyard as discard by #2
+0:25     "PlayerA" life 20 -> 18 by #2
+0:25     #2 "Thoughtseize" move stack -> graveyard by rule:resolve
+0:28   beginning-of-combat
+0:28   declare-attackers
+0:28   end-of-combat
+0:28   postcombat-main
+0:28   end
+0:28   cleanup
+0:30 turn 2 "PlayerB"
+0:30   keyframe
+0:30     player "PlayerA" life 18 poison 0 library 53
+0:30     player "PlayerB" life 20 poison 0 library 53
+0:30     #1 "Swamp" battlefield "PlayerA" types land tapped
+0:30     #2 "Thoughtseize" graveyard "PlayerA"
+0:30     #3 "Island" hand "PlayerA"
+0:30     #4 "Counterspell" hand "PlayerA"
+0:30     #5 "Polluted Delta" hand "PlayerA"
+0:30     #6 "Consider" hand "PlayerA"
+0:30     #7 "Murktide Regent" hand "PlayerA"
+0:30     #8 "Ragavan, Nimble Pilferer" graveyard "PlayerB"
+0:30     #9 "Lightning Bolt" hand "PlayerB"
+0:30     #10 "Mountain" hand "PlayerB"
+0:30     #11 "Sacred Foundry" hand "PlayerB"
+0:30     #12 "Arid Mesa" hand "PlayerB"
+0:30     #13 "Guide of Souls" hand "PlayerB"
+0:30     #14 "Mountain" hand "PlayerB"
+0:30   untap
+0:30   upkeep
+0:31   draw
+0:31     new hidden #16 owner "PlayerB" in library
+0:31     #16 move library -> hand as draw by rule:draw
+0:31   precombat-main
+0:35     "PlayerB" concede
+1-0

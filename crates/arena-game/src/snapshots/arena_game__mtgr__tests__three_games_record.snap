@@ -1,0 +1,3078 @@
+---
+source: crates/arena-game/src/mtgr/tests.rs
+expression: "::mtgr::write(record)"
+---
+[Mtgr "0.3.0"]
+[Event "Traditional_Explorer_Ladder"]
+[Site "Arena"]
+[Date "2026.11.03"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "0-1"]
+[Format "Explorer"]
+[Match "bo3-three-games-0"]
+[Game "1"]
+[Perspective "Player"]
+[ARENA_MatchId "bo3-three-games-0"]
+[Omits "costs"]
+[Partial "library effects"]
+[Termination "concession"]
+
+0:00 deck "Player"
+0:00   main 2 "Archangel of Tithes"
+0:00   main 2 "Archangel of Wrath"
+0:00   main 2 "Bishop of Wings"
+0:00   main 3 "Bleachbone Verge"
+0:00   main 4 "Brightclimb Pathway // Grimclimb Pathway"
+0:00   main 1 "Castle Ardenvale"
+0:00   main 4 "Concealed Courtyard"
+0:00   main 4 "Fatal Push"
+0:00   main 4 "Giada, Font of Hope"
+0:00   main 4 "Godless Shrine"
+0:00   main 2 "Liesa, Forgotten Archangel"
+0:00   main 3 "March of Otherworldly Light"
+0:00   main 3 "Plains"
+0:00   main 4 "Righteous Valkyrie"
+0:00   main 4 "Shattered Sanctum"
+0:00   main 4 "Speaker of the Heavens"
+0:00   main 3 "The Wandering Emperor"
+0:00   main 3 "Vanishing Verse"
+0:00   main 4 "Youthful Valkyrie"
+0:00   side 2 "Damping Sphere"
+0:00   side 2 "Duress"
+0:00   side 2 "Go Blank"
+0:00   side 2 "Guardian of Faith"
+0:00   side 3 "Sheltered by Ghosts"
+0:00   side 3 "Thoughtseize"
+0:00   side 1 "Unlicensed Hearse"
+0:00 pregame
+0:00   keyframe
+0:00     player "Player" life 20 poison 0 library 60
+0:00     player "Opponent" life 20 poison 0 library 78
+0:00   "Player" roll 1
+0:00   "Opponent" roll 7
+1:11   "Opponent" choose first "Opponent"
+1:11   new hidden #1 owner "Opponent" in library top 1
+1:11   #1 move library -> hand as draw by rule:opening-hand
+1:11   new hidden #2 owner "Opponent" in library top 1
+1:11   #2 move library -> hand as draw by rule:opening-hand
+1:11   new hidden #3 owner "Opponent" in library top 1
+1:11   #3 move library -> hand as draw by rule:opening-hand
+1:11   new hidden #4 owner "Opponent" in library top 1
+1:11   #4 move library -> hand as draw by rule:opening-hand
+1:11   new hidden #5 owner "Opponent" in library top 1
+1:11   #5 move library -> hand as draw by rule:opening-hand
+1:11   new hidden #6 owner "Opponent" in library top 1
+1:11   #6 move library -> hand as draw by rule:opening-hand
+1:11   new hidden #7 owner "Opponent" in library top 1
+1:11   #7 move library -> hand as draw by rule:opening-hand
+1:11   new card #8 "March of Otherworldly Light" owner "Player" in library top 1 src arena:79448
+1:11   #8 "March of Otherworldly Light" move library -> hand as draw by rule:opening-hand
+1:11   new card #9 "The Wandering Emperor" owner "Player" in library top 1 src arena:79464
+1:11   #9 "The Wandering Emperor" move library -> hand as draw by rule:opening-hand
+1:11   new card #10 "Fatal Push" owner "Player" in library top 1 src arena:75662
+1:11   #10 "Fatal Push" move library -> hand as draw by rule:opening-hand
+1:11   new card #11 "The Wandering Emperor" owner "Player" in library top 1 src arena:79464
+1:11   #11 "The Wandering Emperor" move library -> hand as draw by rule:opening-hand
+1:11   new card #12 "Fatal Push" owner "Player" in library top 1 src arena:75662
+1:11   #12 "Fatal Push" move library -> hand as draw by rule:opening-hand
+1:11   new card #13 "Godless Shrine" owner "Player" in library top 1 src arena:69396
+1:11   #13 "Godless Shrine" move library -> hand as draw by rule:opening-hand
+1:11   new card #14 "Brightclimb Pathway // Grimclimb Pathway" owner "Player" in library top 1 src arena:73472
+1:11   #14 "Brightclimb Pathway // Grimclimb Pathway" move library -> hand as draw by rule:opening-hand
+1:16   "Opponent" mulligan
+1:16   #1 move hand -> library by rule:mulligan
+1:16   #2 move hand -> library by rule:mulligan
+1:16   #3 move hand -> library by rule:mulligan
+1:16   #4 move hand -> library by rule:mulligan
+1:16   #5 move hand -> library by rule:mulligan
+1:16   #6 move hand -> library by rule:mulligan
+1:16   #7 move hand -> library by rule:mulligan
+1:16   "Opponent" shuffle by rule:mulligan
+1:16   new hidden #15 owner "Opponent" in library top 1
+1:16   #15 move library -> hand as draw by rule:mulligan
+1:16   new hidden #16 owner "Opponent" in library top 1
+1:16   #16 move library -> hand as draw by rule:mulligan
+1:16   new hidden #17 owner "Opponent" in library top 1
+1:16   #17 move library -> hand as draw by rule:mulligan
+1:16   new hidden #18 owner "Opponent" in library top 1
+1:16   #18 move library -> hand as draw by rule:mulligan
+1:16   new hidden #19 owner "Opponent" in library top 1
+1:16   #19 move library -> hand as draw by rule:mulligan
+1:16   new hidden #20 owner "Opponent" in library top 1
+1:16   #20 move library -> hand as draw by rule:mulligan
+1:16   new hidden #21 owner "Opponent" in library top 1
+1:16   #21 move library -> hand as draw by rule:mulligan
+1:43   "Player" mulligan
+1:43   #8 "March of Otherworldly Light" move hand -> library by rule:mulligan
+1:43   #9 "The Wandering Emperor" move hand -> library by rule:mulligan
+1:43   #10 "Fatal Push" move hand -> library by rule:mulligan
+1:43   #11 "The Wandering Emperor" move hand -> library by rule:mulligan
+1:43   #12 "Fatal Push" move hand -> library by rule:mulligan
+1:43   #13 "Godless Shrine" move hand -> library by rule:mulligan
+1:43   #14 "Brightclimb Pathway // Grimclimb Pathway" move hand -> library by rule:mulligan
+1:43   "Player" shuffle by rule:mulligan
+1:43   new card #22 "Giada, Font of Hope" owner "Player" in library top 1 src arena:80165
+1:43   #22 "Giada, Font of Hope" move library -> hand as draw by rule:mulligan
+1:43   new card #23 "Vanishing Verse" owner "Player" in library top 1 src arena:76652
+1:43   #23 "Vanishing Verse" move library -> hand as draw by rule:mulligan
+1:43   new card #24 "Concealed Courtyard" owner "Player" in library top 1 src arena:90615
+1:43   #24 "Concealed Courtyard" move library -> hand as draw by rule:mulligan
+1:43   new card #25 "Archangel of Wrath" owner "Player" in library top 1 src arena:82055
+1:43   #25 "Archangel of Wrath" move library -> hand as draw by rule:mulligan
+1:43   new card #26 "Archangel of Tithes" owner "Player" in library top 1 src arena:90348
+1:43   #26 "Archangel of Tithes" move library -> hand as draw by rule:mulligan
+1:43   new card #27 "Archangel of Tithes" owner "Player" in library top 1 src arena:90348
+1:43   #27 "Archangel of Tithes" move library -> hand as draw by rule:mulligan
+1:43   new card #28 "Concealed Courtyard" owner "Player" in library top 1 src arena:90615
+1:43   #28 "Concealed Courtyard" move library -> hand as draw by rule:mulligan
+1:45   "Opponent" keep
+1:50   #15 move hand -> library bottom by rule:mulligan
+1:52   "Player" keep
+1:54   #27 "Archangel of Tithes" move hand -> library bottom by rule:mulligan
+1:54 turn 1 "Opponent"
+1:54   keyframe
+1:54     player "Player" life 20 poison 0 library 54
+1:54     player "Opponent" life 20 poison 0 library 72
+1:54     #15 library "Opponent" bottom 1
+1:54     #16 hand "Opponent"
+1:54     #17 hand "Opponent"
+1:54     #18 hand "Opponent"
+1:54     #19 hand "Opponent"
+1:54     #20 hand "Opponent"
+1:54     #21 hand "Opponent"
+1:54     #22 "Giada, Font of Hope" hand "Player"
+1:54     #23 "Vanishing Verse" hand "Player"
+1:54     #24 "Concealed Courtyard" hand "Player"
+1:54     #25 "Archangel of Wrath" hand "Player"
+1:54     #26 "Archangel of Tithes" hand "Player"
+1:54     #27 "Archangel of Tithes" library "Player" bottom 1
+1:54     #28 "Concealed Courtyard" hand "Player"
+1:54   untap
+1:54   upkeep
+1:54   precombat-main
+2:01     #17 identify "Thornspire Verge" src arena:92370
+2:01     #17 "Thornspire Verge" play from hand types land
+2:01   beginning-of-combat
+2:01   declare-attackers
+2:01   end-of-combat
+2:01   postcombat-main
+2:01   end
+2:01   cleanup
+2:01 turn 2 "Player"
+2:01   keyframe
+2:01     player "Player" life 20 poison 0 library 54
+2:01     player "Opponent" life 20 poison 0 library 72
+2:01     #15 library "Opponent" bottom 1
+2:01     #16 hand "Opponent"
+2:01     #17 "Thornspire Verge" battlefield "Opponent" types land
+2:01     #18 hand "Opponent"
+2:01     #19 hand "Opponent"
+2:01     #20 hand "Opponent"
+2:01     #21 hand "Opponent"
+2:01     #22 "Giada, Font of Hope" hand "Player"
+2:01     #23 "Vanishing Verse" hand "Player"
+2:01     #24 "Concealed Courtyard" hand "Player"
+2:01     #25 "Archangel of Wrath" hand "Player"
+2:01     #26 "Archangel of Tithes" hand "Player"
+2:01     #27 "Archangel of Tithes" library "Player" bottom 1
+2:01     #28 "Concealed Courtyard" hand "Player"
+2:01   untap
+2:01   upkeep
+2:01   draw
+2:01     new card #29 "Youthful Valkyrie" owner "Player" in library top 1 src arena:75350
+2:01     #29 "Youthful Valkyrie" move library -> hand as draw by rule:draw
+2:01   precombat-main
+2:04     #24 "Concealed Courtyard" play from hand types land
+2:04   beginning-of-combat
+2:04   declare-attackers
+2:04   end-of-combat
+2:04   postcombat-main
+2:04   end
+2:04   cleanup
+2:04 turn 3 "Opponent"
+2:04   keyframe
+2:04     player "Player" life 20 poison 0 library 53
+2:04     player "Opponent" life 20 poison 0 library 72
+2:04     #15 library "Opponent" bottom 1
+2:04     #16 hand "Opponent"
+2:04     #17 "Thornspire Verge" battlefield "Opponent" types land
+2:04     #18 hand "Opponent"
+2:04     #19 hand "Opponent"
+2:04     #20 hand "Opponent"
+2:04     #21 hand "Opponent"
+2:04     #22 "Giada, Font of Hope" hand "Player"
+2:04     #23 "Vanishing Verse" hand "Player"
+2:04     #24 "Concealed Courtyard" battlefield "Player" types land
+2:04     #25 "Archangel of Wrath" hand "Player"
+2:04     #26 "Archangel of Tithes" hand "Player"
+2:04     #27 "Archangel of Tithes" library "Player" bottom 1
+2:04     #28 "Concealed Courtyard" hand "Player"
+2:04     #29 "Youthful Valkyrie" hand "Player"
+2:04   untap
+2:04   upkeep
+2:04   draw
+2:04     new hidden #30 owner "Opponent" in library top 1
+2:04     #30 move library -> hand as draw by rule:draw
+2:04   precombat-main
+2:10     #19 identify "Fixture Pathway 73476 // Fixture Pathway 73477" src arena:73476
+2:10     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" play from hand face "Fixture Pathway 73477" types land
+2:12     #20 identify "Torgal, A Fine Hound" src arena:96076
+2:12     #20 "Torgal, A Fine Hound" cast from hand
+2:12     new ability #31 mana of #17 "Thornspire Verge" ? controller "Opponent"
+2:12     #17 "Thornspire Verge" tap by cost:#31
+2:12     "Opponent" add {R} by #31
+2:12     new ability #32 mana of #19 "Fixture Pathway 73476 // Fixture Pathway 73477" ? controller "Opponent"
+2:12     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" tap by cost:#32
+2:12     "Opponent" add {G} by #32
+2:12     "Opponent" pay {R}{G} by cost:#20
+2:12     "Opponent" priority
+2:12       stack
+2:12         #20 "Torgal, A Fine Hound" controller "Opponent"
+2:12     "Opponent" pass
+2:12     "Player" priority
+2:12       stack
+2:12         #20 "Torgal, A Fine Hound" controller "Opponent"
+2:12     "Player" pass
+2:12     #20 "Torgal, A Fine Hound" resolve
+2:12     #20 "Torgal, A Fine Hound" move stack -> battlefield types creature pt 2/2 by rule:resolve
+2:12   beginning-of-combat
+2:12   declare-attackers
+2:12   end-of-combat
+2:12   postcombat-main
+2:12   end
+2:12   cleanup
+2:12 turn 4 "Player"
+2:12   keyframe
+2:12     player "Player" life 20 poison 0 library 53
+2:12     player "Opponent" life 20 poison 0 library 71
+2:12     #15 library "Opponent" bottom 1
+2:12     #16 hand "Opponent"
+2:12     #17 "Thornspire Verge" battlefield "Opponent" types land tapped
+2:12     #18 hand "Opponent"
+2:12     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+2:12     #20 "Torgal, A Fine Hound" battlefield "Opponent" types creature pt 2/2
+2:12     #21 hand "Opponent"
+2:12     #22 "Giada, Font of Hope" hand "Player"
+2:12     #23 "Vanishing Verse" hand "Player"
+2:12     #24 "Concealed Courtyard" battlefield "Player" types land
+2:12     #25 "Archangel of Wrath" hand "Player"
+2:12     #26 "Archangel of Tithes" hand "Player"
+2:12     #27 "Archangel of Tithes" library "Player" bottom 1
+2:12     #28 "Concealed Courtyard" hand "Player"
+2:12     #29 "Youthful Valkyrie" hand "Player"
+2:12     #30 hand "Opponent"
+2:12   untap
+2:12   upkeep
+2:12   draw
+2:12     new card #33 "Bleachbone Verge" owner "Player" in library top 1 src arena:95052
+2:12     #33 "Bleachbone Verge" move library -> hand as draw by rule:draw
+2:12   precombat-main
+2:16     #28 "Concealed Courtyard" play from hand types land
+2:20     #29 "Youthful Valkyrie" cast from hand
+2:20     new ability #34 mana of #24 "Concealed Courtyard" ? controller "Player"
+2:20     #24 "Concealed Courtyard" tap by cost:#34
+2:20     "Player" add {W} restriction ? by #34
+2:20     new ability #35 mana of #28 "Concealed Courtyard" ? controller "Player"
+2:20     #28 "Concealed Courtyard" tap by cost:#35
+2:20     "Player" add {W} restriction ? by #35
+2:20     "Player" pay {W}{W} by cost:#29
+2:20     "Player" priority
+2:20       stack
+2:20         #29 "Youthful Valkyrie" controller "Player"
+2:20     "Player" pass
+2:20     "Opponent" priority
+2:20       stack
+2:20         #29 "Youthful Valkyrie" controller "Player"
+2:20     "Opponent" pass
+2:20     #29 "Youthful Valkyrie" resolve
+2:20     #29 "Youthful Valkyrie" move stack -> battlefield types creature pt 1/3 by rule:resolve
+2:20   beginning-of-combat
+2:20   declare-attackers
+2:20   end-of-combat
+2:20   postcombat-main
+2:20   end
+2:20   cleanup
+2:20 turn 5 "Opponent"
+2:20   keyframe
+2:20     player "Player" life 20 poison 0 library 52
+2:20     player "Opponent" life 20 poison 0 library 71
+2:20     #15 library "Opponent" bottom 1
+2:20     #16 hand "Opponent"
+2:20     #17 "Thornspire Verge" battlefield "Opponent" types land tapped
+2:20     #18 hand "Opponent"
+2:20     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+2:20     #20 "Torgal, A Fine Hound" battlefield "Opponent" types creature pt 2/2
+2:20     #21 hand "Opponent"
+2:20     #22 "Giada, Font of Hope" hand "Player"
+2:20     #23 "Vanishing Verse" hand "Player"
+2:20     #24 "Concealed Courtyard" battlefield "Player" types land tapped
+2:20     #25 "Archangel of Wrath" hand "Player"
+2:20     #26 "Archangel of Tithes" hand "Player"
+2:20     #27 "Archangel of Tithes" library "Player" bottom 1
+2:20     #28 "Concealed Courtyard" battlefield "Player" types land tapped
+2:20     #29 "Youthful Valkyrie" battlefield "Player" types creature pt 1/3
+2:20     #30 hand "Opponent"
+2:20     #33 "Bleachbone Verge" hand "Player"
+2:20   untap
+2:20     #17 "Thornspire Verge" untap by rule:untap
+2:20     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" untap by rule:untap
+2:20   upkeep
+2:20   draw
+2:20     new hidden #36 owner "Opponent" in library top 1
+2:20     #36 move library -> hand as draw by rule:draw
+2:20   precombat-main
+2:25     #18 identify "Overgrown Farmland" src arena:78635
+2:25     #18 "Overgrown Farmland" play from hand types land
+2:28     #30 identify "Collected Company" src arena:92411
+2:28     #30 "Collected Company" cast from hand
+2:28     new ability #37 mana of #17 "Thornspire Verge" ? controller "Opponent"
+2:28     #17 "Thornspire Verge" tap by cost:#37
+2:28     "Opponent" add {R} by #37
+2:28     new ability #38 mana of #19 "Fixture Pathway 73476 // Fixture Pathway 73477" ? controller "Opponent"
+2:28     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" tap by cost:#38
+2:28     "Opponent" add {G} by #38
+2:28     new ability #39 mana of #18 "Overgrown Farmland" ? controller "Opponent"
+2:28     #18 "Overgrown Farmland" tap by cost:#39
+2:28     "Opponent" add {W} restriction ? by #39
+2:28     new ability #40 mana of #20 "Torgal, A Fine Hound" ? controller "Opponent"
+2:28     #20 "Torgal, A Fine Hound" tap by cost:#40
+2:28     "Opponent" add {W} restriction ? by #40
+2:28     "Opponent" pay {W}{W}{R}{G} by cost:#30
+2:28     "Opponent" priority
+2:28       stack
+2:28         #30 "Collected Company" controller "Opponent"
+2:28     "Opponent" pass
+2:28     "Player" priority
+2:28       stack
+2:28         #30 "Collected Company" controller "Opponent"
+2:28     "Player" pass
+2:28     #30 "Collected Company" resolve
+2:32     new card #41 "Reckless Stormseeker // Storm-Charged Slasher" owner "Opponent" in library src arena:78507
+2:32     #41 "Reckless Stormseeker // Storm-Charged Slasher" move library -> battlefield types creature pt 2/3 by #30
+2:32     new card #42 "Brutal Cathar // Moonrage Brute" owner "Opponent" in library src arena:78331
+2:32     #42 "Brutal Cathar // Moonrage Brute" move library -> battlefield types creature pt 2/2 by #30
+2:32     day by #30
+2:33     #30 "Collected Company" move stack -> graveyard by rule:resolve
+2:33     new ability #43 triggered of #42 "Brutal Cathar // Moonrage Brute" ? controller "Opponent" in stack
+2:35     #43 target #29 "Youthful Valkyrie"
+2:35     "Opponent" priority
+2:35       stack
+2:35         #43 triggered of #42 "Brutal Cathar // Moonrage Brute" ? controller "Opponent" target #29 "Youthful Valkyrie"
+2:35     "Opponent" pass
+2:35     "Player" priority
+2:35       stack
+2:35         #43 triggered of #42 "Brutal Cathar // Moonrage Brute" ? controller "Opponent" target #29 "Youthful Valkyrie"
+2:35     "Player" pass
+2:35     #43 resolve
+2:35     #29 "Youthful Valkyrie" move battlefield -> exile with #42 by #43
+2:35     #43 cease by rule:resolve
+2:35   beginning-of-combat
+2:35     new ability #44 triggered of #41 "Reckless Stormseeker // Storm-Charged Slasher" ? controller "Opponent" in stack
+2:40     #44 target #41 "Reckless Stormseeker // Storm-Charged Slasher"
+2:40     "Opponent" priority
+2:40       stack
+2:40         #44 triggered of #41 "Reckless Stormseeker // Storm-Charged Slasher" ? controller "Opponent" target #41 "Reckless Stormseeker // Storm-Charged Slasher"
+2:40     "Opponent" pass
+2:40     "Player" priority
+2:40       stack
+2:40         #44 triggered of #41 "Reckless Stormseeker // Storm-Charged Slasher" ? controller "Opponent" target #41 "Reckless Stormseeker // Storm-Charged Slasher"
+2:40     "Player" pass
+2:40     #44 resolve
+2:40     #41 "Reckless Stormseeker // Storm-Charged Slasher" pt 2/3 -> 3/3 by #44
+2:40     #44 cease by rule:resolve
+2:40   declare-attackers
+2:42     #41 "Reckless Stormseeker // Storm-Charged Slasher" attack "Player"
+2:42     #41 "Reckless Stormseeker // Storm-Charged Slasher" tap by rule:declare-attackers
+2:42   declare-blockers
+2:42   combat-damage
+2:42     #41 "Reckless Stormseeker // Storm-Charged Slasher" damage "Player" 3 by rule:combat-damage
+2:42     "Player" life 20 -> 17 by rule:combat-damage
+2:42   end-of-combat
+2:42   postcombat-main
+2:42   end
+2:42   cleanup
+2:42     #41 "Reckless Stormseeker // Storm-Charged Slasher" pt 3/3 -> 2/3 by rule:cleanup
+2:42 turn 6 "Player"
+2:42   keyframe
+2:42     player "Player" life 17 poison 0 library 52
+2:42     player "Opponent" life 20 poison 0 library 68
+2:42     day
+2:42     #15 library "Opponent"
+2:42     #16 hand "Opponent"
+2:42     #17 "Thornspire Verge" battlefield "Opponent" types land tapped
+2:42     #18 "Overgrown Farmland" battlefield "Opponent" types land tapped
+2:42     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+2:42     #20 "Torgal, A Fine Hound" battlefield "Opponent" types creature pt 2/2 tapped
+2:42     #21 hand "Opponent"
+2:42     #22 "Giada, Font of Hope" hand "Player"
+2:42     #23 "Vanishing Verse" hand "Player"
+2:42     #24 "Concealed Courtyard" battlefield "Player" types land tapped
+2:42     #25 "Archangel of Wrath" hand "Player"
+2:42     #26 "Archangel of Tithes" hand "Player"
+2:42     #27 "Archangel of Tithes" library "Player" bottom 1
+2:42     #28 "Concealed Courtyard" battlefield "Player" types land tapped
+2:42     #29 "Youthful Valkyrie" exile with #42
+2:42     #30 "Collected Company" graveyard "Opponent"
+2:42     #33 "Bleachbone Verge" hand "Player"
+2:42     #36 hand "Opponent"
+2:42     #41 "Reckless Stormseeker // Storm-Charged Slasher" battlefield "Opponent" types creature pt 2/3 tapped
+2:42     #42 "Brutal Cathar // Moonrage Brute" battlefield "Opponent" types creature pt 2/2
+2:42   untap
+2:42     #24 "Concealed Courtyard" untap by rule:untap
+2:42     #28 "Concealed Courtyard" untap by rule:untap
+2:42   upkeep
+2:42   draw
+2:42     new card #45 "Brightclimb Pathway // Grimclimb Pathway" owner "Player" in library top 1 src arena:73472
+2:42     #45 "Brightclimb Pathway // Grimclimb Pathway" move library -> hand as draw by rule:draw
+2:42   precombat-main
+2:48     #33 "Bleachbone Verge" play from hand types land
+2:50   beginning-of-combat
+2:50   declare-attackers
+2:50   end-of-combat
+2:50   postcombat-main
+2:54   end
+2:54   cleanup
+2:54 turn 7 "Opponent"
+2:54   keyframe
+2:54     player "Player" life 17 poison 0 library 51
+2:54     player "Opponent" life 20 poison 0 library 68
+2:54     day
+2:54     #15 library "Opponent"
+2:54     #16 hand "Opponent"
+2:54     #17 "Thornspire Verge" battlefield "Opponent" types land tapped
+2:54     #18 "Overgrown Farmland" battlefield "Opponent" types land tapped
+2:54     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+2:54     #20 "Torgal, A Fine Hound" battlefield "Opponent" types creature pt 2/2 tapped
+2:54     #21 hand "Opponent"
+2:54     #22 "Giada, Font of Hope" hand "Player"
+2:54     #23 "Vanishing Verse" hand "Player"
+2:54     #24 "Concealed Courtyard" battlefield "Player" types land
+2:54     #25 "Archangel of Wrath" hand "Player"
+2:54     #26 "Archangel of Tithes" hand "Player"
+2:54     #27 "Archangel of Tithes" library "Player" bottom 1
+2:54     #28 "Concealed Courtyard" battlefield "Player" types land
+2:54     #29 "Youthful Valkyrie" exile with #42
+2:54     #30 "Collected Company" graveyard "Opponent"
+2:54     #33 "Bleachbone Verge" battlefield "Player" types land
+2:54     #36 hand "Opponent"
+2:54     #41 "Reckless Stormseeker // Storm-Charged Slasher" battlefield "Opponent" types creature pt 2/3 tapped
+2:54     #42 "Brutal Cathar // Moonrage Brute" battlefield "Opponent" types creature pt 2/2
+2:54     #45 "Brightclimb Pathway // Grimclimb Pathway" hand "Player"
+2:54   untap
+2:54     night by rule:day-night
+2:54     #41 "Reckless Stormseeker // Storm-Charged Slasher" transform by #41
+2:54     #41 "Reckless Stormseeker // Storm-Charged Slasher" pt 2/3 -> 3/4 by #41
+2:54     #42 "Brutal Cathar // Moonrage Brute" transform by #42
+2:54     #42 "Brutal Cathar // Moonrage Brute" pt 2/2 -> 3/3 by #42
+2:54     #17 "Thornspire Verge" untap by rule:untap
+2:54     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" untap by rule:untap
+2:54     #20 "Torgal, A Fine Hound" untap by rule:untap
+2:54     #18 "Overgrown Farmland" untap by rule:untap
+2:54     #41 "Reckless Stormseeker // Storm-Charged Slasher" untap by rule:untap
+2:54   upkeep
+2:54   draw
+2:54     new hidden #46 owner "Opponent" in library top 1
+2:54     #46 move library -> hand as draw by rule:draw
+2:54   precombat-main
+3:03     #36 identify "Howlpack Piper // Wildsong Howler" src arena:79017
+3:03     #36 "Howlpack Piper // Wildsong Howler" cast from hand face "Howlpack Piper"
+3:03     new ability #47 mana of #17 "Thornspire Verge" ? controller "Opponent"
+3:03     #17 "Thornspire Verge" tap by cost:#47
+3:03     "Opponent" add {R} by #47
+3:03     new ability #48 mana of #19 "Fixture Pathway 73476 // Fixture Pathway 73477" ? controller "Opponent"
+3:03     #19 "Fixture Pathway 73476 // Fixture Pathway 73477" tap by cost:#48
+3:03     "Opponent" add {G} by #48
+3:03     new ability #49 mana of #18 "Overgrown Farmland" ? controller "Opponent"
+3:03     #18 "Overgrown Farmland" tap by cost:#49
+3:03     "Opponent" add {W} restriction ? by #49
+3:03     new ability #50 mana of #20 "Torgal, A Fine Hound" ? controller "Opponent"
+3:03     #20 "Torgal, A Fine Hound" tap by cost:#50
+3:03     "Opponent" add {W} restriction ? by #50
+3:03     "Opponent" pay {W}{W}{R}{G} by cost:#36
+3:03     new ability #51 triggered of #20 "Torgal, A Fine Hound" ? controller "Opponent" in stack
+3:03     "Opponent" priority
+3:03       stack
+3:03         #51 triggered of #20 "Torgal, A Fine Hound" ? controller "Opponent"
+3:03         #36 "Howlpack Piper // Wildsong Howler" face "Howlpack Piper" controller "Opponent"
+3:03     "Opponent" pass
+3:03     "Player" priority
+3:03       stack
+3:03         #51 triggered of #20 "Torgal, A Fine Hound" ? controller "Opponent"
+3:03         #36 "Howlpack Piper // Wildsong Howler" face "Howlpack Piper" controller "Opponent"
+3:06     "Player" pass
+3:06     #51 resolve
+3:06     #51 cease by rule:resolve
+3:06     "Opponent" priority
+3:06       stack
+3:06         #36 "Howlpack Piper // Wildsong Howler" face "Howlpack Piper" controller "Opponent"
+3:06     "Opponent" pass
+3:06     "Player" priority
+3:06       stack
+3:06         #36 "Howlpack Piper // Wildsong Howler" face "Howlpack Piper" controller "Opponent"
+3:09     "Player" pass
+3:09     #36 "Howlpack Piper // Wildsong Howler" resolve
+3:09     #36 "Howlpack Piper // Wildsong Howler" move stack -> battlefield face "Wildsong Howler" types creature pt 5/5 by rule:resolve
+3:09     #36 "Howlpack Piper // Wildsong Howler" counters "+1/+1" 0 -> 1 by #20
+3:09     new ability #52 triggered of #36 "Howlpack Piper // Wildsong Howler" ? controller "Opponent" in stack
+3:09     "Opponent" priority
+3:09       stack
+3:09         #52 triggered of #36 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+3:09     "Opponent" pass
+3:09     "Player" priority
+3:09       stack
+3:09         #52 triggered of #36 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+3:12     "Player" pass
+3:12     #52 resolve
+3:14     "Player" concede
+0-1
+
+[Mtgr "0.3.0"]
+[Event "Traditional_Explorer_Ladder"]
+[Site "Arena"]
+[Date "2026.11.03"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "1-0"]
+[Format "Explorer"]
+[Match "bo3-three-games-0"]
+[Game "2"]
+[Perspective "Player"]
+[ARENA_MatchId "bo3-three-games-0"]
+[Omits "costs"]
+[Partial "library effects"]
+[Termination "concession"]
+
+0:00 deck "Player"
+0:00   main 2 "Archangel of Tithes"
+0:00   main 2 "Bishop of Wings"
+0:00   main 3 "Bleachbone Verge"
+0:00   main 4 "Brightclimb Pathway // Grimclimb Pathway"
+0:00   main 1 "Castle Ardenvale"
+0:00   main 4 "Concealed Courtyard"
+0:00   main 3 "Fatal Push"
+0:00   main 4 "Giada, Font of Hope"
+0:00   main 4 "Godless Shrine"
+0:00   main 2 "Liesa, Forgotten Archangel"
+0:00   main 3 "March of Otherworldly Light"
+0:00   main 3 "Plains"
+0:00   main 4 "Righteous Valkyrie"
+0:00   main 4 "Shattered Sanctum"
+0:00   main 3 "Sheltered by Ghosts"
+0:00   main 4 "Speaker of the Heavens"
+0:00   main 3 "The Wandering Emperor"
+0:00   main 3 "Vanishing Verse"
+0:00   main 4 "Youthful Valkyrie"
+0:00   side 2 "Archangel of Wrath"
+0:00   side 2 "Damping Sphere"
+0:00   side 2 "Duress"
+0:00   side 1 "Fatal Push"
+0:00   side 2 "Go Blank"
+0:00   side 2 "Guardian of Faith"
+0:00   side 3 "Thoughtseize"
+0:00   side 1 "Unlicensed Hearse"
+0:50 pregame
+0:50   keyframe
+0:50     player "Player" life 20 poison 0 library 60
+0:50     player "Opponent" life 20 poison 0 library 79
+1:12   "Player" choose first "Player"
+1:12   new card #1 "Plains" owner "Player" in library top 1 src arena:82390
+1:12   #1 "Plains" move library -> hand as draw by rule:opening-hand
+1:12   new card #2 "Sheltered by Ghosts" owner "Player" in library top 1 src arena:92090
+1:12   #2 "Sheltered by Ghosts" move library -> hand as draw by rule:opening-hand
+1:12   new card #3 "Bleachbone Verge" owner "Player" in library top 1 src arena:95052
+1:12   #3 "Bleachbone Verge" move library -> hand as draw by rule:opening-hand
+1:12   new card #4 "Plains" owner "Player" in library top 1 src arena:82390
+1:12   #4 "Plains" move library -> hand as draw by rule:opening-hand
+1:12   new card #5 "Concealed Courtyard" owner "Player" in library top 1 src arena:90615
+1:12   #5 "Concealed Courtyard" move library -> hand as draw by rule:opening-hand
+1:12   new card #6 "Shattered Sanctum" owner "Player" in library top 1 src arena:79088
+1:12   #6 "Shattered Sanctum" move library -> hand as draw by rule:opening-hand
+1:12   new card #7 "Youthful Valkyrie" owner "Player" in library top 1 src arena:75350
+1:12   #7 "Youthful Valkyrie" move library -> hand as draw by rule:opening-hand
+1:12   new hidden #8 owner "Opponent" in library top 1
+1:12   #8 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #9 owner "Opponent" in library top 1
+1:12   #9 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #10 owner "Opponent" in library top 1
+1:12   #10 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #11 owner "Opponent" in library top 1
+1:12   #11 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #12 owner "Opponent" in library top 1
+1:12   #12 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #13 owner "Opponent" in library top 1
+1:12   #13 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #14 owner "Opponent" in library top 1
+1:12   #14 move library -> hand as draw by rule:opening-hand
+1:14   "Player" keep
+1:18   "Opponent" keep
+1:18 turn 1 "Player"
+1:18   keyframe
+1:18     player "Player" life 20 poison 0 library 53
+1:18     player "Opponent" life 20 poison 0 library 72
+1:18     #1 "Plains" hand "Player"
+1:18     #2 "Sheltered by Ghosts" hand "Player"
+1:18     #3 "Bleachbone Verge" hand "Player"
+1:18     #4 "Plains" hand "Player"
+1:18     #5 "Concealed Courtyard" hand "Player"
+1:18     #6 "Shattered Sanctum" hand "Player"
+1:18     #7 "Youthful Valkyrie" hand "Player"
+1:18     #8 hand "Opponent"
+1:18     #9 hand "Opponent"
+1:18     #10 hand "Opponent"
+1:18     #11 hand "Opponent"
+1:18     #12 hand "Opponent"
+1:18     #13 hand "Opponent"
+1:18     #14 hand "Opponent"
+1:18   untap
+1:18   upkeep
+1:18   precombat-main
+1:20     #6 "Shattered Sanctum" play from hand tapped types land
+1:20   beginning-of-combat
+1:20   declare-attackers
+1:20   end-of-combat
+1:20   postcombat-main
+1:20   end
+1:20   cleanup
+1:20 turn 2 "Opponent"
+1:20   keyframe
+1:20     player "Player" life 20 poison 0 library 53
+1:20     player "Opponent" life 20 poison 0 library 72
+1:20     #1 "Plains" hand "Player"
+1:20     #2 "Sheltered by Ghosts" hand "Player"
+1:20     #3 "Bleachbone Verge" hand "Player"
+1:20     #4 "Plains" hand "Player"
+1:20     #5 "Concealed Courtyard" hand "Player"
+1:20     #6 "Shattered Sanctum" battlefield "Player" types land tapped
+1:20     #7 "Youthful Valkyrie" hand "Player"
+1:20     #8 hand "Opponent"
+1:20     #9 hand "Opponent"
+1:20     #10 hand "Opponent"
+1:20     #11 hand "Opponent"
+1:20     #12 hand "Opponent"
+1:20     #13 hand "Opponent"
+1:20     #14 hand "Opponent"
+1:20   untap
+1:20   upkeep
+1:20   draw
+1:20     new hidden #15 owner "Opponent" in library top 1
+1:20     #15 move library -> hand as draw by rule:draw
+1:20   precombat-main
+1:24     #9 identify "Sundown Pass" src arena:102723
+1:24     #9 "Sundown Pass" play from hand tapped types land
+1:24   beginning-of-combat
+1:24   declare-attackers
+1:24   end-of-combat
+1:24   postcombat-main
+1:24   end
+1:24   cleanup
+1:24 turn 3 "Player"
+1:24   keyframe
+1:24     player "Player" life 20 poison 0 library 53
+1:24     player "Opponent" life 20 poison 0 library 71
+1:24     #1 "Plains" hand "Player"
+1:24     #2 "Sheltered by Ghosts" hand "Player"
+1:24     #3 "Bleachbone Verge" hand "Player"
+1:24     #4 "Plains" hand "Player"
+1:24     #5 "Concealed Courtyard" hand "Player"
+1:24     #6 "Shattered Sanctum" battlefield "Player" types land tapped
+1:24     #7 "Youthful Valkyrie" hand "Player"
+1:24     #8 hand "Opponent"
+1:24     #9 "Sundown Pass" battlefield "Opponent" types land tapped
+1:24     #10 hand "Opponent"
+1:24     #11 hand "Opponent"
+1:24     #12 hand "Opponent"
+1:24     #13 hand "Opponent"
+1:24     #14 hand "Opponent"
+1:24     #15 hand "Opponent"
+1:24   untap
+1:24     #6 "Shattered Sanctum" untap by rule:untap
+1:24   upkeep
+1:24   draw
+1:24     new card #16 "Vanishing Verse" owner "Player" in library top 1 src arena:76652
+1:24     #16 "Vanishing Verse" move library -> hand as draw by rule:draw
+1:24   precombat-main
+1:26     #1 "Plains" play from hand types land
+1:27     #7 "Youthful Valkyrie" cast from hand
+1:28     new ability #17 mana of #1 "Plains" ? controller "Player"
+1:28     #1 "Plains" tap by cost:#17
+1:28     "Player" add {W} by #17
+1:28     new ability #18 mana of #6 "Shattered Sanctum" ? controller "Player"
+1:28     #6 "Shattered Sanctum" tap by cost:#18
+1:28     "Player" add {W} restriction ? by #18
+1:28     "Player" pay {W}{W} by cost:#7
+1:28     "Player" priority
+1:28       stack
+1:28         #7 "Youthful Valkyrie" controller "Player"
+1:28     "Player" pass
+1:28     "Opponent" priority
+1:28       stack
+1:28         #7 "Youthful Valkyrie" controller "Player"
+1:28     "Opponent" pass
+1:28     #7 "Youthful Valkyrie" resolve
+1:28     #7 "Youthful Valkyrie" move stack -> battlefield types creature pt 1/3 by rule:resolve
+1:28   beginning-of-combat
+1:28   declare-attackers
+1:28   end-of-combat
+1:28   postcombat-main
+1:28   end
+1:28   cleanup
+1:28 turn 4 "Opponent"
+1:28   keyframe
+1:28     player "Player" life 20 poison 0 library 52
+1:28     player "Opponent" life 20 poison 0 library 71
+1:28     #1 "Plains" battlefield "Player" types land tapped
+1:28     #2 "Sheltered by Ghosts" hand "Player"
+1:28     #3 "Bleachbone Verge" hand "Player"
+1:28     #4 "Plains" hand "Player"
+1:28     #5 "Concealed Courtyard" hand "Player"
+1:28     #6 "Shattered Sanctum" battlefield "Player" types land tapped
+1:28     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 1/3
+1:28     #8 hand "Opponent"
+1:28     #9 "Sundown Pass" battlefield "Opponent" types land tapped
+1:28     #10 hand "Opponent"
+1:28     #11 hand "Opponent"
+1:28     #12 hand "Opponent"
+1:28     #13 hand "Opponent"
+1:28     #14 hand "Opponent"
+1:28     #15 hand "Opponent"
+1:28     #16 "Vanishing Verse" hand "Player"
+1:28   untap
+1:28     #9 "Sundown Pass" untap by rule:untap
+1:28   upkeep
+1:28   draw
+1:28     new hidden #19 owner "Opponent" in library top 1
+1:28     #19 move library -> hand as draw by rule:draw
+1:28   precombat-main
+1:33     #11 identify "Barrels of Blasting Jelly" src arena:97535
+1:33     #11 "Barrels of Blasting Jelly" cast from hand
+1:33     new ability #20 mana of #9 "Sundown Pass" ? controller "Opponent"
+1:33     #9 "Sundown Pass" tap by cost:#20
+1:33     "Opponent" add {W} restriction ? by #20
+1:33     "Opponent" pay {W} by cost:#11
+1:33     "Opponent" priority
+1:33       stack
+1:33         #11 "Barrels of Blasting Jelly" controller "Opponent"
+1:33     "Opponent" pass
+1:33     "Player" priority
+1:33       stack
+1:33         #11 "Barrels of Blasting Jelly" controller "Opponent"
+1:33     "Player" pass
+1:33     #11 "Barrels of Blasting Jelly" resolve
+1:33     #11 "Barrels of Blasting Jelly" move stack -> battlefield types artifact by rule:resolve
+1:33   beginning-of-combat
+1:33   declare-attackers
+1:33   end-of-combat
+1:33   postcombat-main
+1:33   end
+1:33   cleanup
+1:33 turn 5 "Player"
+1:33   keyframe
+1:33     player "Player" life 20 poison 0 library 52
+1:33     player "Opponent" life 20 poison 0 library 70
+1:33     #1 "Plains" battlefield "Player" types land tapped
+1:33     #2 "Sheltered by Ghosts" hand "Player"
+1:33     #3 "Bleachbone Verge" hand "Player"
+1:33     #4 "Plains" hand "Player"
+1:33     #5 "Concealed Courtyard" hand "Player"
+1:33     #6 "Shattered Sanctum" battlefield "Player" types land tapped
+1:33     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 1/3
+1:33     #8 hand "Opponent"
+1:33     #9 "Sundown Pass" battlefield "Opponent" types land tapped
+1:33     #10 hand "Opponent"
+1:33     #11 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+1:33     #12 hand "Opponent"
+1:33     #13 hand "Opponent"
+1:33     #14 hand "Opponent"
+1:33     #15 hand "Opponent"
+1:33     #16 "Vanishing Verse" hand "Player"
+1:33     #19 hand "Opponent"
+1:33   untap
+1:33     #6 "Shattered Sanctum" untap by rule:untap
+1:33     #1 "Plains" untap by rule:untap
+1:33   upkeep
+1:33   draw
+1:33     new card #21 "Giada, Font of Hope" owner "Player" in library top 1 src arena:80165
+1:33     #21 "Giada, Font of Hope" move library -> hand as draw by rule:draw
+1:33   precombat-main
+1:40     #5 "Concealed Courtyard" play from hand types land
+1:40     #21 "Giada, Font of Hope" cast from hand
+1:41     new ability #22 mana of #1 "Plains" ? controller "Player"
+1:41     #1 "Plains" tap by cost:#22
+1:41     "Player" add {W} by #22
+1:41     new ability #23 mana of #6 "Shattered Sanctum" ? controller "Player"
+1:41     #6 "Shattered Sanctum" tap by cost:#23
+1:41     "Player" add {W} restriction ? by #23
+1:41     "Player" pay {W}{W} by cost:#21
+1:41     "Player" priority
+1:41       stack
+1:41         #21 "Giada, Font of Hope" controller "Player"
+1:41     "Player" pass
+1:41     "Opponent" priority
+1:41       stack
+1:41         #21 "Giada, Font of Hope" controller "Player"
+1:41     "Opponent" pass
+1:41     #21 "Giada, Font of Hope" resolve
+1:41     #21 "Giada, Font of Hope" move stack -> battlefield types creature pt 2/2 by rule:resolve
+1:41     new ability #24 triggered of #7 "Youthful Valkyrie" ? controller "Player" in stack
+1:41     "Player" priority
+1:41       stack
+1:41         #24 triggered of #7 "Youthful Valkyrie" ? controller "Player"
+1:41     "Player" pass
+1:41     "Opponent" priority
+1:41       stack
+1:41         #24 triggered of #7 "Youthful Valkyrie" ? controller "Player"
+1:41     "Opponent" pass
+1:41     #24 resolve
+1:41     #7 "Youthful Valkyrie" counters "+1/+1" 0 -> 1 by #24
+1:41     #7 "Youthful Valkyrie" pt 1/3 -> 2/4 by #24
+1:41     #24 cease by rule:resolve
+1:41   beginning-of-combat
+1:41   declare-attackers
+1:45     #7 "Youthful Valkyrie" attack "Opponent"
+1:45     #7 "Youthful Valkyrie" tap by rule:declare-attackers
+1:45   declare-blockers
+1:45   combat-damage
+1:45     #7 "Youthful Valkyrie" damage "Opponent" 2 by rule:combat-damage
+1:45     "Opponent" life 20 -> 18 by rule:combat-damage
+1:45   end-of-combat
+1:45   postcombat-main
+1:45   end
+1:45   cleanup
+1:45 turn 6 "Opponent"
+1:45   keyframe
+1:45     player "Player" life 20 poison 0 library 51
+1:45     player "Opponent" life 18 poison 0 library 70
+1:45     #1 "Plains" battlefield "Player" types land tapped
+1:45     #2 "Sheltered by Ghosts" hand "Player"
+1:45     #3 "Bleachbone Verge" hand "Player"
+1:45     #4 "Plains" hand "Player"
+1:45     #5 "Concealed Courtyard" battlefield "Player" types land
+1:45     #6 "Shattered Sanctum" battlefield "Player" types land tapped
+1:45     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 2/4 tapped counters "+1/+1" 1
+1:45     #8 hand "Opponent"
+1:45     #9 "Sundown Pass" battlefield "Opponent" types land tapped
+1:45     #10 hand "Opponent"
+1:45     #11 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+1:45     #12 hand "Opponent"
+1:45     #13 hand "Opponent"
+1:45     #14 hand "Opponent"
+1:45     #15 hand "Opponent"
+1:45     #16 "Vanishing Verse" hand "Player"
+1:45     #19 hand "Opponent"
+1:45     #21 "Giada, Font of Hope" battlefield "Player" types creature pt 2/2
+1:45   untap
+1:45     #9 "Sundown Pass" untap by rule:untap
+1:45   upkeep
+1:45   draw
+1:45     new hidden #25 owner "Opponent" in library top 1
+1:45     #25 move library -> hand as draw by rule:draw
+1:45   precombat-main
+1:49   beginning-of-combat
+1:49   declare-attackers
+1:49   end-of-combat
+1:49   postcombat-main
+1:49   end
+1:49   cleanup
+1:51     #8 identify "Unnatural Moonrise" src arena:78615
+1:51     #8 "Unnatural Moonrise" move hand -> graveyard as discard by rule:cleanup
+1:51 turn 7 "Player"
+1:51   keyframe
+1:51     player "Player" life 20 poison 0 library 51
+1:51     player "Opponent" life 18 poison 0 library 69
+1:51     #1 "Plains" battlefield "Player" types land tapped
+1:51     #2 "Sheltered by Ghosts" hand "Player"
+1:51     #3 "Bleachbone Verge" hand "Player"
+1:51     #4 "Plains" hand "Player"
+1:51     #5 "Concealed Courtyard" battlefield "Player" types land
+1:51     #6 "Shattered Sanctum" battlefield "Player" types land tapped
+1:51     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 2/4 tapped counters "+1/+1" 1
+1:51     #8 "Unnatural Moonrise" graveyard "Opponent"
+1:51     #9 "Sundown Pass" battlefield "Opponent" types land
+1:51     #10 hand "Opponent"
+1:51     #11 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+1:51     #12 hand "Opponent"
+1:51     #13 hand "Opponent"
+1:51     #14 hand "Opponent"
+1:51     #15 hand "Opponent"
+1:51     #16 "Vanishing Verse" hand "Player"
+1:51     #19 hand "Opponent"
+1:51     #21 "Giada, Font of Hope" battlefield "Player" types creature pt 2/2
+1:51     #25 hand "Opponent"
+1:51   untap
+1:51     #6 "Shattered Sanctum" untap by rule:untap
+1:51     #1 "Plains" untap by rule:untap
+1:51     #7 "Youthful Valkyrie" untap by rule:untap
+1:51   upkeep
+1:51   draw
+1:51     new card #26 "Sheltered by Ghosts" owner "Player" in library top 1 src arena:92090
+1:51     #26 "Sheltered by Ghosts" move library -> hand as draw by rule:draw
+1:51   precombat-main
+1:55     #3 "Bleachbone Verge" play from hand types land
+1:56   beginning-of-combat
+1:56   declare-attackers
+1:57     #7 "Youthful Valkyrie" attack "Opponent"
+1:57     #21 "Giada, Font of Hope" attack "Opponent"
+1:57     #7 "Youthful Valkyrie" tap by rule:declare-attackers
+1:57   declare-blockers
+1:58   combat-damage
+1:58     #21 "Giada, Font of Hope" damage "Opponent" 2 by rule:combat-damage
+1:58     #7 "Youthful Valkyrie" damage "Opponent" 2 by rule:combat-damage
+1:58     "Opponent" life 18 -> 14 by rule:combat-damage
+1:58   end-of-combat
+1:58   postcombat-main
+2:00   end
+2:00   cleanup
+2:00 turn 8 "Opponent"
+2:00   keyframe
+2:00     player "Player" life 20 poison 0 library 50
+2:00     player "Opponent" life 14 poison 0 library 69
+2:00     #1 "Plains" battlefield "Player" types land
+2:00     #2 "Sheltered by Ghosts" hand "Player"
+2:00     #3 "Bleachbone Verge" battlefield "Player" types land
+2:00     #4 "Plains" hand "Player"
+2:00     #5 "Concealed Courtyard" battlefield "Player" types land
+2:00     #6 "Shattered Sanctum" battlefield "Player" types land
+2:00     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 2/4 tapped counters "+1/+1" 1
+2:00     #8 "Unnatural Moonrise" graveyard "Opponent"
+2:00     #9 "Sundown Pass" battlefield "Opponent" types land
+2:00     #10 hand "Opponent"
+2:00     #11 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+2:00     #12 hand "Opponent"
+2:00     #13 hand "Opponent"
+2:00     #14 hand "Opponent"
+2:00     #15 hand "Opponent"
+2:00     #16 "Vanishing Verse" hand "Player"
+2:00     #19 hand "Opponent"
+2:00     #21 "Giada, Font of Hope" battlefield "Player" types creature pt 2/2
+2:00     #25 hand "Opponent"
+2:00     #26 "Sheltered by Ghosts" hand "Player"
+2:00   untap
+2:00   upkeep
+2:00   draw
+2:00     new hidden #27 owner "Opponent" in library top 1
+2:00     #27 move library -> hand as draw by rule:draw
+2:00   precombat-main
+2:04   beginning-of-combat
+2:06   declare-attackers
+2:06   end-of-combat
+2:06   postcombat-main
+2:06   end
+2:06   cleanup
+2:09     #25 identify "Kessig Naturalist // Lord of the Ulvenwald" src arena:78596
+2:09     #25 "Kessig Naturalist // Lord of the Ulvenwald" move hand -> graveyard as discard by rule:cleanup
+2:09 turn 9 "Player"
+2:09   keyframe
+2:09     player "Player" life 20 poison 0 library 50
+2:09     player "Opponent" life 14 poison 0 library 68
+2:09     #1 "Plains" battlefield "Player" types land
+2:09     #2 "Sheltered by Ghosts" hand "Player"
+2:09     #3 "Bleachbone Verge" battlefield "Player" types land
+2:09     #4 "Plains" hand "Player"
+2:09     #5 "Concealed Courtyard" battlefield "Player" types land
+2:09     #6 "Shattered Sanctum" battlefield "Player" types land
+2:09     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 2/4 tapped counters "+1/+1" 1
+2:09     #8 "Unnatural Moonrise" graveyard "Opponent"
+2:09     #9 "Sundown Pass" battlefield "Opponent" types land
+2:09     #10 hand "Opponent"
+2:09     #11 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+2:09     #12 hand "Opponent"
+2:09     #13 hand "Opponent"
+2:09     #14 hand "Opponent"
+2:09     #15 hand "Opponent"
+2:09     #16 "Vanishing Verse" hand "Player"
+2:09     #19 hand "Opponent"
+2:09     #21 "Giada, Font of Hope" battlefield "Player" types creature pt 2/2
+2:09     #25 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+2:09     #26 "Sheltered by Ghosts" hand "Player"
+2:09     #27 hand "Opponent"
+2:09   untap
+2:09     #7 "Youthful Valkyrie" untap by rule:untap
+2:09   upkeep
+2:09   draw
+2:09     new card #28 "Bishop of Wings" owner "Player" in library top 1 src arena:69793
+2:09     #28 "Bishop of Wings" move library -> hand as draw by rule:draw
+2:09   precombat-main
+2:11     #28 "Bishop of Wings" cast from hand
+2:12     new ability #29 mana of #1 "Plains" ? controller "Player"
+2:12     #1 "Plains" tap by cost:#29
+2:12     "Player" add {W} by #29
+2:12     new ability #30 mana of #6 "Shattered Sanctum" ? controller "Player"
+2:12     #6 "Shattered Sanctum" tap by cost:#30
+2:12     "Player" add {W} restriction ? by #30
+2:12     "Player" pay {W}{W} by cost:#28
+2:12     "Player" priority
+2:12       stack
+2:12         #28 "Bishop of Wings" controller "Player"
+2:12     "Player" pass
+2:12     "Opponent" priority
+2:12       stack
+2:12         #28 "Bishop of Wings" controller "Player"
+2:12     "Opponent" pass
+2:12     #28 "Bishop of Wings" resolve
+2:12     #28 "Bishop of Wings" move stack -> battlefield types creature pt 1/4 by rule:resolve
+2:14   beginning-of-combat
+2:14   declare-attackers
+2:15     #7 "Youthful Valkyrie" attack "Opponent"
+2:15     #21 "Giada, Font of Hope" attack "Opponent"
+2:15     #7 "Youthful Valkyrie" tap by rule:declare-attackers
+2:15   declare-blockers
+2:16   combat-damage
+2:16     #21 "Giada, Font of Hope" damage "Opponent" 2 by rule:combat-damage
+2:16     #7 "Youthful Valkyrie" damage "Opponent" 2 by rule:combat-damage
+2:16     "Opponent" life 14 -> 10 by rule:combat-damage
+2:16   end-of-combat
+2:16   postcombat-main
+2:18   end
+2:18   cleanup
+2:18 turn 10 "Opponent"
+2:18   keyframe
+2:18     player "Player" life 20 poison 0 library 49
+2:18     player "Opponent" life 10 poison 0 library 68
+2:18     #1 "Plains" battlefield "Player" types land tapped
+2:18     #2 "Sheltered by Ghosts" hand "Player"
+2:18     #3 "Bleachbone Verge" battlefield "Player" types land
+2:18     #4 "Plains" hand "Player"
+2:18     #5 "Concealed Courtyard" battlefield "Player" types land
+2:18     #6 "Shattered Sanctum" battlefield "Player" types land tapped
+2:18     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 2/4 tapped counters "+1/+1" 1
+2:18     #8 "Unnatural Moonrise" graveyard "Opponent"
+2:18     #9 "Sundown Pass" battlefield "Opponent" types land
+2:18     #10 hand "Opponent"
+2:18     #11 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+2:18     #12 hand "Opponent"
+2:18     #13 hand "Opponent"
+2:18     #14 hand "Opponent"
+2:18     #15 hand "Opponent"
+2:18     #16 "Vanishing Verse" hand "Player"
+2:18     #19 hand "Opponent"
+2:18     #21 "Giada, Font of Hope" battlefield "Player" types creature pt 2/2
+2:18     #25 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+2:18     #26 "Sheltered by Ghosts" hand "Player"
+2:18     #27 hand "Opponent"
+2:18     #28 "Bishop of Wings" battlefield "Player" types creature pt 1/4
+2:18   untap
+2:18   upkeep
+2:18   draw
+2:18     new hidden #31 owner "Opponent" in library top 1
+2:18     #31 move library -> hand as draw by rule:draw
+2:18   precombat-main
+2:20     #31 identify "Dreamroot Cascade" src arena:102713
+2:20     #31 "Dreamroot Cascade" play from hand tapped types land
+2:20   beginning-of-combat
+2:22   declare-attackers
+2:22   end-of-combat
+2:22   postcombat-main
+2:22   end
+2:23   cleanup
+2:23 turn 11 "Player"
+2:23   keyframe
+2:23     player "Player" life 20 poison 0 library 49
+2:23     player "Opponent" life 10 poison 0 library 67
+2:23     #1 "Plains" battlefield "Player" types land tapped
+2:23     #2 "Sheltered by Ghosts" hand "Player"
+2:23     #3 "Bleachbone Verge" battlefield "Player" types land
+2:23     #4 "Plains" hand "Player"
+2:23     #5 "Concealed Courtyard" battlefield "Player" types land
+2:23     #6 "Shattered Sanctum" battlefield "Player" types land tapped
+2:23     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 2/4 tapped counters "+1/+1" 1
+2:23     #8 "Unnatural Moonrise" graveyard "Opponent"
+2:23     #9 "Sundown Pass" battlefield "Opponent" types land
+2:23     #10 hand "Opponent"
+2:23     #11 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+2:23     #12 hand "Opponent"
+2:23     #13 hand "Opponent"
+2:23     #14 hand "Opponent"
+2:23     #15 hand "Opponent"
+2:23     #16 "Vanishing Verse" hand "Player"
+2:23     #19 hand "Opponent"
+2:23     #21 "Giada, Font of Hope" battlefield "Player" types creature pt 2/2
+2:23     #25 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+2:23     #26 "Sheltered by Ghosts" hand "Player"
+2:23     #27 hand "Opponent"
+2:23     #28 "Bishop of Wings" battlefield "Player" types creature pt 1/4
+2:23     #31 "Dreamroot Cascade" battlefield "Opponent" types land tapped
+2:23   untap
+2:23     #6 "Shattered Sanctum" untap by rule:untap
+2:23     #1 "Plains" untap by rule:untap
+2:23     #7 "Youthful Valkyrie" untap by rule:untap
+2:23   upkeep
+2:23   draw
+2:23     new card #32 "The Wandering Emperor" owner "Player" in library top 1 src arena:79464
+2:23     #32 "The Wandering Emperor" move library -> hand as draw by rule:draw
+2:23   precombat-main
+2:25   beginning-of-combat
+2:25   declare-attackers
+2:26     #7 "Youthful Valkyrie" attack "Opponent"
+2:26     #21 "Giada, Font of Hope" attack "Opponent"
+2:26     #28 "Bishop of Wings" attack "Opponent"
+2:26     #7 "Youthful Valkyrie" tap by rule:declare-attackers
+2:26     #28 "Bishop of Wings" tap by rule:declare-attackers
+2:26   declare-blockers
+2:26   combat-damage
+2:26     #21 "Giada, Font of Hope" damage "Opponent" 2 by rule:combat-damage
+2:26     #7 "Youthful Valkyrie" damage "Opponent" 2 by rule:combat-damage
+2:26     #28 "Bishop of Wings" damage "Opponent" 1 by rule:combat-damage
+2:26     "Opponent" life 10 -> 5 by rule:combat-damage
+2:26   end-of-combat
+2:26   postcombat-main
+2:29   end
+2:29   cleanup
+2:29 turn 12 "Opponent"
+2:29   keyframe
+2:29     player "Player" life 20 poison 0 library 48
+2:29     player "Opponent" life 5 poison 0 library 67
+2:29     #1 "Plains" battlefield "Player" types land
+2:29     #2 "Sheltered by Ghosts" hand "Player"
+2:29     #3 "Bleachbone Verge" battlefield "Player" types land
+2:29     #4 "Plains" hand "Player"
+2:29     #5 "Concealed Courtyard" battlefield "Player" types land
+2:29     #6 "Shattered Sanctum" battlefield "Player" types land
+2:29     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 2/4 tapped counters "+1/+1" 1
+2:29     #8 "Unnatural Moonrise" graveyard "Opponent"
+2:29     #9 "Sundown Pass" battlefield "Opponent" types land
+2:29     #10 hand "Opponent"
+2:29     #11 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+2:29     #12 hand "Opponent"
+2:29     #13 hand "Opponent"
+2:29     #14 hand "Opponent"
+2:29     #15 hand "Opponent"
+2:29     #16 "Vanishing Verse" hand "Player"
+2:29     #19 hand "Opponent"
+2:29     #21 "Giada, Font of Hope" battlefield "Player" types creature pt 2/2
+2:29     #25 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+2:29     #26 "Sheltered by Ghosts" hand "Player"
+2:29     #27 hand "Opponent"
+2:29     #28 "Bishop of Wings" battlefield "Player" types creature pt 1/4 tapped
+2:29     #31 "Dreamroot Cascade" battlefield "Opponent" types land tapped
+2:29     #32 "The Wandering Emperor" hand "Player"
+2:29   untap
+2:29     #31 "Dreamroot Cascade" untap by rule:untap
+2:29   upkeep
+2:29   draw
+2:29     new hidden #33 owner "Opponent" in library top 1
+2:29     #33 move library -> hand as draw by rule:draw
+2:29   precombat-main
+2:34     #14 identify "Packsong Pup" src arena:79028
+2:34     #14 "Packsong Pup" cast from hand
+2:34     new ability #34 mana of #9 "Sundown Pass" ? controller "Opponent"
+2:34     #9 "Sundown Pass" tap by cost:#34
+2:34     "Opponent" add {W} restriction ? by #34
+2:34     new ability #35 mana of #31 "Dreamroot Cascade" ? controller "Opponent"
+2:34     #31 "Dreamroot Cascade" tap by cost:#35
+2:34     "Opponent" add {G} restriction ? by #35
+2:34     "Opponent" pay {W}{G} by cost:#14
+2:34     "Opponent" priority
+2:34       stack
+2:34         #14 "Packsong Pup" controller "Opponent"
+2:34     "Opponent" pass
+2:34     "Player" priority
+2:34       stack
+2:34         #14 "Packsong Pup" controller "Opponent"
+2:37     "Player" pass
+2:37     #14 "Packsong Pup" resolve
+2:37     #14 "Packsong Pup" move stack -> battlefield types creature pt 1/1 by rule:resolve
+2:37   beginning-of-combat
+2:39   declare-attackers
+2:39   end-of-combat
+2:39   postcombat-main
+2:39   end
+2:40     #32 "The Wandering Emperor" cast from hand
+2:41     new ability #36 mana of #1 "Plains" ? controller "Player"
+2:41     #1 "Plains" tap by cost:#36
+2:41     "Player" add {W} by #36
+2:41     new ability #37 mana of #6 "Shattered Sanctum" ? controller "Player"
+2:41     #6 "Shattered Sanctum" tap by cost:#37
+2:41     "Player" add {W} restriction ? by #37
+2:41     new ability #38 mana of #5 "Concealed Courtyard" ? controller "Player"
+2:41     #5 "Concealed Courtyard" tap by cost:#38
+2:41     "Player" add {W} restriction ? by #38
+2:41     new ability #39 mana of #3 "Bleachbone Verge" ? controller "Player"
+2:41     #3 "Bleachbone Verge" tap by cost:#39
+2:41     "Player" add {W} restriction ? by #39
+2:41     "Player" pay {W}{W}{W}{W} by cost:#32
+2:41     "Player" priority
+2:41       stack
+2:41         #32 "The Wandering Emperor" controller "Player"
+2:41     "Player" pass
+2:41     "Opponent" priority
+2:41       stack
+2:41         #32 "The Wandering Emperor" controller "Player"
+2:41     "Opponent" pass
+2:41     #32 "The Wandering Emperor" resolve
+2:41     #32 "The Wandering Emperor" move stack -> battlefield types planeswalker by rule:resolve
+2:41     #32 "The Wandering Emperor" counters "loyalty" 0 -> 3 by #32
+2:44     new ability #40 loyalty of #32 "The Wandering Emperor" ? controller "Player" in stack
+2:44     #32 "The Wandering Emperor" counters "loyalty" 3 -> 2 by cost:#40
+2:44     "Player" priority
+2:44       stack
+2:44         #40 loyalty of #32 "The Wandering Emperor" ? controller "Player"
+2:44     "Player" pass
+2:44     "Opponent" priority
+2:44       stack
+2:44         #40 loyalty of #32 "The Wandering Emperor" ? controller "Player"
+2:44     "Opponent" pass
+2:44     #40 resolve
+2:44     new token #41 "Samurai Token" owner "Player" in battlefield types creature pt 2/2 by #40
+2:44     #40 cease by rule:resolve
+2:44   cleanup
+2:44 turn 13 "Player"
+2:44   keyframe
+2:44     player "Player" life 20 poison 0 library 48
+2:44     player "Opponent" life 5 poison 0 library 66
+2:44     #1 "Plains" battlefield "Player" types land tapped
+2:44     #2 "Sheltered by Ghosts" hand "Player"
+2:44     #3 "Bleachbone Verge" battlefield "Player" types land tapped
+2:44     #4 "Plains" hand "Player"
+2:44     #5 "Concealed Courtyard" battlefield "Player" types land tapped
+2:44     #6 "Shattered Sanctum" battlefield "Player" types land tapped
+2:44     #7 "Youthful Valkyrie" battlefield "Player" types creature pt 2/4 tapped counters "+1/+1" 1
+2:44     #8 "Unnatural Moonrise" graveyard "Opponent"
+2:44     #9 "Sundown Pass" battlefield "Opponent" types land tapped
+2:44     #10 hand "Opponent"
+2:44     #11 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+2:44     #12 hand "Opponent"
+2:44     #13 hand "Opponent"
+2:44     #14 "Packsong Pup" battlefield "Opponent" types creature pt 1/1
+2:44     #15 hand "Opponent"
+2:44     #16 "Vanishing Verse" hand "Player"
+2:44     #19 hand "Opponent"
+2:44     #21 "Giada, Font of Hope" battlefield "Player" types creature pt 2/2
+2:44     #25 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+2:44     #26 "Sheltered by Ghosts" hand "Player"
+2:44     #27 hand "Opponent"
+2:44     #28 "Bishop of Wings" battlefield "Player" types creature pt 1/4 tapped
+2:44     #31 "Dreamroot Cascade" battlefield "Opponent" types land tapped
+2:44     #32 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 2
+2:44     #33 hand "Opponent"
+2:44     #41 "Samurai Token" battlefield "Player" types creature pt 2/2
+2:44   untap
+2:44     #6 "Shattered Sanctum" untap by rule:untap
+2:44     #1 "Plains" untap by rule:untap
+2:44     #7 "Youthful Valkyrie" untap by rule:untap
+2:44     #5 "Concealed Courtyard" untap by rule:untap
+2:44     #3 "Bleachbone Verge" untap by rule:untap
+2:44     #28 "Bishop of Wings" untap by rule:untap
+2:44   upkeep
+2:44   draw
+2:44     new card #42 "Godless Shrine" owner "Player" in library top 1 src arena:69396
+2:44     #42 "Godless Shrine" move library -> hand as draw by rule:draw
+2:44   precombat-main
+2:48     #2 "Sheltered by Ghosts" cast from hand
+2:50     #2 "Sheltered by Ghosts" target #21 "Giada, Font of Hope"
+2:50     new ability #43 mana of #1 "Plains" ? controller "Player"
+2:50     #1 "Plains" tap by cost:#43
+2:50     "Player" add {W} by #43
+2:50     new ability #44 mana of #6 "Shattered Sanctum" ? controller "Player"
+2:50     #6 "Shattered Sanctum" tap by cost:#44
+2:50     "Player" add {W} restriction ? by #44
+2:50     "Player" pay {W}{W} by cost:#2
+2:50     "Player" priority
+2:50       stack
+2:50         #2 "Sheltered by Ghosts" controller "Player" target #21 "Giada, Font of Hope"
+2:50     "Player" pass
+2:50     "Opponent" priority
+2:50       stack
+2:50         #2 "Sheltered by Ghosts" controller "Player" target #21 "Giada, Font of Hope"
+2:50     "Opponent" pass
+2:50     #2 "Sheltered by Ghosts" resolve
+2:50     #2 "Sheltered by Ghosts" move stack -> battlefield types enchantment by rule:resolve
+2:50     #2 "Sheltered by Ghosts" attach #21 "Giada, Font of Hope" by rule:resolve
+2:50     new ability #45 triggered of #2 "Sheltered by Ghosts" ? controller "Player" in stack
+2:50     #21 "Giada, Font of Hope" pt 2/2 -> 3/2 by #2
+2:53     #45 target #14 "Packsong Pup"
+2:53     "Player" priority
+2:53       stack
+2:53         #45 triggered of #2 "Sheltered by Ghosts" ? controller "Player" target #14 "Packsong Pup"
+2:53     "Player" pass
+2:53     "Opponent" priority
+2:53       stack
+2:53         #45 triggered of #2 "Sheltered by Ghosts" ? controller "Player" target #14 "Packsong Pup"
+2:53     "Opponent" pass
+2:53     #45 resolve
+2:53     #14 "Packsong Pup" move battlefield -> exile with #2 by #45
+2:53     #45 cease by rule:resolve
+2:54     "Opponent" concede
+1-0
+
+[Mtgr "0.3.0"]
+[Event "Traditional_Explorer_Ladder"]
+[Site "Arena"]
+[Date "2026.11.03"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "0-1"]
+[Format "Explorer"]
+[Match "bo3-three-games-0"]
+[Game "3"]
+[Perspective "Player"]
+[ARENA_MatchId "bo3-three-games-0"]
+[Omits "costs"]
+[Partial "library effects"]
+[Termination "concession"]
+
+0:00 deck "Player"
+0:00   main 2 "Archangel of Tithes"
+0:00   main 2 "Bishop of Wings"
+0:00   main 3 "Bleachbone Verge"
+0:00   main 4 "Brightclimb Pathway // Grimclimb Pathway"
+0:00   main 1 "Castle Ardenvale"
+0:00   main 4 "Concealed Courtyard"
+0:00   main 4 "Fatal Push"
+0:00   main 4 "Giada, Font of Hope"
+0:00   main 4 "Godless Shrine"
+0:00   main 2 "Liesa, Forgotten Archangel"
+0:00   main 3 "March of Otherworldly Light"
+0:00   main 3 "Plains"
+0:00   main 4 "Righteous Valkyrie"
+0:00   main 4 "Shattered Sanctum"
+0:00   main 3 "Sheltered by Ghosts"
+0:00   main 3 "Speaker of the Heavens"
+0:00   main 3 "The Wandering Emperor"
+0:00   main 3 "Vanishing Verse"
+0:00   main 4 "Youthful Valkyrie"
+0:00   side 2 "Archangel of Wrath"
+0:00   side 2 "Damping Sphere"
+0:00   side 2 "Duress"
+0:00   side 2 "Go Blank"
+0:00   side 2 "Guardian of Faith"
+0:00   side 1 "Speaker of the Heavens"
+0:00   side 3 "Thoughtseize"
+0:00   side 1 "Unlicensed Hearse"
+0:08 pregame
+0:08   keyframe
+0:08     player "Player" life 20 poison 0 library 60
+0:08     player "Opponent" life 20 poison 0 library 79
+0:20   "Opponent" choose first "Opponent"
+0:20   new hidden #1 owner "Opponent" in library top 1
+0:20   #1 move library -> hand as draw by rule:opening-hand
+0:20   new hidden #2 owner "Opponent" in library top 1
+0:20   #2 move library -> hand as draw by rule:opening-hand
+0:20   new hidden #3 owner "Opponent" in library top 1
+0:20   #3 move library -> hand as draw by rule:opening-hand
+0:20   new hidden #4 owner "Opponent" in library top 1
+0:20   #4 move library -> hand as draw by rule:opening-hand
+0:20   new hidden #5 owner "Opponent" in library top 1
+0:20   #5 move library -> hand as draw by rule:opening-hand
+0:20   new hidden #6 owner "Opponent" in library top 1
+0:20   #6 move library -> hand as draw by rule:opening-hand
+0:20   new hidden #7 owner "Opponent" in library top 1
+0:20   #7 move library -> hand as draw by rule:opening-hand
+0:20   new card #8 "Sheltered by Ghosts" owner "Player" in library top 1 src arena:92090
+0:20   #8 "Sheltered by Ghosts" move library -> hand as draw by rule:opening-hand
+0:20   new card #9 "Shattered Sanctum" owner "Player" in library top 1 src arena:79088
+0:20   #9 "Shattered Sanctum" move library -> hand as draw by rule:opening-hand
+0:20   new card #10 "Vanishing Verse" owner "Player" in library top 1 src arena:76652
+0:20   #10 "Vanishing Verse" move library -> hand as draw by rule:opening-hand
+0:20   new card #11 "Archangel of Tithes" owner "Player" in library top 1 src arena:90348
+0:20   #11 "Archangel of Tithes" move library -> hand as draw by rule:opening-hand
+0:20   new card #12 "Archangel of Tithes" owner "Player" in library top 1 src arena:90348
+0:20   #12 "Archangel of Tithes" move library -> hand as draw by rule:opening-hand
+0:20   new card #13 "Fatal Push" owner "Player" in library top 1 src arena:75662
+0:20   #13 "Fatal Push" move library -> hand as draw by rule:opening-hand
+0:20   new card #14 "Concealed Courtyard" owner "Player" in library top 1 src arena:90615
+0:20   #14 "Concealed Courtyard" move library -> hand as draw by rule:opening-hand
+0:24   "Opponent" keep
+0:25   "Player" keep
+0:25 turn 1 "Opponent"
+0:25   keyframe
+0:25     player "Player" life 20 poison 0 library 53
+0:25     player "Opponent" life 20 poison 0 library 72
+0:25     #1 hand "Opponent"
+0:25     #2 hand "Opponent"
+0:25     #3 hand "Opponent"
+0:25     #4 hand "Opponent"
+0:25     #5 hand "Opponent"
+0:25     #6 hand "Opponent"
+0:25     #7 hand "Opponent"
+0:25     #8 "Sheltered by Ghosts" hand "Player"
+0:25     #9 "Shattered Sanctum" hand "Player"
+0:25     #10 "Vanishing Verse" hand "Player"
+0:25     #11 "Archangel of Tithes" hand "Player"
+0:25     #12 "Archangel of Tithes" hand "Player"
+0:25     #13 "Fatal Push" hand "Player"
+0:25     #14 "Concealed Courtyard" hand "Player"
+0:25   untap
+0:25   upkeep
+0:25   precombat-main
+0:31     #7 identify "Thornspire Verge" src arena:92370
+0:31     #7 "Thornspire Verge" play from hand types land
+0:31   beginning-of-combat
+0:31   declare-attackers
+0:31   end-of-combat
+0:31   postcombat-main
+0:31   end
+0:31   cleanup
+0:31 turn 2 "Player"
+0:31   keyframe
+0:31     player "Player" life 20 poison 0 library 53
+0:31     player "Opponent" life 20 poison 0 library 72
+0:31     #1 hand "Opponent"
+0:31     #2 hand "Opponent"
+0:31     #3 hand "Opponent"
+0:31     #4 hand "Opponent"
+0:31     #5 hand "Opponent"
+0:31     #6 hand "Opponent"
+0:31     #7 "Thornspire Verge" battlefield "Opponent" types land
+0:31     #8 "Sheltered by Ghosts" hand "Player"
+0:31     #9 "Shattered Sanctum" hand "Player"
+0:31     #10 "Vanishing Verse" hand "Player"
+0:31     #11 "Archangel of Tithes" hand "Player"
+0:31     #12 "Archangel of Tithes" hand "Player"
+0:31     #13 "Fatal Push" hand "Player"
+0:31     #14 "Concealed Courtyard" hand "Player"
+0:31   untap
+0:31   upkeep
+0:31   draw
+0:31     new card #15 "Liesa, Forgotten Archangel" owner "Player" in library top 1 src arena:78598
+0:31     #15 "Liesa, Forgotten Archangel" move library -> hand as draw by rule:draw
+0:31   precombat-main
+0:34     #9 "Shattered Sanctum" play from hand tapped types land
+0:34   beginning-of-combat
+0:34   declare-attackers
+0:34   end-of-combat
+0:34   postcombat-main
+0:34   end
+0:34   cleanup
+0:34 turn 3 "Opponent"
+0:34   keyframe
+0:34     player "Player" life 20 poison 0 library 52
+0:34     player "Opponent" life 20 poison 0 library 72
+0:34     #1 hand "Opponent"
+0:34     #2 hand "Opponent"
+0:34     #3 hand "Opponent"
+0:34     #4 hand "Opponent"
+0:34     #5 hand "Opponent"
+0:34     #6 hand "Opponent"
+0:34     #7 "Thornspire Verge" battlefield "Opponent" types land
+0:34     #8 "Sheltered by Ghosts" hand "Player"
+0:34     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+0:34     #10 "Vanishing Verse" hand "Player"
+0:34     #11 "Archangel of Tithes" hand "Player"
+0:34     #12 "Archangel of Tithes" hand "Player"
+0:34     #13 "Fatal Push" hand "Player"
+0:34     #14 "Concealed Courtyard" hand "Player"
+0:34     #15 "Liesa, Forgotten Archangel" hand "Player"
+0:34   untap
+0:34   upkeep
+0:34   draw
+0:34     new hidden #16 owner "Opponent" in library top 1
+0:34     #16 move library -> hand as draw by rule:draw
+0:34   precombat-main
+0:39     #4 identify "Mountain" src arena:96188
+0:39     #4 "Mountain" play from hand types land
+0:41     #16 identify "Barrels of Blasting Jelly" src arena:97535
+0:41     #16 "Barrels of Blasting Jelly" cast from hand
+0:41     new ability #17 mana of #4 "Mountain" ? controller "Opponent"
+0:41     #4 "Mountain" tap by cost:#17
+0:41     "Opponent" add {R} by #17
+0:41     "Opponent" pay {R} by cost:#16
+0:41     "Opponent" priority
+0:41       stack
+0:41         #16 "Barrels of Blasting Jelly" controller "Opponent"
+0:41     "Opponent" pass
+0:41     "Player" priority
+0:41       stack
+0:41         #16 "Barrels of Blasting Jelly" controller "Opponent"
+0:41     "Player" pass
+0:41     #16 "Barrels of Blasting Jelly" resolve
+0:41     #16 "Barrels of Blasting Jelly" move stack -> battlefield types artifact by rule:resolve
+0:41   beginning-of-combat
+0:41   declare-attackers
+0:41   end-of-combat
+0:41   postcombat-main
+0:41   end
+0:41   cleanup
+0:41 turn 4 "Player"
+0:41   keyframe
+0:41     player "Player" life 20 poison 0 library 52
+0:41     player "Opponent" life 20 poison 0 library 71
+0:41     #1 hand "Opponent"
+0:41     #2 hand "Opponent"
+0:41     #3 hand "Opponent"
+0:41     #4 "Mountain" battlefield "Opponent" types land tapped
+0:41     #5 hand "Opponent"
+0:41     #6 hand "Opponent"
+0:41     #7 "Thornspire Verge" battlefield "Opponent" types land
+0:41     #8 "Sheltered by Ghosts" hand "Player"
+0:41     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+0:41     #10 "Vanishing Verse" hand "Player"
+0:41     #11 "Archangel of Tithes" hand "Player"
+0:41     #12 "Archangel of Tithes" hand "Player"
+0:41     #13 "Fatal Push" hand "Player"
+0:41     #14 "Concealed Courtyard" hand "Player"
+0:41     #15 "Liesa, Forgotten Archangel" hand "Player"
+0:41     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+0:41   untap
+0:41     #9 "Shattered Sanctum" untap by rule:untap
+0:41   upkeep
+0:41   draw
+0:41     new card #18 "Plains" owner "Player" in library top 1 src arena:82390
+0:41     #18 "Plains" move library -> hand as draw by rule:draw
+0:41   precombat-main
+0:44     #14 "Concealed Courtyard" play from hand types land
+0:44   beginning-of-combat
+0:44   declare-attackers
+0:44   end-of-combat
+0:44   postcombat-main
+0:44   end
+0:44   cleanup
+0:44 turn 5 "Opponent"
+0:44   keyframe
+0:44     player "Player" life 20 poison 0 library 51
+0:44     player "Opponent" life 20 poison 0 library 71
+0:44     #1 hand "Opponent"
+0:44     #2 hand "Opponent"
+0:44     #3 hand "Opponent"
+0:44     #4 "Mountain" battlefield "Opponent" types land tapped
+0:44     #5 hand "Opponent"
+0:44     #6 hand "Opponent"
+0:44     #7 "Thornspire Verge" battlefield "Opponent" types land
+0:44     #8 "Sheltered by Ghosts" hand "Player"
+0:44     #9 "Shattered Sanctum" battlefield "Player" types land
+0:44     #10 "Vanishing Verse" hand "Player"
+0:44     #11 "Archangel of Tithes" hand "Player"
+0:44     #12 "Archangel of Tithes" hand "Player"
+0:44     #13 "Fatal Push" hand "Player"
+0:44     #14 "Concealed Courtyard" battlefield "Player" types land
+0:44     #15 "Liesa, Forgotten Archangel" hand "Player"
+0:44     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+0:44     #18 "Plains" hand "Player"
+0:44   untap
+0:44     #4 "Mountain" untap by rule:untap
+0:44   upkeep
+0:44   draw
+0:44     new hidden #19 owner "Opponent" in library top 1
+0:44     #19 move library -> hand as draw by rule:draw
+0:44   precombat-main
+0:47     #2 identify "Overgrown Farmland" src arena:78635
+0:47     #2 "Overgrown Farmland" play from hand types land
+0:48     #3 identify "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" src arena:78613
+0:48     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" cast from hand face "Tovolar, Dire Overlord"
+0:48     new ability #20 mana of #4 "Mountain" ? controller "Opponent"
+0:48     #4 "Mountain" tap by cost:#20
+0:48     "Opponent" add {R} by #20
+0:48     new ability #21 mana of #2 "Overgrown Farmland" ? controller "Opponent"
+0:48     #2 "Overgrown Farmland" tap by cost:#21
+0:48     "Opponent" add {W} restriction ? by #21
+0:48     new ability #22 mana of #7 "Thornspire Verge" ? controller "Opponent"
+0:48     #7 "Thornspire Verge" tap by cost:#22
+0:48     "Opponent" add {G} restriction ? by #22
+0:48     "Opponent" pay {W}{R}{G} by cost:#3
+0:48     "Opponent" priority
+0:48       stack
+0:48         #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" face "Tovolar, Dire Overlord" controller "Opponent"
+0:48     "Opponent" pass
+0:48     "Player" priority
+0:48       stack
+0:48         #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" face "Tovolar, Dire Overlord" controller "Opponent"
+0:48     "Player" pass
+0:48     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" resolve
+0:48     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" move stack -> battlefield types creature pt 3/3 by rule:resolve
+0:48     day by #3
+0:48   beginning-of-combat
+0:55   declare-attackers
+0:55   end-of-combat
+0:55   postcombat-main
+0:55   end
+0:55   cleanup
+0:55 turn 6 "Player"
+0:55   keyframe
+0:55     player "Player" life 20 poison 0 library 51
+0:55     player "Opponent" life 20 poison 0 library 70
+0:55     day
+0:55     #1 hand "Opponent"
+0:55     #2 "Overgrown Farmland" battlefield "Opponent" types land tapped
+0:55     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" battlefield "Opponent" types creature pt 3/3
+0:55     #4 "Mountain" battlefield "Opponent" types land tapped
+0:55     #5 hand "Opponent"
+0:55     #6 hand "Opponent"
+0:55     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+0:55     #8 "Sheltered by Ghosts" hand "Player"
+0:55     #9 "Shattered Sanctum" battlefield "Player" types land
+0:55     #10 "Vanishing Verse" hand "Player"
+0:55     #11 "Archangel of Tithes" hand "Player"
+0:55     #12 "Archangel of Tithes" hand "Player"
+0:55     #13 "Fatal Push" hand "Player"
+0:55     #14 "Concealed Courtyard" battlefield "Player" types land
+0:55     #15 "Liesa, Forgotten Archangel" hand "Player"
+0:55     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+0:55     #18 "Plains" hand "Player"
+0:55     #19 hand "Opponent"
+0:55   untap
+0:55   upkeep
+0:55   draw
+0:55     new card #23 "Fatal Push" owner "Player" in library top 1 src arena:75662
+0:55     #23 "Fatal Push" move library -> hand as draw by rule:draw
+0:55   precombat-main
+0:57     #18 "Plains" play from hand types land
+0:59   beginning-of-combat
+0:59   declare-attackers
+0:59   end-of-combat
+0:59   postcombat-main
+0:59   end
+0:59   cleanup
+0:59 turn 7 "Opponent"
+0:59   keyframe
+0:59     player "Player" life 20 poison 0 library 50
+0:59     player "Opponent" life 20 poison 0 library 70
+0:59     day
+0:59     #1 hand "Opponent"
+0:59     #2 "Overgrown Farmland" battlefield "Opponent" types land tapped
+0:59     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" battlefield "Opponent" types creature pt 3/3
+0:59     #4 "Mountain" battlefield "Opponent" types land tapped
+0:59     #5 hand "Opponent"
+0:59     #6 hand "Opponent"
+0:59     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+0:59     #8 "Sheltered by Ghosts" hand "Player"
+0:59     #9 "Shattered Sanctum" battlefield "Player" types land
+0:59     #10 "Vanishing Verse" hand "Player"
+0:59     #11 "Archangel of Tithes" hand "Player"
+0:59     #12 "Archangel of Tithes" hand "Player"
+0:59     #13 "Fatal Push" hand "Player"
+0:59     #14 "Concealed Courtyard" battlefield "Player" types land
+0:59     #15 "Liesa, Forgotten Archangel" hand "Player"
+0:59     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+0:59     #18 "Plains" battlefield "Player" types land
+0:59     #19 hand "Opponent"
+0:59     #23 "Fatal Push" hand "Player"
+0:59   untap
+0:59     night by rule:day-night
+0:59     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" transform by #3
+0:59     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" pt 3/3 -> 4/4 by #3
+0:59     #7 "Thornspire Verge" untap by rule:untap
+0:59     #4 "Mountain" untap by rule:untap
+0:59     #2 "Overgrown Farmland" untap by rule:untap
+0:59   upkeep
+0:59   draw
+0:59     new hidden #24 owner "Opponent" in library top 1
+0:59     #24 move library -> hand as draw by rule:draw
+0:59   precombat-main
+1:02     #19 identify "Mountain" src arena:96188
+1:02     #19 "Mountain" play from hand types land
+1:04     #1 identify "Howlpack Piper // Wildsong Howler" src arena:79017
+1:04     #1 "Howlpack Piper // Wildsong Howler" cast from hand face "Howlpack Piper"
+1:04     new ability #25 mana of #4 "Mountain" ? controller "Opponent"
+1:04     #4 "Mountain" tap by cost:#25
+1:04     "Opponent" add {R} by #25
+1:04     new ability #26 mana of #19 "Mountain" ? controller "Opponent"
+1:04     #19 "Mountain" tap by cost:#26
+1:04     "Opponent" add {R} by #26
+1:04     new ability #27 mana of #2 "Overgrown Farmland" ? controller "Opponent"
+1:04     #2 "Overgrown Farmland" tap by cost:#27
+1:04     "Opponent" add {W} restriction ? by #27
+1:04     new ability #28 mana of #7 "Thornspire Verge" ? controller "Opponent"
+1:04     #7 "Thornspire Verge" tap by cost:#28
+1:04     "Opponent" add {G} restriction ? by #28
+1:04     "Opponent" pay {W}{R}{R}{G} by cost:#1
+1:04     "Opponent" priority
+1:04       stack
+1:04         #1 "Howlpack Piper // Wildsong Howler" face "Howlpack Piper" controller "Opponent"
+1:04     "Opponent" pass
+1:04     "Player" priority
+1:04       stack
+1:04         #1 "Howlpack Piper // Wildsong Howler" face "Howlpack Piper" controller "Opponent"
+1:06     "Player" pass
+1:06     #1 "Howlpack Piper // Wildsong Howler" resolve
+1:06     #1 "Howlpack Piper // Wildsong Howler" move stack -> battlefield face "Wildsong Howler" types creature pt 4/4 by rule:resolve
+1:06     new ability #29 triggered of #1 "Howlpack Piper // Wildsong Howler" ? controller "Opponent" in stack
+1:06     "Opponent" priority
+1:06       stack
+1:06         #29 triggered of #1 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+1:06     "Opponent" pass
+1:06     "Player" priority
+1:06       stack
+1:06         #29 triggered of #1 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+1:08     "Player" pass
+1:08     #29 resolve
+1:11     #29 cease by rule:resolve
+1:11   beginning-of-combat
+1:13   declare-attackers
+1:15     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" attack "Player"
+1:15     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" tap by rule:declare-attackers
+1:15   declare-blockers
+1:16   combat-damage
+1:16     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" damage "Player" 4 by rule:combat-damage
+1:16     "Player" life 20 -> 16 by rule:combat-damage
+1:16     new ability #30 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent" in stack
+1:16     "Opponent" priority
+1:16       stack
+1:16         #30 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+1:16     "Opponent" pass
+1:16     "Player" priority
+1:16       stack
+1:16         #30 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+1:20     "Player" pass
+1:20     #30 resolve
+1:20     new hidden #31 owner "Opponent" in library top 1
+1:20     #31 move library -> hand as draw by #30
+1:20     #30 cease by rule:resolve
+1:20   end-of-combat
+1:20   postcombat-main
+1:20   end
+1:22     #10 "Vanishing Verse" cast from hand
+1:24     #10 "Vanishing Verse" target #1 "Howlpack Piper // Wildsong Howler"
+1:25     new ability #32 mana of #18 "Plains" ? controller "Player"
+1:25     #18 "Plains" tap by cost:#32
+1:25     "Player" add {W} by #32
+1:25     new ability #33 mana of #9 "Shattered Sanctum" ? controller "Player"
+1:25     #9 "Shattered Sanctum" tap by cost:#33
+1:25     "Player" add {B} restriction ? by #33
+1:25     "Player" pay {W}{B} by cost:#10
+1:25     "Player" priority
+1:25       stack
+1:25         #10 "Vanishing Verse" controller "Player" target #1 "Howlpack Piper // Wildsong Howler"
+1:25     "Player" pass
+1:25     "Opponent" priority
+1:25       stack
+1:25         #10 "Vanishing Verse" controller "Player" target #1 "Howlpack Piper // Wildsong Howler"
+1:25     "Opponent" pass
+1:25     #10 "Vanishing Verse" resolve
+1:25     #1 "Howlpack Piper // Wildsong Howler" move battlefield -> exile by #10
+1:25     #10 "Vanishing Verse" move stack -> graveyard by rule:resolve
+1:29   cleanup
+1:29 turn 8 "Player"
+1:29   keyframe
+1:29     player "Player" life 16 poison 0 library 50
+1:29     player "Opponent" life 20 poison 0 library 68
+1:29     night
+1:29     #1 "Howlpack Piper // Wildsong Howler" exile
+1:29     #2 "Overgrown Farmland" battlefield "Opponent" types land tapped
+1:29     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" battlefield "Opponent" face "Tovolar, the Midnight Scourge" types creature pt 4/4 tapped
+1:29     #4 "Mountain" battlefield "Opponent" types land tapped
+1:29     #5 hand "Opponent"
+1:29     #6 hand "Opponent"
+1:29     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+1:29     #8 "Sheltered by Ghosts" hand "Player"
+1:29     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+1:29     #10 "Vanishing Verse" graveyard "Player"
+1:29     #11 "Archangel of Tithes" hand "Player"
+1:29     #12 "Archangel of Tithes" hand "Player"
+1:29     #13 "Fatal Push" hand "Player"
+1:29     #14 "Concealed Courtyard" battlefield "Player" types land
+1:29     #15 "Liesa, Forgotten Archangel" hand "Player"
+1:29     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+1:29     #18 "Plains" battlefield "Player" types land tapped
+1:29     #19 "Mountain" battlefield "Opponent" types land tapped
+1:29     #23 "Fatal Push" hand "Player"
+1:29     #24 hand "Opponent"
+1:29     #31 hand "Opponent"
+1:29   untap
+1:29     #9 "Shattered Sanctum" untap by rule:untap
+1:29     #18 "Plains" untap by rule:untap
+1:29   upkeep
+1:29   draw
+1:29     new card #34 "Castle Ardenvale" owner "Player" in library top 1 src arena:70385
+1:29     #34 "Castle Ardenvale" move library -> hand as draw by rule:draw
+1:29   precombat-main
+1:32     #34 "Castle Ardenvale" play from hand types land
+1:33     #12 "Archangel of Tithes" cast from hand
+1:34     new ability #35 mana of #18 "Plains" ? controller "Player"
+1:34     #18 "Plains" tap by cost:#35
+1:34     "Player" add {W} by #35
+1:34     new ability #36 mana of #34 "Castle Ardenvale" ? controller "Player"
+1:34     #34 "Castle Ardenvale" tap by cost:#36
+1:34     "Player" add {W} by #36
+1:34     new ability #37 mana of #9 "Shattered Sanctum" ? controller "Player"
+1:34     #9 "Shattered Sanctum" tap by cost:#37
+1:34     "Player" add {W} restriction ? by #37
+1:34     new ability #38 mana of #14 "Concealed Courtyard" ? controller "Player"
+1:34     #14 "Concealed Courtyard" tap by cost:#38
+1:34     "Player" add {W} restriction ? by #38
+1:34     "Player" pay {W}{W}{W}{W} by cost:#12
+1:34     "Player" priority
+1:34       stack
+1:34         #12 "Archangel of Tithes" controller "Player"
+1:34     "Player" pass
+1:34     "Opponent" priority
+1:34       stack
+1:34         #12 "Archangel of Tithes" controller "Player"
+1:34     "Opponent" pass
+1:34     #12 "Archangel of Tithes" resolve
+1:34     #12 "Archangel of Tithes" move stack -> battlefield types creature pt 3/5 by rule:resolve
+1:34   beginning-of-combat
+1:34   declare-attackers
+1:34   end-of-combat
+1:34   postcombat-main
+1:34   end
+1:34   cleanup
+1:34 turn 9 "Opponent"
+1:34   keyframe
+1:34     player "Player" life 16 poison 0 library 49
+1:34     player "Opponent" life 20 poison 0 library 68
+1:34     night
+1:34     #1 "Howlpack Piper // Wildsong Howler" exile
+1:34     #2 "Overgrown Farmland" battlefield "Opponent" types land tapped
+1:34     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" battlefield "Opponent" face "Tovolar, the Midnight Scourge" types creature pt 4/4 tapped
+1:34     #4 "Mountain" battlefield "Opponent" types land tapped
+1:34     #5 hand "Opponent"
+1:34     #6 hand "Opponent"
+1:34     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+1:34     #8 "Sheltered by Ghosts" hand "Player"
+1:34     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+1:34     #10 "Vanishing Verse" graveyard "Player"
+1:34     #11 "Archangel of Tithes" hand "Player"
+1:34     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5
+1:34     #13 "Fatal Push" hand "Player"
+1:34     #14 "Concealed Courtyard" battlefield "Player" types land tapped
+1:34     #15 "Liesa, Forgotten Archangel" hand "Player"
+1:34     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+1:34     #18 "Plains" battlefield "Player" types land tapped
+1:34     #19 "Mountain" battlefield "Opponent" types land tapped
+1:34     #23 "Fatal Push" hand "Player"
+1:34     #24 hand "Opponent"
+1:34     #31 hand "Opponent"
+1:34     #34 "Castle Ardenvale" battlefield "Player" types land tapped
+1:34   untap
+1:34     #7 "Thornspire Verge" untap by rule:untap
+1:34     #4 "Mountain" untap by rule:untap
+1:34     #2 "Overgrown Farmland" untap by rule:untap
+1:34     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" untap by rule:untap
+1:34     #19 "Mountain" untap by rule:untap
+1:34   upkeep
+1:34   draw
+1:34     new hidden #39 owner "Opponent" in library top 1
+1:34     #39 move library -> hand as draw by rule:draw
+1:34   precombat-main
+1:39     #31 identify "Forest" src arena:96191
+1:39     #31 "Forest" play from hand types land
+1:43     #24 identify "Kessig Naturalist // Lord of the Ulvenwald" src arena:78596
+1:43     #24 "Kessig Naturalist // Lord of the Ulvenwald" cast from hand face "Kessig Naturalist"
+1:43     new ability #40 mana of #4 "Mountain" ? controller "Opponent"
+1:43     #4 "Mountain" tap by cost:#40
+1:43     "Opponent" add {R} by #40
+1:43     new ability #41 mana of #31 "Forest" ? controller "Opponent"
+1:43     #31 "Forest" tap by cost:#41
+1:43     "Opponent" add {G} by #41
+1:43     "Opponent" pay {R}{G} by cost:#24
+1:43     "Opponent" priority
+1:43       stack
+1:43         #24 "Kessig Naturalist // Lord of the Ulvenwald" face "Kessig Naturalist" controller "Opponent"
+1:43     "Opponent" pass
+1:43     "Player" priority
+1:43       stack
+1:43         #24 "Kessig Naturalist // Lord of the Ulvenwald" face "Kessig Naturalist" controller "Opponent"
+1:43     "Player" pass
+1:43     #24 "Kessig Naturalist // Lord of the Ulvenwald" resolve
+1:43     #24 "Kessig Naturalist // Lord of the Ulvenwald" move stack -> battlefield face "Lord of the Ulvenwald" types creature pt 3/3 by rule:resolve
+1:43     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" pt 4/4 -> 5/5 by #24
+1:47   beginning-of-combat
+1:47   declare-attackers
+1:49     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" attack "Player"
+1:49     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" tap by rule:declare-attackers
+1:51     new ability #42 mana of #19 "Mountain" ? controller "Opponent"
+1:51     #19 "Mountain" tap by cost:#42
+1:51     "Opponent" add {R} by #42
+1:51     "Opponent" pay {R} by cost:#12
+1:54   declare-blockers
+1:56   combat-damage
+1:56     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" damage "Player" 5 by rule:combat-damage
+1:56     "Player" life 16 -> 11 by rule:combat-damage
+1:56     new ability #43 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent" in stack
+1:56     "Opponent" priority
+1:56       stack
+1:56         #43 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+1:56     "Opponent" pass
+1:56     "Player" priority
+1:56       stack
+1:56         #43 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+1:56     "Player" pass
+1:56     #43 resolve
+1:56     new hidden #44 owner "Opponent" in library top 1
+1:56     #44 move library -> hand as draw by #43
+1:56     #43 cease by rule:resolve
+1:56   end-of-combat
+1:56   postcombat-main
+2:03   end
+2:03   cleanup
+2:03 turn 10 "Player"
+2:03   keyframe
+2:03     player "Player" life 11 poison 0 library 49
+2:03     player "Opponent" life 20 poison 0 library 66
+2:03     night
+2:03     #1 "Howlpack Piper // Wildsong Howler" exile
+2:03     #2 "Overgrown Farmland" battlefield "Opponent" types land
+2:03     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" battlefield "Opponent" face "Tovolar, the Midnight Scourge" types creature pt 5/5 tapped
+2:03     #4 "Mountain" battlefield "Opponent" types land tapped
+2:03     #5 hand "Opponent"
+2:03     #6 hand "Opponent"
+2:03     #7 "Thornspire Verge" battlefield "Opponent" types land
+2:03     #8 "Sheltered by Ghosts" hand "Player"
+2:03     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+2:03     #10 "Vanishing Verse" graveyard "Player"
+2:03     #11 "Archangel of Tithes" hand "Player"
+2:03     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5
+2:03     #13 "Fatal Push" hand "Player"
+2:03     #14 "Concealed Courtyard" battlefield "Player" types land tapped
+2:03     #15 "Liesa, Forgotten Archangel" hand "Player"
+2:03     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+2:03     #18 "Plains" battlefield "Player" types land tapped
+2:03     #19 "Mountain" battlefield "Opponent" types land tapped
+2:03     #23 "Fatal Push" hand "Player"
+2:03     #24 "Kessig Naturalist // Lord of the Ulvenwald" battlefield "Opponent" face "Lord of the Ulvenwald" types creature pt 3/3
+2:03     #31 "Forest" battlefield "Opponent" types land tapped
+2:03     #34 "Castle Ardenvale" battlefield "Player" types land tapped
+2:03     #39 hand "Opponent"
+2:03     #44 hand "Opponent"
+2:03   untap
+2:03     #9 "Shattered Sanctum" untap by rule:untap
+2:03     #14 "Concealed Courtyard" untap by rule:untap
+2:03     #18 "Plains" untap by rule:untap
+2:03     #34 "Castle Ardenvale" untap by rule:untap
+2:03   upkeep
+2:03   draw
+2:03     new card #45 "Speaker of the Heavens" owner "Player" in library top 1 src arena:71820
+2:03     #45 "Speaker of the Heavens" move library -> hand as draw by rule:draw
+2:03   precombat-main
+2:09     #45 "Speaker of the Heavens" cast from hand
+2:10     new ability #46 mana of #18 "Plains" ? controller "Player"
+2:10     #18 "Plains" tap by cost:#46
+2:10     "Player" add {W} by #46
+2:10     "Player" pay {W} by cost:#45
+2:10     "Player" priority
+2:10       stack
+2:10         #45 "Speaker of the Heavens" controller "Player"
+2:10     "Player" pass
+2:10     "Opponent" priority
+2:10       stack
+2:10         #45 "Speaker of the Heavens" controller "Player"
+2:13     "Opponent" pass
+2:13     #45 "Speaker of the Heavens" resolve
+2:13     #45 "Speaker of the Heavens" move stack -> battlefield types creature pt 1/1 by rule:resolve
+2:17     #23 "Fatal Push" cast from hand
+2:18     #23 "Fatal Push" target #24 "Kessig Naturalist // Lord of the Ulvenwald"
+2:19     new ability #47 mana of #9 "Shattered Sanctum" ? controller "Player"
+2:19     #9 "Shattered Sanctum" tap by cost:#47
+2:19     "Player" add {B} restriction ? by #47
+2:19     "Player" pay {B} by cost:#23
+2:19     "Player" priority
+2:19       stack
+2:19         #23 "Fatal Push" controller "Player" target #24 "Kessig Naturalist // Lord of the Ulvenwald"
+2:19     "Player" pass
+2:19     "Opponent" priority
+2:19       stack
+2:19         #23 "Fatal Push" controller "Player" target #24 "Kessig Naturalist // Lord of the Ulvenwald"
+2:31     "Opponent" pass
+2:31     #23 "Fatal Push" resolve
+2:31     #24 "Kessig Naturalist // Lord of the Ulvenwald" move battlefield -> graveyard as destroy by #23
+2:31     #23 "Fatal Push" move stack -> graveyard by rule:resolve
+2:31     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" pt 5/5 -> 4/4 by #24
+2:36   beginning-of-combat
+2:38   declare-attackers
+2:40     #12 "Archangel of Tithes" attack "Opponent"
+2:40     #12 "Archangel of Tithes" tap by rule:declare-attackers
+2:41   declare-blockers
+2:45   combat-damage
+2:45     #12 "Archangel of Tithes" damage "Opponent" 3 by rule:combat-damage
+2:45     "Opponent" life 20 -> 17 by rule:combat-damage
+2:45   end-of-combat
+2:45   postcombat-main
+2:50   end
+2:52   cleanup
+2:52 turn 11 "Opponent"
+2:52   keyframe
+2:52     player "Player" life 11 poison 0 library 48
+2:52     player "Opponent" life 17 poison 0 library 66
+2:52     night
+2:52     #1 "Howlpack Piper // Wildsong Howler" exile
+2:52     #2 "Overgrown Farmland" battlefield "Opponent" types land
+2:52     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" battlefield "Opponent" face "Tovolar, the Midnight Scourge" types creature pt 4/4 tapped
+2:52     #4 "Mountain" battlefield "Opponent" types land tapped
+2:52     #5 hand "Opponent"
+2:52     #6 hand "Opponent"
+2:52     #7 "Thornspire Verge" battlefield "Opponent" types land
+2:52     #8 "Sheltered by Ghosts" hand "Player"
+2:52     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+2:52     #10 "Vanishing Verse" graveyard "Player"
+2:52     #11 "Archangel of Tithes" hand "Player"
+2:52     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5 tapped
+2:52     #13 "Fatal Push" hand "Player"
+2:52     #14 "Concealed Courtyard" battlefield "Player" types land
+2:52     #15 "Liesa, Forgotten Archangel" hand "Player"
+2:52     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+2:52     #18 "Plains" battlefield "Player" types land tapped
+2:52     #19 "Mountain" battlefield "Opponent" types land tapped
+2:52     #23 "Fatal Push" graveyard "Player"
+2:52     #24 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+2:52     #31 "Forest" battlefield "Opponent" types land tapped
+2:52     #34 "Castle Ardenvale" battlefield "Player" types land
+2:52     #39 hand "Opponent"
+2:52     #44 hand "Opponent"
+2:52     #45 "Speaker of the Heavens" battlefield "Player" types creature pt 1/1
+2:52   untap
+2:52     day by rule:day-night
+2:52     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" transform by #3
+2:52     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" pt 4/4 -> 3/3 by #3
+2:52     #4 "Mountain" untap by rule:untap
+2:52     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" untap by rule:untap
+2:52     #19 "Mountain" untap by rule:untap
+2:52     #31 "Forest" untap by rule:untap
+2:52   upkeep
+2:52   draw
+2:52     new hidden #48 owner "Opponent" in library top 1
+2:52     #48 move library -> hand as draw by rule:draw
+2:52   precombat-main
+3:00     #6 identify "Fixture Land 97998" src arena:97998
+3:00     #6 "Fixture Land 97998" play from hand tapped types land
+3:10     #44 identify "Howling Moon" src arena:79016
+3:10     #44 "Howling Moon" cast from hand
+3:10     new ability #49 mana of #4 "Mountain" ? controller "Opponent"
+3:10     #4 "Mountain" tap by cost:#49
+3:10     "Opponent" add {R} by #49
+3:10     new ability #50 mana of #19 "Mountain" ? controller "Opponent"
+3:10     #19 "Mountain" tap by cost:#50
+3:10     "Opponent" add {R} by #50
+3:10     new ability #51 mana of #31 "Forest" ? controller "Opponent"
+3:10     #31 "Forest" tap by cost:#51
+3:10     "Opponent" add {G} by #51
+3:10     "Opponent" pay {R}{R}{G} by cost:#44
+3:10     "Opponent" priority
+3:10       stack
+3:10         #44 "Howling Moon" controller "Opponent"
+3:10     "Opponent" pass
+3:10     "Player" priority
+3:10       stack
+3:10         #44 "Howling Moon" controller "Opponent"
+3:14     "Player" pass
+3:14     #44 "Howling Moon" resolve
+3:14     #44 "Howling Moon" move stack -> battlefield types enchantment by rule:resolve
+3:18   beginning-of-combat
+3:18     new ability #52 triggered of #44 "Howling Moon" ? controller "Opponent" in stack
+3:19     #52 target #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge"
+3:19     "Opponent" priority
+3:19       stack
+3:19         #52 triggered of #44 "Howling Moon" ? controller "Opponent" target #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge"
+3:19     "Opponent" pass
+3:19     "Player" priority
+3:19       stack
+3:19         #52 triggered of #44 "Howling Moon" ? controller "Opponent" target #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge"
+3:19     "Player" pass
+3:19     #52 resolve
+3:19     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" pt 3/3 -> 5/5 by #52
+3:19     #52 cease by rule:resolve
+3:21   declare-attackers
+3:22     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" attack "Player"
+3:22     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" tap by rule:declare-attackers
+3:24   declare-blockers
+3:27   combat-damage
+3:27     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" damage "Player" 5 by rule:combat-damage
+3:27     "Player" life 11 -> 6 by rule:combat-damage
+3:27     new ability #53 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent" in stack
+3:27     "Opponent" priority
+3:27       stack
+3:27         #53 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+3:27     "Opponent" pass
+3:27     "Player" priority
+3:27       stack
+3:27         #53 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+3:30     "Player" pass
+3:30     #53 resolve
+3:30     new hidden #54 owner "Opponent" in library top 1
+3:30     #54 move library -> hand as draw by #53
+3:30     #53 cease by rule:resolve
+3:30   end-of-combat
+3:30   postcombat-main
+3:35     #48 identify "Werewolf Pack Leader" src arena:77316
+3:35     #48 "Werewolf Pack Leader" cast from hand
+3:35     new ability #55 mana of #2 "Overgrown Farmland" ? controller "Opponent"
+3:35     #2 "Overgrown Farmland" tap by cost:#55
+3:35     "Opponent" add {G} restriction ? by #55
+3:35     new ability #56 mana of #7 "Thornspire Verge" ? controller "Opponent"
+3:35     #7 "Thornspire Verge" tap by cost:#56
+3:35     "Opponent" add {G} restriction ? by #56
+3:35     "Opponent" pay {G}{G} by cost:#48
+3:35     "Opponent" priority
+3:35       stack
+3:35         #48 "Werewolf Pack Leader" controller "Opponent"
+3:35     "Opponent" pass
+3:35     "Player" priority
+3:35       stack
+3:35         #48 "Werewolf Pack Leader" controller "Opponent"
+3:37     "Player" pass
+3:37     #48 "Werewolf Pack Leader" resolve
+3:37     #48 "Werewolf Pack Leader" move stack -> battlefield types creature pt 3/3 by rule:resolve
+3:37   end
+3:39     #13 "Fatal Push" cast from hand
+3:41     #13 "Fatal Push" target #48 "Werewolf Pack Leader"
+3:41     new ability #57 mana of #14 "Concealed Courtyard" ? controller "Player"
+3:41     #14 "Concealed Courtyard" tap by cost:#57
+3:41     "Player" add {B} restriction ? by #57
+3:41     "Player" pay {B} by cost:#13
+3:41     "Player" priority
+3:41       stack
+3:41         #13 "Fatal Push" controller "Player" target #48 "Werewolf Pack Leader"
+3:41     "Player" pass
+3:41     "Opponent" priority
+3:41       stack
+3:41         #13 "Fatal Push" controller "Player" target #48 "Werewolf Pack Leader"
+3:41     "Opponent" pass
+3:41     #13 "Fatal Push" resolve
+3:41     #48 "Werewolf Pack Leader" move battlefield -> graveyard as destroy by #13
+3:41     #13 "Fatal Push" move stack -> graveyard by rule:resolve
+3:41   cleanup
+3:41     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" pt 5/5 -> 3/3 by rule:cleanup
+3:41 turn 12 "Player"
+3:41   keyframe
+3:41     player "Player" life 6 poison 0 library 48
+3:41     player "Opponent" life 17 poison 0 library 64
+3:41     day
+3:41     #1 "Howlpack Piper // Wildsong Howler" exile
+3:41     #2 "Overgrown Farmland" battlefield "Opponent" types land tapped
+3:41     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" battlefield "Opponent" types creature pt 3/3 tapped
+3:41     #4 "Mountain" battlefield "Opponent" types land tapped
+3:41     #5 hand "Opponent"
+3:41     #6 "Fixture Land 97998" battlefield "Opponent" types land tapped
+3:41     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+3:41     #8 "Sheltered by Ghosts" hand "Player"
+3:41     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+3:41     #10 "Vanishing Verse" graveyard "Player"
+3:41     #11 "Archangel of Tithes" hand "Player"
+3:41     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5 tapped
+3:41     #13 "Fatal Push" graveyard "Player"
+3:41     #14 "Concealed Courtyard" battlefield "Player" types land tapped
+3:41     #15 "Liesa, Forgotten Archangel" hand "Player"
+3:41     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+3:41     #18 "Plains" battlefield "Player" types land tapped
+3:41     #19 "Mountain" battlefield "Opponent" types land tapped
+3:41     #23 "Fatal Push" graveyard "Player"
+3:41     #24 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+3:41     #31 "Forest" battlefield "Opponent" types land tapped
+3:41     #34 "Castle Ardenvale" battlefield "Player" types land
+3:41     #39 hand "Opponent"
+3:41     #44 "Howling Moon" battlefield "Opponent" types enchantment
+3:41     #45 "Speaker of the Heavens" battlefield "Player" types creature pt 1/1
+3:41     #48 "Werewolf Pack Leader" graveyard "Opponent"
+3:41     #54 hand "Opponent"
+3:41   untap
+3:41     #9 "Shattered Sanctum" untap by rule:untap
+3:41     #14 "Concealed Courtyard" untap by rule:untap
+3:41     #18 "Plains" untap by rule:untap
+3:41     #12 "Archangel of Tithes" untap by rule:untap
+3:41   upkeep
+3:41   draw
+3:41     new card #58 "The Wandering Emperor" owner "Player" in library top 1 src arena:79464
+3:41     #58 "The Wandering Emperor" move library -> hand as draw by rule:draw
+3:41   precombat-main
+3:51     #8 "Sheltered by Ghosts" cast from hand
+3:55     #8 "Sheltered by Ghosts" target #45 "Speaker of the Heavens"
+3:57     new ability #59 mana of #18 "Plains" ? controller "Player"
+3:57     #18 "Plains" tap by cost:#59
+3:57     "Player" add {W} by #59
+3:57     new ability #60 mana of #34 "Castle Ardenvale" ? controller "Player"
+3:57     #34 "Castle Ardenvale" tap by cost:#60
+3:57     "Player" add {W} by #60
+3:57     "Player" pay {W}{W} by cost:#8
+3:57     "Player" priority
+3:57       stack
+3:57         #8 "Sheltered by Ghosts" controller "Player" target #45 "Speaker of the Heavens"
+3:57     "Player" pass
+3:57     "Opponent" priority
+3:57       stack
+3:57         #8 "Sheltered by Ghosts" controller "Player" target #45 "Speaker of the Heavens"
+3:57     "Opponent" pass
+3:57     #8 "Sheltered by Ghosts" resolve
+3:57     #8 "Sheltered by Ghosts" move stack -> battlefield types enchantment by rule:resolve
+3:57     #8 "Sheltered by Ghosts" attach #45 "Speaker of the Heavens" by rule:resolve
+3:57     new ability #61 triggered of #8 "Sheltered by Ghosts" ? controller "Player" in stack
+3:57     #45 "Speaker of the Heavens" pt 1/1 -> 2/1 by #8
+4:01     #61 target #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge"
+4:01     "Player" priority
+4:01       stack
+4:01         #61 triggered of #8 "Sheltered by Ghosts" ? controller "Player" target #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge"
+4:01     "Player" pass
+4:01     "Opponent" priority
+4:01       stack
+4:01         #61 triggered of #8 "Sheltered by Ghosts" ? controller "Player" target #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge"
+4:01     "Opponent" pass
+4:01     #61 resolve
+4:01     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" move battlefield -> exile with #8 by #61
+4:01     #61 cease by rule:resolve
+4:01   beginning-of-combat
+4:01   declare-attackers
+4:04     #12 "Archangel of Tithes" attack "Opponent"
+4:04     #45 "Speaker of the Heavens" attack "Opponent"
+4:04     #12 "Archangel of Tithes" tap by rule:declare-attackers
+4:04   declare-blockers
+4:04   combat-damage
+4:04     #45 "Speaker of the Heavens" damage "Opponent" 2 by rule:combat-damage
+4:04     #12 "Archangel of Tithes" damage "Opponent" 3 by rule:combat-damage
+4:04     "Opponent" life 17 -> 12 by rule:combat-damage
+4:04     "Player" life 6 -> 8 by rule:combat-damage
+4:04   end-of-combat
+4:04   postcombat-main
+4:04   end
+4:04   cleanup
+4:04 turn 13 "Opponent"
+4:04   keyframe
+4:04     player "Player" life 8 poison 0 library 47
+4:04     player "Opponent" life 12 poison 0 library 64
+4:04     day
+4:04     #1 "Howlpack Piper // Wildsong Howler" exile
+4:04     #2 "Overgrown Farmland" battlefield "Opponent" types land tapped
+4:04     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" exile with #8
+4:04     #4 "Mountain" battlefield "Opponent" types land tapped
+4:04     #5 hand "Opponent"
+4:04     #6 "Fixture Land 97998" battlefield "Opponent" types land tapped
+4:04     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+4:04     #8 "Sheltered by Ghosts" battlefield "Player" types enchantment attached #45
+4:04     #9 "Shattered Sanctum" battlefield "Player" types land
+4:04     #10 "Vanishing Verse" graveyard "Player"
+4:04     #11 "Archangel of Tithes" hand "Player"
+4:04     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5 tapped
+4:04     #13 "Fatal Push" graveyard "Player"
+4:04     #14 "Concealed Courtyard" battlefield "Player" types land
+4:04     #15 "Liesa, Forgotten Archangel" hand "Player"
+4:04     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+4:04     #18 "Plains" battlefield "Player" types land tapped
+4:04     #19 "Mountain" battlefield "Opponent" types land tapped
+4:04     #23 "Fatal Push" graveyard "Player"
+4:04     #24 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+4:04     #31 "Forest" battlefield "Opponent" types land tapped
+4:04     #34 "Castle Ardenvale" battlefield "Player" types land tapped
+4:04     #39 hand "Opponent"
+4:04     #44 "Howling Moon" battlefield "Opponent" types enchantment
+4:04     #45 "Speaker of the Heavens" battlefield "Player" types creature pt 2/1
+4:04     #48 "Werewolf Pack Leader" graveyard "Opponent"
+4:04     #54 hand "Opponent"
+4:04     #58 "The Wandering Emperor" hand "Player"
+4:04   untap
+4:04     #7 "Thornspire Verge" untap by rule:untap
+4:04     #4 "Mountain" untap by rule:untap
+4:04     #2 "Overgrown Farmland" untap by rule:untap
+4:04     #19 "Mountain" untap by rule:untap
+4:04     #31 "Forest" untap by rule:untap
+4:04     #6 "Fixture Land 97998" untap by rule:untap
+4:04   upkeep
+4:04   draw
+4:04     new hidden #62 owner "Opponent" in library top 1
+4:04     #62 move library -> hand as draw by rule:draw
+4:04   precombat-main
+4:24     #62 identify "Fixture Pathway 73476 // Fixture Pathway 73477" src arena:73476
+4:24     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" play from hand face "Fixture Pathway 73477" types land
+4:28     #54 identify "Howlpack Piper // Wildsong Howler" src arena:79017
+4:28     #54 "Howlpack Piper // Wildsong Howler" cast from hand face "Howlpack Piper"
+4:28     new ability #63 mana of #4 "Mountain" ? controller "Opponent"
+4:28     #4 "Mountain" tap by cost:#63
+4:28     "Opponent" add {R} by #63
+4:28     new ability #64 mana of #19 "Mountain" ? controller "Opponent"
+4:28     #19 "Mountain" tap by cost:#64
+4:28     "Opponent" add {R} by #64
+4:28     new ability #65 mana of #31 "Forest" ? controller "Opponent"
+4:28     #31 "Forest" tap by cost:#65
+4:28     "Opponent" add {G} by #65
+4:28     new ability #66 mana of #62 "Fixture Pathway 73476 // Fixture Pathway 73477" ? controller "Opponent"
+4:28     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" tap by cost:#66
+4:28     "Opponent" add {G} by #66
+4:28     "Opponent" pay {R}{R}{G}{G} by cost:#54
+4:28     "Opponent" priority
+4:28       stack
+4:28         #54 "Howlpack Piper // Wildsong Howler" face "Howlpack Piper" controller "Opponent"
+4:28     "Opponent" pass
+4:28     "Player" priority
+4:28       stack
+4:28         #54 "Howlpack Piper // Wildsong Howler" face "Howlpack Piper" controller "Opponent"
+4:28     "Player" pass
+4:28     #54 "Howlpack Piper // Wildsong Howler" resolve
+4:28     #54 "Howlpack Piper // Wildsong Howler" move stack -> battlefield types creature pt 2/2 by rule:resolve
+4:31   beginning-of-combat
+4:31     new ability #67 triggered of #44 "Howling Moon" ? controller "Opponent" in stack
+4:33     #67 target #54 "Howlpack Piper // Wildsong Howler"
+4:33     "Opponent" priority
+4:33       stack
+4:33         #67 triggered of #44 "Howling Moon" ? controller "Opponent" target #54 "Howlpack Piper // Wildsong Howler"
+4:33     "Opponent" pass
+4:33     "Player" priority
+4:33       stack
+4:33         #67 triggered of #44 "Howling Moon" ? controller "Opponent" target #54 "Howlpack Piper // Wildsong Howler"
+4:33     "Player" pass
+4:33     #67 resolve
+4:33     #54 "Howlpack Piper // Wildsong Howler" pt 2/2 -> 4/4 by #67
+4:33     #67 cease by rule:resolve
+4:33   declare-attackers
+4:33   end-of-combat
+4:33   postcombat-main
+4:35   end
+4:35   cleanup
+4:35     #54 "Howlpack Piper // Wildsong Howler" pt 4/4 -> 2/2 by rule:cleanup
+4:35 turn 14 "Player"
+4:35   keyframe
+4:35     player "Player" life 8 poison 0 library 47
+4:35     player "Opponent" life 12 poison 0 library 63
+4:35     day
+4:35     #1 "Howlpack Piper // Wildsong Howler" exile
+4:35     #2 "Overgrown Farmland" battlefield "Opponent" types land
+4:35     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" exile with #8
+4:35     #4 "Mountain" battlefield "Opponent" types land tapped
+4:35     #5 hand "Opponent"
+4:35     #6 "Fixture Land 97998" battlefield "Opponent" types land
+4:35     #7 "Thornspire Verge" battlefield "Opponent" types land
+4:35     #8 "Sheltered by Ghosts" battlefield "Player" types enchantment attached #45
+4:35     #9 "Shattered Sanctum" battlefield "Player" types land
+4:35     #10 "Vanishing Verse" graveyard "Player"
+4:35     #11 "Archangel of Tithes" hand "Player"
+4:35     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5 tapped
+4:35     #13 "Fatal Push" graveyard "Player"
+4:35     #14 "Concealed Courtyard" battlefield "Player" types land
+4:35     #15 "Liesa, Forgotten Archangel" hand "Player"
+4:35     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+4:35     #18 "Plains" battlefield "Player" types land tapped
+4:35     #19 "Mountain" battlefield "Opponent" types land tapped
+4:35     #23 "Fatal Push" graveyard "Player"
+4:35     #24 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+4:35     #31 "Forest" battlefield "Opponent" types land tapped
+4:35     #34 "Castle Ardenvale" battlefield "Player" types land tapped
+4:35     #39 hand "Opponent"
+4:35     #44 "Howling Moon" battlefield "Opponent" types enchantment
+4:35     #45 "Speaker of the Heavens" battlefield "Player" types creature pt 2/1
+4:35     #48 "Werewolf Pack Leader" graveyard "Opponent"
+4:35     #54 "Howlpack Piper // Wildsong Howler" battlefield "Opponent" types creature pt 2/2
+4:35     #58 "The Wandering Emperor" hand "Player"
+4:35     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+4:35   untap
+4:35     #18 "Plains" untap by rule:untap
+4:35     #34 "Castle Ardenvale" untap by rule:untap
+4:35     #12 "Archangel of Tithes" untap by rule:untap
+4:35   upkeep
+4:35   draw
+4:35     new card #68 "Bleachbone Verge" owner "Player" in library top 1 src arena:95052
+4:35     #68 "Bleachbone Verge" move library -> hand as draw by rule:draw
+4:35   precombat-main
+4:38     #68 "Bleachbone Verge" play from hand types land
+4:53   beginning-of-combat
+5:22   declare-attackers
+5:25     #12 "Archangel of Tithes" attack "Opponent"
+5:25     #45 "Speaker of the Heavens" attack "Opponent"
+5:25     #12 "Archangel of Tithes" tap by rule:declare-attackers
+5:31     #39 identify "Fixture Aura 106371" src arena:106371
+5:31     #39 "Fixture Aura 106371" cast from hand
+5:31     #39 "Fixture Aura 106371" target #54 "Howlpack Piper // Wildsong Howler"
+5:31     new ability #69 mana of #6 "Fixture Land 97998" ? controller "Opponent"
+5:31     #6 "Fixture Land 97998" tap by cost:#69
+5:31     "Opponent" add {U} by #69
+5:31     new ability #70 mana of #7 "Thornspire Verge" ? controller "Opponent"
+5:31     #7 "Thornspire Verge" tap by cost:#70
+5:31     "Opponent" add {G} restriction ? by #70
+5:31     "Opponent" pay {U}{G} by cost:#39
+5:31     "Opponent" priority
+5:31       stack
+5:31         #39 "Fixture Aura 106371" controller "Opponent" target #54 "Howlpack Piper // Wildsong Howler"
+5:31     "Opponent" pass
+5:31     "Player" priority
+5:31       stack
+5:31         #39 "Fixture Aura 106371" controller "Opponent" target #54 "Howlpack Piper // Wildsong Howler"
+5:33     "Player" pass
+5:33     #39 "Fixture Aura 106371" resolve
+5:33     #39 "Fixture Aura 106371" move stack -> battlefield types enchantment by rule:resolve
+5:33     #39 "Fixture Aura 106371" attach #54 "Howlpack Piper // Wildsong Howler" by rule:resolve
+5:33     #54 "Howlpack Piper // Wildsong Howler" pt 2/2 -> 3/2 by #39
+5:36   declare-blockers
+5:40     #54 "Howlpack Piper // Wildsong Howler" block #45 "Speaker of the Heavens"
+5:40     new ability #71 mana of #2 "Overgrown Farmland" ? controller "Opponent"
+5:40     #2 "Overgrown Farmland" tap by cost:#71
+5:40     "Opponent" add {W} restriction ? by #71
+5:40     "Opponent" pay {W} by ?
+5:41     #58 "The Wandering Emperor" cast from hand
+5:42     new ability #72 mana of #18 "Plains" ? controller "Player"
+5:42     #18 "Plains" tap by cost:#72
+5:42     "Player" add {W} by #72
+5:42     new ability #73 mana of #34 "Castle Ardenvale" ? controller "Player"
+5:42     #34 "Castle Ardenvale" tap by cost:#73
+5:42     "Player" add {W} by #73
+5:42     new ability #74 mana of #9 "Shattered Sanctum" ? controller "Player"
+5:42     #9 "Shattered Sanctum" tap by cost:#74
+5:42     "Player" add {W} restriction ? by #74
+5:42     new ability #75 mana of #14 "Concealed Courtyard" ? controller "Player"
+5:42     #14 "Concealed Courtyard" tap by cost:#75
+5:42     "Player" add {W} restriction ? by #75
+5:42     "Player" pay {W}{W}{W}{W} by cost:#58
+5:42     "Player" priority
+5:42       stack
+5:42         #58 "The Wandering Emperor" controller "Player"
+5:42     "Player" pass
+5:42     "Opponent" priority
+5:42       stack
+5:42         #58 "The Wandering Emperor" controller "Player"
+5:42     "Opponent" pass
+5:42     #58 "The Wandering Emperor" resolve
+5:42     #58 "The Wandering Emperor" move stack -> battlefield types planeswalker by rule:resolve
+5:42     #58 "The Wandering Emperor" counters "loyalty" 0 -> 3 by #58
+5:46     new ability #76 loyalty of #58 "The Wandering Emperor" ? controller "Player" in stack
+5:47     #76 target #45 "Speaker of the Heavens"
+5:47     #58 "The Wandering Emperor" counters "loyalty" 3 -> 4 by cost:#76
+5:47     "Player" priority
+5:47       stack
+5:47         #76 loyalty of #58 "The Wandering Emperor" ? controller "Player" target #45 "Speaker of the Heavens"
+5:47     "Player" pass
+5:47     "Opponent" priority
+5:47       stack
+5:47         #76 loyalty of #58 "The Wandering Emperor" ? controller "Player" target #45 "Speaker of the Heavens"
+5:47     "Opponent" pass
+5:47     #76 resolve
+5:47     #45 "Speaker of the Heavens" counters "+1/+1" 0 -> 1 by #76
+5:47     #45 "Speaker of the Heavens" pt 2/1 -> 3/2 by #76
+5:47     #76 cease by rule:resolve
+5:47   combat-damage
+5:47     #45 "Speaker of the Heavens" damage #54 "Howlpack Piper // Wildsong Howler" 3 by rule:combat-damage
+5:47     "Player" life 8 -> 11 by rule:combat-damage
+5:47     #54 "Howlpack Piper // Wildsong Howler" move battlefield -> graveyard by rule:sba
+5:47     #39 "Fixture Aura 106371" move battlefield -> graveyard by rule:sba
+5:47     new ability #77 triggered of #39 "Fixture Aura 106371" ? controller "Opponent" in stack
+5:47     "Player" priority
+5:47       stack
+5:47         #77 triggered of #39 "Fixture Aura 106371" ? controller "Opponent"
+5:47     "Player" pass
+5:47     "Opponent" priority
+5:47       stack
+5:47         #77 triggered of #39 "Fixture Aura 106371" ? controller "Opponent"
+5:47     "Opponent" pass
+5:47     #77 resolve
+5:47     #54 "Howlpack Piper // Wildsong Howler" move graveyard -> battlefield tapped types creature pt 2/2 by #77
+5:47     #77 cease by rule:resolve
+5:47   combat-damage
+5:47     #12 "Archangel of Tithes" damage "Opponent" 3 by rule:combat-damage
+5:47     "Opponent" life 12 -> 9 by rule:combat-damage
+5:47   end-of-combat
+5:47   postcombat-main
+5:47   end
+5:47   cleanup
+5:47 turn 15 "Opponent"
+5:47   keyframe
+5:47     player "Player" life 11 poison 0 library 46
+5:47     player "Opponent" life 9 poison 0 library 63
+5:47     day
+5:47     #1 "Howlpack Piper // Wildsong Howler" exile
+5:47     #2 "Overgrown Farmland" battlefield "Opponent" types land tapped
+5:47     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" exile with #8
+5:47     #4 "Mountain" battlefield "Opponent" types land tapped
+5:47     #5 hand "Opponent"
+5:47     #6 "Fixture Land 97998" battlefield "Opponent" types land tapped
+5:47     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+5:47     #8 "Sheltered by Ghosts" battlefield "Player" types enchantment attached #45
+5:47     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+5:47     #10 "Vanishing Verse" graveyard "Player"
+5:47     #11 "Archangel of Tithes" hand "Player"
+5:47     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5 tapped
+5:47     #13 "Fatal Push" graveyard "Player"
+5:47     #14 "Concealed Courtyard" battlefield "Player" types land tapped
+5:47     #15 "Liesa, Forgotten Archangel" hand "Player"
+5:47     #16 "Barrels of Blasting Jelly" battlefield "Opponent" types artifact
+5:47     #18 "Plains" battlefield "Player" types land tapped
+5:47     #19 "Mountain" battlefield "Opponent" types land tapped
+5:47     #23 "Fatal Push" graveyard "Player"
+5:47     #24 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+5:47     #31 "Forest" battlefield "Opponent" types land tapped
+5:47     #34 "Castle Ardenvale" battlefield "Player" types land tapped
+5:47     #39 "Fixture Aura 106371" graveyard "Opponent"
+5:47     #44 "Howling Moon" battlefield "Opponent" types enchantment
+5:47     #45 "Speaker of the Heavens" battlefield "Player" types creature pt 3/2 counters "+1/+1" 1
+5:47     #48 "Werewolf Pack Leader" graveyard "Opponent"
+5:47     #54 "Howlpack Piper // Wildsong Howler" battlefield "Opponent" types creature pt 2/2 tapped
+5:47     #58 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 4
+5:47     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+5:47     #68 "Bleachbone Verge" battlefield "Player" types land
+5:47   untap
+5:47     #7 "Thornspire Verge" untap by rule:untap
+5:47     #4 "Mountain" untap by rule:untap
+5:47     #2 "Overgrown Farmland" untap by rule:untap
+5:47     #19 "Mountain" untap by rule:untap
+5:47     #31 "Forest" untap by rule:untap
+5:47     #6 "Fixture Land 97998" untap by rule:untap
+5:47     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" untap by rule:untap
+5:47     #54 "Howlpack Piper // Wildsong Howler" untap by rule:untap
+5:47   upkeep
+5:47   draw
+5:47     new hidden #78 owner "Opponent" in library top 1
+5:47     #78 move library -> hand as draw by rule:draw
+5:47   precombat-main
+5:58     #78 identify "Thornspire Verge" src arena:92370
+5:58     #78 "Thornspire Verge" play from hand types land
+6:01     new ability #79 activated of #54 "Howlpack Piper // Wildsong Howler" ? controller "Opponent" in stack
+6:01     #54 "Howlpack Piper // Wildsong Howler" tap by cost:#79
+6:01     new ability #80 mana of #4 "Mountain" ? controller "Opponent"
+6:01     #4 "Mountain" tap by cost:#80
+6:01     "Opponent" add {R} by #80
+6:01     new ability #81 mana of #31 "Forest" ? controller "Opponent"
+6:01     #31 "Forest" tap by cost:#81
+6:01     "Opponent" add {G} by #81
+6:01     "Opponent" pay {R}{G} by cost:#79
+6:01     "Opponent" priority
+6:01       stack
+6:01         #79 activated of #54 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+6:01     "Opponent" pass
+6:01     "Player" priority
+6:01       stack
+6:01         #79 activated of #54 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+6:01     "Player" pass
+6:01     #79 resolve
+6:03     #5 identify "Howlpack Piper // Wildsong Howler" src arena:79017
+6:03     #5 "Howlpack Piper // Wildsong Howler" move hand -> battlefield types creature pt 2/2 by #79
+6:03     #54 "Howlpack Piper // Wildsong Howler" untap by ?
+6:03     #79 cease by rule:resolve
+6:13     new ability #82 activated of #16 "Barrels of Blasting Jelly" ? controller "Opponent" in stack
+6:13     #82 target #45 "Speaker of the Heavens"
+6:13     #16 "Barrels of Blasting Jelly" tap by cost:#82
+6:13     new ability #83 mana of #6 "Fixture Land 97998" ? controller "Opponent"
+6:13     #6 "Fixture Land 97998" tap by cost:#83
+6:13     "Opponent" add {U} by #83
+6:13     new ability #84 triggered of #45 "Speaker of the Heavens" ? controller "Player" in stack
+6:13     new ability #85 mana of #19 "Mountain" ? controller "Opponent"
+6:13     #19 "Mountain" tap by cost:#85
+6:13     "Opponent" add {R} by #85
+6:13     new ability #86 mana of #62 "Fixture Pathway 73476 // Fixture Pathway 73477" ? controller "Opponent"
+6:13     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" tap by cost:#86
+6:13     "Opponent" add {G} by #86
+6:13     new ability #87 mana of #2 "Overgrown Farmland" ? controller "Opponent"
+6:13     #2 "Overgrown Farmland" tap by cost:#87
+6:13     "Opponent" add {W} restriction ? by #87
+6:13     new ability #88 mana of #7 "Thornspire Verge" ? controller "Opponent"
+6:13     #7 "Thornspire Verge" tap by cost:#88
+6:13     "Opponent" add {R} by #88
+6:13     "Opponent" pay {W}{U}{R}{R}{G} by cost:#82
+6:13     #16 "Barrels of Blasting Jelly" move battlefield -> graveyard as sacrifice by cost:#82
+6:13     "Opponent" priority
+6:13       stack
+6:13         #84 triggered of #45 "Speaker of the Heavens" ? controller "Player"
+6:13         #82 activated of #16 "Barrels of Blasting Jelly" ? controller "Opponent" target #45 "Speaker of the Heavens"
+6:13     "Opponent" pass
+6:13     "Player" priority
+6:13       stack
+6:13         #84 triggered of #45 "Speaker of the Heavens" ? controller "Player"
+6:13         #82 activated of #16 "Barrels of Blasting Jelly" ? controller "Opponent" target #45 "Speaker of the Heavens"
+6:13     "Player" pass
+6:13     #84 resolve
+6:13     #82 countered by #84
+6:13     #82 cease by #84
+6:13     #84 cease by rule:resolve
+6:13   beginning-of-combat
+6:13     new ability #89 triggered of #44 "Howling Moon" ? controller "Opponent" in stack
+6:21     #89 target #54 "Howlpack Piper // Wildsong Howler"
+6:21     "Opponent" priority
+6:21       stack
+6:21         #89 triggered of #44 "Howling Moon" ? controller "Opponent" target #54 "Howlpack Piper // Wildsong Howler"
+6:21     "Opponent" pass
+6:21     "Player" priority
+6:21       stack
+6:21         #89 triggered of #44 "Howling Moon" ? controller "Opponent" target #54 "Howlpack Piper // Wildsong Howler"
+6:21     "Player" pass
+6:21     #89 resolve
+6:21     #54 "Howlpack Piper // Wildsong Howler" pt 2/2 -> 4/4 by #89
+6:21     #89 cease by rule:resolve
+6:21   declare-attackers
+6:25     #54 "Howlpack Piper // Wildsong Howler" attack #58 "The Wandering Emperor"
+6:25     #54 "Howlpack Piper // Wildsong Howler" tap by rule:declare-attackers
+6:25   declare-blockers
+6:27   combat-damage
+6:27     #54 "Howlpack Piper // Wildsong Howler" damage #58 "The Wandering Emperor" 4 by rule:combat-damage
+6:27     #58 "The Wandering Emperor" counters "loyalty" 4 -> 0 by #54
+6:27     #58 "The Wandering Emperor" move battlefield -> graveyard by rule:sba
+6:27   end-of-combat
+6:27   postcombat-main
+6:27   end
+6:27   cleanup
+6:27     #54 "Howlpack Piper // Wildsong Howler" pt 4/4 -> ? by rule:cleanup
+6:27 turn 16 "Player"
+6:27   keyframe
+6:27     player "Player" life 11 poison 0 library 46
+6:27     player "Opponent" life 9 poison 0 library 62
+6:27     day
+6:27     #1 "Howlpack Piper // Wildsong Howler" exile
+6:27     #2 "Overgrown Farmland" battlefield "Opponent" types land tapped
+6:27     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" exile with #8
+6:27     #4 "Mountain" battlefield "Opponent" types land tapped
+6:27     #5 "Howlpack Piper // Wildsong Howler" battlefield "Opponent" types creature pt 2/2
+6:27     #6 "Fixture Land 97998" battlefield "Opponent" types land tapped
+6:27     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+6:27     #8 "Sheltered by Ghosts" battlefield "Player" types enchantment attached #45
+6:27     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+6:27     #10 "Vanishing Verse" graveyard "Player"
+6:27     #11 "Archangel of Tithes" hand "Player"
+6:27     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5 tapped
+6:27     #13 "Fatal Push" graveyard "Player"
+6:27     #14 "Concealed Courtyard" battlefield "Player" types land tapped
+6:27     #15 "Liesa, Forgotten Archangel" hand "Player"
+6:27     #16 "Barrels of Blasting Jelly" graveyard "Opponent"
+6:27     #18 "Plains" battlefield "Player" types land tapped
+6:27     #19 "Mountain" battlefield "Opponent" types land tapped
+6:27     #23 "Fatal Push" graveyard "Player"
+6:27     #24 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+6:27     #31 "Forest" battlefield "Opponent" types land tapped
+6:27     #34 "Castle Ardenvale" battlefield "Player" types land tapped
+6:27     #39 "Fixture Aura 106371" graveyard "Opponent"
+6:27     #44 "Howling Moon" battlefield "Opponent" types enchantment
+6:27     #45 "Speaker of the Heavens" battlefield "Player" types creature pt 3/2 counters "+1/+1" 1
+6:27     #48 "Werewolf Pack Leader" graveyard "Opponent"
+6:27     #54 "Howlpack Piper // Wildsong Howler" battlefield "Opponent" types creature pt ? tapped
+6:27     #58 "The Wandering Emperor" graveyard "Player"
+6:27     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+6:27     #68 "Bleachbone Verge" battlefield "Player" types land
+6:27     #78 "Thornspire Verge" battlefield "Opponent" types land
+6:27   untap
+6:27     night by rule:day-night
+6:27     #5 "Howlpack Piper // Wildsong Howler" transform by #5
+6:27     #5 "Howlpack Piper // Wildsong Howler" pt 2/2 -> 4/4 by #5
+6:27     #54 "Howlpack Piper // Wildsong Howler" transform by #54
+6:27     #54 "Howlpack Piper // Wildsong Howler" pt ? -> 4/4 by #54
+6:27     #9 "Shattered Sanctum" untap by rule:untap
+6:27     #14 "Concealed Courtyard" untap by rule:untap
+6:27     #18 "Plains" untap by rule:untap
+6:27     #34 "Castle Ardenvale" untap by rule:untap
+6:27     #12 "Archangel of Tithes" untap by rule:untap
+6:27   upkeep
+6:31     new ability #90 triggered of #54 "Howlpack Piper // Wildsong Howler" ? controller "Opponent" in stack
+6:31     new ability #91 triggered of #5 "Howlpack Piper // Wildsong Howler" ? controller "Opponent" in stack
+6:31     "Player" priority
+6:31       stack
+6:31         #91 triggered of #5 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+6:31         #90 triggered of #54 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+6:34     "Player" pass
+6:34     "Opponent" priority
+6:34       stack
+6:34         #91 triggered of #5 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+6:34         #90 triggered of #54 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+6:34     "Opponent" pass
+6:34     #91 resolve
+7:19     new card #92 "Outland Liberator // Frenzied Trapbreaker" owner "Opponent" in library src arena:78549
+7:19     #92 "Outland Liberator // Frenzied Trapbreaker" reveal by #91
+7:19     #92 "Outland Liberator // Frenzied Trapbreaker" move library -> hand by #91
+7:19     #91 cease by rule:resolve
+7:19     "Player" priority
+7:19       stack
+7:19         #90 triggered of #54 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+7:19     "Player" pass
+7:19     "Opponent" priority
+7:19       stack
+7:19         #90 triggered of #54 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+7:19     "Opponent" pass
+7:19     #90 resolve
+7:23     new card #93 "Reckless Stormseeker // Storm-Charged Slasher" owner "Opponent" in library src arena:78507
+7:23     #93 "Reckless Stormseeker // Storm-Charged Slasher" reveal by #90
+7:23     #93 "Reckless Stormseeker // Storm-Charged Slasher" move library -> hand by #90
+7:23     #90 cease by rule:resolve
+7:23   draw
+7:23     new card #94 "March of Otherworldly Light" owner "Player" in library top 1 src arena:79448
+7:23     #94 "March of Otherworldly Light" move library -> hand as draw by rule:draw
+7:23   precombat-main
+7:52     #15 "Liesa, Forgotten Archangel" cast from hand
+7:54     new ability #95 mana of #18 "Plains" ? controller "Player"
+7:54     #18 "Plains" tap by cost:#95
+7:54     "Player" add {W} by #95
+7:54     new ability #96 mana of #34 "Castle Ardenvale" ? controller "Player"
+7:54     #34 "Castle Ardenvale" tap by cost:#96
+7:54     "Player" add {W} by #96
+7:54     new ability #97 mana of #9 "Shattered Sanctum" ? controller "Player"
+7:54     #9 "Shattered Sanctum" tap by cost:#97
+7:54     "Player" add {W} restriction ? by #97
+7:54     new ability #98 mana of #14 "Concealed Courtyard" ? controller "Player"
+7:54     #14 "Concealed Courtyard" tap by cost:#98
+7:54     "Player" add {W} restriction ? by #98
+7:54     new ability #99 mana of #68 "Bleachbone Verge" ? controller "Player"
+7:54     #68 "Bleachbone Verge" tap by cost:#99
+7:54     "Player" add {B} by #99
+7:54     "Player" pay {W}{W}{W}{W}{B} by cost:#15
+7:54     "Player" priority
+7:54       stack
+7:54         #15 "Liesa, Forgotten Archangel" controller "Player"
+7:54     "Player" pass
+7:54     "Opponent" priority
+7:54       stack
+7:54         #15 "Liesa, Forgotten Archangel" controller "Player"
+7:54     "Opponent" pass
+7:54     #15 "Liesa, Forgotten Archangel" resolve
+7:54     #15 "Liesa, Forgotten Archangel" move stack -> battlefield types creature pt 4/5 by rule:resolve
+7:54   beginning-of-combat
+7:54   declare-attackers
+7:57   end-of-combat
+7:57   postcombat-main
+7:57   end
+7:57   cleanup
+7:57 turn 17 "Opponent"
+7:57   keyframe
+7:57     player "Player" life 11 poison 0 library 45
+7:57     player "Opponent" life 9 poison 0 library 60
+7:57     night
+7:57     #1 "Howlpack Piper // Wildsong Howler" exile
+7:57     #2 "Overgrown Farmland" battlefield "Opponent" types land tapped
+7:57     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" exile with #8
+7:57     #4 "Mountain" battlefield "Opponent" types land tapped
+7:57     #5 "Howlpack Piper // Wildsong Howler" battlefield "Opponent" face "Wildsong Howler" types creature pt 4/4
+7:57     #6 "Fixture Land 97998" battlefield "Opponent" types land tapped
+7:57     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+7:57     #8 "Sheltered by Ghosts" battlefield "Player" types enchantment attached #45
+7:57     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+7:57     #10 "Vanishing Verse" graveyard "Player"
+7:57     #11 "Archangel of Tithes" hand "Player"
+7:57     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5
+7:57     #13 "Fatal Push" graveyard "Player"
+7:57     #14 "Concealed Courtyard" battlefield "Player" types land tapped
+7:57     #15 "Liesa, Forgotten Archangel" battlefield "Player" types creature pt 4/5
+7:57     #16 "Barrels of Blasting Jelly" graveyard "Opponent"
+7:57     #18 "Plains" battlefield "Player" types land tapped
+7:57     #19 "Mountain" battlefield "Opponent" types land tapped
+7:57     #23 "Fatal Push" graveyard "Player"
+7:57     #24 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+7:57     #31 "Forest" battlefield "Opponent" types land tapped
+7:57     #34 "Castle Ardenvale" battlefield "Player" types land tapped
+7:57     #39 "Fixture Aura 106371" graveyard "Opponent"
+7:57     #44 "Howling Moon" battlefield "Opponent" types enchantment
+7:57     #45 "Speaker of the Heavens" battlefield "Player" types creature pt 3/2 counters "+1/+1" 1
+7:57     #48 "Werewolf Pack Leader" graveyard "Opponent"
+7:57     #54 "Howlpack Piper // Wildsong Howler" battlefield "Opponent" face "Wildsong Howler" types creature pt 4/4 tapped
+7:57     #58 "The Wandering Emperor" graveyard "Player"
+7:57     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+7:57     #68 "Bleachbone Verge" battlefield "Player" types land tapped
+7:57     #78 "Thornspire Verge" battlefield "Opponent" types land
+7:57     #92 "Outland Liberator // Frenzied Trapbreaker" hand "Opponent"
+7:57     #93 "Reckless Stormseeker // Storm-Charged Slasher" hand "Opponent"
+7:57     #94 "March of Otherworldly Light" hand "Player"
+7:57   untap
+7:57     #7 "Thornspire Verge" untap by rule:untap
+7:57     #4 "Mountain" untap by rule:untap
+7:57     #2 "Overgrown Farmland" untap by rule:untap
+7:57     #19 "Mountain" untap by rule:untap
+7:57     #31 "Forest" untap by rule:untap
+7:57     #6 "Fixture Land 97998" untap by rule:untap
+7:57     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" untap by rule:untap
+7:57     #54 "Howlpack Piper // Wildsong Howler" untap by rule:untap
+7:57   upkeep
+7:57   draw
+7:57     new hidden #100 owner "Opponent" in library top 1
+7:57     #100 move library -> hand as draw by rule:draw
+7:57   precombat-main
+8:20     #100 identify "Mountain" src arena:96188
+8:20     #100 "Mountain" play from hand types land
+8:23     #93 "Reckless Stormseeker // Storm-Charged Slasher" cast from hand face "Reckless Stormseeker"
+8:23     new ability #101 mana of #4 "Mountain" ? controller "Opponent"
+8:23     #4 "Mountain" tap by cost:#101
+8:23     "Opponent" add {R} by #101
+8:23     new ability #102 mana of #19 "Mountain" ? controller "Opponent"
+8:23     #19 "Mountain" tap by cost:#102
+8:23     "Opponent" add {R} by #102
+8:23     new ability #103 mana of #31 "Forest" ? controller "Opponent"
+8:23     #31 "Forest" tap by cost:#103
+8:23     "Opponent" add {G} by #103
+8:23     "Opponent" pay {R}{R}{G} by cost:#93
+8:23     "Opponent" priority
+8:23       stack
+8:23         #93 "Reckless Stormseeker // Storm-Charged Slasher" face "Reckless Stormseeker" controller "Opponent"
+8:23     "Opponent" pass
+8:23     "Player" priority
+8:23       stack
+8:23         #93 "Reckless Stormseeker // Storm-Charged Slasher" face "Reckless Stormseeker" controller "Opponent"
+8:23     "Player" pass
+8:23     #93 "Reckless Stormseeker // Storm-Charged Slasher" resolve
+8:23     #93 "Reckless Stormseeker // Storm-Charged Slasher" move stack -> battlefield face "Storm-Charged Slasher" types creature pt 3/4 by rule:resolve
+8:26     #92 "Outland Liberator // Frenzied Trapbreaker" cast from hand face "Outland Liberator"
+8:26     new ability #104 mana of #100 "Mountain" ? controller "Opponent"
+8:26     #100 "Mountain" tap by cost:#104
+8:26     "Opponent" add {R} by #104
+8:26     new ability #105 mana of #62 "Fixture Pathway 73476 // Fixture Pathway 73477" ? controller "Opponent"
+8:26     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" tap by cost:#105
+8:26     "Opponent" add {G} by #105
+8:26     "Opponent" pay {R}{G} by cost:#92
+8:26     "Opponent" priority
+8:26       stack
+8:26         #92 "Outland Liberator // Frenzied Trapbreaker" face "Outland Liberator" controller "Opponent"
+8:26     "Opponent" pass
+8:26     "Player" priority
+8:26       stack
+8:26         #92 "Outland Liberator // Frenzied Trapbreaker" face "Outland Liberator" controller "Opponent"
+8:26     "Player" pass
+8:26     #92 "Outland Liberator // Frenzied Trapbreaker" resolve
+8:26     #92 "Outland Liberator // Frenzied Trapbreaker" move stack -> battlefield face "Frenzied Trapbreaker" types creature pt 3/3 by rule:resolve
+8:30   beginning-of-combat
+8:30     new ability #106 triggered of #93 "Reckless Stormseeker // Storm-Charged Slasher" ? controller "Opponent" in stack
+8:32     new ability #107 triggered of #44 "Howling Moon" ? controller "Opponent" in stack
+8:32     #106 target #92 "Outland Liberator // Frenzied Trapbreaker"
+8:37     #107 target #92 "Outland Liberator // Frenzied Trapbreaker"
+8:37     "Opponent" priority
+8:37       stack
+8:37         #107 triggered of #44 "Howling Moon" ? controller "Opponent" target #92 "Outland Liberator // Frenzied Trapbreaker"
+8:37         #106 triggered of #93 "Reckless Stormseeker // Storm-Charged Slasher" ? controller "Opponent" target #92 "Outland Liberator // Frenzied Trapbreaker"
+8:37     "Opponent" pass
+8:37     "Player" priority
+8:37       stack
+8:37         #107 triggered of #44 "Howling Moon" ? controller "Opponent" target #92 "Outland Liberator // Frenzied Trapbreaker"
+8:37         #106 triggered of #93 "Reckless Stormseeker // Storm-Charged Slasher" ? controller "Opponent" target #92 "Outland Liberator // Frenzied Trapbreaker"
+8:37     "Player" pass
+8:37     #107 resolve
+8:37     #92 "Outland Liberator // Frenzied Trapbreaker" pt 3/3 -> 5/5 by #107
+8:37     #107 cease by rule:resolve
+8:37     "Opponent" priority
+8:37       stack
+8:37         #106 triggered of #93 "Reckless Stormseeker // Storm-Charged Slasher" ? controller "Opponent" target #92 "Outland Liberator // Frenzied Trapbreaker"
+8:37     "Opponent" pass
+8:37     "Player" priority
+8:37       stack
+8:37         #106 triggered of #93 "Reckless Stormseeker // Storm-Charged Slasher" ? controller "Opponent" target #92 "Outland Liberator // Frenzied Trapbreaker"
+8:37     "Player" pass
+8:37     #106 resolve
+8:37     #92 "Outland Liberator // Frenzied Trapbreaker" pt 5/5 -> 7/5 by #106
+8:37     #106 cease by rule:resolve
+8:37   declare-attackers
+8:45     #54 "Howlpack Piper // Wildsong Howler" attack "Player"
+8:45     #92 "Outland Liberator // Frenzied Trapbreaker" attack "Player"
+8:45     #54 "Howlpack Piper // Wildsong Howler" tap by rule:declare-attackers
+8:45     #92 "Outland Liberator // Frenzied Trapbreaker" tap by rule:declare-attackers
+8:48     new ability #108 mana of #6 "Fixture Land 97998" ? controller "Opponent"
+8:48     #6 "Fixture Land 97998" tap by cost:#108
+8:48     "Opponent" add {U} by #108
+8:48     new ability #109 triggered of #92 "Outland Liberator // Frenzied Trapbreaker" ? controller "Opponent" in stack
+8:48     new ability #110 mana of #7 "Thornspire Verge" ? controller "Opponent"
+8:48     #7 "Thornspire Verge" tap by cost:#110
+8:48     "Opponent" add {R} by #110
+8:48     "Opponent" pay {U}{R} by cost:#12
+8:49     #109 target #8 "Sheltered by Ghosts"
+8:49     "Opponent" priority
+8:49       stack
+8:49         #109 triggered of #92 "Outland Liberator // Frenzied Trapbreaker" ? controller "Opponent" target #8 "Sheltered by Ghosts"
+8:49     "Opponent" pass
+8:49     "Player" priority
+8:49       stack
+8:49         #109 triggered of #92 "Outland Liberator // Frenzied Trapbreaker" ? controller "Opponent" target #8 "Sheltered by Ghosts"
+8:49     "Player" pass
+8:49     #109 resolve
+8:49     #8 "Sheltered by Ghosts" move battlefield -> graveyard as destroy by #109
+8:49     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" move exile -> battlefield face "Tovolar, the Midnight Scourge" types creature pt 4/4 by ?
+8:49     #109 cease by rule:resolve
+8:49     #45 "Speaker of the Heavens" pt 3/2 -> 2/2 by #8
+8:54   declare-blockers
+9:10     #15 "Liesa, Forgotten Archangel" block #54 "Howlpack Piper // Wildsong Howler"
+9:10   combat-damage
+9:10     #54 "Howlpack Piper // Wildsong Howler" damage #15 "Liesa, Forgotten Archangel" 4 by rule:combat-damage
+9:10     #15 "Liesa, Forgotten Archangel" damage #54 "Howlpack Piper // Wildsong Howler" 4 by rule:combat-damage
+9:10     #92 "Outland Liberator // Frenzied Trapbreaker" damage "Player" 7 by rule:combat-damage
+9:10     "Player" life 11 -> 4 by rule:combat-damage
+9:10     "Player" life 4 -> 8 by rule:combat-damage
+9:10     #54 "Howlpack Piper // Wildsong Howler" move battlefield -> exile by rule:sba
+9:10     new ability #111 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent" in stack
+9:10     "Opponent" priority
+9:10       stack
+9:10         #111 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+9:10     "Opponent" pass
+9:10     "Player" priority
+9:10       stack
+9:10         #111 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+9:10     "Player" pass
+9:10     #111 resolve
+9:10     new hidden #112 owner "Opponent" in library top 1
+9:10     #112 move library -> hand as draw by #111
+9:10     #111 cease by rule:resolve
+9:10   end-of-combat
+9:10   postcombat-main
+9:19   end
+9:19   cleanup
+9:19     #92 "Outland Liberator // Frenzied Trapbreaker" pt 7/5 -> ? by rule:cleanup
+9:19 turn 18 "Player"
+9:19   keyframe
+9:19     player "Player" life 8 poison 0 library 45
+9:19     player "Opponent" life 9 poison 0 library 58
+9:19     night
+9:19     #1 "Howlpack Piper // Wildsong Howler" exile
+9:19     #2 "Overgrown Farmland" battlefield "Opponent" types land
+9:19     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" battlefield "Opponent" face "Tovolar, the Midnight Scourge" types creature pt 4/4
+9:19     #4 "Mountain" battlefield "Opponent" types land tapped
+9:19     #5 "Howlpack Piper // Wildsong Howler" battlefield "Opponent" face "Wildsong Howler" types creature pt 4/4
+9:19     #6 "Fixture Land 97998" battlefield "Opponent" types land tapped
+9:19     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+9:19     #8 "Sheltered by Ghosts" graveyard "Player"
+9:19     #9 "Shattered Sanctum" battlefield "Player" types land tapped
+9:19     #10 "Vanishing Verse" graveyard "Player"
+9:19     #11 "Archangel of Tithes" hand "Player"
+9:19     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5
+9:19     #13 "Fatal Push" graveyard "Player"
+9:19     #14 "Concealed Courtyard" battlefield "Player" types land tapped
+9:19     #15 "Liesa, Forgotten Archangel" battlefield "Player" types creature pt 4/5
+9:19     #16 "Barrels of Blasting Jelly" graveyard "Opponent"
+9:19     #18 "Plains" battlefield "Player" types land tapped
+9:19     #19 "Mountain" battlefield "Opponent" types land tapped
+9:19     #23 "Fatal Push" graveyard "Player"
+9:19     #24 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+9:19     #31 "Forest" battlefield "Opponent" types land tapped
+9:19     #34 "Castle Ardenvale" battlefield "Player" types land tapped
+9:19     #39 "Fixture Aura 106371" graveyard "Opponent"
+9:19     #44 "Howling Moon" battlefield "Opponent" types enchantment
+9:19     #45 "Speaker of the Heavens" battlefield "Player" types creature pt 2/2 counters "+1/+1" 1
+9:19     #48 "Werewolf Pack Leader" graveyard "Opponent"
+9:19     #54 "Howlpack Piper // Wildsong Howler" exile
+9:19     #58 "The Wandering Emperor" graveyard "Player"
+9:19     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+9:19     #68 "Bleachbone Verge" battlefield "Player" types land tapped
+9:19     #78 "Thornspire Verge" battlefield "Opponent" types land
+9:19     #92 "Outland Liberator // Frenzied Trapbreaker" battlefield "Opponent" face "Frenzied Trapbreaker" types creature pt ? tapped
+9:19     #93 "Reckless Stormseeker // Storm-Charged Slasher" battlefield "Opponent" face "Storm-Charged Slasher" types creature pt 3/4
+9:19     #94 "March of Otherworldly Light" hand "Player"
+9:19     #100 "Mountain" battlefield "Opponent" types land tapped
+9:19     #112 hand "Opponent"
+9:19   untap
+9:19     day by rule:day-night
+9:19     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" transform by #3
+9:19     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" pt 4/4 -> 3/3 by #3
+9:19     #92 "Outland Liberator // Frenzied Trapbreaker" transform by #92
+9:19     #92 "Outland Liberator // Frenzied Trapbreaker" pt ? -> 2/2 by #92
+9:19     #93 "Reckless Stormseeker // Storm-Charged Slasher" transform by #93
+9:19     #93 "Reckless Stormseeker // Storm-Charged Slasher" pt 3/4 -> 2/3 by #93
+9:19     #5 "Howlpack Piper // Wildsong Howler" transform by #5
+9:19     #5 "Howlpack Piper // Wildsong Howler" pt 4/4 -> 2/2 by #5
+9:19     #9 "Shattered Sanctum" untap by rule:untap
+9:19     #14 "Concealed Courtyard" untap by rule:untap
+9:19     #18 "Plains" untap by rule:untap
+9:19     #34 "Castle Ardenvale" untap by rule:untap
+9:19     #68 "Bleachbone Verge" untap by rule:untap
+9:19   upkeep
+9:19   draw
+9:19     new card #113 "Giada, Font of Hope" owner "Player" in library top 1 src arena:80165
+9:19     #113 "Giada, Font of Hope" move library -> hand as draw by rule:draw
+9:19   precombat-main
+9:24     #113 "Giada, Font of Hope" cast from hand
+9:32     new ability #114 mana of #18 "Plains" ? controller "Player"
+9:32     #18 "Plains" tap by cost:#114
+9:32     "Player" add {W} by #114
+9:32     new ability #115 mana of #34 "Castle Ardenvale" ? controller "Player"
+9:32     #34 "Castle Ardenvale" tap by cost:#115
+9:32     "Player" add {W} by #115
+9:32     "Player" pay {W}{W} by cost:#113
+9:32     "Player" priority
+9:32       stack
+9:32         #113 "Giada, Font of Hope" controller "Player"
+9:32     "Player" pass
+9:32     "Opponent" priority
+9:32       stack
+9:32         #113 "Giada, Font of Hope" controller "Player"
+9:50     "Opponent" pass
+9:50     #113 "Giada, Font of Hope" resolve
+9:50     #113 "Giada, Font of Hope" move stack -> battlefield types creature pt 2/2 by rule:resolve
+9:52   beginning-of-combat
+10:01   declare-attackers
+10:02   end-of-combat
+10:02   postcombat-main
+10:03   end
+10:05   cleanup
+10:05 turn 19 "Opponent"
+10:05   keyframe
+10:05     player "Player" life 8 poison 0 library 44
+10:05     player "Opponent" life 9 poison 0 library 58
+10:05     day
+10:05     #1 "Howlpack Piper // Wildsong Howler" exile
+10:05     #2 "Overgrown Farmland" battlefield "Opponent" types land
+10:05     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" battlefield "Opponent" types creature pt 3/3
+10:05     #4 "Mountain" battlefield "Opponent" types land tapped
+10:05     #5 "Howlpack Piper // Wildsong Howler" battlefield "Opponent" types creature pt 2/2
+10:05     #6 "Fixture Land 97998" battlefield "Opponent" types land tapped
+10:05     #7 "Thornspire Verge" battlefield "Opponent" types land tapped
+10:05     #8 "Sheltered by Ghosts" graveyard "Player"
+10:05     #9 "Shattered Sanctum" battlefield "Player" types land
+10:05     #10 "Vanishing Verse" graveyard "Player"
+10:05     #11 "Archangel of Tithes" hand "Player"
+10:05     #12 "Archangel of Tithes" battlefield "Player" types creature pt 3/5
+10:05     #13 "Fatal Push" graveyard "Player"
+10:05     #14 "Concealed Courtyard" battlefield "Player" types land
+10:05     #15 "Liesa, Forgotten Archangel" battlefield "Player" types creature pt 4/5
+10:05     #16 "Barrels of Blasting Jelly" graveyard "Opponent"
+10:05     #18 "Plains" battlefield "Player" types land tapped
+10:05     #19 "Mountain" battlefield "Opponent" types land tapped
+10:05     #23 "Fatal Push" graveyard "Player"
+10:05     #24 "Kessig Naturalist // Lord of the Ulvenwald" graveyard "Opponent"
+10:05     #31 "Forest" battlefield "Opponent" types land tapped
+10:05     #34 "Castle Ardenvale" battlefield "Player" types land tapped
+10:05     #39 "Fixture Aura 106371" graveyard "Opponent"
+10:05     #44 "Howling Moon" battlefield "Opponent" types enchantment
+10:05     #45 "Speaker of the Heavens" battlefield "Player" types creature pt 2/2 counters "+1/+1" 1
+10:05     #48 "Werewolf Pack Leader" graveyard "Opponent"
+10:05     #54 "Howlpack Piper // Wildsong Howler" exile
+10:05     #58 "The Wandering Emperor" graveyard "Player"
+10:05     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" battlefield "Opponent" face "Fixture Pathway 73477" types land tapped
+10:05     #68 "Bleachbone Verge" battlefield "Player" types land
+10:05     #78 "Thornspire Verge" battlefield "Opponent" types land
+10:05     #92 "Outland Liberator // Frenzied Trapbreaker" battlefield "Opponent" types creature pt 2/2 tapped
+10:05     #93 "Reckless Stormseeker // Storm-Charged Slasher" battlefield "Opponent" types creature pt 2/3
+10:05     #94 "March of Otherworldly Light" hand "Player"
+10:05     #100 "Mountain" battlefield "Opponent" types land tapped
+10:05     #112 hand "Opponent"
+10:05     #113 "Giada, Font of Hope" battlefield "Player" types creature pt 2/2
+10:05   untap
+10:05     #7 "Thornspire Verge" untap by rule:untap
+10:05     #4 "Mountain" untap by rule:untap
+10:05     #19 "Mountain" untap by rule:untap
+10:05     #31 "Forest" untap by rule:untap
+10:05     #6 "Fixture Land 97998" untap by rule:untap
+10:05     #62 "Fixture Pathway 73476 // Fixture Pathway 73477" untap by rule:untap
+10:05     #100 "Mountain" untap by rule:untap
+10:05     #92 "Outland Liberator // Frenzied Trapbreaker" untap by rule:untap
+10:05   upkeep
+10:05     new ability #116 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent" in stack
+10:05     "Opponent" priority
+10:05       stack
+10:05         #116 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+10:05     "Opponent" pass
+10:05     "Player" priority
+10:05       stack
+10:05         #116 triggered of #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" ? controller "Opponent"
+10:08     "Player" pass
+10:08     #116 resolve
+10:08     night by #116
+10:08     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" transform by #3
+10:08     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" pt 3/3 -> 4/4 by #3
+10:08     #92 "Outland Liberator // Frenzied Trapbreaker" transform by #92
+10:08     #92 "Outland Liberator // Frenzied Trapbreaker" pt 2/2 -> 3/3 by #92
+10:08     #93 "Reckless Stormseeker // Storm-Charged Slasher" transform by #93
+10:08     #93 "Reckless Stormseeker // Storm-Charged Slasher" pt 2/3 -> 3/4 by #93
+10:08     #5 "Howlpack Piper // Wildsong Howler" transform by #5
+10:08     #5 "Howlpack Piper // Wildsong Howler" pt 2/2 -> 4/4 by #5
+10:08     new ability #117 triggered of #5 "Howlpack Piper // Wildsong Howler" ? controller "Opponent" in stack
+10:08     #116 cease by rule:resolve
+10:08     "Opponent" priority
+10:08       stack
+10:08         #117 triggered of #5 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+10:08     "Opponent" pass
+10:08     "Player" priority
+10:08       stack
+10:08         #117 triggered of #5 "Howlpack Piper // Wildsong Howler" ? controller "Opponent"
+10:10     "Player" pass
+10:10     #117 resolve
+10:12     new card #118 "Outland Liberator // Frenzied Trapbreaker" owner "Opponent" in library src arena:78549
+10:12     #118 "Outland Liberator // Frenzied Trapbreaker" reveal by #117
+10:12     #118 "Outland Liberator // Frenzied Trapbreaker" move library -> hand by #117
+10:12     #117 cease by rule:resolve
+10:12   draw
+10:12     new hidden #119 owner "Opponent" in library top 1
+10:12     #119 move library -> hand as draw by rule:draw
+10:12   precombat-main
+10:18     #112 identify "Collected Company" src arena:92411
+10:18     #112 "Collected Company" cast from hand
+10:18     new ability #120 mana of #6 "Fixture Land 97998" ? controller "Opponent"
+10:18     #6 "Fixture Land 97998" tap by cost:#120
+10:18     "Opponent" add {U} by #120
+10:18     new ability #121 mana of #4 "Mountain" ? controller "Opponent"
+10:18     #4 "Mountain" tap by cost:#121
+10:18     "Opponent" add {R} by #121
+10:18     new ability #122 mana of #19 "Mountain" ? controller "Opponent"
+10:18     #19 "Mountain" tap by cost:#122
+10:18     "Opponent" add {R} by #122
+10:18     new ability #123 mana of #31 "Forest" ? controller "Opponent"
+10:18     #31 "Forest" tap by cost:#123
+10:18     "Opponent" add {G} by #123
+10:18     "Opponent" pay {U}{R}{R}{G} by cost:#112
+10:18     "Opponent" priority
+10:18       stack
+10:18         #112 "Collected Company" controller "Opponent"
+10:18     "Opponent" pass
+10:18     "Player" priority
+10:18       stack
+10:18         #112 "Collected Company" controller "Opponent"
+10:20     "Player" pass
+10:20     #112 "Collected Company" resolve
+10:22     new card #124 "Kessig Naturalist // Lord of the Ulvenwald" owner "Opponent" in library src arena:78596
+10:22     #124 "Kessig Naturalist // Lord of the Ulvenwald" move library -> battlefield face "Lord of the Ulvenwald" types creature pt 3/3 by #112
+10:22     new card #125 "Ascendant Packleader" owner "Opponent" in library src arena:78995
+10:22     #125 "Ascendant Packleader" move library -> battlefield types creature pt 4/3 by #112
+10:22     #125 "Ascendant Packleader" counters "+1/+1" 0 -> 1 by ?
+10:22     #3 "Tovolar, Dire Overlord // Tovolar, the Midnight Scourge" pt 4/4 -> 5/5 by #124
+10:22     #92 "Outland Liberator // Frenzied Trapbreaker" pt 3/3 -> 4/4 by #124
+10:22     #93 "Reckless Stormseeker // Storm-Charged Slasher" pt 3/4 -> 4/5 by #124
+10:22     #5 "Howlpack Piper // Wildsong Howler" pt 4/4 -> 5/5 by #124
+10:23     #112 "Collected Company" move stack -> graveyard by rule:resolve
+10:28     "Player" concede
+0-1

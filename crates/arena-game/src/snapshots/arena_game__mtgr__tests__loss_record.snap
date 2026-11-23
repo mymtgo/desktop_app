@@ -1,0 +1,2638 @@
+---
+source: crates/arena-game/src/mtgr/tests.rs
+assertion_line: 75
+expression: "::mtgr::write(record)"
+---
+[Mtgr "0.3.0"]
+[Event "Traditional_Explorer_Ladder"]
+[Site "Arena"]
+[Date "2026.11.03"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "0-1"]
+[Format "Explorer"]
+[Match "bo3-loss-and-match-concede-0"]
+[Game "1"]
+[Perspective "Player"]
+[ARENA_MatchId "bo3-loss-and-match-concede-0"]
+[Omits "costs"]
+[Partial "library effects"]
+[Termination "concession"]
+
+0:00 deck "Player"
+0:00   main 2 "Beza, the Bounding Spring"
+0:00   main 2 "Change the Equation"
+0:00   main 4 "Consult the Star Charts"
+0:00   main 3 "Deserted Beach"
+0:00   main 1 "Dovin's Veto"
+0:00   main 1 "Eiganjo, Seat of the Empire"
+0:00   main 2 "Elspeth, Storm Slayer"
+0:00   main 2 "Field of Ruin"
+0:00   main 4 "Floodfarm Verge"
+0:00   main 2 "Fountainport"
+0:00   main 3 "Get Lost"
+0:00   main 1 "Hall of Storm Giants"
+0:00   main 4 "Hallowed Fountain"
+0:00   main 2 "Island"
+0:00   main 4 "March of Otherworldly Light"
+0:00   main 1 "Memory Deluge"
+0:00   main 2 "Meticulous Archive"
+0:00   main 4 "No More Lies"
+0:00   main 1 "Otawara, Soaring City"
+0:00   main 2 "Plains"
+0:00   main 2 "Restless Anchorage"
+0:00   main 1 "Stock Up"
+0:00   main 2 "Supreme Verdict"
+0:00   main 2 "Teferi, Hero of Dominaria"
+0:00   main 3 "Temporary Lockdown"
+0:00   main 3 "The Wandering Emperor"
+0:00   main 1 "Three Steps Ahead"
+0:00   side 2 "Beza, the Bounding Spring"
+0:00   side 3 "Dovin's Veto"
+0:00   side 1 "Get Lost"
+0:00   side 3 "High Noon"
+0:00   side 1 "Kaheera, the Orphanguard"
+0:00   side 3 "Kutzil's Flanker"
+0:00   side 1 "Rest in Peace"
+0:00   side 1 "Temporary Lockdown"
+0:00 pregame
+0:00   keyframe
+0:00     player "Player" life 20 poison 0 library 61
+0:00     player "Opponent" life 20 poison 0 library 60
+0:00   "Player" roll 8
+0:00   "Opponent" roll 18
+0:25   "Opponent" choose first "Opponent"
+0:25   new card #1 "Kaheera, the Orphanguard" owner "Player" in outside "sideboard" src arena:71291
+0:25   #1 "Kaheera, the Orphanguard" reveal by #1
+0:25   new hidden #2 owner "Opponent" in library top 1
+0:25   #2 move library -> hand as draw by rule:opening-hand
+0:25   new hidden #3 owner "Opponent" in library top 1
+0:25   #3 move library -> hand as draw by rule:opening-hand
+0:25   new hidden #4 owner "Opponent" in library top 1
+0:25   #4 move library -> hand as draw by rule:opening-hand
+0:25   new hidden #5 owner "Opponent" in library top 1
+0:25   #5 move library -> hand as draw by rule:opening-hand
+0:25   new hidden #6 owner "Opponent" in library top 1
+0:25   #6 move library -> hand as draw by rule:opening-hand
+0:25   new hidden #7 owner "Opponent" in library top 1
+0:25   #7 move library -> hand as draw by rule:opening-hand
+0:25   new hidden #8 owner "Opponent" in library top 1
+0:25   #8 move library -> hand as draw by rule:opening-hand
+0:25   new card #9 "Consult the Star Charts" owner "Player" in library top 1 src arena:96625
+0:25   #9 "Consult the Star Charts" move library -> hand as draw by rule:opening-hand
+0:25   new card #10 "Elspeth, Storm Slayer" owner "Player" in library top 1 src arena:95526
+0:25   #10 "Elspeth, Storm Slayer" move library -> hand as draw by rule:opening-hand
+0:25   new card #11 "Memory Deluge" owner "Player" in library top 1 src arena:78396
+0:25   #11 "Memory Deluge" move library -> hand as draw by rule:opening-hand
+0:25   new card #12 "Eiganjo, Seat of the Empire" owner "Player" in library top 1 src arena:79708
+0:25   #12 "Eiganjo, Seat of the Empire" move library -> hand as draw by rule:opening-hand
+0:25   new card #13 "Consult the Star Charts" owner "Player" in library top 1 src arena:96625
+0:25   #13 "Consult the Star Charts" move library -> hand as draw by rule:opening-hand
+0:25   new card #14 "Change the Equation" owner "Player" in library top 1 src arena:84307
+0:25   #14 "Change the Equation" move library -> hand as draw by rule:opening-hand
+0:25   new card #15 "Hallowed Fountain" owner "Player" in library top 1 src arena:69399
+0:25   #15 "Hallowed Fountain" move library -> hand as draw by rule:opening-hand
+0:32   "Opponent" mulligan
+0:32   #2 move hand -> library by rule:mulligan
+0:32   #3 move hand -> library by rule:mulligan
+0:32   #4 move hand -> library by rule:mulligan
+0:32   #5 move hand -> library by rule:mulligan
+0:32   #6 move hand -> library by rule:mulligan
+0:32   #7 move hand -> library by rule:mulligan
+0:32   #8 move hand -> library by rule:mulligan
+0:32   "Opponent" shuffle by rule:mulligan
+0:32   new hidden #16 owner "Opponent" in library top 1
+0:32   #16 move library -> hand as draw by rule:mulligan
+0:32   new hidden #17 owner "Opponent" in library top 1
+0:32   #17 move library -> hand as draw by rule:mulligan
+0:32   new hidden #18 owner "Opponent" in library top 1
+0:32   #18 move library -> hand as draw by rule:mulligan
+0:32   new hidden #19 owner "Opponent" in library top 1
+0:32   #19 move library -> hand as draw by rule:mulligan
+0:32   new hidden #20 owner "Opponent" in library top 1
+0:32   #20 move library -> hand as draw by rule:mulligan
+0:32   new hidden #21 owner "Opponent" in library top 1
+0:32   #21 move library -> hand as draw by rule:mulligan
+0:32   new hidden #22 owner "Opponent" in library top 1
+0:32   #22 move library -> hand as draw by rule:mulligan
+0:37   "Player" mulligan
+0:37   #9 "Consult the Star Charts" move hand -> library by rule:mulligan
+0:37   #10 "Elspeth, Storm Slayer" move hand -> library by rule:mulligan
+0:37   #11 "Memory Deluge" move hand -> library by rule:mulligan
+0:37   #12 "Eiganjo, Seat of the Empire" move hand -> library by rule:mulligan
+0:37   #13 "Consult the Star Charts" move hand -> library by rule:mulligan
+0:37   #14 "Change the Equation" move hand -> library by rule:mulligan
+0:37   #15 "Hallowed Fountain" move hand -> library by rule:mulligan
+0:37   "Player" shuffle by rule:mulligan
+0:37   new card #23 "No More Lies" owner "Player" in library top 1 src arena:89134
+0:37   #23 "No More Lies" move library -> hand as draw by rule:mulligan
+0:37   new card #24 "Hallowed Fountain" owner "Player" in library top 1 src arena:69399
+0:37   #24 "Hallowed Fountain" move library -> hand as draw by rule:mulligan
+0:37   new card #25 "Consult the Star Charts" owner "Player" in library top 1 src arena:96625
+0:37   #25 "Consult the Star Charts" move library -> hand as draw by rule:mulligan
+0:37   new card #26 "No More Lies" owner "Player" in library top 1 src arena:89134
+0:37   #26 "No More Lies" move library -> hand as draw by rule:mulligan
+0:37   new card #27 "Consult the Star Charts" owner "Player" in library top 1 src arena:96625
+0:37   #27 "Consult the Star Charts" move library -> hand as draw by rule:mulligan
+0:37   new card #28 "March of Otherworldly Light" owner "Player" in library top 1 src arena:79448
+0:37   #28 "March of Otherworldly Light" move library -> hand as draw by rule:mulligan
+0:37   new card #29 "Get Lost" owner "Player" in library top 1 src arena:87145
+0:37   #29 "Get Lost" move library -> hand as draw by rule:mulligan
+0:39   "Opponent" mulligan
+0:39   #16 move hand -> library by rule:mulligan
+0:39   #17 move hand -> library by rule:mulligan
+0:39   #18 move hand -> library by rule:mulligan
+0:39   #19 move hand -> library by rule:mulligan
+0:39   #20 move hand -> library by rule:mulligan
+0:39   #21 move hand -> library by rule:mulligan
+0:39   #22 move hand -> library by rule:mulligan
+0:39   "Opponent" shuffle by rule:mulligan
+0:39   new hidden #30 owner "Opponent" in library top 1
+0:39   #30 move library -> hand as draw by rule:mulligan
+0:39   new hidden #31 owner "Opponent" in library top 1
+0:39   #31 move library -> hand as draw by rule:mulligan
+0:39   new hidden #32 owner "Opponent" in library top 1
+0:39   #32 move library -> hand as draw by rule:mulligan
+0:39   new hidden #33 owner "Opponent" in library top 1
+0:39   #33 move library -> hand as draw by rule:mulligan
+0:39   new hidden #34 owner "Opponent" in library top 1
+0:39   #34 move library -> hand as draw by rule:mulligan
+0:39   new hidden #35 owner "Opponent" in library top 1
+0:39   #35 move library -> hand as draw by rule:mulligan
+0:39   new hidden #36 owner "Opponent" in library top 1
+0:39   #36 move library -> hand as draw by rule:mulligan
+0:40   "Player" mulligan
+0:40   #23 "No More Lies" move hand -> library by rule:mulligan
+0:40   #24 "Hallowed Fountain" move hand -> library by rule:mulligan
+0:40   #25 "Consult the Star Charts" move hand -> library by rule:mulligan
+0:40   #26 "No More Lies" move hand -> library by rule:mulligan
+0:40   #27 "Consult the Star Charts" move hand -> library by rule:mulligan
+0:40   #28 "March of Otherworldly Light" move hand -> library by rule:mulligan
+0:40   #29 "Get Lost" move hand -> library by rule:mulligan
+0:40   "Player" shuffle by rule:mulligan
+0:40   new card #37 "The Wandering Emperor" owner "Player" in library top 1 src arena:79464
+0:40   #37 "The Wandering Emperor" move library -> hand as draw by rule:mulligan
+0:40   new card #38 "No More Lies" owner "Player" in library top 1 src arena:89134
+0:40   #38 "No More Lies" move library -> hand as draw by rule:mulligan
+0:40   new card #39 "Beza, the Bounding Spring" owner "Player" in library top 1 src arena:91538
+0:40   #39 "Beza, the Bounding Spring" move library -> hand as draw by rule:mulligan
+0:40   new card #40 "Eiganjo, Seat of the Empire" owner "Player" in library top 1 src arena:79708
+0:40   #40 "Eiganjo, Seat of the Empire" move library -> hand as draw by rule:mulligan
+0:40   new card #41 "Teferi, Hero of Dominaria" owner "Player" in library top 1 src arena:67518
+0:40   #41 "Teferi, Hero of Dominaria" move library -> hand as draw by rule:mulligan
+0:40   new card #42 "Otawara, Soaring City" owner "Player" in library top 1 src arena:79711
+0:40   #42 "Otawara, Soaring City" move library -> hand as draw by rule:mulligan
+0:40   new card #43 "Fountainport" owner "Player" in library top 1 src arena:91789
+0:40   #43 "Fountainport" move library -> hand as draw by rule:mulligan
+0:42   "Opponent" keep
+0:48   #35 move hand -> library bottom by rule:mulligan
+0:48   #34 move hand -> library bottom by rule:mulligan
+0:49   "Player" keep
+0:56   #39 "Beza, the Bounding Spring" move hand -> library bottom by rule:mulligan
+0:56   #41 "Teferi, Hero of Dominaria" move hand -> library bottom by rule:mulligan
+0:56 turn 1 "Opponent"
+0:56   keyframe
+0:56     player "Player" life 20 poison 0 library 56
+0:56     player "Opponent" life 20 poison 0 library 55
+0:56     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+0:56     #30 hand "Opponent"
+0:56     #31 hand "Opponent"
+0:56     #32 hand "Opponent"
+0:56     #33 hand "Opponent"
+0:56     #34 library "Opponent" bottom 1
+0:56     #35 library "Opponent" bottom 2
+0:56     #36 hand "Opponent"
+0:56     #37 "The Wandering Emperor" hand "Player"
+0:56     #38 "No More Lies" hand "Player"
+0:56     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+0:56     #40 "Eiganjo, Seat of the Empire" hand "Player"
+0:56     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+0:56     #42 "Otawara, Soaring City" hand "Player"
+0:56     #43 "Fountainport" hand "Player"
+0:56   untap
+0:56   upkeep
+0:56   precombat-main
+0:59     #33 identify "Forest" src arena:95190
+0:59     #33 "Forest" play from hand types land
+0:59   beginning-of-combat
+0:59   declare-attackers
+0:59   end-of-combat
+0:59   postcombat-main
+0:59   end
+0:59   cleanup
+0:59 turn 2 "Player"
+0:59   keyframe
+0:59     player "Player" life 20 poison 0 library 56
+0:59     player "Opponent" life 20 poison 0 library 55
+0:59     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+0:59     #30 hand "Opponent"
+0:59     #31 hand "Opponent"
+0:59     #32 hand "Opponent"
+0:59     #33 "Forest" battlefield "Opponent" types land
+0:59     #34 library "Opponent" bottom 1
+0:59     #35 library "Opponent" bottom 2
+0:59     #36 hand "Opponent"
+0:59     #37 "The Wandering Emperor" hand "Player"
+0:59     #38 "No More Lies" hand "Player"
+0:59     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+0:59     #40 "Eiganjo, Seat of the Empire" hand "Player"
+0:59     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+0:59     #42 "Otawara, Soaring City" hand "Player"
+0:59     #43 "Fountainport" hand "Player"
+0:59   untap
+0:59   upkeep
+0:59   draw
+0:59     new card #44 "Temporary Lockdown" owner "Player" in library top 1 src arena:82088
+0:59     #44 "Temporary Lockdown" move library -> hand as draw by rule:draw
+0:59   precombat-main
+1:05     #42 "Otawara, Soaring City" play from hand types land
+1:05   beginning-of-combat
+1:05   declare-attackers
+1:05   end-of-combat
+1:05   postcombat-main
+1:05   end
+1:05   cleanup
+1:05 turn 3 "Opponent"
+1:05   keyframe
+1:05     player "Player" life 20 poison 0 library 55
+1:05     player "Opponent" life 20 poison 0 library 55
+1:05     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:05     #30 hand "Opponent"
+1:05     #31 hand "Opponent"
+1:05     #32 hand "Opponent"
+1:05     #33 "Forest" battlefield "Opponent" types land
+1:05     #34 library "Opponent" bottom 1
+1:05     #35 library "Opponent" bottom 2
+1:05     #36 hand "Opponent"
+1:05     #37 "The Wandering Emperor" hand "Player"
+1:05     #38 "No More Lies" hand "Player"
+1:05     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+1:05     #40 "Eiganjo, Seat of the Empire" hand "Player"
+1:05     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+1:05     #42 "Otawara, Soaring City" battlefield "Player" types land
+1:05     #43 "Fountainport" hand "Player"
+1:05     #44 "Temporary Lockdown" hand "Player"
+1:05   untap
+1:05   upkeep
+1:05   draw
+1:05     new hidden #45 owner "Opponent" in library top 1
+1:05     #45 move library -> hand as draw by rule:draw
+1:05   precombat-main
+1:08     #31 identify "Forest" src arena:95190
+1:08     #31 "Forest" play from hand types land
+1:08   beginning-of-combat
+1:08   declare-attackers
+1:08   end-of-combat
+1:08   postcombat-main
+1:08   end
+1:08   cleanup
+1:08 turn 4 "Player"
+1:08   keyframe
+1:08     player "Player" life 20 poison 0 library 55
+1:08     player "Opponent" life 20 poison 0 library 54
+1:08     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:08     #30 hand "Opponent"
+1:08     #31 "Forest" battlefield "Opponent" types land
+1:08     #32 hand "Opponent"
+1:08     #33 "Forest" battlefield "Opponent" types land
+1:08     #34 library "Opponent" bottom 1
+1:08     #35 library "Opponent" bottom 2
+1:08     #36 hand "Opponent"
+1:08     #37 "The Wandering Emperor" hand "Player"
+1:08     #38 "No More Lies" hand "Player"
+1:08     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+1:08     #40 "Eiganjo, Seat of the Empire" hand "Player"
+1:08     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+1:08     #42 "Otawara, Soaring City" battlefield "Player" types land
+1:08     #43 "Fountainport" hand "Player"
+1:08     #44 "Temporary Lockdown" hand "Player"
+1:08     #45 hand "Opponent"
+1:08   untap
+1:08   upkeep
+1:08   draw
+1:08     new card #46 "Floodfarm Verge" owner "Player" in library top 1 src arena:92359
+1:08     #46 "Floodfarm Verge" move library -> hand as draw by rule:draw
+1:08   precombat-main
+1:14     #46 "Floodfarm Verge" play from hand types land
+1:14   beginning-of-combat
+1:14   declare-attackers
+1:14   end-of-combat
+1:14   postcombat-main
+1:14   end
+1:14   cleanup
+1:14 turn 5 "Opponent"
+1:14   keyframe
+1:14     player "Player" life 20 poison 0 library 54
+1:14     player "Opponent" life 20 poison 0 library 54
+1:14     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:14     #30 hand "Opponent"
+1:14     #31 "Forest" battlefield "Opponent" types land
+1:14     #32 hand "Opponent"
+1:14     #33 "Forest" battlefield "Opponent" types land
+1:14     #34 library "Opponent" bottom 1
+1:14     #35 library "Opponent" bottom 2
+1:14     #36 hand "Opponent"
+1:14     #37 "The Wandering Emperor" hand "Player"
+1:14     #38 "No More Lies" hand "Player"
+1:14     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+1:14     #40 "Eiganjo, Seat of the Empire" hand "Player"
+1:14     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+1:14     #42 "Otawara, Soaring City" battlefield "Player" types land
+1:14     #43 "Fountainport" hand "Player"
+1:14     #44 "Temporary Lockdown" hand "Player"
+1:14     #45 hand "Opponent"
+1:14     #46 "Floodfarm Verge" battlefield "Player" types land
+1:14   untap
+1:14   upkeep
+1:14   draw
+1:14     new hidden #47 owner "Opponent" in library top 1
+1:14     #47 move library -> hand as draw by rule:draw
+1:14   precombat-main
+1:17     #45 identify "Forest" src arena:95190
+1:17     #45 "Forest" play from hand types land
+1:19     #32 special plot
+1:19     new ability #48 mana of #33 "Forest" ? controller "Opponent"
+1:19     #33 "Forest" tap by cost:#48
+1:19     "Opponent" add {G} by #48
+1:19     new ability #49 mana of #31 "Forest" ? controller "Opponent"
+1:19     #31 "Forest" tap by cost:#49
+1:19     "Opponent" add {G} by #49
+1:19     new ability #50 mana of #45 "Forest" ? controller "Opponent"
+1:19     #45 "Forest" tap by cost:#50
+1:19     "Opponent" add {G} by #50
+1:19     "Opponent" pay {G}{G}{G} by cost:#32
+1:19     #32 identify "Outcaster Trailblazer" src arena:90519
+1:19     #32 "Outcaster Trailblazer" move hand -> exile by #32
+1:19   beginning-of-combat
+1:19   declare-attackers
+1:19   end-of-combat
+1:19   postcombat-main
+1:19   end
+1:19   cleanup
+1:19 turn 6 "Player"
+1:19   keyframe
+1:19     player "Player" life 20 poison 0 library 54
+1:19     player "Opponent" life 20 poison 0 library 53
+1:19     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:19     #30 hand "Opponent"
+1:19     #31 "Forest" battlefield "Opponent" types land tapped
+1:19     #32 "Outcaster Trailblazer" exile
+1:19     #33 "Forest" battlefield "Opponent" types land tapped
+1:19     #34 library "Opponent" bottom 1
+1:19     #35 library "Opponent" bottom 2
+1:19     #36 hand "Opponent"
+1:19     #37 "The Wandering Emperor" hand "Player"
+1:19     #38 "No More Lies" hand "Player"
+1:19     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+1:19     #40 "Eiganjo, Seat of the Empire" hand "Player"
+1:19     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+1:19     #42 "Otawara, Soaring City" battlefield "Player" types land
+1:19     #43 "Fountainport" hand "Player"
+1:19     #44 "Temporary Lockdown" hand "Player"
+1:19     #45 "Forest" battlefield "Opponent" types land tapped
+1:19     #46 "Floodfarm Verge" battlefield "Player" types land
+1:19     #47 hand "Opponent"
+1:19   untap
+1:19   upkeep
+1:19   draw
+1:19     new card #51 "Consult the Star Charts" owner "Player" in library top 1 src arena:96625
+1:19     #51 "Consult the Star Charts" move library -> hand as draw by rule:draw
+1:19   precombat-main
+1:28     #43 "Fountainport" play from hand types land
+1:29   beginning-of-combat
+1:29   declare-attackers
+1:29   end-of-combat
+1:29   postcombat-main
+1:30   end
+1:30   cleanup
+1:30 turn 7 "Opponent"
+1:30   keyframe
+1:30     player "Player" life 20 poison 0 library 53
+1:30     player "Opponent" life 20 poison 0 library 53
+1:30     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:30     #30 hand "Opponent"
+1:30     #31 "Forest" battlefield "Opponent" types land tapped
+1:30     #32 "Outcaster Trailblazer" exile
+1:30     #33 "Forest" battlefield "Opponent" types land tapped
+1:30     #34 library "Opponent" bottom 1
+1:30     #35 library "Opponent" bottom 2
+1:30     #36 hand "Opponent"
+1:30     #37 "The Wandering Emperor" hand "Player"
+1:30     #38 "No More Lies" hand "Player"
+1:30     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+1:30     #40 "Eiganjo, Seat of the Empire" hand "Player"
+1:30     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+1:30     #42 "Otawara, Soaring City" battlefield "Player" types land
+1:30     #43 "Fountainport" battlefield "Player" types land
+1:30     #44 "Temporary Lockdown" hand "Player"
+1:30     #45 "Forest" battlefield "Opponent" types land tapped
+1:30     #46 "Floodfarm Verge" battlefield "Player" types land
+1:30     #47 hand "Opponent"
+1:30     #51 "Consult the Star Charts" hand "Player"
+1:30   untap
+1:30     #33 "Forest" untap by rule:untap
+1:30     #31 "Forest" untap by rule:untap
+1:30     #45 "Forest" untap by rule:untap
+1:30   upkeep
+1:30   draw
+1:30     new hidden #52 owner "Opponent" in library top 1
+1:30     #52 move library -> hand as draw by rule:draw
+1:30   precombat-main
+1:34     #36 identify "Nykthos, Shrine to Nyx" src arena:54769
+1:34     #36 "Nykthos, Shrine to Nyx" play from hand types land
+1:35     #30 identify "Kiora, Behemoth Beckoner" src arena:69683
+1:35     #30 "Kiora, Behemoth Beckoner" cast from hand
+1:35     new ability #53 mana of #36 "Nykthos, Shrine to Nyx" ? controller "Opponent"
+1:35     #36 "Nykthos, Shrine to Nyx" tap by cost:#53
+1:35     "Opponent" add {C} by #53
+1:35     new ability #54 mana of #33 "Forest" ? controller "Opponent"
+1:35     #33 "Forest" tap by cost:#54
+1:35     "Opponent" add {G} by #54
+1:35     new ability #55 mana of #31 "Forest" ? controller "Opponent"
+1:35     #31 "Forest" tap by cost:#55
+1:35     "Opponent" add {G} by #55
+1:35     "Opponent" pay {G}{G}{C} by cost:#30
+1:35     "Opponent" priority
+1:35       stack
+1:35         #30 "Kiora, Behemoth Beckoner" controller "Opponent"
+1:35     "Opponent" pass
+1:35     "Player" priority
+1:35       stack
+1:35         #30 "Kiora, Behemoth Beckoner" controller "Opponent"
+1:38     #38 "No More Lies" cast from hand
+1:39     #38 "No More Lies" target #30 "Kiora, Behemoth Beckoner"
+1:40     new ability #56 mana of #46 "Floodfarm Verge" ? controller "Player"
+1:40     #46 "Floodfarm Verge" tap by cost:#56
+1:40     "Player" add {W} by #56
+1:40     new ability #57 mana of #42 "Otawara, Soaring City" ? controller "Player"
+1:40     #42 "Otawara, Soaring City" tap by cost:#57
+1:40     "Player" add {U} by #57
+1:40     "Player" pay {W}{U} by cost:#38
+1:40     "Player" priority
+1:40       stack
+1:40         #38 "No More Lies" controller "Player" target #30 "Kiora, Behemoth Beckoner"
+1:40         #30 "Kiora, Behemoth Beckoner" controller "Opponent"
+1:40     "Player" pass
+1:40     "Opponent" priority
+1:40       stack
+1:40         #38 "No More Lies" controller "Player" target #30 "Kiora, Behemoth Beckoner"
+1:40         #30 "Kiora, Behemoth Beckoner" controller "Opponent"
+1:40     "Opponent" pass
+1:40     #38 "No More Lies" resolve
+1:40     #30 "Kiora, Behemoth Beckoner" countered by #38
+1:40     #30 "Kiora, Behemoth Beckoner" move stack -> exile by #38
+1:40     #38 "No More Lies" move stack -> graveyard by rule:resolve
+1:47     #52 identify "Llanowar Elves" src arena:93940
+1:47     #52 "Llanowar Elves" cast from hand
+1:47     new ability #58 mana of #45 "Forest" ? controller "Opponent"
+1:47     #45 "Forest" tap by cost:#58
+1:47     "Opponent" add {G} by #58
+1:47     "Opponent" pay {G} by cost:#52
+1:47     "Opponent" priority
+1:47       stack
+1:47         #52 "Llanowar Elves" controller "Opponent"
+1:47     "Opponent" pass
+1:47     "Player" priority
+1:47       stack
+1:47         #52 "Llanowar Elves" controller "Opponent"
+1:47     "Player" pass
+1:47     #52 "Llanowar Elves" resolve
+1:47     #52 "Llanowar Elves" move stack -> battlefield types creature pt 1/1 by rule:resolve
+1:51   beginning-of-combat
+1:51   declare-attackers
+1:51   end-of-combat
+1:51   postcombat-main
+1:52   end
+1:52   cleanup
+1:52 turn 8 "Player"
+1:52   keyframe
+1:52     player "Player" life 20 poison 0 library 53
+1:52     player "Opponent" life 20 poison 0 library 52
+1:52     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:52     #30 "Kiora, Behemoth Beckoner" exile
+1:52     #31 "Forest" battlefield "Opponent" types land tapped
+1:52     #32 "Outcaster Trailblazer" exile
+1:52     #33 "Forest" battlefield "Opponent" types land tapped
+1:52     #34 library "Opponent" bottom 1
+1:52     #35 library "Opponent" bottom 2
+1:52     #36 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+1:52     #37 "The Wandering Emperor" hand "Player"
+1:52     #38 "No More Lies" graveyard "Player"
+1:52     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+1:52     #40 "Eiganjo, Seat of the Empire" hand "Player"
+1:52     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+1:52     #42 "Otawara, Soaring City" battlefield "Player" types land tapped
+1:52     #43 "Fountainport" battlefield "Player" types land
+1:52     #44 "Temporary Lockdown" hand "Player"
+1:52     #45 "Forest" battlefield "Opponent" types land tapped
+1:52     #46 "Floodfarm Verge" battlefield "Player" types land tapped
+1:52     #47 hand "Opponent"
+1:52     #51 "Consult the Star Charts" hand "Player"
+1:52     #52 "Llanowar Elves" battlefield "Opponent" types creature pt 1/1
+1:52   untap
+1:52     #42 "Otawara, Soaring City" untap by rule:untap
+1:52     #46 "Floodfarm Verge" untap by rule:untap
+1:52   upkeep
+1:52   draw
+1:52     new card #59 "Get Lost" owner "Player" in library top 1 src arena:87145
+1:52     #59 "Get Lost" move library -> hand as draw by rule:draw
+1:52   precombat-main
+2:00     #40 "Eiganjo, Seat of the Empire" play from hand types land
+2:01   beginning-of-combat
+2:01   declare-attackers
+2:01   end-of-combat
+2:01   postcombat-main
+2:02   end
+2:02   cleanup
+2:02 turn 9 "Opponent"
+2:02   keyframe
+2:02     player "Player" life 20 poison 0 library 52
+2:02     player "Opponent" life 20 poison 0 library 52
+2:02     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:02     #30 "Kiora, Behemoth Beckoner" exile
+2:02     #31 "Forest" battlefield "Opponent" types land tapped
+2:02     #32 "Outcaster Trailblazer" exile
+2:02     #33 "Forest" battlefield "Opponent" types land tapped
+2:02     #34 library "Opponent" bottom 1
+2:02     #35 library "Opponent" bottom 2
+2:02     #36 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+2:02     #37 "The Wandering Emperor" hand "Player"
+2:02     #38 "No More Lies" graveyard "Player"
+2:02     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+2:02     #40 "Eiganjo, Seat of the Empire" battlefield "Player" types land
+2:02     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+2:02     #42 "Otawara, Soaring City" battlefield "Player" types land
+2:02     #43 "Fountainport" battlefield "Player" types land
+2:02     #44 "Temporary Lockdown" hand "Player"
+2:02     #45 "Forest" battlefield "Opponent" types land tapped
+2:02     #46 "Floodfarm Verge" battlefield "Player" types land
+2:02     #47 hand "Opponent"
+2:02     #51 "Consult the Star Charts" hand "Player"
+2:02     #52 "Llanowar Elves" battlefield "Opponent" types creature pt 1/1
+2:02     #59 "Get Lost" hand "Player"
+2:02   untap
+2:02     #33 "Forest" untap by rule:untap
+2:02     #31 "Forest" untap by rule:untap
+2:02     #45 "Forest" untap by rule:untap
+2:02     #36 "Nykthos, Shrine to Nyx" untap by rule:untap
+2:02   upkeep
+2:02   draw
+2:02     new hidden #60 owner "Opponent" in library top 1
+2:02     #60 move library -> hand as draw by rule:draw
+2:02   precombat-main
+2:05     #60 identify "Forest" src arena:95190
+2:05     #60 "Forest" play from hand types land
+2:05     #32 "Outcaster Trailblazer" cast from exile
+2:05     "Opponent" priority
+2:05       stack
+2:05         #32 "Outcaster Trailblazer" controller "Opponent"
+2:05     "Opponent" pass
+2:05     "Player" priority
+2:05       stack
+2:05         #32 "Outcaster Trailblazer" controller "Opponent"
+2:08     "Player" pass
+2:08     #32 "Outcaster Trailblazer" resolve
+2:08     #32 "Outcaster Trailblazer" move stack -> battlefield types creature pt 4/2 by rule:resolve
+2:08     new ability #61 triggered of #32 "Outcaster Trailblazer" ? controller "Opponent" in stack
+2:08     "Opponent" priority
+2:08       stack
+2:08         #61 triggered of #32 "Outcaster Trailblazer" ? controller "Opponent"
+2:08     "Opponent" pass
+2:08     "Player" priority
+2:08       stack
+2:08         #61 triggered of #32 "Outcaster Trailblazer" ? controller "Opponent"
+2:10     "Player" pass
+2:10     #61 resolve
+2:13     "Opponent" add {G} restriction ? by #61
+2:13     #61 cease by rule:resolve
+2:14     #47 identify "Cavalier of Thorns" src arena:69952
+2:14     #47 "Cavalier of Thorns" cast from hand
+2:14     new ability #62 mana of #36 "Nykthos, Shrine to Nyx" ? controller "Opponent"
+2:14     #36 "Nykthos, Shrine to Nyx" tap by cost:#62
+2:14     "Opponent" add {C} by #62
+2:14     new ability #63 mana of #33 "Forest" ? controller "Opponent"
+2:14     #33 "Forest" tap by cost:#63
+2:14     "Opponent" add {G} by #63
+2:14     new ability #64 mana of #31 "Forest" ? controller "Opponent"
+2:14     #31 "Forest" tap by cost:#64
+2:14     "Opponent" add {G} by #64
+2:14     new ability #65 mana of #45 "Forest" ? controller "Opponent"
+2:14     #45 "Forest" tap by cost:#65
+2:14     "Opponent" add {G} by #65
+2:14     "Opponent" pay {G}{G}{G}{G}{C} by cost:#47
+2:14     "Opponent" priority
+2:14       stack
+2:14         #47 "Cavalier of Thorns" controller "Opponent"
+2:14     "Opponent" pass
+2:14     "Player" priority
+2:14       stack
+2:14         #47 "Cavalier of Thorns" controller "Opponent"
+2:17     "Player" pass
+2:17     #47 "Cavalier of Thorns" resolve
+2:17     #47 "Cavalier of Thorns" move stack -> battlefield types creature pt 5/6 by rule:resolve
+2:18     new ability #66 triggered of #32 "Outcaster Trailblazer" ? controller "Opponent" in stack
+2:18     new ability #67 triggered of #47 "Cavalier of Thorns" ? controller "Opponent" in stack
+2:18     "Opponent" priority
+2:18       stack
+2:18         #67 triggered of #47 "Cavalier of Thorns" ? controller "Opponent"
+2:18         #66 triggered of #32 "Outcaster Trailblazer" ? controller "Opponent"
+2:18     "Opponent" pass
+2:18     "Player" priority
+2:18       stack
+2:18         #67 triggered of #47 "Cavalier of Thorns" ? controller "Opponent"
+2:18         #66 triggered of #32 "Outcaster Trailblazer" ? controller "Opponent"
+2:21     "Player" pass
+2:21     #67 resolve
+2:27     new card #68 "Evendo, Waking Haven" owner "Opponent" in library top 4 src arena:96827
+2:27     #68 "Evendo, Waking Haven" move library -> battlefield tapped types land by #67
+2:27     new card #69 "Old-Growth Troll" owner "Opponent" in library top 3 src arena:75232
+2:27     #69 "Old-Growth Troll" move library -> graveyard by #67
+2:27     new card #70 "Storm the Festival" owner "Opponent" in library top 3 src arena:78560
+2:27     #70 "Storm the Festival" move library -> graveyard by #67
+2:27     new card #71 "Forest" owner "Opponent" in library top 1 src arena:95190
+2:27     #71 "Forest" move library -> graveyard by #67
+2:27     new card #72 "Elvish Mystic" owner "Opponent" in library top 1 src arena:54163
+2:27     #72 "Elvish Mystic" move library -> graveyard by #67
+2:27     #67 cease by rule:resolve
+2:27     "Opponent" priority
+2:27       stack
+2:27         #66 triggered of #32 "Outcaster Trailblazer" ? controller "Opponent"
+2:27     "Opponent" pass
+2:27     "Player" priority
+2:27       stack
+2:27         #66 triggered of #32 "Outcaster Trailblazer" ? controller "Opponent"
+2:32     "Player" pass
+2:32     #66 resolve
+2:32     new hidden #73 owner "Opponent" in library top 1
+2:32     #73 move library -> hand as draw by #66
+2:32     #66 cease by rule:resolve
+2:41     new ability #74 activated of #68 "Evendo, Waking Haven" ? controller "Opponent" in stack
+2:41     #47 "Cavalier of Thorns" tap by cost:#74
+2:41     "Opponent" priority
+2:41       stack
+2:41         #74 activated of #68 "Evendo, Waking Haven" ? controller "Opponent"
+2:41     "Opponent" pass
+2:41     "Player" priority
+2:41       stack
+2:41         #74 activated of #68 "Evendo, Waking Haven" ? controller "Opponent"
+2:45     "Player" pass
+2:45     #74 resolve
+2:45     #68 "Evendo, Waking Haven" counters "charge" 0 -> 5 by #74
+2:45     #74 cease by rule:resolve
+2:51     new ability #75 activated of #68 "Evendo, Waking Haven" ? controller "Opponent" in stack
+2:51     #32 "Outcaster Trailblazer" tap by cost:#75
+2:51     "Opponent" priority
+2:51       stack
+2:51         #75 activated of #68 "Evendo, Waking Haven" ? controller "Opponent"
+2:51     "Opponent" pass
+2:51     "Player" priority
+2:51       stack
+2:51         #75 activated of #68 "Evendo, Waking Haven" ? controller "Opponent"
+2:52     "Player" pass
+2:52     #75 resolve
+2:52     #68 "Evendo, Waking Haven" counters "charge" 5 -> 9 by #75
+2:52     #75 cease by rule:resolve
+2:56   beginning-of-combat
+3:00   declare-attackers
+3:01     #52 "Llanowar Elves" attack "Player"
+3:01     #52 "Llanowar Elves" tap by rule:declare-attackers
+3:03   declare-blockers
+3:03   combat-damage
+3:03     #52 "Llanowar Elves" damage "Player" 1 by rule:combat-damage
+3:03     "Player" life 20 -> 19 by rule:combat-damage
+3:03   end-of-combat
+3:03   postcombat-main
+3:03   end
+3:07     #37 "The Wandering Emperor" cast from hand
+3:08     new ability #76 mana of #43 "Fountainport" ? controller "Player"
+3:08     #43 "Fountainport" tap by cost:#76
+3:08     "Player" add {C} by #76
+3:08     new ability #77 mana of #46 "Floodfarm Verge" ? controller "Player"
+3:08     #46 "Floodfarm Verge" tap by cost:#77
+3:08     "Player" add {W} by #77
+3:08     new ability #78 mana of #40 "Eiganjo, Seat of the Empire" ? controller "Player"
+3:08     #40 "Eiganjo, Seat of the Empire" tap by cost:#78
+3:08     "Player" add {W} by #78
+3:08     new ability #79 mana of #42 "Otawara, Soaring City" ? controller "Player"
+3:08     #42 "Otawara, Soaring City" tap by cost:#79
+3:08     "Player" add {U} by #79
+3:08     "Player" pay {W}{W}{U}{C} by cost:#37
+3:08     "Player" priority
+3:08       stack
+3:08         #37 "The Wandering Emperor" controller "Player"
+3:08     "Player" pass
+3:08     "Opponent" priority
+3:08       stack
+3:08         #37 "The Wandering Emperor" controller "Player"
+3:08     "Opponent" pass
+3:08     #37 "The Wandering Emperor" resolve
+3:08     #37 "The Wandering Emperor" move stack -> battlefield types planeswalker by rule:resolve
+3:08     #37 "The Wandering Emperor" counters "loyalty" 0 -> 3 by #37
+3:12     new ability #80 loyalty of #37 "The Wandering Emperor" ? controller "Player" in stack
+3:14     #80 target #47 "Cavalier of Thorns"
+3:14     #37 "The Wandering Emperor" counters "loyalty" 3 -> 1 by cost:#80
+3:14     "Player" priority
+3:14       stack
+3:14         #80 loyalty of #37 "The Wandering Emperor" ? controller "Player" target #47 "Cavalier of Thorns"
+3:14     "Player" pass
+3:14     "Opponent" priority
+3:14       stack
+3:14         #80 loyalty of #37 "The Wandering Emperor" ? controller "Player" target #47 "Cavalier of Thorns"
+3:14     "Opponent" pass
+3:14     #80 resolve
+3:14     #47 "Cavalier of Thorns" move battlefield -> exile by #80
+3:14     "Player" life 19 -> 21 by #80
+3:14     #80 cease by rule:resolve
+3:14   cleanup
+3:14 turn 10 "Player"
+3:14   keyframe
+3:14     player "Player" life 21 poison 0 library 52
+3:14     player "Opponent" life 20 poison 0 library 45
+3:14     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+3:14     #30 "Kiora, Behemoth Beckoner" exile
+3:14     #31 "Forest" battlefield "Opponent" types land tapped
+3:14     #32 "Outcaster Trailblazer" battlefield "Opponent" types creature pt 4/2 tapped
+3:14     #33 "Forest" battlefield "Opponent" types land tapped
+3:14     #34 library "Opponent" bottom 1
+3:14     #35 library "Opponent" bottom 2
+3:14     #36 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+3:14     #37 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 1
+3:14     #38 "No More Lies" graveyard "Player"
+3:14     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+3:14     #40 "Eiganjo, Seat of the Empire" battlefield "Player" types land tapped
+3:14     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+3:14     #42 "Otawara, Soaring City" battlefield "Player" types land tapped
+3:14     #43 "Fountainport" battlefield "Player" types land tapped
+3:14     #44 "Temporary Lockdown" hand "Player"
+3:14     #45 "Forest" battlefield "Opponent" types land tapped
+3:14     #46 "Floodfarm Verge" battlefield "Player" types land tapped
+3:14     #47 "Cavalier of Thorns" exile
+3:14     #51 "Consult the Star Charts" hand "Player"
+3:14     #52 "Llanowar Elves" battlefield "Opponent" types creature pt 1/1 tapped
+3:14     #59 "Get Lost" hand "Player"
+3:14     #60 "Forest" battlefield "Opponent" types land
+3:14     #68 "Evendo, Waking Haven" battlefield "Opponent" types land tapped counters "charge" 9
+3:14     #69 "Old-Growth Troll" graveyard "Opponent"
+3:14     #70 "Storm the Festival" graveyard "Opponent"
+3:14     #71 "Forest" graveyard "Opponent"
+3:14     #72 "Elvish Mystic" graveyard "Opponent"
+3:14     #73 hand "Opponent"
+3:14   untap
+3:14     #42 "Otawara, Soaring City" untap by rule:untap
+3:14     #46 "Floodfarm Verge" untap by rule:untap
+3:14     #43 "Fountainport" untap by rule:untap
+3:14     #40 "Eiganjo, Seat of the Empire" untap by rule:untap
+3:14   upkeep
+3:14   draw
+3:14     new card #81 "Fountainport" owner "Player" in library top 1 src arena:91789
+3:14     #81 "Fountainport" move library -> hand as draw by rule:draw
+3:14   precombat-main
+3:20     #81 "Fountainport" play from hand types land
+3:24     new ability #82 loyalty of #37 "The Wandering Emperor" ? controller "Player" in stack
+3:26     #37 "The Wandering Emperor" counters "loyalty" 1 -> 2 by cost:#82
+3:26     "Player" priority
+3:26       stack
+3:26         #82 loyalty of #37 "The Wandering Emperor" ? controller "Player"
+3:26     "Player" pass
+3:26     "Opponent" priority
+3:26       stack
+3:26         #82 loyalty of #37 "The Wandering Emperor" ? controller "Player"
+3:26     "Opponent" pass
+3:26     #82 resolve
+3:26     #82 cease by rule:resolve
+3:31     #1 "Kaheera, the Orphanguard" special companion
+3:31     new ability #83 mana of #43 "Fountainport" ? controller "Player"
+3:31     #43 "Fountainport" tap by cost:#83
+3:31     "Player" add {C} by #83
+3:31     new ability #84 mana of #81 "Fountainport" ? controller "Player"
+3:31     #81 "Fountainport" tap by cost:#84
+3:31     "Player" add {C} by #84
+3:31     new ability #85 mana of #46 "Floodfarm Verge" ? controller "Player"
+3:31     #46 "Floodfarm Verge" tap by cost:#85
+3:31     "Player" add {W} by #85
+3:31     "Player" pay {W}{C}{C} by cost:#1
+3:31     #1 "Kaheera, the Orphanguard" move outside "sideboard" -> hand by #1
+3:33   beginning-of-combat
+3:33   declare-attackers
+3:33   end-of-combat
+3:33   postcombat-main
+3:34   end
+3:34   cleanup
+3:34 turn 11 "Opponent"
+3:34   keyframe
+3:34     player "Player" life 21 poison 0 library 51
+3:34     player "Opponent" life 20 poison 0 library 45
+3:34     #1 "Kaheera, the Orphanguard" hand "Player"
+3:34     #30 "Kiora, Behemoth Beckoner" exile
+3:34     #31 "Forest" battlefield "Opponent" types land tapped
+3:34     #32 "Outcaster Trailblazer" battlefield "Opponent" types creature pt 4/2 tapped
+3:34     #33 "Forest" battlefield "Opponent" types land tapped
+3:34     #34 library "Opponent" bottom 1
+3:34     #35 library "Opponent" bottom 2
+3:34     #36 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+3:34     #37 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 2
+3:34     #38 "No More Lies" graveyard "Player"
+3:34     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+3:34     #40 "Eiganjo, Seat of the Empire" battlefield "Player" types land
+3:34     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+3:34     #42 "Otawara, Soaring City" battlefield "Player" types land
+3:34     #43 "Fountainport" battlefield "Player" types land tapped
+3:34     #44 "Temporary Lockdown" hand "Player"
+3:34     #45 "Forest" battlefield "Opponent" types land tapped
+3:34     #46 "Floodfarm Verge" battlefield "Player" types land tapped
+3:34     #47 "Cavalier of Thorns" exile
+3:34     #51 "Consult the Star Charts" hand "Player"
+3:34     #52 "Llanowar Elves" battlefield "Opponent" types creature pt 1/1 tapped
+3:34     #59 "Get Lost" hand "Player"
+3:34     #60 "Forest" battlefield "Opponent" types land
+3:34     #68 "Evendo, Waking Haven" battlefield "Opponent" types land tapped counters "charge" 9
+3:34     #69 "Old-Growth Troll" graveyard "Opponent"
+3:34     #70 "Storm the Festival" graveyard "Opponent"
+3:34     #71 "Forest" graveyard "Opponent"
+3:34     #72 "Elvish Mystic" graveyard "Opponent"
+3:34     #73 hand "Opponent"
+3:34     #81 "Fountainport" battlefield "Player" types land tapped
+3:34   untap
+3:34     #33 "Forest" untap by rule:untap
+3:34     #31 "Forest" untap by rule:untap
+3:34     #45 "Forest" untap by rule:untap
+3:34     #36 "Nykthos, Shrine to Nyx" untap by rule:untap
+3:34     #52 "Llanowar Elves" untap by rule:untap
+3:34     #32 "Outcaster Trailblazer" untap by rule:untap
+3:34     #68 "Evendo, Waking Haven" untap by rule:untap
+3:34   upkeep
+3:34   draw
+3:34     new hidden #86 owner "Opponent" in library top 1
+3:34     #86 move library -> hand as draw by rule:draw
+3:34   precombat-main
+3:39     #73 identify "Nissa, Who Shakes the World" src arena:69620
+3:39     #73 "Nissa, Who Shakes the World" cast from hand
+3:39     new ability #87 mana of #36 "Nykthos, Shrine to Nyx" ? controller "Opponent"
+3:39     #36 "Nykthos, Shrine to Nyx" tap by cost:#87
+3:39     "Opponent" add {C} by #87
+3:39     new ability #88 mana of #33 "Forest" ? controller "Opponent"
+3:39     #33 "Forest" tap by cost:#88
+3:39     "Opponent" add {G} by #88
+3:39     new ability #89 mana of #31 "Forest" ? controller "Opponent"
+3:39     #31 "Forest" tap by cost:#89
+3:39     "Opponent" add {G} by #89
+3:39     new ability #90 mana of #45 "Forest" ? controller "Opponent"
+3:39     #45 "Forest" tap by cost:#90
+3:39     "Opponent" add {G} by #90
+3:39     new ability #91 mana of #60 "Forest" ? controller "Opponent"
+3:39     #60 "Forest" tap by cost:#91
+3:39     "Opponent" add {G} by #91
+3:39     "Opponent" pay {G}{G}{G}{G}{C} by cost:#73
+3:39     "Opponent" priority
+3:39       stack
+3:39         #73 "Nissa, Who Shakes the World" controller "Opponent"
+3:39     "Opponent" pass
+3:39     "Player" priority
+3:39       stack
+3:39         #73 "Nissa, Who Shakes the World" controller "Opponent"
+3:49     "Player" pass
+3:49     #73 "Nissa, Who Shakes the World" resolve
+3:49     #73 "Nissa, Who Shakes the World" move stack -> battlefield types planeswalker by rule:resolve
+3:49     #73 "Nissa, Who Shakes the World" counters "loyalty" 0 -> 5 by #73
+4:00     new ability #92 loyalty of #73 "Nissa, Who Shakes the World" ? controller "Opponent" in stack
+4:00     #92 target #33 "Forest"
+4:00     #73 "Nissa, Who Shakes the World" counters "loyalty" 5 -> 6 by cost:#92
+4:00     "Opponent" priority
+4:00       stack
+4:00         #92 loyalty of #73 "Nissa, Who Shakes the World" ? controller "Opponent" target #33 "Forest"
+4:00     "Opponent" pass
+4:00     "Player" priority
+4:00       stack
+4:00         #92 loyalty of #73 "Nissa, Who Shakes the World" ? controller "Opponent" target #33 "Forest"
+4:03     "Player" pass
+4:03     #92 resolve
+4:03     new effect #93 of #73 "Nissa, Who Shakes the World" ? controller "Opponent" by #92
+4:03     #33 "Forest" counters "+1/+1" 0 -> 3 by #92
+4:03     #33 "Forest" types land -> creature land by #92
+4:03     #33 "Forest" pt none -> 3/3 by #92
+4:03     #33 "Forest" untap by ?
+4:03     #92 cease by rule:resolve
+4:08     #86 identify "Old-Growth Troll" src arena:75232
+4:08     #86 "Old-Growth Troll" cast from hand
+4:08     new ability #94 mana of #68 "Evendo, Waking Haven" ? controller "Opponent"
+4:08     #68 "Evendo, Waking Haven" tap by cost:#94
+4:08     "Opponent" add {G} by #94
+4:08     new ability #95 mana of #33 "Forest" ? controller "Opponent"
+4:08     #33 "Forest" tap by cost:#95
+4:08     new ability #96 mana of #73 "Nissa, Who Shakes the World" ? controller "Opponent"
+4:08     "Opponent" add {G} by #95
+4:08     "Opponent" add {G} restriction ? by #96
+4:08     "Opponent" pay {G}{G}{G} by cost:#86
+4:08     "Opponent" priority
+4:08       stack
+4:08         #86 "Old-Growth Troll" controller "Opponent"
+4:08     "Opponent" pass
+4:08     "Player" priority
+4:08       stack
+4:08         #86 "Old-Growth Troll" controller "Opponent"
+4:11     #59 "Get Lost" cast from hand
+4:12     #59 "Get Lost" target #32 "Outcaster Trailblazer"
+4:13     new ability #97 mana of #40 "Eiganjo, Seat of the Empire" ? controller "Player"
+4:13     #40 "Eiganjo, Seat of the Empire" tap by cost:#97
+4:13     "Player" add {W} by #97
+4:13     new ability #98 mana of #42 "Otawara, Soaring City" ? controller "Player"
+4:13     #42 "Otawara, Soaring City" tap by cost:#98
+4:13     "Player" add {U} by #98
+4:13     "Player" pay {W}{U} by cost:#59
+4:13     "Player" priority
+4:13       stack
+4:13         #59 "Get Lost" controller "Player" target #32 "Outcaster Trailblazer"
+4:13         #86 "Old-Growth Troll" controller "Opponent"
+4:13     "Player" pass
+4:13     "Opponent" priority
+4:13       stack
+4:13         #59 "Get Lost" controller "Player" target #32 "Outcaster Trailblazer"
+4:13         #86 "Old-Growth Troll" controller "Opponent"
+4:13     "Opponent" pass
+4:13     #59 "Get Lost" resolve
+4:13     #32 "Outcaster Trailblazer" move battlefield -> graveyard as destroy by #59
+4:13     new token #99 "Map Token" owner "Opponent" in battlefield types artifact by #59
+4:13     new token #100 "Map Token" owner "Opponent" in battlefield types artifact by #59
+4:13     #59 "Get Lost" move stack -> graveyard by rule:resolve
+4:13     "Opponent" priority
+4:13       stack
+4:13         #86 "Old-Growth Troll" controller "Opponent"
+4:13     "Opponent" pass
+4:13     "Player" priority
+4:13       stack
+4:13         #86 "Old-Growth Troll" controller "Opponent"
+4:13     "Player" pass
+4:13     #86 "Old-Growth Troll" resolve
+4:13     #86 "Old-Growth Troll" move stack -> battlefield types creature pt 4/4 by rule:resolve
+4:23     new ability #101 activated of #68 "Evendo, Waking Haven" ? controller "Opponent" in stack
+4:23     #86 "Old-Growth Troll" tap by cost:#101
+4:23     "Opponent" priority
+4:23       stack
+4:23         #101 activated of #68 "Evendo, Waking Haven" ? controller "Opponent"
+4:23     "Opponent" pass
+4:23     "Player" priority
+4:23       stack
+4:23         #101 activated of #68 "Evendo, Waking Haven" ? controller "Opponent"
+4:23     "Player" pass
+4:23     #101 resolve
+4:23     #68 "Evendo, Waking Haven" counters "charge" 9 -> 13 by #101
+4:23     #101 cease by rule:resolve
+4:26   beginning-of-combat
+4:26   declare-attackers
+4:33   end-of-combat
+4:33   postcombat-main
+4:36   end
+4:36   cleanup
+4:36 turn 12 "Player"
+4:36   keyframe
+4:36     player "Player" life 21 poison 0 library 51
+4:36     player "Opponent" life 20 poison 0 library 44
+4:36     #1 "Kaheera, the Orphanguard" hand "Player"
+4:36     #30 "Kiora, Behemoth Beckoner" exile
+4:36     #31 "Forest" battlefield "Opponent" types land tapped
+4:36     #32 "Outcaster Trailblazer" graveyard "Opponent"
+4:36     #33 "Forest" battlefield "Opponent" types creature land pt 3/3 tapped counters "+1/+1" 3
+4:36     #34 library "Opponent" bottom 1
+4:36     #35 library "Opponent" bottom 2
+4:36     #36 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+4:36     #37 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 2
+4:36     #38 "No More Lies" graveyard "Player"
+4:36     #39 "Beza, the Bounding Spring" library "Player" bottom 2
+4:36     #40 "Eiganjo, Seat of the Empire" battlefield "Player" types land tapped
+4:36     #41 "Teferi, Hero of Dominaria" library "Player" bottom 1
+4:36     #42 "Otawara, Soaring City" battlefield "Player" types land tapped
+4:36     #43 "Fountainport" battlefield "Player" types land tapped
+4:36     #44 "Temporary Lockdown" hand "Player"
+4:36     #45 "Forest" battlefield "Opponent" types land tapped
+4:36     #46 "Floodfarm Verge" battlefield "Player" types land tapped
+4:36     #47 "Cavalier of Thorns" exile
+4:36     #51 "Consult the Star Charts" hand "Player"
+4:36     #52 "Llanowar Elves" battlefield "Opponent" types creature pt 1/1
+4:36     #59 "Get Lost" graveyard "Player"
+4:36     #60 "Forest" battlefield "Opponent" types land tapped
+4:36     #68 "Evendo, Waking Haven" battlefield "Opponent" types land tapped counters "charge" 13
+4:36     #69 "Old-Growth Troll" graveyard "Opponent"
+4:36     #70 "Storm the Festival" graveyard "Opponent"
+4:36     #71 "Forest" graveyard "Opponent"
+4:36     #72 "Elvish Mystic" graveyard "Opponent"
+4:36     #73 "Nissa, Who Shakes the World" battlefield "Opponent" types planeswalker counters "loyalty" 6
+4:36     #81 "Fountainport" battlefield "Player" types land tapped
+4:36     #86 "Old-Growth Troll" battlefield "Opponent" types creature pt 4/4 tapped
+4:36     #93 effect of #73 "Nissa, Who Shakes the World" ? controller "Opponent"
+4:36     #99 "Map Token" battlefield "Opponent" types artifact
+4:36     #100 "Map Token" battlefield "Opponent" types artifact
+4:36   untap
+4:36     #42 "Otawara, Soaring City" untap by rule:untap
+4:36     #46 "Floodfarm Verge" untap by rule:untap
+4:36     #43 "Fountainport" untap by rule:untap
+4:36     #40 "Eiganjo, Seat of the Empire" untap by rule:untap
+4:36     #81 "Fountainport" untap by rule:untap
+4:36   upkeep
+4:36   draw
+4:36     new card #102 "Consult the Star Charts" owner "Player" in library top 1 src arena:96625
+4:36     #102 "Consult the Star Charts" move library -> hand as draw by rule:draw
+4:36   precombat-main
+4:43     "Player" concede
+0-1
+
+[Mtgr "0.3.0"]
+[Event "Traditional_Explorer_Ladder"]
+[Site "Arena"]
+[Date "2026.11.03"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "1-0"]
+[Format "Explorer"]
+[Match "bo3-loss-and-match-concede-0"]
+[Game "2"]
+[Perspective "Player"]
+[ARENA_MatchId "bo3-loss-and-match-concede-0"]
+[Omits "costs"]
+[Partial "library effects"]
+[Termination "concession"]
+
+0:00 deck "Player"
+0:00   main 2 "Beza, the Bounding Spring"
+0:00   main 2 "Change the Equation"
+0:00   main 4 "Consult the Star Charts"
+0:00   main 3 "Deserted Beach"
+0:00   main 4 "Dovin's Veto"
+0:00   main 1 "Eiganjo, Seat of the Empire"
+0:00   main 2 "Elspeth, Storm Slayer"
+0:00   main 2 "Field of Ruin"
+0:00   main 4 "Floodfarm Verge"
+0:00   main 2 "Fountainport"
+0:00   main 4 "Get Lost"
+0:00   main 1 "Hall of Storm Giants"
+0:00   main 4 "Hallowed Fountain"
+0:00   main 2 "Island"
+0:00   main 4 "March of Otherworldly Light"
+0:00   main 1 "Memory Deluge"
+0:00   main 2 "Meticulous Archive"
+0:00   main 3 "No More Lies"
+0:00   main 1 "Otawara, Soaring City"
+0:00   main 2 "Plains"
+0:00   main 2 "Restless Anchorage"
+0:00   main 1 "Stock Up"
+0:00   main 2 "Supreme Verdict"
+0:00   main 2 "Teferi, Hero of Dominaria"
+0:00   main 3 "The Wandering Emperor"
+0:00   main 1 "Three Steps Ahead"
+0:00   side 2 "Beza, the Bounding Spring"
+0:00   side 3 "High Noon"
+0:00   side 1 "Kaheera, the Orphanguard"
+0:00   side 3 "Kutzil's Flanker"
+0:00   side 1 "No More Lies"
+0:00   side 1 "Rest in Peace"
+0:00   side 4 "Temporary Lockdown"
+1:00 pregame
+1:00   keyframe
+1:00     player "Player" life 20 poison 0 library 61
+1:00     player "Opponent" life 20 poison 0 library 60
+1:12   "Player" choose first "Player"
+1:12   new card #1 "Kaheera, the Orphanguard" owner "Player" in outside "sideboard" src arena:71291
+1:12   #1 "Kaheera, the Orphanguard" reveal by #1
+1:12   new card #2 "Deserted Beach" owner "Player" in library top 1 src arena:78629
+1:12   #2 "Deserted Beach" move library -> hand as draw by rule:opening-hand
+1:12   new card #3 "Beza, the Bounding Spring" owner "Player" in library top 1 src arena:91538
+1:12   #3 "Beza, the Bounding Spring" move library -> hand as draw by rule:opening-hand
+1:12   new card #4 "Otawara, Soaring City" owner "Player" in library top 1 src arena:79711
+1:12   #4 "Otawara, Soaring City" move library -> hand as draw by rule:opening-hand
+1:12   new card #5 "Dovin's Veto" owner "Player" in library top 1 src arena:69643
+1:12   #5 "Dovin's Veto" move library -> hand as draw by rule:opening-hand
+1:12   new card #6 "No More Lies" owner "Player" in library top 1 src arena:89134
+1:12   #6 "No More Lies" move library -> hand as draw by rule:opening-hand
+1:12   new card #7 "Hallowed Fountain" owner "Player" in library top 1 src arena:69399
+1:12   #7 "Hallowed Fountain" move library -> hand as draw by rule:opening-hand
+1:12   new card #8 "Get Lost" owner "Player" in library top 1 src arena:87145
+1:12   #8 "Get Lost" move library -> hand as draw by rule:opening-hand
+1:12   new hidden #9 owner "Opponent" in library top 1
+1:12   #9 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #10 owner "Opponent" in library top 1
+1:12   #10 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #11 owner "Opponent" in library top 1
+1:12   #11 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #12 owner "Opponent" in library top 1
+1:12   #12 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #13 owner "Opponent" in library top 1
+1:12   #13 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #14 owner "Opponent" in library top 1
+1:12   #14 move library -> hand as draw by rule:opening-hand
+1:12   new hidden #15 owner "Opponent" in library top 1
+1:12   #15 move library -> hand as draw by rule:opening-hand
+1:18   "Player" keep
+1:24   "Opponent" mulligan
+1:24   #9 move hand -> library by rule:mulligan
+1:24   #10 move hand -> library by rule:mulligan
+1:24   #11 move hand -> library by rule:mulligan
+1:24   #12 move hand -> library by rule:mulligan
+1:24   #13 move hand -> library by rule:mulligan
+1:24   #14 move hand -> library by rule:mulligan
+1:24   #15 move hand -> library by rule:mulligan
+1:24   "Opponent" shuffle by rule:mulligan
+1:24   new hidden #16 owner "Opponent" in library top 1
+1:24   #16 move library -> hand as draw by rule:mulligan
+1:24   new hidden #17 owner "Opponent" in library top 1
+1:24   #17 move library -> hand as draw by rule:mulligan
+1:24   new hidden #18 owner "Opponent" in library top 1
+1:24   #18 move library -> hand as draw by rule:mulligan
+1:24   new hidden #19 owner "Opponent" in library top 1
+1:24   #19 move library -> hand as draw by rule:mulligan
+1:24   new hidden #20 owner "Opponent" in library top 1
+1:24   #20 move library -> hand as draw by rule:mulligan
+1:24   new hidden #21 owner "Opponent" in library top 1
+1:24   #21 move library -> hand as draw by rule:mulligan
+1:24   new hidden #22 owner "Opponent" in library top 1
+1:24   #22 move library -> hand as draw by rule:mulligan
+1:27   "Opponent" keep
+1:30   #19 move hand -> library bottom by rule:mulligan
+1:30 turn 1 "Player"
+1:30   keyframe
+1:30     player "Player" life 20 poison 0 library 54
+1:30     player "Opponent" life 20 poison 0 library 54
+1:30     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:30     #2 "Deserted Beach" hand "Player"
+1:30     #3 "Beza, the Bounding Spring" hand "Player"
+1:30     #4 "Otawara, Soaring City" hand "Player"
+1:30     #5 "Dovin's Veto" hand "Player"
+1:30     #6 "No More Lies" hand "Player"
+1:30     #7 "Hallowed Fountain" hand "Player"
+1:30     #8 "Get Lost" hand "Player"
+1:30     #16 hand "Opponent"
+1:30     #17 hand "Opponent"
+1:30     #18 hand "Opponent"
+1:30     #19 library "Opponent" bottom 1
+1:30     #20 hand "Opponent"
+1:30     #21 hand "Opponent"
+1:30     #22 hand "Opponent"
+1:30   untap
+1:30   upkeep
+1:30   precombat-main
+1:45     #7 "Hallowed Fountain" play from hand tapped types land
+1:45   beginning-of-combat
+1:45   declare-attackers
+1:45   end-of-combat
+1:45   postcombat-main
+1:45   end
+1:45   cleanup
+1:45 turn 2 "Opponent"
+1:45   keyframe
+1:45     player "Player" life 20 poison 0 library 54
+1:45     player "Opponent" life 20 poison 0 library 54
+1:45     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:45     #2 "Deserted Beach" hand "Player"
+1:45     #3 "Beza, the Bounding Spring" hand "Player"
+1:45     #4 "Otawara, Soaring City" hand "Player"
+1:45     #5 "Dovin's Veto" hand "Player"
+1:45     #6 "No More Lies" hand "Player"
+1:45     #7 "Hallowed Fountain" battlefield "Player" types land tapped
+1:45     #8 "Get Lost" hand "Player"
+1:45     #16 hand "Opponent"
+1:45     #17 hand "Opponent"
+1:45     #18 hand "Opponent"
+1:45     #19 library "Opponent" bottom 1
+1:45     #20 hand "Opponent"
+1:45     #21 hand "Opponent"
+1:45     #22 hand "Opponent"
+1:45   untap
+1:45   upkeep
+1:45   draw
+1:45     new hidden #23 owner "Opponent" in library top 1
+1:45     #23 move library -> hand as draw by rule:draw
+1:45   precombat-main
+1:48     #18 identify "Evendo, Waking Haven" src arena:96827
+1:48     #18 "Evendo, Waking Haven" play from hand tapped types land
+1:48   beginning-of-combat
+1:48   declare-attackers
+1:48   end-of-combat
+1:48   postcombat-main
+1:48   end
+1:48   cleanup
+1:48 turn 3 "Player"
+1:48   keyframe
+1:48     player "Player" life 20 poison 0 library 54
+1:48     player "Opponent" life 20 poison 0 library 53
+1:48     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:48     #2 "Deserted Beach" hand "Player"
+1:48     #3 "Beza, the Bounding Spring" hand "Player"
+1:48     #4 "Otawara, Soaring City" hand "Player"
+1:48     #5 "Dovin's Veto" hand "Player"
+1:48     #6 "No More Lies" hand "Player"
+1:48     #7 "Hallowed Fountain" battlefield "Player" types land tapped
+1:48     #8 "Get Lost" hand "Player"
+1:48     #16 hand "Opponent"
+1:48     #17 hand "Opponent"
+1:48     #18 "Evendo, Waking Haven" battlefield "Opponent" types land tapped
+1:48     #19 library "Opponent" bottom 1
+1:48     #20 hand "Opponent"
+1:48     #21 hand "Opponent"
+1:48     #22 hand "Opponent"
+1:48     #23 hand "Opponent"
+1:48   untap
+1:48     #7 "Hallowed Fountain" untap by rule:untap
+1:48   upkeep
+1:48   draw
+1:48     new card #24 "Hall of Storm Giants" owner "Player" in library top 1 src arena:77362
+1:48     #24 "Hall of Storm Giants" move library -> hand as draw by rule:draw
+1:48   precombat-main
+1:52     #24 "Hall of Storm Giants" play from hand types land
+1:52   beginning-of-combat
+1:52   declare-attackers
+1:52   end-of-combat
+1:52   postcombat-main
+1:52   end
+1:52   cleanup
+1:52 turn 4 "Opponent"
+1:52   keyframe
+1:52     player "Player" life 20 poison 0 library 53
+1:52     player "Opponent" life 20 poison 0 library 53
+1:52     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:52     #2 "Deserted Beach" hand "Player"
+1:52     #3 "Beza, the Bounding Spring" hand "Player"
+1:52     #4 "Otawara, Soaring City" hand "Player"
+1:52     #5 "Dovin's Veto" hand "Player"
+1:52     #6 "No More Lies" hand "Player"
+1:52     #7 "Hallowed Fountain" battlefield "Player" types land
+1:52     #8 "Get Lost" hand "Player"
+1:52     #16 hand "Opponent"
+1:52     #17 hand "Opponent"
+1:52     #18 "Evendo, Waking Haven" battlefield "Opponent" types land tapped
+1:52     #19 library "Opponent" bottom 1
+1:52     #20 hand "Opponent"
+1:52     #21 hand "Opponent"
+1:52     #22 hand "Opponent"
+1:52     #23 hand "Opponent"
+1:52     #24 "Hall of Storm Giants" battlefield "Player" types land
+1:52   untap
+1:52     #18 "Evendo, Waking Haven" untap by rule:untap
+1:52   upkeep
+1:52   draw
+1:52     new hidden #25 owner "Opponent" in library top 1
+1:52     #25 move library -> hand as draw by rule:draw
+1:52   precombat-main
+1:54     #17 identify "Forest" src arena:95190
+1:54     #17 "Forest" play from hand types land
+1:56     #16 identify "Badgermole Cub" src arena:97444
+1:56     #16 "Badgermole Cub" cast from hand
+1:56     new ability #26 mana of #17 "Forest" ? controller "Opponent"
+1:56     #17 "Forest" tap by cost:#26
+1:56     "Opponent" add {G} by #26
+1:56     new ability #27 mana of #18 "Evendo, Waking Haven" ? controller "Opponent"
+1:56     #18 "Evendo, Waking Haven" tap by cost:#27
+1:56     "Opponent" add {G} by #27
+1:56     "Opponent" pay {G}{G} by cost:#16
+1:56     "Opponent" priority
+1:56       stack
+1:56         #16 "Badgermole Cub" controller "Opponent"
+1:56     "Opponent" pass
+1:56     "Player" priority
+1:56       stack
+1:56         #16 "Badgermole Cub" controller "Opponent"
+1:58     #6 "No More Lies" cast from hand
+1:59     #6 "No More Lies" target #16 "Badgermole Cub"
+2:00     new ability #28 mana of #24 "Hall of Storm Giants" ? controller "Player"
+2:00     #24 "Hall of Storm Giants" tap by cost:#28
+2:00     "Player" add {U} by #28
+2:00     new ability #29 mana of #7 "Hallowed Fountain" ? controller "Player"
+2:00     #7 "Hallowed Fountain" tap by cost:#29
+2:00     "Player" add {W} by #29
+2:00     "Player" pay {W}{U} by cost:#6
+2:00     "Player" priority
+2:00       stack
+2:00         #6 "No More Lies" controller "Player" target #16 "Badgermole Cub"
+2:00         #16 "Badgermole Cub" controller "Opponent"
+2:00     "Player" pass
+2:00     "Opponent" priority
+2:00       stack
+2:00         #6 "No More Lies" controller "Player" target #16 "Badgermole Cub"
+2:00         #16 "Badgermole Cub" controller "Opponent"
+2:00     "Opponent" pass
+2:00     #6 "No More Lies" resolve
+2:00     #16 "Badgermole Cub" countered by #6
+2:00     #16 "Badgermole Cub" move stack -> exile by #6
+2:00     #6 "No More Lies" move stack -> graveyard by rule:resolve
+2:00   beginning-of-combat
+2:00   declare-attackers
+2:00   end-of-combat
+2:00   postcombat-main
+2:00   end
+2:00   cleanup
+2:00 turn 5 "Player"
+2:00   keyframe
+2:00     player "Player" life 20 poison 0 library 53
+2:00     player "Opponent" life 20 poison 0 library 52
+2:00     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:00     #2 "Deserted Beach" hand "Player"
+2:00     #3 "Beza, the Bounding Spring" hand "Player"
+2:00     #4 "Otawara, Soaring City" hand "Player"
+2:00     #5 "Dovin's Veto" hand "Player"
+2:00     #6 "No More Lies" graveyard "Player"
+2:00     #7 "Hallowed Fountain" battlefield "Player" types land tapped
+2:00     #8 "Get Lost" hand "Player"
+2:00     #16 "Badgermole Cub" exile
+2:00     #17 "Forest" battlefield "Opponent" types land tapped
+2:00     #18 "Evendo, Waking Haven" battlefield "Opponent" types land tapped
+2:00     #19 library "Opponent" bottom 1
+2:00     #20 hand "Opponent"
+2:00     #21 hand "Opponent"
+2:00     #22 hand "Opponent"
+2:00     #23 hand "Opponent"
+2:00     #24 "Hall of Storm Giants" battlefield "Player" types land tapped
+2:00     #25 hand "Opponent"
+2:00   untap
+2:00     #7 "Hallowed Fountain" untap by rule:untap
+2:00     #24 "Hall of Storm Giants" untap by rule:untap
+2:00   upkeep
+2:00   draw
+2:00     new card #30 "Change the Equation" owner "Player" in library top 1 src arena:84307
+2:00     #30 "Change the Equation" move library -> hand as draw by rule:draw
+2:00   precombat-main
+2:05     #2 "Deserted Beach" play from hand types land
+2:06   beginning-of-combat
+2:06   declare-attackers
+2:06   end-of-combat
+2:06   postcombat-main
+2:07   end
+2:07   cleanup
+2:07 turn 6 "Opponent"
+2:07   keyframe
+2:07     player "Player" life 20 poison 0 library 52
+2:07     player "Opponent" life 20 poison 0 library 52
+2:07     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:07     #2 "Deserted Beach" battlefield "Player" types land
+2:07     #3 "Beza, the Bounding Spring" hand "Player"
+2:07     #4 "Otawara, Soaring City" hand "Player"
+2:07     #5 "Dovin's Veto" hand "Player"
+2:07     #6 "No More Lies" graveyard "Player"
+2:07     #7 "Hallowed Fountain" battlefield "Player" types land
+2:07     #8 "Get Lost" hand "Player"
+2:07     #16 "Badgermole Cub" exile
+2:07     #17 "Forest" battlefield "Opponent" types land tapped
+2:07     #18 "Evendo, Waking Haven" battlefield "Opponent" types land tapped
+2:07     #19 library "Opponent" bottom 1
+2:07     #20 hand "Opponent"
+2:07     #21 hand "Opponent"
+2:07     #22 hand "Opponent"
+2:07     #23 hand "Opponent"
+2:07     #24 "Hall of Storm Giants" battlefield "Player" types land
+2:07     #25 hand "Opponent"
+2:07     #30 "Change the Equation" hand "Player"
+2:07   untap
+2:07     #18 "Evendo, Waking Haven" untap by rule:untap
+2:07     #17 "Forest" untap by rule:untap
+2:07   upkeep
+2:07   draw
+2:07     new hidden #31 owner "Opponent" in library top 1
+2:07     #31 move library -> hand as draw by rule:draw
+2:07   precombat-main
+2:09     #25 identify "Forest" src arena:95190
+2:09     #25 "Forest" play from hand types land
+2:11     #22 special plot
+2:11     new ability #32 mana of #17 "Forest" ? controller "Opponent"
+2:11     #17 "Forest" tap by cost:#32
+2:11     "Opponent" add {G} by #32
+2:11     new ability #33 mana of #25 "Forest" ? controller "Opponent"
+2:11     #25 "Forest" tap by cost:#33
+2:11     "Opponent" add {G} by #33
+2:11     new ability #34 mana of #18 "Evendo, Waking Haven" ? controller "Opponent"
+2:11     #18 "Evendo, Waking Haven" tap by cost:#34
+2:11     "Opponent" add {G} by #34
+2:11     "Opponent" pay {G}{G}{G} by cost:#22
+2:11     #22 identify "Outcaster Trailblazer" src arena:90519
+2:11     #22 "Outcaster Trailblazer" move hand -> exile by #22
+2:11   beginning-of-combat
+2:11   declare-attackers
+2:11   end-of-combat
+2:11   postcombat-main
+2:11   end
+2:11   cleanup
+2:11 turn 7 "Player"
+2:11   keyframe
+2:11     player "Player" life 20 poison 0 library 52
+2:11     player "Opponent" life 20 poison 0 library 51
+2:11     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:11     #2 "Deserted Beach" battlefield "Player" types land
+2:11     #3 "Beza, the Bounding Spring" hand "Player"
+2:11     #4 "Otawara, Soaring City" hand "Player"
+2:11     #5 "Dovin's Veto" hand "Player"
+2:11     #6 "No More Lies" graveyard "Player"
+2:11     #7 "Hallowed Fountain" battlefield "Player" types land
+2:11     #8 "Get Lost" hand "Player"
+2:11     #16 "Badgermole Cub" exile
+2:11     #17 "Forest" battlefield "Opponent" types land tapped
+2:11     #18 "Evendo, Waking Haven" battlefield "Opponent" types land tapped
+2:11     #19 library "Opponent" bottom 1
+2:11     #20 hand "Opponent"
+2:11     #21 hand "Opponent"
+2:11     #22 "Outcaster Trailblazer" exile
+2:11     #23 hand "Opponent"
+2:11     #24 "Hall of Storm Giants" battlefield "Player" types land
+2:11     #25 "Forest" battlefield "Opponent" types land tapped
+2:11     #30 "Change the Equation" hand "Player"
+2:11     #31 hand "Opponent"
+2:11   untap
+2:11   upkeep
+2:11   draw
+2:11     new card #35 "The Wandering Emperor" owner "Player" in library top 1 src arena:79464
+2:11     #35 "The Wandering Emperor" move library -> hand as draw by rule:draw
+2:11   precombat-main
+2:17     #4 "Otawara, Soaring City" play from hand types land
+2:19   beginning-of-combat
+2:19   declare-attackers
+2:19   end-of-combat
+2:19   postcombat-main
+2:19   end
+2:19   cleanup
+2:19 turn 8 "Opponent"
+2:19   keyframe
+2:19     player "Player" life 20 poison 0 library 51
+2:19     player "Opponent" life 20 poison 0 library 51
+2:19     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:19     #2 "Deserted Beach" battlefield "Player" types land
+2:19     #3 "Beza, the Bounding Spring" hand "Player"
+2:19     #4 "Otawara, Soaring City" battlefield "Player" types land
+2:19     #5 "Dovin's Veto" hand "Player"
+2:19     #6 "No More Lies" graveyard "Player"
+2:19     #7 "Hallowed Fountain" battlefield "Player" types land
+2:19     #8 "Get Lost" hand "Player"
+2:19     #16 "Badgermole Cub" exile
+2:19     #17 "Forest" battlefield "Opponent" types land tapped
+2:19     #18 "Evendo, Waking Haven" battlefield "Opponent" types land tapped
+2:19     #19 library "Opponent" bottom 1
+2:19     #20 hand "Opponent"
+2:19     #21 hand "Opponent"
+2:19     #22 "Outcaster Trailblazer" exile
+2:19     #23 hand "Opponent"
+2:19     #24 "Hall of Storm Giants" battlefield "Player" types land
+2:19     #25 "Forest" battlefield "Opponent" types land tapped
+2:19     #30 "Change the Equation" hand "Player"
+2:19     #31 hand "Opponent"
+2:19     #35 "The Wandering Emperor" hand "Player"
+2:19   untap
+2:19     #18 "Evendo, Waking Haven" untap by rule:untap
+2:19     #17 "Forest" untap by rule:untap
+2:19     #25 "Forest" untap by rule:untap
+2:19   upkeep
+2:19   draw
+2:19     new hidden #36 owner "Opponent" in library top 1
+2:19     #36 move library -> hand as draw by rule:draw
+2:19   precombat-main
+2:22     #23 identify "Forest" src arena:95190
+2:22     #23 "Forest" play from hand types land
+2:24     #20 special plot
+2:24     new ability #37 mana of #17 "Forest" ? controller "Opponent"
+2:24     #17 "Forest" tap by cost:#37
+2:24     "Opponent" add {G} by #37
+2:24     new ability #38 mana of #25 "Forest" ? controller "Opponent"
+2:24     #25 "Forest" tap by cost:#38
+2:24     "Opponent" add {G} by #38
+2:24     new ability #39 mana of #23 "Forest" ? controller "Opponent"
+2:24     #23 "Forest" tap by cost:#39
+2:24     "Opponent" add {G} by #39
+2:24     "Opponent" pay {G}{G}{G} by cost:#20
+2:24     #20 identify "Outcaster Trailblazer" src arena:90519
+2:24     #20 "Outcaster Trailblazer" move hand -> exile by #20
+2:28   beginning-of-combat
+2:29   declare-attackers
+2:29   end-of-combat
+2:29   postcombat-main
+2:30   end
+2:32     #35 "The Wandering Emperor" cast from hand
+2:33     new ability #40 mana of #4 "Otawara, Soaring City" ? controller "Player"
+2:33     #4 "Otawara, Soaring City" tap by cost:#40
+2:33     "Player" add {U} by #40
+2:33     new ability #41 mana of #24 "Hall of Storm Giants" ? controller "Player"
+2:33     #24 "Hall of Storm Giants" tap by cost:#41
+2:33     "Player" add {U} by #41
+2:33     new ability #42 mana of #7 "Hallowed Fountain" ? controller "Player"
+2:33     #7 "Hallowed Fountain" tap by cost:#42
+2:33     "Player" add {W} by #42
+2:33     new ability #43 mana of #2 "Deserted Beach" ? controller "Player"
+2:33     #2 "Deserted Beach" tap by cost:#43
+2:33     "Player" add {W} restriction ? by #43
+2:33     "Player" pay {W}{W}{U}{U} by cost:#35
+2:33     "Player" priority
+2:33       stack
+2:33         #35 "The Wandering Emperor" controller "Player"
+2:33     "Player" pass
+2:33     "Opponent" priority
+2:33       stack
+2:33         #35 "The Wandering Emperor" controller "Player"
+2:33     "Opponent" pass
+2:33     #35 "The Wandering Emperor" resolve
+2:33     #35 "The Wandering Emperor" move stack -> battlefield types planeswalker by rule:resolve
+2:33     #35 "The Wandering Emperor" counters "loyalty" 0 -> 3 by #35
+2:36     new ability #44 loyalty of #35 "The Wandering Emperor" ? controller "Player" in stack
+2:36     #35 "The Wandering Emperor" counters "loyalty" 3 -> 2 by cost:#44
+2:36     "Player" priority
+2:36       stack
+2:36         #44 loyalty of #35 "The Wandering Emperor" ? controller "Player"
+2:36     "Player" pass
+2:36     "Opponent" priority
+2:36       stack
+2:36         #44 loyalty of #35 "The Wandering Emperor" ? controller "Player"
+2:36     "Opponent" pass
+2:36     #44 resolve
+2:36     new token #45 "Samurai Token" owner "Player" in battlefield types creature pt 2/2 by #44
+2:36     #44 cease by rule:resolve
+2:36   cleanup
+2:36 turn 9 "Player"
+2:36   keyframe
+2:36     player "Player" life 20 poison 0 library 51
+2:36     player "Opponent" life 20 poison 0 library 50
+2:36     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:36     #2 "Deserted Beach" battlefield "Player" types land tapped
+2:36     #3 "Beza, the Bounding Spring" hand "Player"
+2:36     #4 "Otawara, Soaring City" battlefield "Player" types land tapped
+2:36     #5 "Dovin's Veto" hand "Player"
+2:36     #6 "No More Lies" graveyard "Player"
+2:36     #7 "Hallowed Fountain" battlefield "Player" types land tapped
+2:36     #8 "Get Lost" hand "Player"
+2:36     #16 "Badgermole Cub" exile
+2:36     #17 "Forest" battlefield "Opponent" types land tapped
+2:36     #18 "Evendo, Waking Haven" battlefield "Opponent" types land
+2:36     #19 library "Opponent" bottom 1
+2:36     #20 "Outcaster Trailblazer" exile
+2:36     #21 hand "Opponent"
+2:36     #22 "Outcaster Trailblazer" exile
+2:36     #23 "Forest" battlefield "Opponent" types land tapped
+2:36     #24 "Hall of Storm Giants" battlefield "Player" types land tapped
+2:36     #25 "Forest" battlefield "Opponent" types land tapped
+2:36     #30 "Change the Equation" hand "Player"
+2:36     #31 hand "Opponent"
+2:36     #35 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 2
+2:36     #36 hand "Opponent"
+2:36     #45 "Samurai Token" battlefield "Player" types creature pt 2/2
+2:36   untap
+2:36     #7 "Hallowed Fountain" untap by rule:untap
+2:36     #24 "Hall of Storm Giants" untap by rule:untap
+2:36     #2 "Deserted Beach" untap by rule:untap
+2:36     #4 "Otawara, Soaring City" untap by rule:untap
+2:36   upkeep
+2:36   draw
+2:36     new card #46 "March of Otherworldly Light" owner "Player" in library top 1 src arena:79448
+2:36     #46 "March of Otherworldly Light" move library -> hand as draw by rule:draw
+2:36   precombat-main
+2:41     new ability #47 loyalty of #35 "The Wandering Emperor" ? controller "Player" in stack
+2:41     #35 "The Wandering Emperor" counters "loyalty" 2 -> 1 by cost:#47
+2:41     "Player" priority
+2:41       stack
+2:41         #47 loyalty of #35 "The Wandering Emperor" ? controller "Player"
+2:41     "Player" pass
+2:41     "Opponent" priority
+2:41       stack
+2:41         #47 loyalty of #35 "The Wandering Emperor" ? controller "Player"
+2:41     "Opponent" pass
+2:41     #47 resolve
+2:41     new token #48 "Samurai Token" owner "Player" in battlefield types creature pt 2/2 by #47
+2:41     #47 cease by rule:resolve
+2:43   beginning-of-combat
+2:43   declare-attackers
+2:45     #45 "Samurai Token" attack "Opponent"
+2:45   declare-blockers
+2:45   combat-damage
+2:45     #45 "Samurai Token" damage "Opponent" 2 by rule:combat-damage
+2:45     "Opponent" life 20 -> 18 by rule:combat-damage
+2:45   end-of-combat
+2:45   postcombat-main
+2:48   end
+2:48   cleanup
+2:48 turn 10 "Opponent"
+2:48   keyframe
+2:48     player "Player" life 20 poison 0 library 50
+2:48     player "Opponent" life 18 poison 0 library 50
+2:48     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:48     #2 "Deserted Beach" battlefield "Player" types land
+2:48     #3 "Beza, the Bounding Spring" hand "Player"
+2:48     #4 "Otawara, Soaring City" battlefield "Player" types land
+2:48     #5 "Dovin's Veto" hand "Player"
+2:48     #6 "No More Lies" graveyard "Player"
+2:48     #7 "Hallowed Fountain" battlefield "Player" types land
+2:48     #8 "Get Lost" hand "Player"
+2:48     #16 "Badgermole Cub" exile
+2:48     #17 "Forest" battlefield "Opponent" types land tapped
+2:48     #18 "Evendo, Waking Haven" battlefield "Opponent" types land
+2:48     #19 library "Opponent" bottom 1
+2:48     #20 "Outcaster Trailblazer" exile
+2:48     #21 hand "Opponent"
+2:48     #22 "Outcaster Trailblazer" exile
+2:48     #23 "Forest" battlefield "Opponent" types land tapped
+2:48     #24 "Hall of Storm Giants" battlefield "Player" types land
+2:48     #25 "Forest" battlefield "Opponent" types land tapped
+2:48     #30 "Change the Equation" hand "Player"
+2:48     #31 hand "Opponent"
+2:48     #35 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 1
+2:48     #36 hand "Opponent"
+2:48     #45 "Samurai Token" battlefield "Player" types creature pt 2/2
+2:48     #46 "March of Otherworldly Light" hand "Player"
+2:48     #48 "Samurai Token" battlefield "Player" types creature pt 2/2
+2:48   untap
+2:48     #17 "Forest" untap by rule:untap
+2:48     #25 "Forest" untap by rule:untap
+2:48     #23 "Forest" untap by rule:untap
+2:48   upkeep
+2:48   draw
+2:48     new hidden #49 owner "Opponent" in library top 1
+2:48     #49 move library -> hand as draw by rule:draw
+2:48   precombat-main
+2:54     #21 identify "Nykthos, Shrine to Nyx" src arena:54769
+2:54     #21 "Nykthos, Shrine to Nyx" play from hand types land
+2:55     #20 "Outcaster Trailblazer" cast from exile
+2:55     "Opponent" priority
+2:55       stack
+2:55         #20 "Outcaster Trailblazer" controller "Opponent"
+2:55     "Opponent" pass
+2:55     "Player" priority
+2:55       stack
+2:55         #20 "Outcaster Trailblazer" controller "Opponent"
+2:57     "Player" pass
+2:57     #20 "Outcaster Trailblazer" resolve
+2:57     #20 "Outcaster Trailblazer" move stack -> battlefield types creature pt 4/2 by rule:resolve
+2:57     new ability #50 triggered of #20 "Outcaster Trailblazer" ? controller "Opponent" in stack
+2:57     "Opponent" priority
+2:57       stack
+2:57         #50 triggered of #20 "Outcaster Trailblazer" ? controller "Opponent"
+2:57     "Opponent" pass
+2:57     "Player" priority
+2:57       stack
+2:57         #50 triggered of #20 "Outcaster Trailblazer" ? controller "Opponent"
+3:00     "Player" pass
+3:00     #50 resolve
+3:02     "Opponent" add {G} restriction ? by #50
+3:02     #50 cease by rule:resolve
+3:03     #22 "Outcaster Trailblazer" cast from exile
+3:03     "Opponent" priority
+3:03       stack
+3:03         #22 "Outcaster Trailblazer" controller "Opponent"
+3:03     "Opponent" pass
+3:03     "Player" priority
+3:03       stack
+3:03         #22 "Outcaster Trailblazer" controller "Opponent"
+3:05     #8 "Get Lost" cast from hand
+3:06     #8 "Get Lost" target #20 "Outcaster Trailblazer"
+3:07     new ability #51 mana of #4 "Otawara, Soaring City" ? controller "Player"
+3:07     #4 "Otawara, Soaring City" tap by cost:#51
+3:07     "Player" add {U} by #51
+3:07     "Player" pay {U} by cost:#8
+3:08     new ability #52 mana of #2 "Deserted Beach" ? controller "Player"
+3:08     #2 "Deserted Beach" tap by cost:#52
+3:08     "Player" add {W} restriction ? by #52
+3:08     "Player" pay {W} by cost:#8
+3:08     "Player" priority
+3:08       stack
+3:08         #8 "Get Lost" controller "Player" target #20 "Outcaster Trailblazer"
+3:08         #22 "Outcaster Trailblazer" controller "Opponent"
+3:08     "Player" pass
+3:08     "Opponent" priority
+3:08       stack
+3:08         #8 "Get Lost" controller "Player" target #20 "Outcaster Trailblazer"
+3:08         #22 "Outcaster Trailblazer" controller "Opponent"
+3:12     "Opponent" pass
+3:12     #8 "Get Lost" resolve
+3:12     #20 "Outcaster Trailblazer" move battlefield -> graveyard as destroy by #8
+3:12     new token #53 "Map Token" owner "Opponent" in battlefield types artifact by #8
+3:12     new token #54 "Map Token" owner "Opponent" in battlefield types artifact by #8
+3:12     #8 "Get Lost" move stack -> graveyard by rule:resolve
+3:12     "Opponent" priority
+3:12       stack
+3:12         #22 "Outcaster Trailblazer" controller "Opponent"
+3:12     "Opponent" pass
+3:12     "Player" priority
+3:12       stack
+3:12         #22 "Outcaster Trailblazer" controller "Opponent"
+3:15     "Player" pass
+3:15     #22 "Outcaster Trailblazer" resolve
+3:15     #22 "Outcaster Trailblazer" move stack -> battlefield types creature pt 4/2 by rule:resolve
+3:15     new ability #55 triggered of #22 "Outcaster Trailblazer" ? controller "Opponent" in stack
+3:15     "Opponent" priority
+3:15       stack
+3:15         #55 triggered of #22 "Outcaster Trailblazer" ? controller "Opponent"
+3:15     "Opponent" pass
+3:15     "Player" priority
+3:15       stack
+3:15         #55 triggered of #22 "Outcaster Trailblazer" ? controller "Opponent"
+3:17     "Player" pass
+3:17     #55 resolve
+3:19     "Opponent" add {G} restriction ? by #55
+3:19     #55 cease by rule:resolve
+3:21     #36 identify "Nissa, Who Shakes the World" src arena:69620
+3:21     #36 "Nissa, Who Shakes the World" cast from hand
+3:21     new ability #56 mana of #21 "Nykthos, Shrine to Nyx" ? controller "Opponent"
+3:21     #21 "Nykthos, Shrine to Nyx" tap by cost:#56
+3:21     "Opponent" add {C} by #56
+3:21     new ability #57 mana of #17 "Forest" ? controller "Opponent"
+3:21     #17 "Forest" tap by cost:#57
+3:21     "Opponent" add {G} by #57
+3:21     new ability #58 mana of #25 "Forest" ? controller "Opponent"
+3:21     #25 "Forest" tap by cost:#58
+3:21     "Opponent" add {G} by #58
+3:21     "Opponent" pay {G}{G}{G}{G}{C} by cost:#36
+3:21     "Opponent" priority
+3:21       stack
+3:21         #36 "Nissa, Who Shakes the World" controller "Opponent"
+3:21     "Opponent" pass
+3:21     "Player" priority
+3:21       stack
+3:21         #36 "Nissa, Who Shakes the World" controller "Opponent"
+3:23     #30 "Change the Equation" cast from hand
+3:25     #30 "Change the Equation" target #36 "Nissa, Who Shakes the World"
+3:26     new ability #59 mana of #24 "Hall of Storm Giants" ? controller "Player"
+3:26     #24 "Hall of Storm Giants" tap by cost:#59
+3:26     "Player" add {U} by #59
+3:26     new ability #60 mana of #7 "Hallowed Fountain" ? controller "Player"
+3:26     #7 "Hallowed Fountain" tap by cost:#60
+3:26     "Player" add {W} by #60
+3:26     "Player" pay {W}{U} by cost:#30
+3:26     "Player" priority
+3:26       stack
+3:26         #30 "Change the Equation" controller "Player" target #36 "Nissa, Who Shakes the World"
+3:26         #36 "Nissa, Who Shakes the World" controller "Opponent"
+3:26     "Player" pass
+3:26     "Opponent" priority
+3:26       stack
+3:26         #30 "Change the Equation" controller "Player" target #36 "Nissa, Who Shakes the World"
+3:26         #36 "Nissa, Who Shakes the World" controller "Opponent"
+3:26     "Opponent" pass
+3:26     #30 "Change the Equation" resolve
+3:26     #36 "Nissa, Who Shakes the World" countered by #30
+3:26     #36 "Nissa, Who Shakes the World" move stack -> graveyard by #30
+3:26     #30 "Change the Equation" move stack -> graveyard by rule:resolve
+3:36     new ability #61 activated of #53 "Map Token" ? controller "Opponent" in stack
+3:36     #61 target #22 "Outcaster Trailblazer"
+3:36     #53 "Map Token" tap by cost:#61
+3:36     new ability #62 mana of #23 "Forest" ? controller "Opponent"
+3:36     #23 "Forest" tap by cost:#62
+3:36     "Opponent" add {G} by #62
+3:36     "Opponent" pay {G} by cost:#61
+3:36     #53 "Map Token" move battlefield -> graveyard as sacrifice by cost:#61
+3:36     #53 "Map Token" cease by rule:sba
+3:36     "Opponent" priority
+3:36       stack
+3:36         #61 activated of #53 "Map Token" ? controller "Opponent" target #22 "Outcaster Trailblazer"
+3:36     "Opponent" pass
+3:36     "Player" priority
+3:36       stack
+3:36         #61 activated of #53 "Map Token" ? controller "Opponent" target #22 "Outcaster Trailblazer"
+3:36     "Player" pass
+3:36     #61 resolve
+3:36     #22 "Outcaster Trailblazer" counters "+1/+1" 0 -> 1 by #61
+3:36     #22 "Outcaster Trailblazer" pt 4/2 -> 5/3 by #61
+3:41     new card #63 "Llanowar Elves" owner "Opponent" in library top 1 src arena:93940
+3:41     #63 "Llanowar Elves" move library -> graveyard by #61
+3:41     #61 cease by rule:resolve
+3:46   beginning-of-combat
+3:46   declare-attackers
+3:46   end-of-combat
+3:46   postcombat-main
+3:49   end
+3:49   cleanup
+3:49 turn 11 "Player"
+3:49   keyframe
+3:49     player "Player" life 20 poison 0 library 50
+3:49     player "Opponent" life 18 poison 0 library 48
+3:49     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+3:49     #2 "Deserted Beach" battlefield "Player" types land tapped
+3:49     #3 "Beza, the Bounding Spring" hand "Player"
+3:49     #4 "Otawara, Soaring City" battlefield "Player" types land tapped
+3:49     #5 "Dovin's Veto" hand "Player"
+3:49     #6 "No More Lies" graveyard "Player"
+3:49     #7 "Hallowed Fountain" battlefield "Player" types land tapped
+3:49     #8 "Get Lost" graveyard "Player"
+3:49     #16 "Badgermole Cub" exile
+3:49     #17 "Forest" battlefield "Opponent" types land tapped
+3:49     #18 "Evendo, Waking Haven" battlefield "Opponent" types land
+3:49     #19 library "Opponent" bottom 1
+3:49     #20 "Outcaster Trailblazer" graveyard "Opponent"
+3:49     #21 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+3:49     #22 "Outcaster Trailblazer" battlefield "Opponent" types creature pt 5/3 counters "+1/+1" 1
+3:49     #23 "Forest" battlefield "Opponent" types land tapped
+3:49     #24 "Hall of Storm Giants" battlefield "Player" types land tapped
+3:49     #25 "Forest" battlefield "Opponent" types land tapped
+3:49     #30 "Change the Equation" graveyard "Player"
+3:49     #31 hand "Opponent"
+3:49     #35 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 1
+3:49     #36 "Nissa, Who Shakes the World" graveyard "Opponent"
+3:49     #45 "Samurai Token" battlefield "Player" types creature pt 2/2
+3:49     #46 "March of Otherworldly Light" hand "Player"
+3:49     #48 "Samurai Token" battlefield "Player" types creature pt 2/2
+3:49     #49 hand "Opponent"
+3:49     #54 "Map Token" battlefield "Opponent" types artifact
+3:49     #63 "Llanowar Elves" graveyard "Opponent"
+3:49   untap
+3:49     #7 "Hallowed Fountain" untap by rule:untap
+3:49     #24 "Hall of Storm Giants" untap by rule:untap
+3:49     #2 "Deserted Beach" untap by rule:untap
+3:49     #4 "Otawara, Soaring City" untap by rule:untap
+3:49   upkeep
+3:49   draw
+3:49     new card #64 "Beza, the Bounding Spring" owner "Player" in library top 1 src arena:91538
+3:49     #64 "Beza, the Bounding Spring" move library -> hand as draw by rule:draw
+3:49   precombat-main
+3:51     new ability #65 loyalty of #35 "The Wandering Emperor" ? controller "Player" in stack
+3:54     #65 target #45 "Samurai Token"
+3:54     #35 "The Wandering Emperor" counters "loyalty" 1 -> 2 by cost:#65
+3:54     "Player" priority
+3:54       stack
+3:54         #65 loyalty of #35 "The Wandering Emperor" ? controller "Player" target #45 "Samurai Token"
+3:54     "Player" pass
+3:54     "Opponent" priority
+3:54       stack
+3:54         #65 loyalty of #35 "The Wandering Emperor" ? controller "Player" target #45 "Samurai Token"
+3:54     "Opponent" pass
+3:54     #65 resolve
+3:54     #45 "Samurai Token" counters "+1/+1" 0 -> 1 by #65
+3:54     #45 "Samurai Token" pt 2/2 -> 3/3 by #65
+3:54     #65 cease by rule:resolve
+3:57   beginning-of-combat
+3:57   declare-attackers
+3:59     #45 "Samurai Token" attack "Opponent"
+3:59   declare-blockers
+4:01   combat-damage
+4:01     #45 "Samurai Token" damage "Opponent" 3 by rule:combat-damage
+4:01     "Opponent" life 18 -> 15 by rule:combat-damage
+4:01   combat-damage
+4:01   end-of-combat
+4:01   postcombat-main
+4:03   end
+4:03   cleanup
+4:03 turn 12 "Opponent"
+4:03   keyframe
+4:03     player "Player" life 20 poison 0 library 49
+4:03     player "Opponent" life 15 poison 0 library 48
+4:03     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+4:03     #2 "Deserted Beach" battlefield "Player" types land
+4:03     #3 "Beza, the Bounding Spring" hand "Player"
+4:03     #4 "Otawara, Soaring City" battlefield "Player" types land
+4:03     #5 "Dovin's Veto" hand "Player"
+4:03     #6 "No More Lies" graveyard "Player"
+4:03     #7 "Hallowed Fountain" battlefield "Player" types land
+4:03     #8 "Get Lost" graveyard "Player"
+4:03     #16 "Badgermole Cub" exile
+4:03     #17 "Forest" battlefield "Opponent" types land tapped
+4:03     #18 "Evendo, Waking Haven" battlefield "Opponent" types land
+4:03     #19 library "Opponent" bottom 1
+4:03     #20 "Outcaster Trailblazer" graveyard "Opponent"
+4:03     #21 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+4:03     #22 "Outcaster Trailblazer" battlefield "Opponent" types creature pt 5/3 counters "+1/+1" 1
+4:03     #23 "Forest" battlefield "Opponent" types land tapped
+4:03     #24 "Hall of Storm Giants" battlefield "Player" types land
+4:03     #25 "Forest" battlefield "Opponent" types land tapped
+4:03     #30 "Change the Equation" graveyard "Player"
+4:03     #31 hand "Opponent"
+4:03     #35 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 2
+4:03     #36 "Nissa, Who Shakes the World" graveyard "Opponent"
+4:03     #45 "Samurai Token" battlefield "Player" types creature pt 3/3 counters "+1/+1" 1
+4:03     #46 "March of Otherworldly Light" hand "Player"
+4:03     #48 "Samurai Token" battlefield "Player" types creature pt 2/2
+4:03     #49 hand "Opponent"
+4:03     #54 "Map Token" battlefield "Opponent" types artifact
+4:03     #63 "Llanowar Elves" graveyard "Opponent"
+4:03     #64 "Beza, the Bounding Spring" hand "Player"
+4:03   untap
+4:03     #17 "Forest" untap by rule:untap
+4:03     #25 "Forest" untap by rule:untap
+4:03     #23 "Forest" untap by rule:untap
+4:03     #21 "Nykthos, Shrine to Nyx" untap by rule:untap
+4:03   upkeep
+4:03   draw
+4:03     new hidden #66 owner "Opponent" in library top 1
+4:03     #66 move library -> hand as draw by rule:draw
+4:03   precombat-main
+4:06     #31 identify "Forest" src arena:95190
+4:06     #31 "Forest" play from hand types land
+4:07     #66 identify "Storm the Festival" src arena:78560
+4:07     #66 "Storm the Festival" cast from hand
+4:07     new ability #67 mana of #21 "Nykthos, Shrine to Nyx" ? controller "Opponent"
+4:07     #21 "Nykthos, Shrine to Nyx" tap by cost:#67
+4:07     "Opponent" add {C} by #67
+4:07     new ability #68 mana of #17 "Forest" ? controller "Opponent"
+4:07     #17 "Forest" tap by cost:#68
+4:07     "Opponent" add {G} by #68
+4:07     new ability #69 mana of #25 "Forest" ? controller "Opponent"
+4:07     #25 "Forest" tap by cost:#69
+4:07     "Opponent" add {G} by #69
+4:07     new ability #70 mana of #23 "Forest" ? controller "Opponent"
+4:07     #23 "Forest" tap by cost:#70
+4:07     "Opponent" add {G} by #70
+4:07     new ability #71 mana of #31 "Forest" ? controller "Opponent"
+4:07     #31 "Forest" tap by cost:#71
+4:07     "Opponent" add {G} by #71
+4:07     new ability #72 mana of #18 "Evendo, Waking Haven" ? controller "Opponent"
+4:07     #18 "Evendo, Waking Haven" tap by cost:#72
+4:07     "Opponent" add {G} by #72
+4:07     "Opponent" pay {G}{G}{G}{G}{G}{C} by cost:#66
+4:07     "Opponent" priority
+4:07       stack
+4:07         #66 "Storm the Festival" controller "Opponent"
+4:07     "Opponent" pass
+4:07     "Player" priority
+4:07       stack
+4:07         #66 "Storm the Festival" controller "Opponent"
+4:11     #5 "Dovin's Veto" cast from hand
+4:11     #5 "Dovin's Veto" target #66 "Storm the Festival"
+4:12     new ability #73 mana of #4 "Otawara, Soaring City" ? controller "Player"
+4:12     #4 "Otawara, Soaring City" tap by cost:#73
+4:12     "Player" add {U} by #73
+4:12     new ability #74 mana of #7 "Hallowed Fountain" ? controller "Player"
+4:12     #7 "Hallowed Fountain" tap by cost:#74
+4:12     "Player" add {W} by #74
+4:12     "Player" pay {W}{U} by cost:#5
+4:12     "Player" priority
+4:12       stack
+4:12         #5 "Dovin's Veto" controller "Player" target #66 "Storm the Festival"
+4:12         #66 "Storm the Festival" controller "Opponent"
+4:12     "Player" pass
+4:12     "Opponent" priority
+4:12       stack
+4:12         #5 "Dovin's Veto" controller "Player" target #66 "Storm the Festival"
+4:12         #66 "Storm the Festival" controller "Opponent"
+4:12     "Opponent" pass
+4:12     #5 "Dovin's Veto" resolve
+4:12     #66 "Storm the Festival" countered by #5
+4:12     #66 "Storm the Festival" move stack -> graveyard by #5
+4:12     #5 "Dovin's Veto" move stack -> graveyard by rule:resolve
+4:21   beginning-of-combat
+4:22   declare-attackers
+4:23   end-of-combat
+4:23   postcombat-main
+4:25   end
+4:25   cleanup
+4:25 turn 13 "Player"
+4:25   keyframe
+4:25     player "Player" life 20 poison 0 library 49
+4:25     player "Opponent" life 15 poison 0 library 47
+4:25     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+4:25     #2 "Deserted Beach" battlefield "Player" types land
+4:25     #3 "Beza, the Bounding Spring" hand "Player"
+4:25     #4 "Otawara, Soaring City" battlefield "Player" types land tapped
+4:25     #5 "Dovin's Veto" graveyard "Player"
+4:25     #6 "No More Lies" graveyard "Player"
+4:25     #7 "Hallowed Fountain" battlefield "Player" types land tapped
+4:25     #8 "Get Lost" graveyard "Player"
+4:25     #16 "Badgermole Cub" exile
+4:25     #17 "Forest" battlefield "Opponent" types land tapped
+4:25     #18 "Evendo, Waking Haven" battlefield "Opponent" types land tapped
+4:25     #19 library "Opponent" bottom 1
+4:25     #20 "Outcaster Trailblazer" graveyard "Opponent"
+4:25     #21 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+4:25     #22 "Outcaster Trailblazer" battlefield "Opponent" types creature pt 5/3 counters "+1/+1" 1
+4:25     #23 "Forest" battlefield "Opponent" types land tapped
+4:25     #24 "Hall of Storm Giants" battlefield "Player" types land
+4:25     #25 "Forest" battlefield "Opponent" types land tapped
+4:25     #30 "Change the Equation" graveyard "Player"
+4:25     #31 "Forest" battlefield "Opponent" types land tapped
+4:25     #35 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 2
+4:25     #36 "Nissa, Who Shakes the World" graveyard "Opponent"
+4:25     #45 "Samurai Token" battlefield "Player" types creature pt 3/3 counters "+1/+1" 1
+4:25     #46 "March of Otherworldly Light" hand "Player"
+4:25     #48 "Samurai Token" battlefield "Player" types creature pt 2/2
+4:25     #49 hand "Opponent"
+4:25     #54 "Map Token" battlefield "Opponent" types artifact
+4:25     #63 "Llanowar Elves" graveyard "Opponent"
+4:25     #64 "Beza, the Bounding Spring" hand "Player"
+4:25     #66 "Storm the Festival" graveyard "Opponent"
+4:25   untap
+4:25     #7 "Hallowed Fountain" untap by rule:untap
+4:25     #4 "Otawara, Soaring City" untap by rule:untap
+4:25   upkeep
+4:25   draw
+4:25     new card #75 "No More Lies" owner "Player" in library top 1 src arena:89134
+4:25     #75 "No More Lies" move library -> hand as draw by rule:draw
+4:25   precombat-main
+4:28     new ability #76 loyalty of #35 "The Wandering Emperor" ? controller "Player" in stack
+4:29     #76 target #48 "Samurai Token"
+4:29     #35 "The Wandering Emperor" counters "loyalty" 2 -> 3 by cost:#76
+4:29     "Player" priority
+4:29       stack
+4:29         #76 loyalty of #35 "The Wandering Emperor" ? controller "Player" target #48 "Samurai Token"
+4:29     "Player" pass
+4:29     "Opponent" priority
+4:29       stack
+4:29         #76 loyalty of #35 "The Wandering Emperor" ? controller "Player" target #48 "Samurai Token"
+4:29     "Opponent" pass
+4:29     #76 resolve
+4:29     #48 "Samurai Token" counters "+1/+1" 0 -> 1 by #76
+4:29     #48 "Samurai Token" pt 2/2 -> 3/3 by #76
+4:29     #76 cease by rule:resolve
+4:31   beginning-of-combat
+4:31   declare-attackers
+4:35     #45 "Samurai Token" attack "Opponent"
+4:35     #48 "Samurai Token" attack "Opponent"
+4:35   declare-blockers
+4:39   combat-damage
+4:39     #48 "Samurai Token" damage "Opponent" 3 by rule:combat-damage
+4:39     "Opponent" life 15 -> 12 by rule:combat-damage
+4:42   combat-damage
+4:42     #45 "Samurai Token" damage "Opponent" 3 by rule:combat-damage
+4:42     "Opponent" life 12 -> 9 by rule:combat-damage
+4:42   end-of-combat
+4:42   postcombat-main
+4:44   end
+4:44   cleanup
+4:44 turn 14 "Opponent"
+4:44   keyframe
+4:44     player "Player" life 20 poison 0 library 48
+4:44     player "Opponent" life 9 poison 0 library 47
+4:44     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+4:44     #2 "Deserted Beach" battlefield "Player" types land
+4:44     #3 "Beza, the Bounding Spring" hand "Player"
+4:44     #4 "Otawara, Soaring City" battlefield "Player" types land
+4:44     #5 "Dovin's Veto" graveyard "Player"
+4:44     #6 "No More Lies" graveyard "Player"
+4:44     #7 "Hallowed Fountain" battlefield "Player" types land
+4:44     #8 "Get Lost" graveyard "Player"
+4:44     #16 "Badgermole Cub" exile
+4:44     #17 "Forest" battlefield "Opponent" types land tapped
+4:44     #18 "Evendo, Waking Haven" battlefield "Opponent" types land tapped
+4:44     #19 library "Opponent" bottom 1
+4:44     #20 "Outcaster Trailblazer" graveyard "Opponent"
+4:44     #21 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+4:44     #22 "Outcaster Trailblazer" battlefield "Opponent" types creature pt 5/3 counters "+1/+1" 1
+4:44     #23 "Forest" battlefield "Opponent" types land tapped
+4:44     #24 "Hall of Storm Giants" battlefield "Player" types land
+4:44     #25 "Forest" battlefield "Opponent" types land tapped
+4:44     #30 "Change the Equation" graveyard "Player"
+4:44     #31 "Forest" battlefield "Opponent" types land tapped
+4:44     #35 "The Wandering Emperor" battlefield "Player" types planeswalker counters "loyalty" 3
+4:44     #36 "Nissa, Who Shakes the World" graveyard "Opponent"
+4:44     #45 "Samurai Token" battlefield "Player" types creature pt 3/3 counters "+1/+1" 1
+4:44     #46 "March of Otherworldly Light" hand "Player"
+4:44     #48 "Samurai Token" battlefield "Player" types creature pt 3/3 counters "+1/+1" 1
+4:44     #49 hand "Opponent"
+4:44     #54 "Map Token" battlefield "Opponent" types artifact
+4:44     #63 "Llanowar Elves" graveyard "Opponent"
+4:44     #64 "Beza, the Bounding Spring" hand "Player"
+4:44     #66 "Storm the Festival" graveyard "Opponent"
+4:44     #75 "No More Lies" hand "Player"
+4:44   untap
+4:44     #18 "Evendo, Waking Haven" untap by rule:untap
+4:44     #17 "Forest" untap by rule:untap
+4:44     #25 "Forest" untap by rule:untap
+4:44     #23 "Forest" untap by rule:untap
+4:44     #21 "Nykthos, Shrine to Nyx" untap by rule:untap
+4:44     #31 "Forest" untap by rule:untap
+4:44   upkeep
+4:44   draw
+4:44     new hidden #77 owner "Opponent" in library top 1
+4:44     #77 move library -> hand as draw by rule:draw
+4:44   precombat-main
+4:47     #49 identify "Lair of the Hydra" src arena:77364
+4:47     #49 "Lair of the Hydra" play from hand tapped types land
+4:48     #77 identify "Cavalier of Thorns" src arena:69952
+4:48     #77 "Cavalier of Thorns" cast from hand
+4:48     new ability #78 mana of #21 "Nykthos, Shrine to Nyx" ? controller "Opponent"
+4:48     #21 "Nykthos, Shrine to Nyx" tap by cost:#78
+4:48     "Opponent" add {C} by #78
+4:48     new ability #79 mana of #17 "Forest" ? controller "Opponent"
+4:48     #17 "Forest" tap by cost:#79
+4:48     "Opponent" add {G} by #79
+4:48     new ability #80 mana of #25 "Forest" ? controller "Opponent"
+4:48     #25 "Forest" tap by cost:#80
+4:48     "Opponent" add {G} by #80
+4:48     new ability #81 mana of #23 "Forest" ? controller "Opponent"
+4:48     #23 "Forest" tap by cost:#81
+4:48     "Opponent" add {G} by #81
+4:48     new ability #82 mana of #31 "Forest" ? controller "Opponent"
+4:48     #31 "Forest" tap by cost:#82
+4:48     "Opponent" add {G} by #82
+4:48     "Opponent" pay {G}{G}{G}{G}{C} by cost:#77
+4:48     "Opponent" priority
+4:48       stack
+4:48         #77 "Cavalier of Thorns" controller "Opponent"
+4:48     "Opponent" pass
+4:48     "Player" priority
+4:48       stack
+4:48         #77 "Cavalier of Thorns" controller "Opponent"
+4:51     #75 "No More Lies" cast from hand
+4:51     #75 "No More Lies" target #77 "Cavalier of Thorns"
+4:52     new ability #83 mana of #4 "Otawara, Soaring City" ? controller "Player"
+4:52     #4 "Otawara, Soaring City" tap by cost:#83
+4:52     "Player" add {U} by #83
+4:52     new ability #84 mana of #7 "Hallowed Fountain" ? controller "Player"
+4:52     #7 "Hallowed Fountain" tap by cost:#84
+4:52     "Player" add {W} by #84
+4:52     "Player" pay {W}{U} by cost:#75
+4:52     "Player" priority
+4:52       stack
+4:52         #75 "No More Lies" controller "Player" target #77 "Cavalier of Thorns"
+4:52         #77 "Cavalier of Thorns" controller "Opponent"
+4:52     "Player" pass
+4:52     "Opponent" priority
+4:52       stack
+4:52         #75 "No More Lies" controller "Player" target #77 "Cavalier of Thorns"
+4:52         #77 "Cavalier of Thorns" controller "Opponent"
+4:52     "Opponent" pass
+4:52     #75 "No More Lies" resolve
+4:52     #77 "Cavalier of Thorns" countered by #75
+4:52     #77 "Cavalier of Thorns" move stack -> exile by #75
+4:52     #75 "No More Lies" move stack -> graveyard by rule:resolve
+5:00     new ability #85 activated of #18 "Evendo, Waking Haven" ? controller "Opponent" in stack
+5:00     #22 "Outcaster Trailblazer" tap by cost:#85
+5:00     "Opponent" priority
+5:00       stack
+5:00         #85 activated of #18 "Evendo, Waking Haven" ? controller "Opponent"
+5:00     "Opponent" pass
+5:00     "Player" priority
+5:00       stack
+5:00         #85 activated of #18 "Evendo, Waking Haven" ? controller "Opponent"
+5:02     #46 "March of Otherworldly Light" cast from hand
+5:02     "Player" priority
+5:02       stack
+5:02         #46 "March of Otherworldly Light" controller "Player"
+5:02         #85 activated of #18 "Evendo, Waking Haven" ? controller "Opponent"
+5:04     #46 "March of Otherworldly Light" choose x 3
+5:07     "Opponent" concede
+1-0
+
+[Mtgr "0.3.0"]
+[Event "Traditional_Explorer_Ladder"]
+[Site "Arena"]
+[Date "2026.11.03"]
+[Round "-"]
+[Player1 "Player"]
+[Player2 "Opponent"]
+[Result "0-1"]
+[Format "Explorer"]
+[Match "bo3-loss-and-match-concede-0"]
+[Game "3"]
+[Perspective "Player"]
+[ARENA_MatchId "bo3-loss-and-match-concede-0"]
+[Omits "costs"]
+[Partial "library effects"]
+[Termination "concession"]
+
+0:00 deck "Player"
+0:00   main 2 "Beza, the Bounding Spring"
+0:00   main 2 "Change the Equation"
+0:00   main 4 "Consult the Star Charts"
+0:00   main 3 "Deserted Beach"
+0:00   main 3 "Dovin's Veto"
+0:00   main 1 "Eiganjo, Seat of the Empire"
+0:00   main 2 "Elspeth, Storm Slayer"
+0:00   main 2 "Field of Ruin"
+0:00   main 4 "Floodfarm Verge"
+0:00   main 2 "Fountainport"
+0:00   main 4 "Get Lost"
+0:00   main 1 "Hall of Storm Giants"
+0:00   main 4 "Hallowed Fountain"
+0:00   main 2 "Island"
+0:00   main 4 "March of Otherworldly Light"
+0:00   main 1 "Memory Deluge"
+0:00   main 2 "Meticulous Archive"
+0:00   main 4 "No More Lies"
+0:00   main 1 "Otawara, Soaring City"
+0:00   main 2 "Plains"
+0:00   main 2 "Restless Anchorage"
+0:00   main 1 "Stock Up"
+0:00   main 2 "Supreme Verdict"
+0:00   main 2 "Teferi, Hero of Dominaria"
+0:00   main 3 "The Wandering Emperor"
+0:00   main 1 "Three Steps Ahead"
+0:00   side 2 "Beza, the Bounding Spring"
+0:00   side 1 "Dovin's Veto"
+0:00   side 3 "High Noon"
+0:00   side 1 "Kaheera, the Orphanguard"
+0:00   side 3 "Kutzil's Flanker"
+0:00   side 1 "Rest in Peace"
+0:00   side 4 "Temporary Lockdown"
+0:21 pregame
+0:21   keyframe
+0:21     player "Player" life 20 poison 0 library 61
+0:21     player "Opponent" life 20 poison 0 library 60
+1:24   "Opponent" choose first "Opponent"
+1:24   new card #1 "Kaheera, the Orphanguard" owner "Player" in outside "sideboard" src arena:71291
+1:24   #1 "Kaheera, the Orphanguard" reveal by #1
+1:24   new hidden #2 owner "Opponent" in library top 1
+1:24   #2 move library -> hand as draw by rule:opening-hand
+1:24   new hidden #3 owner "Opponent" in library top 1
+1:24   #3 move library -> hand as draw by rule:opening-hand
+1:24   new hidden #4 owner "Opponent" in library top 1
+1:24   #4 move library -> hand as draw by rule:opening-hand
+1:24   new hidden #5 owner "Opponent" in library top 1
+1:24   #5 move library -> hand as draw by rule:opening-hand
+1:24   new hidden #6 owner "Opponent" in library top 1
+1:24   #6 move library -> hand as draw by rule:opening-hand
+1:24   new hidden #7 owner "Opponent" in library top 1
+1:24   #7 move library -> hand as draw by rule:opening-hand
+1:24   new hidden #8 owner "Opponent" in library top 1
+1:24   #8 move library -> hand as draw by rule:opening-hand
+1:24   new card #9 "Get Lost" owner "Player" in library top 1 src arena:87145
+1:24   #9 "Get Lost" move library -> hand as draw by rule:opening-hand
+1:24   new card #10 "Dovin's Veto" owner "Player" in library top 1 src arena:69643
+1:24   #10 "Dovin's Veto" move library -> hand as draw by rule:opening-hand
+1:24   new card #11 "Hallowed Fountain" owner "Player" in library top 1 src arena:69399
+1:24   #11 "Hallowed Fountain" move library -> hand as draw by rule:opening-hand
+1:24   new card #12 "No More Lies" owner "Player" in library top 1 src arena:89134
+1:24   #12 "No More Lies" move library -> hand as draw by rule:opening-hand
+1:24   new card #13 "Otawara, Soaring City" owner "Player" in library top 1 src arena:79711
+1:24   #13 "Otawara, Soaring City" move library -> hand as draw by rule:opening-hand
+1:24   new card #14 "Meticulous Archive" owner "Player" in library top 1 src arena:89186
+1:24   #14 "Meticulous Archive" move library -> hand as draw by rule:opening-hand
+1:24   new card #15 "Beza, the Bounding Spring" owner "Player" in library top 1 src arena:91538
+1:24   #15 "Beza, the Bounding Spring" move library -> hand as draw by rule:opening-hand
+1:29   "Opponent" mulligan
+1:29   #2 move hand -> library by rule:mulligan
+1:29   #3 move hand -> library by rule:mulligan
+1:29   #4 move hand -> library by rule:mulligan
+1:29   #5 move hand -> library by rule:mulligan
+1:29   #6 move hand -> library by rule:mulligan
+1:29   #7 move hand -> library by rule:mulligan
+1:29   #8 move hand -> library by rule:mulligan
+1:29   "Opponent" shuffle by rule:mulligan
+1:29   new hidden #16 owner "Opponent" in library top 1
+1:29   #16 move library -> hand as draw by rule:mulligan
+1:29   new hidden #17 owner "Opponent" in library top 1
+1:29   #17 move library -> hand as draw by rule:mulligan
+1:29   new hidden #18 owner "Opponent" in library top 1
+1:29   #18 move library -> hand as draw by rule:mulligan
+1:29   new hidden #19 owner "Opponent" in library top 1
+1:29   #19 move library -> hand as draw by rule:mulligan
+1:29   new hidden #20 owner "Opponent" in library top 1
+1:29   #20 move library -> hand as draw by rule:mulligan
+1:29   new hidden #21 owner "Opponent" in library top 1
+1:29   #21 move library -> hand as draw by rule:mulligan
+1:29   new hidden #22 owner "Opponent" in library top 1
+1:29   #22 move library -> hand as draw by rule:mulligan
+1:31   "Player" keep
+1:32   "Opponent" keep
+1:35   #18 move hand -> library bottom by rule:mulligan
+1:35 turn 1 "Opponent"
+1:35   keyframe
+1:35     player "Player" life 20 poison 0 library 54
+1:35     player "Opponent" life 20 poison 0 library 54
+1:35     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:35     #9 "Get Lost" hand "Player"
+1:35     #10 "Dovin's Veto" hand "Player"
+1:35     #11 "Hallowed Fountain" hand "Player"
+1:35     #12 "No More Lies" hand "Player"
+1:35     #13 "Otawara, Soaring City" hand "Player"
+1:35     #14 "Meticulous Archive" hand "Player"
+1:35     #15 "Beza, the Bounding Spring" hand "Player"
+1:35     #16 hand "Opponent"
+1:35     #17 hand "Opponent"
+1:35     #18 library "Opponent" bottom 1
+1:35     #19 hand "Opponent"
+1:35     #20 hand "Opponent"
+1:35     #21 hand "Opponent"
+1:35     #22 hand "Opponent"
+1:35   untap
+1:35   upkeep
+1:35   precombat-main
+1:37     #22 identify "Forest" src arena:95190
+1:37     #22 "Forest" play from hand types land
+1:37   beginning-of-combat
+1:37   declare-attackers
+1:37   end-of-combat
+1:37   postcombat-main
+1:37   end
+1:37   cleanup
+1:37 turn 2 "Player"
+1:37   keyframe
+1:37     player "Player" life 20 poison 0 library 54
+1:37     player "Opponent" life 20 poison 0 library 54
+1:37     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:37     #9 "Get Lost" hand "Player"
+1:37     #10 "Dovin's Veto" hand "Player"
+1:37     #11 "Hallowed Fountain" hand "Player"
+1:37     #12 "No More Lies" hand "Player"
+1:37     #13 "Otawara, Soaring City" hand "Player"
+1:37     #14 "Meticulous Archive" hand "Player"
+1:37     #15 "Beza, the Bounding Spring" hand "Player"
+1:37     #16 hand "Opponent"
+1:37     #17 hand "Opponent"
+1:37     #18 library "Opponent" bottom 1
+1:37     #19 hand "Opponent"
+1:37     #20 hand "Opponent"
+1:37     #21 hand "Opponent"
+1:37     #22 "Forest" battlefield "Opponent" types land
+1:37   untap
+1:37   upkeep
+1:37   draw
+1:37     new card #23 "Consult the Star Charts" owner "Player" in library top 1 src arena:96625
+1:37     #23 "Consult the Star Charts" move library -> hand as draw by rule:draw
+1:37   precombat-main
+1:41     #14 "Meticulous Archive" play from hand tapped types land
+1:41     new ability #24 triggered of #14 "Meticulous Archive" ? controller "Player" in stack
+1:41     "Player" priority
+1:41       stack
+1:41         #24 triggered of #14 "Meticulous Archive" ? controller "Player"
+1:41     "Player" pass
+1:41     "Opponent" priority
+1:41       stack
+1:41         #24 triggered of #14 "Meticulous Archive" ? controller "Player"
+1:41     "Opponent" pass
+1:41     #24 resolve
+1:41     new card #25 "Plains" owner "Player" in library top 1 src arena:82390
+1:41     #25 "Plains" look "Player" by #24
+1:45     #24 cease by rule:resolve
+1:45   beginning-of-combat
+1:45   declare-attackers
+1:45   end-of-combat
+1:45   postcombat-main
+1:45   end
+1:45   cleanup
+1:45 turn 3 "Opponent"
+1:45   keyframe
+1:45     player "Player" life 20 poison 0 library 53
+1:45     player "Opponent" life 20 poison 0 library 54
+1:45     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:45     #9 "Get Lost" hand "Player"
+1:45     #10 "Dovin's Veto" hand "Player"
+1:45     #11 "Hallowed Fountain" hand "Player"
+1:45     #12 "No More Lies" hand "Player"
+1:45     #13 "Otawara, Soaring City" hand "Player"
+1:45     #14 "Meticulous Archive" battlefield "Player" types land tapped
+1:45     #15 "Beza, the Bounding Spring" hand "Player"
+1:45     #16 hand "Opponent"
+1:45     #17 hand "Opponent"
+1:45     #18 library "Opponent" bottom 1
+1:45     #19 hand "Opponent"
+1:45     #20 hand "Opponent"
+1:45     #21 hand "Opponent"
+1:45     #22 "Forest" battlefield "Opponent" types land
+1:45     #23 "Consult the Star Charts" hand "Player"
+1:45     #25 "Plains" library "Player" top 1
+1:45   untap
+1:45   upkeep
+1:45   draw
+1:45     new hidden #26 owner "Opponent" in library top 1
+1:45     #26 move library -> hand as draw by rule:draw
+1:45   precombat-main
+1:48     #26 identify "Forest" src arena:95190
+1:48     #26 "Forest" play from hand types land
+1:49     #21 identify "Badgermole Cub" src arena:97444
+1:49     #21 "Badgermole Cub" cast from hand
+1:49     new ability #27 mana of #22 "Forest" ? controller "Opponent"
+1:49     #22 "Forest" tap by cost:#27
+1:49     "Opponent" add {G} by #27
+1:49     new ability #28 mana of #26 "Forest" ? controller "Opponent"
+1:49     #26 "Forest" tap by cost:#28
+1:49     "Opponent" add {G} by #28
+1:49     "Opponent" pay {G}{G} by cost:#21
+1:49     "Opponent" priority
+1:49       stack
+1:49         #21 "Badgermole Cub" controller "Opponent"
+1:49     "Opponent" pass
+1:49     "Player" priority
+1:49       stack
+1:49         #21 "Badgermole Cub" controller "Opponent"
+1:49     "Player" pass
+1:49     #21 "Badgermole Cub" resolve
+1:49     #21 "Badgermole Cub" move stack -> battlefield types creature pt 2/2 by rule:resolve
+1:49     new ability #29 triggered of #21 "Badgermole Cub" ? controller "Opponent" in stack
+1:53     #29 target #26 "Forest"
+1:53     "Opponent" priority
+1:53       stack
+1:53         #29 triggered of #21 "Badgermole Cub" ? controller "Opponent" target #26 "Forest"
+1:53     "Opponent" pass
+1:53     "Player" priority
+1:53       stack
+1:53         #29 triggered of #21 "Badgermole Cub" ? controller "Opponent" target #26 "Forest"
+1:53     "Player" pass
+1:53     #29 resolve
+1:53     new effect #30 of #21 "Badgermole Cub" ? controller "Opponent" by #29
+1:53     #26 "Forest" counters "+1/+1" 0 -> 1 by #29
+1:53     #26 "Forest" types land -> creature land by #29
+1:53     #26 "Forest" pt none -> 1/1 by #29
+1:53     #29 cease by rule:resolve
+1:53   beginning-of-combat
+1:53   declare-attackers
+1:53   end-of-combat
+1:53   postcombat-main
+1:53   end
+1:53   cleanup
+1:53 turn 4 "Player"
+1:53   keyframe
+1:53     player "Player" life 20 poison 0 library 53
+1:53     player "Opponent" life 20 poison 0 library 53
+1:53     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+1:53     #9 "Get Lost" hand "Player"
+1:53     #10 "Dovin's Veto" hand "Player"
+1:53     #11 "Hallowed Fountain" hand "Player"
+1:53     #12 "No More Lies" hand "Player"
+1:53     #13 "Otawara, Soaring City" hand "Player"
+1:53     #14 "Meticulous Archive" battlefield "Player" types land tapped
+1:53     #15 "Beza, the Bounding Spring" hand "Player"
+1:53     #16 hand "Opponent"
+1:53     #17 hand "Opponent"
+1:53     #18 library "Opponent" bottom 1
+1:53     #19 hand "Opponent"
+1:53     #20 hand "Opponent"
+1:53     #21 "Badgermole Cub" battlefield "Opponent" types creature pt 2/2
+1:53     #22 "Forest" battlefield "Opponent" types land tapped
+1:53     #23 "Consult the Star Charts" hand "Player"
+1:53     #25 "Plains" library "Player" top 1
+1:53     #26 "Forest" battlefield "Opponent" types creature land pt 1/1 tapped counters "+1/+1" 1
+1:53     #30 effect of #21 "Badgermole Cub" ? controller "Opponent"
+1:53   untap
+1:53     #14 "Meticulous Archive" untap by rule:untap
+1:53   upkeep
+1:53   draw
+1:53     #25 "Plains" move library -> hand as draw by rule:draw
+1:53   precombat-main
+1:58     #25 "Plains" play from hand types land
+1:59   beginning-of-combat
+1:59   declare-attackers
+1:59   end-of-combat
+1:59   postcombat-main
+2:00   end
+2:00   cleanup
+2:00 turn 5 "Opponent"
+2:00   keyframe
+2:00     player "Player" life 20 poison 0 library 52
+2:00     player "Opponent" life 20 poison 0 library 53
+2:00     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:00     #9 "Get Lost" hand "Player"
+2:00     #10 "Dovin's Veto" hand "Player"
+2:00     #11 "Hallowed Fountain" hand "Player"
+2:00     #12 "No More Lies" hand "Player"
+2:00     #13 "Otawara, Soaring City" hand "Player"
+2:00     #14 "Meticulous Archive" battlefield "Player" types land
+2:00     #15 "Beza, the Bounding Spring" hand "Player"
+2:00     #16 hand "Opponent"
+2:00     #17 hand "Opponent"
+2:00     #18 library "Opponent" bottom 1
+2:00     #19 hand "Opponent"
+2:00     #20 hand "Opponent"
+2:00     #21 "Badgermole Cub" battlefield "Opponent" types creature pt 2/2
+2:00     #22 "Forest" battlefield "Opponent" types land tapped
+2:00     #23 "Consult the Star Charts" hand "Player"
+2:00     #25 "Plains" battlefield "Player" types land
+2:00     #26 "Forest" battlefield "Opponent" types creature land pt 1/1 tapped counters "+1/+1" 1
+2:00     #30 effect of #21 "Badgermole Cub" ? controller "Opponent"
+2:00   untap
+2:00     #22 "Forest" untap by rule:untap
+2:00     #26 "Forest" untap by rule:untap
+2:00   upkeep
+2:00   draw
+2:00     new hidden #31 owner "Opponent" in library top 1
+2:00     #31 move library -> hand as draw by rule:draw
+2:00   precombat-main
+2:02     #16 identify "Nykthos, Shrine to Nyx" src arena:54769
+2:02     #16 "Nykthos, Shrine to Nyx" play from hand types land
+2:03     #19 identify "Prowling Serpopard" src arena:73991
+2:03     #19 "Prowling Serpopard" cast from hand
+2:03     new ability #32 mana of #16 "Nykthos, Shrine to Nyx" ? controller "Opponent"
+2:03     #16 "Nykthos, Shrine to Nyx" tap by cost:#32
+2:03     "Opponent" add {C} by #32
+2:03     new ability #33 mana of #26 "Forest" ? controller "Opponent"
+2:03     #26 "Forest" tap by cost:#33
+2:03     new ability #34 mana of #21 "Badgermole Cub" ? controller "Opponent"
+2:03     "Opponent" add {G} by #33
+2:03     "Opponent" add {G} restriction ? by #34
+2:03     "Opponent" pay {G}{G}{C} by cost:#19
+2:03     "Opponent" priority
+2:03       stack
+2:03         #19 "Prowling Serpopard" controller "Opponent"
+2:03     "Opponent" pass
+2:03     "Player" priority
+2:03       stack
+2:03         #19 "Prowling Serpopard" controller "Opponent"
+2:07     #9 "Get Lost" cast from hand
+2:08     #9 "Get Lost" target #21 "Badgermole Cub"
+2:09     new ability #35 mana of #25 "Plains" ? controller "Player"
+2:09     #25 "Plains" tap by cost:#35
+2:09     "Player" add {W} by #35
+2:09     new ability #36 mana of #14 "Meticulous Archive" ? controller "Player"
+2:09     #14 "Meticulous Archive" tap by cost:#36
+2:09     "Player" add {W} by #36
+2:09     "Player" pay {W}{W} by cost:#9
+2:09     "Player" priority
+2:09       stack
+2:09         #9 "Get Lost" controller "Player" target #21 "Badgermole Cub"
+2:09         #19 "Prowling Serpopard" controller "Opponent"
+2:09     "Player" pass
+2:09     "Opponent" priority
+2:09       stack
+2:09         #9 "Get Lost" controller "Player" target #21 "Badgermole Cub"
+2:09         #19 "Prowling Serpopard" controller "Opponent"
+2:09     "Opponent" pass
+2:09     #9 "Get Lost" resolve
+2:09     #21 "Badgermole Cub" move battlefield -> graveyard as destroy by #9
+2:09     new token #37 "Map Token" owner "Opponent" in battlefield types artifact by #9
+2:09     new token #38 "Map Token" owner "Opponent" in battlefield types artifact by #9
+2:09     #9 "Get Lost" move stack -> graveyard by rule:resolve
+2:09     "Opponent" priority
+2:09       stack
+2:09         #19 "Prowling Serpopard" controller "Opponent"
+2:09     "Opponent" pass
+2:09     "Player" priority
+2:09       stack
+2:09         #19 "Prowling Serpopard" controller "Opponent"
+2:09     "Player" pass
+2:09     #19 "Prowling Serpopard" resolve
+2:09     #19 "Prowling Serpopard" move stack -> battlefield types creature pt 4/3 by rule:resolve
+2:17   beginning-of-combat
+2:17   declare-attackers
+2:17   end-of-combat
+2:17   postcombat-main
+2:18   end
+2:18   cleanup
+2:18 turn 6 "Player"
+2:18   keyframe
+2:18     player "Player" life 20 poison 0 library 52
+2:18     player "Opponent" life 20 poison 0 library 52
+2:18     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:18     #9 "Get Lost" graveyard "Player"
+2:18     #10 "Dovin's Veto" hand "Player"
+2:18     #11 "Hallowed Fountain" hand "Player"
+2:18     #12 "No More Lies" hand "Player"
+2:18     #13 "Otawara, Soaring City" hand "Player"
+2:18     #14 "Meticulous Archive" battlefield "Player" types land tapped
+2:18     #15 "Beza, the Bounding Spring" hand "Player"
+2:18     #16 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+2:18     #17 hand "Opponent"
+2:18     #18 library "Opponent" bottom 1
+2:18     #19 "Prowling Serpopard" battlefield "Opponent" types creature pt 4/3
+2:18     #20 hand "Opponent"
+2:18     #21 "Badgermole Cub" graveyard "Opponent"
+2:18     #22 "Forest" battlefield "Opponent" types land
+2:18     #23 "Consult the Star Charts" hand "Player"
+2:18     #25 "Plains" battlefield "Player" types land tapped
+2:18     #26 "Forest" battlefield "Opponent" types creature land pt 1/1 tapped counters "+1/+1" 1
+2:18     #30 effect of #21 "Badgermole Cub" ? controller "Opponent"
+2:18     #31 hand "Opponent"
+2:18     #37 "Map Token" battlefield "Opponent" types artifact
+2:18     #38 "Map Token" battlefield "Opponent" types artifact
+2:18   untap
+2:18     #14 "Meticulous Archive" untap by rule:untap
+2:18     #25 "Plains" untap by rule:untap
+2:18   upkeep
+2:18   draw
+2:18     new card #39 "Dovin's Veto" owner "Player" in library top 1 src arena:69643
+2:18     #39 "Dovin's Veto" move library -> hand as draw by rule:draw
+2:18   precombat-main
+2:26     #11 "Hallowed Fountain" play from hand tapped types land
+2:27   beginning-of-combat
+2:27   declare-attackers
+2:27   end-of-combat
+2:27   postcombat-main
+2:28   end
+2:28   cleanup
+2:28 turn 7 "Opponent"
+2:28   keyframe
+2:28     player "Player" life 20 poison 0 library 51
+2:28     player "Opponent" life 20 poison 0 library 52
+2:28     #1 "Kaheera, the Orphanguard" outside "sideboard" "Player" companion
+2:28     #9 "Get Lost" graveyard "Player"
+2:28     #10 "Dovin's Veto" hand "Player"
+2:28     #11 "Hallowed Fountain" battlefield "Player" types land tapped
+2:28     #12 "No More Lies" hand "Player"
+2:28     #13 "Otawara, Soaring City" hand "Player"
+2:28     #14 "Meticulous Archive" battlefield "Player" types land
+2:28     #15 "Beza, the Bounding Spring" hand "Player"
+2:28     #16 "Nykthos, Shrine to Nyx" battlefield "Opponent" types land tapped
+2:28     #17 hand "Opponent"
+2:28     #18 library "Opponent" bottom 1
+2:28     #19 "Prowling Serpopard" battlefield "Opponent" types creature pt 4/3
+2:28     #20 hand "Opponent"
+2:28     #21 "Badgermole Cub" graveyard "Opponent"
+2:28     #22 "Forest" battlefield "Opponent" types land
+2:28     #23 "Consult the Star Charts" hand "Player"
+2:28     #25 "Plains" battlefield "Player" types land
+2:28     #26 "Forest" battlefield "Opponent" types creature land pt 1/1 tapped counters "+1/+1" 1
+2:28     #30 effect of #21 "Badgermole Cub" ? controller "Opponent"
+2:28     #31 hand "Opponent"
+2:28     #37 "Map Token" battlefield "Opponent" types artifact
+2:28     #38 "Map Token" battlefield "Opponent" types artifact
+2:28     #39 "Dovin's Veto" hand "Player"
+2:28   untap
+2:28     #26 "Forest" untap by rule:untap
+2:28     #16 "Nykthos, Shrine to Nyx" untap by rule:untap
+2:28   upkeep
+2:28   draw
+2:28     new hidden #40 owner "Opponent" in library top 1
+2:28     #40 move library -> hand as draw by rule:draw
+2:28   precombat-main
+2:31     #40 identify "Forest" src arena:95190
+2:31     #40 "Forest" play from hand types land
+2:34     #31 identify "Shifting Ceratops" src arena:69979
+2:34     #31 "Shifting Ceratops" cast from hand
+2:34     new ability #41 mana of #16 "Nykthos, Shrine to Nyx" ? controller "Opponent"
+2:34     #16 "Nykthos, Shrine to Nyx" tap by cost:#41
+2:34     "Opponent" add {C} by #41
+2:34     new ability #42 mana of #22 "Forest" ? controller "Opponent"
+2:34     #22 "Forest" tap by cost:#42
+2:34     "Opponent" add {G} by #42
+2:34     new ability #43 mana of #40 "Forest" ? controller "Opponent"
+2:34     #40 "Forest" tap by cost:#43
+2:34     "Opponent" add {G} by #43
+2:34     new ability #44 mana of #26 "Forest" ? controller "Opponent"
+2:34     #26 "Forest" tap by cost:#44
+2:34     "Opponent" add {G} by #44
+2:34     "Opponent" pay {G}{G}{G}{C} by cost:#31
+2:34     "Opponent" priority
+2:34       stack
+2:34         #31 "Shifting Ceratops" controller "Opponent"
+2:34     "Opponent" pass
+2:34     "Player" priority
+2:34       stack
+2:34         #31 "Shifting Ceratops" controller "Opponent"
+2:36     "Player" pass
+2:36     #31 "Shifting Ceratops" resolve
+2:36     #31 "Shifting Ceratops" move stack -> battlefield types creature pt 5/4 by rule:resolve
+2:36   beginning-of-combat
+2:39     "Player" concede
+0-1

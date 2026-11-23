@@ -1,0 +1,35 @@
+---
+source: crates/fixture-tools/tests/protocol_snapshots.rs
+expression: summary
+---
+{
+  "entry_types": {
+    "begins_game": 2,
+    "chooses_to_play": 1,
+    "conceded_game": 2,
+    "joined": 4,
+    "other": 2,
+    "rolled": 2,
+    "turn": 1,
+    "wins_game": 2
+  },
+  "events": 815,
+  "first_at_ms": 1787401420000,
+  "kinds": {
+    "deck_used": 3,
+    "game_management_json": 45,
+    "game_state_update": 15,
+    "league_dropped": 1,
+    "league_join_request": 2,
+    "league_joined": 3,
+    "login": 1,
+    "match_deck_registered": 1,
+    "match_state_changed": 520,
+    "tournament_player_state": 4,
+    "tournament_round_info": 2,
+    "tournament_round_result": 2,
+    "tournament_state_changed": 110,
+    "tournament_sync": 106
+  },
+  "last_at_ms": 1787401781000
+}

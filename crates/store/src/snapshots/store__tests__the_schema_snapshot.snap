@@ -1,0 +1,955 @@
+---
+source: crates/store/src/lib.rs
+expression: schema_description(&conn)
+---
+table accounts strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 username TEXT notnull=1 default=NULL pk=0
+  column 2 login_id INTEGER notnull=0 default=NULL pk=0
+  column 3 first_seen_at INTEGER notnull=1 default=NULL pk=0
+  column 4 tracked INTEGER notnull=1 default=1 pk=0
+  column 5 tracked_chosen INTEGER notnull=1 default=0 pk=0
+  column 6 last_login_at INTEGER notnull=0 default=NULL pk=0
+  column 7 platform TEXT notnull=1 default='mtgo' pk=0
+  column 8 arena_user_id TEXT notnull=0 default=NULL pk=0
+  column 9 display_name TEXT notnull=0 default=NULL pk=0
+  check (platform IN ('mtgo', 'arena', 'endstep'))
+  check (tracked IN (0, 1))
+  check (tracked_chosen IN (0, 1))
+  index accounts_arena_user_id unique=1 origin=c partial=1 on (arena_user_id): CREATE UNIQUE INDEX accounts_arena_user_id ON accounts (arena_user_id) WHERE arena_user_id IS NOT NULL
+  index sqlite_autoindex_accounts_1 unique=1 origin=u partial=0 on (username)
+  index sqlite_autoindex_accounts_2 unique=1 origin=u partial=0 on (login_id)
+table archetype_cards strict=1 without_rowid=0
+  column 0 archetype_id INTEGER notnull=1 default=NULL pk=1
+  column 1 list INTEGER notnull=1 default=NULL pk=2
+  column 2 catalog_id INTEGER notnull=1 default=NULL pk=3
+  column 3 oracle_id TEXT notnull=0 default=NULL pk=0
+  column 4 quantity INTEGER notnull=1 default=NULL pk=0
+  column 5 sideboard INTEGER notnull=1 default=NULL pk=4
+  check (list >= 1)
+  check (quantity >= 1)
+  check (sideboard IN (0, 1))
+  foreign key (archetype_id) -> archetypes (id) on update NO ACTION on delete CASCADE match NONE
+  index archetype_cards_catalog_id unique=0 origin=c partial=0 on (catalog_id): CREATE INDEX archetype_cards_catalog_id ON archetype_cards (catalog_id)
+  index sqlite_autoindex_archetype_cards_1 unique=1 origin=pk partial=0 on (archetype_id, list, catalog_id, sideboard)
+table archetypes strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 uuid TEXT notnull=1 default=NULL pk=0
+  column 2 name TEXT notnull=1 default=NULL pk=0
+  column 3 format TEXT notnull=0 default=NULL pk=0
+  column 4 color_identity TEXT notnull=0 default=NULL pk=0
+  column 5 source TEXT notnull=1 default=NULL pk=0
+  column 6 definition TEXT notnull=0 default=NULL pk=0
+  column 7 definition_version TEXT notnull=0 default=NULL pk=0
+  column 8 retired_at INTEGER notnull=0 default=NULL pk=0
+  column 9 merged_into_id INTEGER notnull=0 default=NULL pk=0
+  column 10 source_match_id INTEGER notnull=0 default=NULL pk=0
+  column 11 incomplete INTEGER notnull=1 default=0 pk=0
+  column 12 created_at INTEGER notnull=1 default=NULL pk=0
+  column 13 updated_at INTEGER notnull=1 default=NULL pk=0
+  column 14 offline_held INTEGER notnull=1 default=0 pk=0
+  check ((source = 'fallback') = (format IS NULL))
+  check (definition IS NULL OR json_valid(definition))
+  check (incomplete IN (0, 1))
+  check (merged_into_id IS NULL OR merged_into_id <> id)
+  check (offline_held IN (0, 1))
+  check (source = 'downloaded' OR definition IS NULL)
+  check (source IN ('downloaded', 'manual', 'fallback', 'commander'))
+  foreign key (merged_into_id) -> archetypes (id) on update NO ACTION on delete SET NULL match NONE
+  foreign key (source_match_id) -> matches (id) on update NO ACTION on delete SET NULL match NONE
+  index archetypes_format unique=0 origin=c partial=0 on (format, name): CREATE INDEX archetypes_format ON archetypes (format, name)
+  index sqlite_autoindex_archetypes_1 unique=1 origin=u partial=0 on (uuid)
+table arena_course_observations strict=1 without_rowid=0
+  column 0 arena_log_file_id INTEGER notnull=1 default=NULL pk=1
+  column 1 byte_offset INTEGER notnull=1 default=NULL pk=2
+  column 2 observed_at INTEGER notnull=1 default=NULL pk=0
+  column 3 account_id INTEGER notnull=1 default=NULL pk=0
+  column 4 course_id TEXT notnull=1 default=NULL pk=3
+  column 5 event_name TEXT notnull=1 default=NULL pk=0
+  column 6 module TEXT notnull=1 default=NULL pk=0
+  column 7 wins INTEGER notnull=1 default=NULL pk=0
+  column 8 losses INTEGER notnull=1 default=NULL pk=0
+  column 9 deck_id TEXT notnull=1 default=NULL pk=0
+  column 10 deck_name TEXT notnull=1 default=NULL pk=0
+  column 11 cards TEXT notnull=1 default=NULL pk=0
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete RESTRICT match NONE
+  foreign key (arena_log_file_id) -> arena_log_files (id) on update NO ACTION on delete RESTRICT match NONE
+  index arena_course_observations_account unique=0 origin=c partial=0 on (account_id, arena_log_file_id, byte_offset): CREATE INDEX arena_course_observations_account ON arena_course_observations (account_id, arena_log_file_id, byte_offset)
+  index sqlite_autoindex_arena_course_observations_1 unique=1 origin=pk partial=0 on (arena_log_file_id, byte_offset, course_id)
+table arena_game_archives strict=1 without_rowid=0
+  column 0 match_token TEXT notnull=1 default=NULL pk=1
+  column 1 messages BLOB notnull=1 default=NULL pk=0
+  column 2 message_count INTEGER notnull=1 default=NULL pk=0
+  column 3 archived_at INTEGER notnull=1 default=NULL pk=0
+  index sqlite_autoindex_arena_game_archives_1 unique=1 origin=pk partial=0 on (match_token)
+table arena_game_messages strict=1 without_rowid=0
+  column 0 arena_log_file_id INTEGER notnull=1 default=NULL pk=1
+  column 1 byte_offset INTEGER notnull=1 default=NULL pk=2
+  column 2 seq INTEGER notnull=1 default=NULL pk=3
+  column 3 match_token TEXT notnull=1 default=NULL pk=0
+  column 4 game_number INTEGER notnull=0 default=NULL pk=0
+  column 5 source TEXT notnull=1 default=NULL pk=0
+  column 6 logged_at INTEGER notnull=1 default=NULL pk=0
+  column 7 raw BLOB notnull=1 default=NULL pk=0
+  column 8 compressed INTEGER notnull=1 default=0 pk=0
+  check (compressed IN (0, 1))
+  check (source IN ('gre', 'client'))
+  foreign key (arena_log_file_id) -> arena_log_files (id) on update NO ACTION on delete RESTRICT match NONE
+  index arena_game_messages_match unique=0 origin=c partial=0 on (match_token): CREATE INDEX arena_game_messages_match ON arena_game_messages (match_token)
+  index sqlite_autoindex_arena_game_messages_1 unique=1 origin=pk partial=0 on (arena_log_file_id, byte_offset, seq)
+table arena_game_syncs strict=1 without_rowid=0
+  column 0 match_id INTEGER notnull=0 default=NULL pk=1
+  column 1 status TEXT notnull=1 default=NULL pk=0
+  column 2 derived_version INTEGER notnull=1 default=NULL pk=0
+  column 3 synced_at INTEGER notnull=1 default=NULL pk=0
+  check (status IN ('derived', 'no_messages'))
+  foreign key (match_id) -> matches (id) on update NO ACTION on delete CASCADE match NONE
+table arena_log_events strict=1 without_rowid=0
+  column 0 arena_log_file_id INTEGER notnull=1 default=NULL pk=1
+  column 1 byte_offset INTEGER notnull=1 default=NULL pk=2
+  column 2 seq INTEGER notnull=1 default=NULL pk=3
+  column 3 kind TEXT notnull=1 default=NULL pk=0
+  column 4 match_token TEXT notnull=0 default=NULL pk=0
+  column 5 logged_at INTEGER notnull=1 default=NULL pk=0
+  column 6 raw BLOB notnull=1 default=NULL pk=0
+  column 7 compressed INTEGER notnull=1 default=0 pk=0
+  check (compressed IN (0, 1))
+  check (kind IN ('login', 'authenticated', 'deck_set', 'room_state', 'game_info', 'first_turn', 'deck_submitted', 'mulligan', 'rank', 'season', 'detailed_logs'))
+  foreign key (arena_log_file_id) -> arena_log_files (id) on update NO ACTION on delete RESTRICT match NONE
+  index arena_log_events_match_token unique=0 origin=c partial=1 on (match_token): CREATE INDEX arena_log_events_match_token ON arena_log_events (match_token) WHERE match_token IS NOT NULL
+  index sqlite_autoindex_arena_log_events_1 unique=1 origin=pk partial=0 on (arena_log_file_id, byte_offset, seq)
+table arena_log_files strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 path TEXT notnull=1 default=NULL pk=0
+  column 2 identity_hash INTEGER notnull=1 default=NULL pk=0
+  column 3 head_hash INTEGER notnull=1 default=NULL pk=0
+  column 4 head_len INTEGER notnull=1 default=NULL pk=0
+  column 5 created_at_fs INTEGER notnull=0 default=NULL pk=0
+  column 6 last_observed_size INTEGER notnull=1 default=0 pk=0
+  column 7 read_offset INTEGER notnull=1 default=0 pk=0
+  column 8 first_seen_at INTEGER notnull=1 default=NULL pk=0
+  column 9 sealed_at INTEGER notnull=0 default=NULL pk=0
+  column 10 seal_reason TEXT notnull=0 default=NULL pk=0
+table arena_match_events strict=1 without_rowid=0
+  column 0 match_token TEXT notnull=1 default=NULL pk=1
+  column 1 event_name TEXT notnull=1 default=NULL pk=0
+  index sqlite_autoindex_arena_match_events_1 unique=1 origin=pk partial=0 on (match_token)
+table arena_rank_gap_claims strict=1 without_rowid=0
+  column 0 match_token TEXT notnull=1 default=NULL pk=1
+  column 1 arena_log_file_id INTEGER notnull=1 default=NULL pk=0
+  column 2 byte_offset INTEGER notnull=1 default=NULL pk=0
+  column 3 claimed_at INTEGER notnull=1 default=NULL pk=0
+  index sqlite_autoindex_arena_rank_gap_claims_1 unique=1 origin=pk partial=0 on (match_token)
+table arena_rank_observations strict=1 without_rowid=0
+  column 0 account_id INTEGER notnull=1 default=NULL pk=0
+  column 1 ladder TEXT notnull=1 default=NULL pk=3
+  column 2 season INTEGER notnull=1 default=NULL pk=0
+  column 3 observed_at INTEGER notnull=1 default=NULL pk=0
+  column 4 class TEXT notnull=1 default=NULL pk=0
+  column 5 level INTEGER notnull=1 default=NULL pk=0
+  column 6 step INTEGER notnull=1 default=NULL pk=0
+  column 7 matches_won INTEGER notnull=1 default=NULL pk=0
+  column 8 matches_lost INTEGER notnull=1 default=NULL pk=0
+  column 9 mythic_percentile REAL notnull=0 default=NULL pk=0
+  column 10 mythic_placement INTEGER notnull=0 default=NULL pk=0
+  column 11 arena_log_file_id INTEGER notnull=1 default=NULL pk=1
+  column 12 byte_offset INTEGER notnull=1 default=NULL pk=2
+  check (ladder IN ('constructed', 'limited'))
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete RESTRICT match NONE
+  index sqlite_autoindex_arena_rank_observations_1 unique=1 origin=pk partial=0 on (arena_log_file_id, byte_offset, ladder)
+table cards strict=1 without_rowid=0
+  column 0 catalog_id INTEGER notnull=0 default=NULL pk=1
+  column 1 scryfall_id TEXT notnull=0 default=NULL pk=0
+  column 2 oracle_id TEXT notnull=0 default=NULL pk=0
+  column 3 name TEXT notnull=0 default=NULL pk=0
+  column 4 type TEXT notnull=0 default=NULL pk=0
+  column 5 sub_type TEXT notnull=0 default=NULL pk=0
+  column 6 rarity TEXT notnull=0 default=NULL pk=0
+  column 7 color_identity TEXT notnull=0 default=NULL pk=0
+  column 8 colors TEXT notnull=0 default=NULL pk=0
+  column 9 cmc REAL notnull=0 default=NULL pk=0
+  column 10 mana_cost TEXT notnull=0 default=NULL pk=0
+  column 11 set_name TEXT notnull=0 default=NULL pk=0
+  column 12 set_code TEXT notnull=0 default=NULL pk=0
+  column 13 image TEXT notnull=0 default=NULL pk=0
+  column 14 art_crop TEXT notnull=0 default=NULL pk=0
+  column 15 local_image TEXT notnull=0 default=NULL pk=0
+  column 16 local_art_crop TEXT notnull=0 default=NULL pk=0
+  column 17 api_unknown_at INTEGER notnull=0 default=NULL pk=0
+  index cards_oracle_id unique=0 origin=c partial=1 on (oracle_id): CREATE INDEX cards_oracle_id ON cards (oracle_id) WHERE oracle_id IS NOT NULL
+table deck_archetype_notes strict=1 without_rowid=0 autoincrement=1
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 deck_id INTEGER notnull=1 default=NULL pk=0
+  column 2 archetype_id INTEGER notnull=1 default=NULL pk=0
+  column 3 body TEXT notnull=1 default=NULL pk=0
+  column 4 created_at INTEGER notnull=1 default=NULL pk=0
+  check (length(body) BETWEEN 1 AND 2000)
+  foreign key (archetype_id) -> archetypes (id) on update NO ACTION on delete CASCADE match NONE
+  foreign key (deck_id) -> decks (id) on update NO ACTION on delete CASCADE match NONE
+  index deck_archetype_notes_archetype_id unique=0 origin=c partial=0 on (archetype_id, created_at): CREATE INDEX deck_archetype_notes_archetype_id ON deck_archetype_notes (archetype_id, created_at)
+  index deck_archetype_notes_pair unique=0 origin=c partial=0 on (deck_id, archetype_id): CREATE INDEX deck_archetype_notes_pair ON deck_archetype_notes (deck_id, archetype_id)
+table deck_versions strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 deck_id INTEGER notnull=1 default=NULL pk=0
+  column 2 signature TEXT notnull=1 default=NULL pk=0
+  column 3 modified_at INTEGER notnull=1 default=NULL pk=0
+  foreign key (deck_id) -> decks (id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_deck_versions_1 unique=1 origin=u partial=0 on (deck_id, signature)
+table decks strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 mtgo_id TEXT notnull=1 default=NULL pk=0
+  column 2 account_id INTEGER notnull=0 default=NULL pk=0
+  column 3 name TEXT notnull=1 default=NULL pk=0
+  column 4 original_name TEXT notnull=0 default=NULL pk=0
+  column 5 format TEXT notnull=1 default=NULL pk=0
+  column 6 color_identity TEXT notnull=0 default=NULL pk=0
+  column 7 color_identity_manual INTEGER notnull=1 default=0 pk=0
+  column 8 cover_catalog_id INTEGER notnull=0 default=NULL pk=0
+  column 9 archived_at INTEGER notnull=0 default=NULL pk=0
+  column 10 file_synced_at INTEGER notnull=0 default=NULL pk=0
+  column 11 created_at INTEGER notnull=1 default=NULL pk=0
+  column 12 updated_at INTEGER notnull=1 default=NULL pk=0
+  column 13 source TEXT notnull=1 default=NULL pk=0
+  column 14 cloud_sync_enabled INTEGER notnull=1 default=0 pk=0
+  column 15 overlay_label TEXT notnull=0 default=NULL pk=0
+  column 16 archetype_id INTEGER notnull=0 default=NULL pk=0
+  column 17 cover_file TEXT notnull=0 default=NULL pk=0
+  column 18 pulled_platform TEXT notnull=0 default=NULL pk=0
+  check (cloud_sync_enabled IN (0, 1))
+  check (color_identity_manual IN (0, 1))
+  check (overlay_label IS NULL OR length(overlay_label) BETWEEN 1 AND 40)
+  check (pulled_platform IN ('arena', 'endstep'))
+  check (source IN ('file', 'imported'))
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete RESTRICT match NONE
+  foreign key (archetype_id) -> archetypes (id) on update NO ACTION on delete SET NULL match NONE
+  index decks_account_id unique=0 origin=c partial=0 on (account_id): CREATE INDEX decks_account_id ON decks (account_id)
+  index decks_archetype_id unique=0 origin=c partial=1 on (archetype_id): CREATE INDEX decks_archetype_id ON decks (archetype_id) WHERE archetype_id IS NOT NULL
+  index sqlite_autoindex_decks_1 unique=1 origin=u partial=0 on (mtgo_id)
+table derivations strict=1 without_rowid=0
+  column 0 name TEXT notnull=1 default=NULL pk=1
+  column 1 version INTEGER notnull=1 default=NULL pk=0
+  column 2 rebuilt_at INTEGER notnull=1 default=NULL pk=0
+  index sqlite_autoindex_derivations_1 unique=1 origin=pk partial=0 on (name)
+table draft_picks strict=1 without_rowid=0
+  column 0 draft_id INTEGER notnull=1 default=NULL pk=1
+  column 1 ordinal INTEGER notnull=1 default=NULL pk=2
+  column 2 pack_number INTEGER notnull=1 default=NULL pk=0
+  column 3 pick_number INTEGER notnull=1 default=NULL pk=0
+  column 4 pack_id INTEGER notnull=0 default=NULL pk=0
+  column 5 direction INTEGER notnull=0 default=NULL pk=0
+  column 6 cards_available TEXT notnull=1 default=NULL pk=0
+  column 7 picked_catalog_id INTEGER notnull=0 default=NULL pk=0
+  column 8 picked_card_id INTEGER notnull=0 default=NULL pk=0
+  column 9 reservations TEXT notnull=1 default=NULL pk=0
+  column 10 shown_at INTEGER notnull=0 default=NULL pk=0
+  column 11 deadline_at INTEGER notnull=0 default=NULL pk=0
+  column 12 picked_at INTEGER notnull=0 default=NULL pk=0
+  column 13 detached_at INTEGER notnull=0 default=NULL pk=0
+  column 14 note TEXT notnull=0 default=NULL pk=0
+  column 15 note_updated_at INTEGER notnull=0 default=NULL pk=0
+  check ((note IS NULL) = (note_updated_at IS NULL))
+  check (note IS NULL OR length(note) BETWEEN 1 AND 2000)
+  check (ordinal >= 1)
+  foreign key (draft_id) -> drafts (id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_draft_picks_1 unique=1 origin=pk partial=0 on (draft_id, ordinal)
+table drafts strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 draft_token TEXT notnull=1 default=NULL pk=0
+  column 2 account_id INTEGER notnull=0 default=NULL pk=0
+  column 3 source TEXT notnull=1 default=NULL pk=0
+  column 4 league_id INTEGER notnull=0 default=NULL pk=0
+  column 5 league_event_id INTEGER notnull=0 default=NULL pk=0
+  column 6 mtgo_course_id INTEGER notnull=0 default=NULL pk=0
+  column 7 mtgo_draft_id INTEGER notnull=0 default=NULL pk=0
+  column 8 pod_token TEXT notnull=0 default=NULL pk=0
+  column 9 seat_count INTEGER notnull=1 default=8 pk=0
+  column 10 seat_index INTEGER notnull=0 default=NULL pk=0
+  column 11 booster_catalog_id INTEGER notnull=0 default=NULL pk=0
+  column 12 state TEXT notnull=1 default=NULL pk=0
+  column 13 pack_size INTEGER notnull=1 default=14 pk=0
+  column 14 picks_expected INTEGER notnull=1 default=42 pk=0
+  column 15 started_at INTEGER notnull=0 default=NULL pk=0
+  column 16 ended_at INTEGER notnull=0 default=NULL pk=0
+  column 17 abandons_at INTEGER notnull=0 default=NULL pk=0
+  column 18 detached_at INTEGER notnull=0 default=NULL pk=0
+  column 19 imported_from INTEGER notnull=0 default=NULL pk=0
+  column 20 imported_league_from INTEGER notnull=0 default=NULL pk=0
+  column 21 legacy_draft_id INTEGER notnull=0 default=NULL pk=0
+  check ((source = 'imported') = (imported_from IS NOT NULL))
+  check (abandons_at IS NULL OR state IN ('connecting', 'picking'))
+  check (source IN ('log', 'imported'))
+  check (state IN ('connecting', 'picking', 'finished', 'abandoned'))
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete RESTRICT match NONE
+  foreign key (league_id) -> leagues (id) on update NO ACTION on delete SET NULL match NONE
+  index drafts_account_id unique=0 origin=c partial=0 on (account_id): CREATE INDEX drafts_account_id ON drafts (account_id)
+  index drafts_league_id unique=1 origin=c partial=1 on (league_id): CREATE UNIQUE INDEX drafts_league_id ON drafts (league_id) WHERE league_id IS NOT NULL
+  index sqlite_autoindex_drafts_1 unique=1 origin=u partial=0 on (draft_token)
+  index sqlite_autoindex_drafts_2 unique=1 origin=u partial=0 on (imported_from)
+table endstep_captures strict=1 without_rowid=0
+  column 0 unit_id TEXT notnull=1 default=NULL pk=1
+  column 1 kind TEXT notnull=1 default=NULL pk=0
+  column 2 started_at INTEGER notnull=1 default=NULL pk=0
+  column 3 counter INTEGER notnull=1 default=NULL pk=0
+  column 4 format INTEGER notnull=1 default=NULL pk=0
+  column 5 extension TEXT notnull=1 default=NULL pk=0
+  column 6 browser TEXT notnull=1 default=NULL pk=0
+  column 7 developer INTEGER notnull=1 default=NULL pk=0
+  column 8 classification TEXT notnull=1 default=NULL pk=0
+  column 9 frame_count INTEGER notnull=1 default=NULL pk=0
+  column 10 file_hash TEXT notnull=1 default=NULL pk=0
+  column 11 body BLOB notnull=1 default=NULL pk=0
+  column 12 imported_at INTEGER notnull=1 default=NULL pk=0
+  column 13 synced_version INTEGER notnull=1 default=0 pk=0
+  check (classification IN ('human', 'bot', 'unknown'))
+  check (developer IN (0, 1))
+  check (kind IN ('match', 'session'))
+  index endstep_captures_fold_order unique=0 origin=c partial=0 on (started_at, counter): CREATE INDEX endstep_captures_fold_order ON endstep_captures (started_at, counter)
+  index sqlite_autoindex_endstep_captures_1 unique=1 origin=pk partial=0 on (unit_id)
+table endstep_cards strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 name TEXT notnull=1 default=NULL pk=0
+  column 2 set_code TEXT notnull=1 default='' pk=0
+  column 3 collector_number TEXT notnull=1 default='' pk=0
+  column 4 first_seen_at INTEGER notnull=1 default=NULL pk=0
+  index sqlite_autoindex_endstep_cards_1 unique=1 origin=u partial=0 on (name, set_code, collector_number)
+table endstep_ranked_results strict=1 without_rowid=0
+  column 0 match_id INTEGER notnull=0 default=NULL pk=1
+  column 1 status TEXT notnull=0 default=NULL pk=0
+  column 2 format_id TEXT notnull=0 default=NULL pk=0
+  column 3 rating_before INTEGER notnull=0 default=NULL pk=0
+  column 4 rating_after INTEGER notnull=0 default=NULL pk=0
+  column 5 score_before INTEGER notnull=0 default=NULL pk=0
+  column 6 score_after INTEGER notnull=0 default=NULL pk=0
+  column 7 delta INTEGER notnull=0 default=NULL pk=0
+  column 8 rd_before INTEGER notnull=0 default=NULL pk=0
+  column 9 rd_after INTEGER notnull=0 default=NULL pk=0
+  column 10 rank TEXT notnull=0 default=NULL pk=0
+  foreign key (match_id) -> matches (id) on update NO ACTION on delete CASCADE match NONE
+table endstep_unit_refs strict=1 without_rowid=0
+  column 0 unit_id TEXT notnull=1 default=NULL pk=1
+  column 1 ref TEXT notnull=1 default=NULL pk=2
+  foreign key (unit_id) -> endstep_captures (unit_id) on update NO ACTION on delete CASCADE match NONE
+  index endstep_unit_refs_ref unique=0 origin=c partial=0 on (ref): CREATE INDEX endstep_unit_refs_ref ON endstep_unit_refs (ref)
+  index sqlite_autoindex_endstep_unit_refs_1 unique=1 origin=pk partial=0 on (unit_id, ref)
+table game_card_casts strict=1 without_rowid=0
+  column 0 game_id INTEGER notnull=1 default=NULL pk=1
+  column 1 side TEXT notnull=1 default=NULL pk=2
+  column 2 catalog_id INTEGER notnull=1 default=NULL pk=3
+  column 3 method TEXT notnull=1 default=NULL pk=4
+  column 4 count INTEGER notnull=1 default=NULL pk=0
+  check (count >= 1)
+  check (method IN ('kicked', 'flashback', 'madness', 'evoked', 'warp', 'free_cast', 'bargained', 'dashed', 'bestowed', 'replicated', 'spectacle', 'rebound', 'escaped', 'ninjutsu', 'suspended', 'buyback', 'disturb', 'foretold', 'retraced', 'mayhem', 'miracle', 'gifted', 'casualty'))
+  foreign key (game_id, side, catalog_id) -> game_cards (game_id, side, catalog_id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_game_card_casts_1 unique=1 origin=pk partial=0 on (game_id, side, catalog_id, method)
+table game_cards strict=1 without_rowid=0
+  column 0 game_id INTEGER notnull=1 default=NULL pk=1
+  column 1 side TEXT notnull=1 default=NULL pk=2
+  column 2 catalog_id INTEGER notnull=1 default=NULL pk=3
+  column 3 main_qty INTEGER notnull=1 default=0 pk=0
+  column 4 side_qty INTEGER notnull=1 default=0 pk=0
+  column 5 sided_in INTEGER notnull=1 default=0 pk=0
+  column 6 sided_out INTEGER notnull=1 default=0 pk=0
+  column 7 opening_hand INTEGER notnull=1 default=0 pk=0
+  column 8 bottomed INTEGER notnull=1 default=0 pk=0
+  column 9 starting_hand INTEGER notnull=1 default=0 pk=0
+  column 10 first_draw INTEGER notnull=1 default=0 pk=0
+  column 11 seen INTEGER notnull=1 default=0 pk=0
+  column 12 pregame_revealed INTEGER notnull=1 default=0 pk=0
+  column 13 pregame_played INTEGER notnull=1 default=0 pk=0
+  column 14 cast INTEGER notnull=1 default=0 pk=0
+  column 15 played INTEGER notnull=0 default=NULL pk=0
+  column 16 activated INTEGER notnull=0 default=NULL pk=0
+  column 17 discarded INTEGER notnull=1 default=0 pk=0
+  column 18 cast_turn INTEGER notnull=0 default=NULL pk=0
+  column 19 hand_seen INTEGER notnull=1 default=0 pk=0
+  column 20 graveyard_seen INTEGER notnull=1 default=0 pk=0
+  column 21 exile_seen INTEGER notnull=1 default=0 pk=0
+  column 22 battlefield_seen INTEGER notnull=1 default=0 pk=0
+  column 23 has_zone_data INTEGER notnull=1 default=0 pk=0
+  column 24 inferred INTEGER notnull=1 default=0 pk=0
+  check (has_zone_data IN (0, 1))
+  check (inferred IN (0, 1))
+  check (side IN ('local', 'opponent'))
+  check (starting_hand = opening_hand - bottomed)
+  foreign key (game_id) -> games (id) on update NO ACTION on delete CASCADE match NONE
+  index game_cards_catalog unique=0 origin=c partial=0 on (catalog_id, side): CREATE INDEX game_cards_catalog ON game_cards (catalog_id, side)
+  index sqlite_autoindex_game_cards_1 unique=1 origin=pk partial=0 on (game_id, side, catalog_id)
+table game_logs strict=1 without_rowid=0
+  column 0 match_id INTEGER notnull=0 default=NULL pk=1
+  column 1 decoded_entries BLOB notnull=1 default=NULL pk=0
+  column 2 entry_count INTEGER notnull=1 default=NULL pk=0
+  column 3 decoded_at INTEGER notnull=1 default=NULL pk=0
+  foreign key (match_id) -> matches (id) on update NO ACTION on delete CASCADE match NONE
+table game_mulligan_cards strict=1 without_rowid=0
+  column 0 game_id INTEGER notnull=1 default=NULL pk=1
+  column 1 hand INTEGER notnull=1 default=NULL pk=2
+  column 2 catalog_id INTEGER notnull=1 default=NULL pk=3
+  column 3 quantity INTEGER notnull=1 default=NULL pk=0
+  check (hand >= 1)
+  check (quantity >= 1)
+  foreign key (game_id) -> games (id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_game_mulligan_cards_1 unique=1 origin=pk partial=0 on (game_id, hand, catalog_id)
+table game_timelines strict=1 without_rowid=0
+  column 0 game_id INTEGER notnull=0 default=NULL pk=1
+  column 1 raw BLOB notnull=1 default=NULL pk=0
+  column 2 times BLOB notnull=1 default=NULL pk=0
+  column 3 frame_count INTEGER notnull=1 default=NULL pk=0
+  foreign key (game_id) -> games (id) on update NO ACTION on delete CASCADE match NONE
+table games strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 match_id INTEGER notnull=1 default=NULL pk=0
+  column 2 mtgo_game_id INTEGER notnull=0 default=NULL pk=0
+  column 3 game_number INTEGER notnull=1 default=NULL pk=0
+  column 4 result TEXT notnull=1 default=NULL pk=0
+  column 5 end_reason TEXT notnull=1 default=NULL pk=0
+  column 6 on_play INTEGER notnull=0 default=NULL pk=0
+  column 7 local_mulligans INTEGER notnull=0 default=NULL pk=0
+  column 8 opp_mulligans INTEGER notnull=0 default=NULL pk=0
+  column 9 local_opening_hand_size INTEGER notnull=0 default=NULL pk=0
+  column 10 local_starting_hand_size INTEGER notnull=0 default=NULL pk=0
+  column 11 opp_opening_hand_size INTEGER notnull=0 default=NULL pk=0
+  column 12 opp_starting_hand_size INTEGER notnull=0 default=NULL pk=0
+  column 13 local_die_roll INTEGER notnull=0 default=NULL pk=0
+  column 14 opp_die_roll INTEGER notnull=0 default=NULL pk=0
+  column 15 turn_count INTEGER notnull=0 default=NULL pk=0
+  column 16 started_at INTEGER notnull=0 default=NULL pk=0
+  column 17 ended_at INTEGER notnull=0 default=NULL pk=0
+  check (end_reason IN ('win', 'concede', 'forfeit', 'disconnect', 'unknown'))
+  check (on_play IN (0, 1))
+  check (result IN ('win', 'loss', 'draw', 'unknown'))
+  foreign key (match_id) -> matches (id) on update NO ACTION on delete CASCADE match NONE
+  index games_mtgo_game_id unique=0 origin=c partial=1 on (mtgo_game_id): CREATE INDEX games_mtgo_game_id ON games (mtgo_game_id) WHERE mtgo_game_id IS NOT NULL
+  index sqlite_autoindex_games_1 unique=1 origin=u partial=0 on (match_id, game_number)
+  index sqlite_autoindex_games_2 unique=1 origin=u partial=0 on (match_id, mtgo_game_id)
+table leagues strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 run_key TEXT notnull=1 default=NULL pk=0
+  column 2 account_id INTEGER notnull=0 default=NULL pk=0
+  column 3 source TEXT notnull=1 default=NULL pk=0
+  column 4 kind TEXT notnull=1 default=NULL pk=0
+  column 5 state TEXT notnull=1 default=NULL pk=0
+  column 6 token TEXT notnull=0 default=NULL pk=0
+  column 7 event_id INTEGER notnull=0 default=NULL pk=0
+  column 8 mtgo_course_id INTEGER notnull=0 default=NULL pk=0
+  column 9 name TEXT notnull=1 default=NULL pk=0
+  column 10 format TEXT notnull=0 default=NULL pk=0
+  column 11 set_code TEXT notnull=0 default=NULL pk=0
+  column 12 deck_version_id INTEGER notnull=0 default=NULL pk=0
+  column 13 deck_id INTEGER notnull=0 default=NULL pk=0
+  column 14 started_at INTEGER notnull=1 default=NULL pk=0
+  column 15 joined_at INTEGER notnull=0 default=NULL pk=0
+  column 16 completed_at INTEGER notnull=0 default=NULL pk=0
+  column 17 dropped_at INTEGER notnull=0 default=NULL pk=0
+  column 18 created_at INTEGER notnull=1 default=NULL pk=0
+  column 19 detached_at INTEGER notnull=0 default=NULL pk=0
+  column 20 user_dropped_at INTEGER notnull=0 default=NULL pk=0
+  column 21 notes TEXT notnull=0 default=NULL pk=0
+  column 22 notes_edited_at INTEGER notnull=0 default=NULL pk=0
+  column 23 imported_from INTEGER notnull=0 default=NULL pk=0
+  column 24 imported_seed TEXT notnull=0 default=NULL pk=0
+  column 25 removed_at INTEGER notnull=0 default=NULL pk=0
+  column 26 user_state TEXT notnull=0 default=NULL pk=0
+  column 27 edited_at INTEGER notnull=0 default=NULL pk=0
+  column 28 sync_client_id TEXT notnull=0 default=NULL pk=0
+  column 29 rounds INTEGER notnull=0 default=NULL pk=0
+  column 30 course_wins INTEGER notnull=0 default=NULL pk=0
+  column 31 course_losses INTEGER notnull=0 default=NULL pk=0
+  column 32 course_observed_at INTEGER notnull=0 default=NULL pk=0
+  check ((source = 'imported') = (imported_seed IS NOT NULL))
+  check (imported_seed IS NULL OR json_valid(imported_seed))
+  check (kind IN ('constructed', 'draft', 'sealed'))
+  check (notes IS NULL OR length(notes) BETWEEN 1 AND 5000)
+  check (rounds IS NULL OR rounds > 0)
+  check (source <> 'imported' OR run_key = '0x:' || imported_from)
+  check (source <> 'log' OR (token IS NOT NULL AND imported_from IS NULL))
+  check (source <> 'manual' OR (run_key LIKE 'manual:%' AND kind = 'constructed' AND state = 'complete' AND token IS NOT NULL AND substr(token, 1, 7) = 'manual_'))
+  check (source IN ('log', 'imported', 'manual'))
+  check (state IN ('active', 'complete', 'partial', 'dropped'))
+  check (user_state IS NULL OR user_state IN ('active', 'complete', 'partial', 'dropped'))
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete RESTRICT match NONE
+  foreign key (deck_id) -> decks (id) on update NO ACTION on delete RESTRICT match NONE
+  foreign key (deck_version_id) -> deck_versions (id) on update NO ACTION on delete SET NULL match NONE
+  index leagues_account_kind unique=0 origin=c partial=0 on (account_id, kind, started_at): CREATE INDEX leagues_account_kind ON leagues (account_id, kind, started_at)
+  index leagues_deck_id unique=0 origin=c partial=1 on (deck_id): CREATE INDEX leagues_deck_id ON leagues (deck_id) WHERE deck_id IS NOT NULL
+  index leagues_deck_version_id unique=0 origin=c partial=1 on (deck_version_id): CREATE INDEX leagues_deck_version_id ON leagues (deck_version_id) WHERE deck_version_id IS NOT NULL
+  index leagues_sync_client_id unique=0 origin=c partial=0 on (sync_client_id): CREATE INDEX leagues_sync_client_id ON leagues (sync_client_id)
+  index sqlite_autoindex_leagues_1 unique=1 origin=u partial=0 on (run_key)
+  index sqlite_autoindex_leagues_2 unique=1 origin=u partial=0 on (imported_from)
+trigger leagues_client_id_changed_requeues_reports: CREATE TRIGGER leagues_client_id_changed_requeues_reports AFTER UPDATE OF sync_client_id ON leagues WHEN OLD.sync_client_id IS NOT NEW.sync_client_id BEGIN DELETE FROM outbox WHERE kind = 'match_report' AND (status <> 'sent' OR attempts > 0) AND subject IN (SELECT token FROM matches WHERE league_id = NEW.id AND hidden_at IS NULL); END
+trigger leagues_inserted_fills_sync_client_id: CREATE TRIGGER leagues_inserted_fills_sync_client_id AFTER INSERT ON leagues WHEN NEW.sync_client_id IS NULL AND NEW.token IS NOT NULL AND NEW.run_key NOT LIKE 'arena:%' BEGIN UPDATE leagues SET sync_client_id = NEW.token || '_' || strftime('%Y%m%dT%H%M%SZ', (NEW.started_at - (NEW.started_at % 1000 + 1000) % 1000) / 1000, 'unixepoch') WHERE id = NEW.id; END
+trigger leagues_token_set_fills_sync_client_id: CREATE TRIGGER leagues_token_set_fills_sync_client_id AFTER UPDATE OF token ON leagues WHEN NEW.sync_client_id IS NULL AND NEW.token IS NOT NULL AND NEW.run_key NOT LIKE 'arena:%' BEGIN UPDATE leagues SET sync_client_id = NEW.token || '_' || strftime('%Y%m%dT%H%M%SZ', (NEW.started_at - (NEW.started_at % 1000 + 1000) % 1000) / 1000, 'unixepoch') WHERE id = NEW.id; END
+table limited_deck_snapshots strict=1 without_rowid=0
+  column 0 match_id INTEGER notnull=1 default=NULL pk=1
+  column 1 source TEXT notnull=1 default=NULL pk=2
+  column 2 cards TEXT notnull=1 default=NULL pk=0
+  column 3 signature TEXT notnull=1 default=NULL pk=0
+  column 4 captured_at INTEGER notnull=1 default=NULL pk=0
+  column 5 event_file_id INTEGER notnull=0 default=NULL pk=0
+  column 6 event_offset INTEGER notnull=0 default=NULL pk=0
+  check ((source = 'registered') = (event_file_id IS NOT NULL AND event_offset IS NOT NULL))
+  check (source IN ('registered', 'imported'))
+  foreign key (match_id) -> matches (id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_limited_deck_snapshots_1 unique=1 origin=pk partial=0 on (match_id, source)
+view listed_leagues: CREATE VIEW listed_leagues AS SELECT * FROM leagues WHERE removed_at IS NULL
+  column 0 id INTEGER notnull=0 default=NULL pk=0
+  column 1 run_key TEXT notnull=0 default=NULL pk=0
+  column 2 account_id INTEGER notnull=0 default=NULL pk=0
+  column 3 source TEXT notnull=0 default=NULL pk=0
+  column 4 kind TEXT notnull=0 default=NULL pk=0
+  column 5 state TEXT notnull=0 default=NULL pk=0
+  column 6 token TEXT notnull=0 default=NULL pk=0
+  column 7 event_id INTEGER notnull=0 default=NULL pk=0
+  column 8 mtgo_course_id INTEGER notnull=0 default=NULL pk=0
+  column 9 name TEXT notnull=0 default=NULL pk=0
+  column 10 format TEXT notnull=0 default=NULL pk=0
+  column 11 set_code TEXT notnull=0 default=NULL pk=0
+  column 12 deck_version_id INTEGER notnull=0 default=NULL pk=0
+  column 13 deck_id INTEGER notnull=0 default=NULL pk=0
+  column 14 started_at INTEGER notnull=0 default=NULL pk=0
+  column 15 joined_at INTEGER notnull=0 default=NULL pk=0
+  column 16 completed_at INTEGER notnull=0 default=NULL pk=0
+  column 17 dropped_at INTEGER notnull=0 default=NULL pk=0
+  column 18 created_at INTEGER notnull=0 default=NULL pk=0
+  column 19 detached_at INTEGER notnull=0 default=NULL pk=0
+  column 20 user_dropped_at INTEGER notnull=0 default=NULL pk=0
+  column 21 notes TEXT notnull=0 default=NULL pk=0
+  column 22 notes_edited_at INTEGER notnull=0 default=NULL pk=0
+  column 23 imported_from INTEGER notnull=0 default=NULL pk=0
+  column 24 imported_seed TEXT notnull=0 default=NULL pk=0
+  column 25 removed_at INTEGER notnull=0 default=NULL pk=0
+  column 26 user_state TEXT notnull=0 default=NULL pk=0
+  column 27 edited_at INTEGER notnull=0 default=NULL pk=0
+  column 28 sync_client_id TEXT notnull=0 default=NULL pk=0
+  column 29 rounds INTEGER notnull=0 default=NULL pk=0
+  column 30 course_wins INTEGER notnull=0 default=NULL pk=0
+  column 31 course_losses INTEGER notnull=0 default=NULL pk=0
+  column 32 course_observed_at INTEGER notnull=0 default=NULL pk=0
+view listed_matches: CREATE VIEW listed_matches AS SELECT * FROM matches WHERE hidden_at IS NULL AND detached_at IS NULL
+  column 0 id INTEGER notnull=0 default=NULL pk=0
+  column 1 token TEXT notnull=0 default=NULL pk=0
+  column 2 mtgo_match_id INTEGER notnull=0 default=NULL pk=0
+  column 3 account_id INTEGER notnull=0 default=NULL pk=0
+  column 4 opponent_id INTEGER notnull=0 default=NULL pk=0
+  column 5 source TEXT notnull=0 default=NULL pk=0
+  column 6 format TEXT notnull=0 default=NULL pk=0
+  column 7 match_type TEXT notnull=0 default=NULL pk=0
+  column 8 tournament_event_id INTEGER notnull=0 default=NULL pk=0
+  column 9 tournament_round INTEGER notnull=0 default=NULL pk=0
+  column 10 state TEXT notnull=0 default=NULL pk=0
+  column 11 outcome TEXT notnull=0 default=NULL pk=0
+  column 12 started_at INTEGER notnull=0 default=NULL pk=0
+  column 13 ended_at INTEGER notnull=0 default=NULL pk=0
+  column 14 last_activity_at INTEGER notnull=0 default=NULL pk=0
+  column 15 needs_attention INTEGER notnull=0 default=NULL pk=0
+  column 16 attention_reason TEXT notnull=0 default=NULL pk=0
+  column 17 revision INTEGER notnull=0 default=NULL pk=0
+  column 18 derived_version INTEGER notnull=0 default=NULL pk=0
+  column 19 league_token TEXT notnull=0 default=NULL pk=0
+  column 20 game_structure TEXT notnull=0 default=NULL pk=0
+  column 21 games_won_imported INTEGER notnull=0 default=NULL pk=0
+  column 22 games_lost_imported INTEGER notnull=0 default=NULL pk=0
+  column 23 deck_version_id INTEGER notnull=0 default=NULL pk=0
+  column 24 league_id INTEGER notnull=0 default=NULL pk=0
+  column 25 tournament_id INTEGER notnull=0 default=NULL pk=0
+  column 26 tournament_token TEXT notnull=0 default=NULL pk=0
+  column 27 registered_deck_checked_at INTEGER notnull=0 default=NULL pk=0
+  column 28 detached_at INTEGER notnull=0 default=NULL pk=0
+  column 29 archetypes_detected_at INTEGER notnull=0 default=NULL pk=0
+  column 30 games_synced_at INTEGER notnull=0 default=NULL pk=0
+  column 31 opponent_archetype_none INTEGER notnull=0 default=NULL pk=0
+  column 32 league_linked INTEGER notnull=0 default=NULL pk=0
+  column 33 notes TEXT notnull=0 default=NULL pk=0
+  column 34 hidden_at INTEGER notnull=0 default=NULL pk=0
+  column 35 replay_share_uuid TEXT notnull=0 default=NULL pk=0
+  column 36 replay_share_url TEXT notnull=0 default=NULL pk=0
+  column 37 replay_shared_at INTEGER notnull=0 default=NULL pk=0
+  column 38 legacy_history INTEGER notnull=0 default=NULL pk=0
+  column 39 no_league INTEGER notnull=0 default=NULL pk=0
+  column 40 edited_at INTEGER notnull=0 default=NULL pk=0
+  column 41 deleted_from_league_id INTEGER notnull=0 default=NULL pk=0
+  column 42 corrected_at INTEGER notnull=0 default=NULL pk=0
+  column 43 history_outcome TEXT notnull=0 default=NULL pk=0
+  column 44 rank_file_id INTEGER notnull=0 default=NULL pk=0
+  column 45 rank_byte_offset INTEGER notnull=0 default=NULL pk=0
+table log_events strict=1 without_rowid=0
+  column 0 log_file_id INTEGER notnull=1 default=NULL pk=1
+  column 1 byte_offset INTEGER notnull=1 default=NULL pk=2
+  column 2 kind TEXT notnull=0 default=NULL pk=0
+  column 3 match_token TEXT notnull=0 default=NULL pk=0
+  column 4 match_id INTEGER notnull=0 default=NULL pk=0
+  column 5 game_id INTEGER notnull=0 default=NULL pk=0
+  column 6 tournament_token TEXT notnull=0 default=NULL pk=0
+  column 7 league_token TEXT notnull=0 default=NULL pk=0
+  column 8 league_event_id INTEGER notnull=0 default=NULL pk=0
+  column 9 draft_token TEXT notnull=0 default=NULL pk=0
+  column 10 logged_at INTEGER notnull=1 default=NULL pk=0
+  column 11 raw BLOB notnull=1 default=NULL pk=0
+  column 12 compressed INTEGER notnull=1 default=0 pk=0
+  column 13 quarantined INTEGER notnull=1 default=0 pk=0
+  check (compressed IN (0, 1))
+  check (kind IN ('match_state_changed', 'game_state_update', 'deck_used', 'game_management_json', 'match_deck_registered', 'tournament_state_changed', 'tournament_sync', 'tournament_round_info', 'tournament_round_result', 'tournament_player_eliminated', 'tournament_ended', 'draft_created', 'draft_state_changed', 'draft_selection', 'draft_league_standing', 'draft_joined', 'draft_pod_state', 'draft_pack_opened', 'draft_pending_pick', 'draft_ended', 'draft_pick_committed', 'league_pool_granted', 'league_join_request', 'league_joined', 'league_dropped', 'login'))
+  check (kind IS NOT NULL OR quarantined = 1)
+  check (quarantined IN (0, 1))
+  foreign key (log_file_id) -> log_files (id) on update NO ACTION on delete RESTRICT match NONE
+  index log_events_draft_token unique=0 origin=c partial=1 on (draft_token): CREATE INDEX log_events_draft_token ON log_events (draft_token) WHERE draft_token IS NOT NULL
+  index log_events_drafts unique=0 origin=c partial=1 on (log_file_id, byte_offset): CREATE INDEX log_events_drafts ON log_events (log_file_id, byte_offset) WHERE kind IN ('draft_created', 'draft_state_changed', 'draft_selection', 'draft_league_standing', 'draft_joined', 'draft_pod_state', 'draft_pack_opened', 'draft_pending_pick', 'draft_ended', 'draft_pick_committed', 'league_pool_granted')
+  index log_events_frames unique=0 origin=c partial=1 on (game_id, log_file_id, byte_offset): CREATE INDEX log_events_frames ON log_events (game_id, log_file_id, byte_offset) WHERE kind = 'game_state_update'
+  index log_events_game_id unique=0 origin=c partial=1 on (game_id): CREATE INDEX log_events_game_id ON log_events (game_id) WHERE game_id IS NOT NULL
+  index log_events_joins unique=0 origin=c partial=1 on (match_token): CREATE INDEX log_events_joins ON log_events (match_token) WHERE match_token IS NOT NULL AND kind IN ('game_management_json', 'match_state_changed') AND (compressed = 1 OR instr(raw, 'MatchJoinedEventUnderwayState') > 0)
+  index log_events_leagues unique=0 origin=c partial=1 on (log_file_id, byte_offset): CREATE INDEX log_events_leagues ON log_events (log_file_id, byte_offset) WHERE kind IN ('league_joined', 'league_dropped', 'league_join_request')
+  index log_events_logins unique=0 origin=c partial=1 on (log_file_id, byte_offset): CREATE INDEX log_events_logins ON log_events (log_file_id, byte_offset) WHERE kind = 'login'
+  index log_events_match_id unique=0 origin=c partial=1 on (match_id): CREATE INDEX log_events_match_id ON log_events (match_id) WHERE match_id IS NOT NULL
+  index log_events_match_token unique=0 origin=c partial=1 on (match_token): CREATE INDEX log_events_match_token ON log_events (match_token) WHERE match_token IS NOT NULL
+  index log_events_registered unique=0 origin=c partial=1 on (match_token, log_file_id, byte_offset): CREATE INDEX log_events_registered ON log_events (match_token, log_file_id, byte_offset) WHERE kind = 'match_deck_registered'
+  index log_events_tournament_kinds unique=0 origin=c partial=1 on (log_file_id, byte_offset): CREATE INDEX log_events_tournament_kinds ON log_events (log_file_id, byte_offset) WHERE kind IN ('tournament_sync', 'tournament_state_changed', 'tournament_round_result', 'tournament_round_info', 'tournament_player_eliminated', 'tournament_ended')
+  index log_events_tournament_state_changes unique=0 origin=c partial=1 on (logged_at): CREATE INDEX log_events_tournament_state_changes ON log_events (logged_at) WHERE kind = 'tournament_state_changed'
+  index log_events_tournament_token unique=0 origin=c partial=1 on (tournament_token): CREATE INDEX log_events_tournament_token ON log_events (tournament_token) WHERE tournament_token IS NOT NULL
+  index sqlite_autoindex_log_events_1 unique=1 origin=pk partial=0 on (log_file_id, byte_offset)
+table log_files strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 path TEXT notnull=1 default=NULL pk=0
+  column 2 identity_hash TEXT notnull=1 default=NULL pk=0
+  column 3 head_hash TEXT notnull=1 default=NULL pk=0
+  column 4 head_len INTEGER notnull=1 default=NULL pk=0
+  column 5 created_at_fs INTEGER notnull=0 default=NULL pk=0
+  column 6 anchor_offset INTEGER notnull=0 default=NULL pk=0
+  column 7 anchor_hash TEXT notnull=0 default=NULL pk=0
+  column 8 day_anchor TEXT notnull=1 default=NULL pk=0
+  column 9 timezone TEXT notnull=1 default=NULL pk=0
+  column 10 inherited_username TEXT notnull=0 default=NULL pk=0
+  column 11 local_username TEXT notnull=0 default=NULL pk=0
+  column 12 local_login_id INTEGER notnull=0 default=NULL pk=0
+  column 13 cursor_offset INTEGER notnull=1 default=0 pk=0
+  column 14 clock_date TEXT notnull=1 default=NULL pk=0
+  column 15 clock_last_secs INTEGER notnull=0 default=NULL pk=0
+  column 16 last_observed_size INTEGER notnull=1 default=0 pk=0
+  column 17 stuck_ticks INTEGER notnull=1 default=0 pk=0
+  column 18 first_seen_at INTEGER notnull=1 default=NULL pk=0
+  column 19 last_seen_at INTEGER notnull=1 default=NULL pk=0
+  column 20 sealed_at INTEGER notnull=0 default=NULL pk=0
+  column 21 seal_reason TEXT notnull=0 default=NULL pk=0
+  check ((sealed_at IS NULL) = (seal_reason IS NULL))
+  check (seal_reason IN ('truncated', 'created_forward', 'head_changed', 'anchor_changed', 'stuck_force_reset'))
+  index log_files_one_active_per_path unique=1 origin=c partial=1 on (path): CREATE UNIQUE INDEX log_files_one_active_per_path ON log_files (path) WHERE sealed_at IS NULL
+table match_archetypes strict=1 without_rowid=0
+  column 0 match_id INTEGER notnull=1 default=NULL pk=1
+  column 1 is_opponent INTEGER notnull=1 default=NULL pk=2
+  column 2 archetype_id INTEGER notnull=1 default=NULL pk=0
+  column 3 confidence REAL notnull=1 default=NULL pk=0
+  column 4 manual INTEGER notnull=1 default=0 pk=0
+  check (confidence >= 0 AND confidence <= 1)
+  check (is_opponent IN (0, 1))
+  check (manual IN (0, 1))
+  foreign key (archetype_id) -> archetypes (id) on update NO ACTION on delete CASCADE match NONE
+  foreign key (match_id) -> matches (id) on update NO ACTION on delete CASCADE match NONE
+  index match_archetypes_archetype_id unique=0 origin=c partial=0 on (archetype_id, is_opponent): CREATE INDEX match_archetypes_archetype_id ON match_archetypes (archetype_id, is_opponent)
+  index sqlite_autoindex_match_archetypes_1 unique=1 origin=pk partial=0 on (match_id, is_opponent)
+table match_commanders strict=1 without_rowid=0
+  column 0 match_id INTEGER notnull=1 default=NULL pk=1
+  column 1 seat TEXT notnull=1 default=NULL pk=2
+  column 2 position INTEGER notnull=1 default=NULL pk=3
+  column 3 catalog_id INTEGER notnull=1 default=NULL pk=0
+  check (position IN (0, 1))
+  check (seat IN ('player', 'opponent'))
+  foreign key (match_id) -> matches (id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_match_commanders_1 unique=1 origin=pk partial=0 on (match_id, seat, position)
+table match_event_archives strict=1 without_rowid=0
+  column 0 match_token TEXT notnull=1 default=NULL pk=1
+  column 1 raw BLOB notnull=1 default=NULL pk=0
+  column 2 event_count INTEGER notnull=1 default=NULL pk=0
+  column 3 compacted_at INTEGER notnull=1 default=NULL pk=0
+  index sqlite_autoindex_match_event_archives_1 unique=1 origin=pk partial=0 on (match_token)
+table match_failures strict=1 without_rowid=0
+  column 0 token TEXT notnull=1 default=NULL pk=1
+  column 1 reason TEXT notnull=1 default=NULL pk=0
+  column 2 failed_at INTEGER notnull=1 default=NULL pk=0
+  column 3 derived_version INTEGER notnull=1 default=NULL pk=0
+  index sqlite_autoindex_match_failures_1 unique=1 origin=pk partial=0 on (token)
+view match_rank_readings: CREATE VIEW match_rank_readings AS SELECT m.id AS match_id, r.arena_log_file_id AS rank_file_id, r.byte_offset AS rank_byte_offset FROM matches m JOIN accounts a ON a.id = m.account_id AND a.platform = 'arena' LEFT JOIN arena_log_events f ON f.rowid = (SELECT e.rowid FROM arena_log_events e WHERE e.match_token = m.token ORDER BY e.arena_log_file_id, e.byte_offset LIMIT 1) JOIN arena_rank_observations r ON r.rowid = (SELECT o.rowid FROM arena_rank_observations o WHERE o.account_id = m.account_id AND o.ladder = 'constructed' AND CASE WHEN m.source = 'manual' THEN o.observed_at < m.started_at ELSE (o.arena_log_file_id, o.byte_offset) < (f.arena_log_file_id, f.byte_offset) END ORDER BY o.season DESC, o.arena_log_file_id DESC, o.byte_offset DESC LIMIT 1) WHERE m.match_type = 'ranked'
+  column 0 match_id INTEGER notnull=0 default=NULL pk=0
+  column 1 rank_file_id INTEGER notnull=0 default=NULL pk=0
+  column 2 rank_byte_offset INTEGER notnull=0 default=NULL pk=0
+table matches strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 token TEXT notnull=1 default=NULL pk=0
+  column 2 mtgo_match_id INTEGER notnull=0 default=NULL pk=0
+  column 3 account_id INTEGER notnull=1 default=NULL pk=0
+  column 4 opponent_id INTEGER notnull=0 default=NULL pk=0
+  column 5 source TEXT notnull=1 default=NULL pk=0
+  column 6 format TEXT notnull=0 default=NULL pk=0
+  column 7 match_type TEXT notnull=0 default=NULL pk=0
+  column 8 tournament_event_id INTEGER notnull=0 default=NULL pk=0
+  column 9 tournament_round INTEGER notnull=0 default=NULL pk=0
+  column 10 state TEXT notnull=1 default=NULL pk=0
+  column 11 outcome TEXT notnull=1 default=NULL pk=0
+  column 12 started_at INTEGER notnull=1 default=NULL pk=0
+  column 13 ended_at INTEGER notnull=0 default=NULL pk=0
+  column 14 last_activity_at INTEGER notnull=1 default=NULL pk=0
+  column 15 needs_attention INTEGER notnull=1 default=0 pk=0
+  column 16 attention_reason TEXT notnull=0 default=NULL pk=0
+  column 17 revision INTEGER notnull=1 default=NULL pk=0
+  column 18 derived_version INTEGER notnull=1 default=NULL pk=0
+  column 19 league_token TEXT notnull=0 default=NULL pk=0
+  column 20 game_structure TEXT notnull=0 default=NULL pk=0
+  column 21 games_won_imported INTEGER notnull=0 default=NULL pk=0
+  column 22 games_lost_imported INTEGER notnull=0 default=NULL pk=0
+  column 23 deck_version_id INTEGER notnull=0 default=NULL pk=0
+  column 24 league_id INTEGER notnull=0 default=NULL pk=0
+  column 25 tournament_id INTEGER notnull=0 default=NULL pk=0
+  column 26 tournament_token TEXT notnull=0 default=NULL pk=0
+  column 27 registered_deck_checked_at INTEGER notnull=0 default=NULL pk=0
+  column 28 detached_at INTEGER notnull=0 default=NULL pk=0
+  column 29 archetypes_detected_at INTEGER notnull=0 default=NULL pk=0
+  column 30 games_synced_at INTEGER notnull=0 default=NULL pk=0
+  column 31 opponent_archetype_none INTEGER notnull=1 default=0 pk=0
+  column 32 league_linked INTEGER notnull=1 default=0 pk=0
+  column 33 notes TEXT notnull=0 default=NULL pk=0
+  column 34 hidden_at INTEGER notnull=0 default=NULL pk=0
+  column 35 replay_share_uuid TEXT notnull=0 default=NULL pk=0
+  column 36 replay_share_url TEXT notnull=0 default=NULL pk=0
+  column 37 replay_shared_at INTEGER notnull=0 default=NULL pk=0
+  column 38 legacy_history INTEGER notnull=1 default=0 pk=0
+  column 39 no_league INTEGER notnull=1 default=0 pk=0
+  column 40 edited_at INTEGER notnull=0 default=NULL pk=0
+  column 41 deleted_from_league_id INTEGER notnull=0 default=NULL pk=0
+  column 42 corrected_at INTEGER notnull=0 default=NULL pk=0
+  column 43 history_outcome TEXT notnull=0 default=NULL pk=0
+  column 44 rank_file_id INTEGER notnull=0 default=NULL pk=0
+  column 45 rank_byte_offset INTEGER notnull=0 default=NULL pk=0
+  check ((replay_share_uuid IS NULL) = (replay_share_url IS NULL) AND (replay_share_uuid IS NULL) = (replay_shared_at IS NULL))
+  check (history_outcome IS NULL OR history_outcome IN ('win', 'loss'))
+  check (league_linked IN (0, 1) AND (league_linked = 0 OR league_id IS NOT NULL))
+  check (legacy_history = 0 OR source IN ('imported', 'history'))
+  check (legacy_history IN (0, 1))
+  check (needs_attention IN (0, 1))
+  check (no_league IN (0, 1))
+  check (notes IS NULL OR length(notes) BETWEEN 1 AND 5000)
+  check (opponent_archetype_none IN (0, 1))
+  check (outcome IN ('win', 'loss', 'draw', 'unknown'))
+  check (source <> 'manual' OR mtgo_match_id IS NULL)
+  check (source IN ('log', 'imported', 'manual', 'history'))
+  check (state IN ('pending', 'in_progress', 'ended', 'complete', 'abandoned'))
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete RESTRICT match NONE
+  foreign key (deck_version_id) -> deck_versions (id) on update NO ACTION on delete SET NULL match NONE
+  foreign key (deleted_from_league_id) -> leagues (id) on update NO ACTION on delete SET NULL match NONE
+  foreign key (league_id) -> leagues (id) on update NO ACTION on delete SET NULL match NONE
+  foreign key (opponent_id) -> opponents (id) on update NO ACTION on delete RESTRICT match NONE
+  foreign key (tournament_id) -> tournaments (id) on update NO ACTION on delete SET NULL match NONE
+  index matches_account_format_started unique=0 origin=c partial=1 on (account_id, format, started_at): CREATE INDEX matches_account_format_started ON matches (account_id, format, started_at) WHERE deck_version_id IS NOT NULL
+  index matches_account_league unique=0 origin=c partial=1 on (account_id, league_token): CREATE INDEX matches_account_league ON matches (account_id, league_token) WHERE league_token IS NOT NULL
+  index matches_account_tournament unique=0 origin=c partial=1 on (account_id, tournament_event_id): CREATE INDEX matches_account_tournament ON matches (account_id, tournament_event_id) WHERE tournament_event_id IS NOT NULL
+  index matches_deck_version_id unique=0 origin=c partial=1 on (deck_version_id): CREATE INDEX matches_deck_version_id ON matches (deck_version_id) WHERE deck_version_id IS NOT NULL
+  index matches_detect_due unique=0 origin=c partial=1 on (started_at): CREATE INDEX matches_detect_due ON matches (started_at) WHERE archetypes_detected_at IS NULL AND state = 'complete'
+  index matches_league_id unique=0 origin=c partial=1 on (league_id): CREATE INDEX matches_league_id ON matches (league_id) WHERE league_id IS NOT NULL
+  index matches_mtgo_match_id unique=0 origin=c partial=1 on (mtgo_match_id): CREATE INDEX matches_mtgo_match_id ON matches (mtgo_match_id) WHERE mtgo_match_id IS NOT NULL
+  index matches_opponent_id unique=0 origin=c partial=1 on (opponent_id): CREATE INDEX matches_opponent_id ON matches (opponent_id) WHERE opponent_id IS NOT NULL
+  index matches_started_at unique=0 origin=c partial=0 on (started_at): CREATE INDEX matches_started_at ON matches (started_at)
+  index matches_tournament_id unique=0 origin=c partial=1 on (tournament_id): CREATE INDEX matches_tournament_id ON matches (tournament_id) WHERE tournament_id IS NOT NULL
+  index sqlite_autoindex_matches_1 unique=1 origin=u partial=0 on (token)
+trigger matches_hidden_records_league: CREATE TRIGGER matches_hidden_records_league AFTER UPDATE OF hidden_at ON matches WHEN OLD.hidden_at IS NULL AND NEW.hidden_at IS NOT NULL BEGIN UPDATE matches SET deleted_from_league_id = NEW.league_id WHERE id = NEW.id; END
+trigger matches_hidden_relinked_records_league: CREATE TRIGGER matches_hidden_relinked_records_league AFTER UPDATE OF league_id ON matches WHEN NEW.hidden_at IS NOT NULL AND NEW.league_id IS NOT NULL AND NEW.league_id IS NOT OLD.league_id BEGIN UPDATE matches SET deleted_from_league_id = NEW.league_id WHERE id = NEW.id; END
+trigger matches_inserted_hidden_records_league: CREATE TRIGGER matches_inserted_hidden_records_league AFTER INSERT ON matches WHEN NEW.hidden_at IS NOT NULL BEGIN UPDATE matches SET deleted_from_league_id = NEW.league_id WHERE id = NEW.id; END
+trigger matches_league_changed_requeues_report: CREATE TRIGGER matches_league_changed_requeues_report AFTER UPDATE OF league_id ON matches WHEN OLD.league_id IS NOT NEW.league_id AND NEW.hidden_at IS NULL BEGIN DELETE FROM outbox WHERE kind = 'match_report' AND subject = NEW.token AND (status <> 'sent' OR attempts > 0); END
+trigger matches_restored_clears_league: CREATE TRIGGER matches_restored_clears_league AFTER UPDATE OF hidden_at ON matches WHEN OLD.hidden_at IS NOT NULL AND NEW.hidden_at IS NULL BEGIN UPDATE matches SET deleted_from_league_id = NULL WHERE id = NEW.id; END
+table opponents strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 username TEXT notnull=1 default=NULL pk=0
+  column 2 first_seen_at INTEGER notnull=1 default=NULL pk=0
+  column 3 platform TEXT notnull=1 default='mtgo' pk=0
+  column 4 display_name TEXT notnull=0 default=NULL pk=0
+  check (platform IN ('mtgo', 'arena', 'endstep'))
+  index sqlite_autoindex_opponents_1 unique=1 origin=u partial=0 on (username)
+table outbox strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 kind TEXT notnull=1 default=NULL pk=0
+  column 2 subject TEXT notnull=1 default=NULL pk=0
+  column 3 payload BLOB notnull=1 default=NULL pk=0
+  column 4 status TEXT notnull=1 default=NULL pk=0
+  column 5 attempts INTEGER notnull=1 default=0 pk=0
+  column 6 next_attempt_at INTEGER notnull=0 default=NULL pk=0
+  column 7 claimed_at INTEGER notnull=0 default=NULL pk=0
+  column 8 last_error TEXT notnull=0 default=NULL pk=0
+  column 9 sent_at INTEGER notnull=0 default=NULL pk=0
+  column 10 created_at INTEGER notnull=1 default=NULL pk=0
+  check ((status = 'sending') = (claimed_at IS NOT NULL))
+  check ((status = 'sent') = (sent_at IS NOT NULL))
+  check (kind IN ('match_report', 'tournament_observation', 'card_stats'))
+  check (status IN ('pending', 'sending', 'sent', 'failed', 'skipped'))
+  index outbox_due unique=0 origin=c partial=1 on (kind, created_at): CREATE INDEX outbox_due ON outbox (kind, created_at) WHERE status = 'pending'
+  index sqlite_autoindex_outbox_1 unique=1 origin=u partial=0 on (kind, subject)
+table recorded_replay_games strict=1 without_rowid=0
+  column 0 token TEXT notnull=1 default=NULL pk=1
+  column 1 position INTEGER notnull=1 default=NULL pk=2
+  column 2 game_number INTEGER notnull=1 default=NULL pk=0
+  column 3 mtgo_game_id INTEGER notnull=0 default=NULL pk=0
+  foreign key (token) -> recorded_replays (token) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_recorded_replay_games_1 unique=1 origin=pk partial=0 on (token, position)
+table recorded_replays strict=1 without_rowid=0
+  column 0 token TEXT notnull=1 default=NULL pk=1
+  column 1 mtgo_match_id INTEGER notnull=0 default=NULL pk=0
+  column 2 text TEXT notnull=1 default=NULL pk=0
+  column 3 file_hash TEXT notnull=1 default=NULL pk=0
+  column 4 recorder TEXT notnull=0 default=NULL pk=0
+  column 5 imported_at INTEGER notnull=1 default=NULL pk=0
+  index recorded_replays_mtgo_match_id unique=0 origin=c partial=1 on (mtgo_match_id): CREATE INDEX recorded_replays_mtgo_match_id ON recorded_replays (mtgo_match_id) WHERE mtgo_match_id IS NOT NULL
+  index sqlite_autoindex_recorded_replays_1 unique=1 origin=pk partial=0 on (token)
+table settings strict=1 without_rowid=0
+  column 0 key TEXT notnull=1 default=NULL pk=1
+  column 1 value TEXT notnull=1 default=NULL pk=0
+  index sqlite_autoindex_settings_1 unique=1 origin=pk partial=0 on (key)
+table sideboard_guide_cards strict=1 without_rowid=0
+  column 0 guide_id INTEGER notnull=1 default=NULL pk=1
+  column 1 oracle_id TEXT notnull=1 default=NULL pk=3
+  column 2 direction TEXT notnull=1 default=NULL pk=2
+  column 3 quantity INTEGER notnull=1 default=NULL pk=0
+  check (direction IN ('in', 'out'))
+  check (length(oracle_id) BETWEEN 1 AND 64)
+  check (quantity BETWEEN 1 AND 99)
+  foreign key (guide_id) -> sideboard_guides (id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_sideboard_guide_cards_1 unique=1 origin=pk partial=0 on (guide_id, direction, oracle_id)
+table sideboard_guides strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 deck_id INTEGER notnull=1 default=NULL pk=0
+  column 2 archetype_id INTEGER notnull=1 default=NULL pk=0
+  column 3 created_at INTEGER notnull=1 default=NULL pk=0
+  column 4 updated_at INTEGER notnull=1 default=NULL pk=0
+  foreign key (archetype_id) -> archetypes (id) on update NO ACTION on delete CASCADE match NONE
+  foreign key (deck_id) -> decks (id) on update NO ACTION on delete CASCADE match NONE
+  index sideboard_guides_archetype_id unique=0 origin=c partial=0 on (archetype_id): CREATE INDEX sideboard_guides_archetype_id ON sideboard_guides (archetype_id)
+  index sqlite_autoindex_sideboard_guides_1 unique=1 origin=u partial=0 on (deck_id, archetype_id)
+table sync_rejections strict=1 without_rowid=0
+  column 0 type TEXT notnull=1 default=NULL pk=1
+  column 1 client_id TEXT notnull=1 default=NULL pk=2
+  column 2 reason TEXT notnull=1 default=NULL pk=0
+  column 3 hash TEXT notnull=1 default=NULL pk=0
+  check (type IN ('deck', 'league', 'match'))
+  index sqlite_autoindex_sync_rejections_1 unique=1 origin=pk partial=0 on (type, client_id)
+table sync_state strict=1 without_rowid=0
+  column 0 type TEXT notnull=1 default=NULL pk=1
+  column 1 last_synced_at INTEGER notnull=0 default=NULL pk=0
+  column 2 canonical_version INTEGER notnull=1 default=NULL pk=0
+  column 3 full_cursor TEXT notnull=0 default=NULL pk=0
+  column 4 download_cursor TEXT notnull=0 default=NULL pk=0
+  check (type IN ('deck', 'league', 'match'))
+  index sqlite_autoindex_sync_state_1 unique=1 origin=pk partial=0 on (type)
+table synced_arena_runs strict=1 without_rowid=0
+  column 0 account_id INTEGER notnull=1 default=NULL pk=1
+  column 1 course_id TEXT notnull=1 default=NULL pk=2
+  column 2 event_name TEXT notnull=1 default=NULL pk=0
+  column 3 kind TEXT notnull=1 default=NULL pk=0
+  column 4 wins INTEGER notnull=1 default=NULL pk=0
+  column 5 losses INTEGER notnull=1 default=NULL pk=0
+  column 6 state TEXT notnull=1 default=NULL pk=0
+  column 7 observed_at INTEGER notnull=1 default=NULL pk=0
+  column 8 player_fields TEXT notnull=0 default=NULL pk=0
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_synced_arena_runs_1 unique=1 origin=pk partial=0 on (account_id, course_id)
+table synced_rows strict=1 without_rowid=0
+  column 0 type TEXT notnull=1 default=NULL pk=1
+  column 1 client_id TEXT notnull=1 default=NULL pk=2
+  column 2 hash TEXT notnull=0 default=NULL pk=0
+  column 3 synced_at INTEGER notnull=0 default=NULL pk=0
+  column 4 built_hash TEXT notnull=0 default=NULL pk=0
+  column 5 touch_key TEXT notnull=0 default=NULL pk=0
+  column 6 changed_at INTEGER notnull=0 default=NULL pk=0
+  column 7 carry TEXT notnull=0 default=NULL pk=0
+  column 8 pulled_key TEXT notnull=0 default=NULL pk=0
+  column 9 carry_asks INTEGER notnull=1 default=0 pk=0
+  column 10 carry_first_ask_at INTEGER notnull=0 default=NULL pk=0
+  column 11 parked_hash TEXT notnull=0 default=NULL pk=0
+  column 12 parked_reason TEXT notnull=0 default=NULL pk=0
+  check (carry IS NULL OR json_valid(carry))
+  check (parked_reason IN ('no_arena_account', 'no_sources'))
+  check (type IN ('deck', 'league', 'match'))
+  index sqlite_autoindex_synced_rows_1 unique=1 origin=pk partial=0 on (type, client_id)
+table synced_sources strict=1 without_rowid=0
+  column 0 match_id INTEGER notnull=0 default=NULL pk=1
+  column 1 platform TEXT notnull=1 default=NULL pk=0
+  column 2 payload BLOB notnull=1 default=NULL pk=0
+  column 3 league_client_id TEXT notnull=0 default=NULL pk=0
+  check (platform IN ('arena', 'endstep'))
+  foreign key (match_id) -> matches (id) on update NO ACTION on delete CASCADE match NONE
+table tournament_player_states strict=1 without_rowid=0
+  column 0 log_file_id INTEGER notnull=1 default=NULL pk=1
+  column 1 byte_offset INTEGER notnull=1 default=NULL pk=2
+  column 2 tournament_token TEXT notnull=1 default=NULL pk=0
+  column 3 new_state INTEGER notnull=1 default=NULL pk=0
+  column 4 in_playoffs INTEGER notnull=1 default=NULL pk=0
+  column 5 logged_at INTEGER notnull=1 default=NULL pk=0
+  check (in_playoffs IN (0, 1))
+  foreign key (log_file_id) -> log_files (id) on update NO ACTION on delete RESTRICT match NONE
+  index sqlite_autoindex_tournament_player_states_1 unique=1 origin=pk partial=0 on (log_file_id, byte_offset)
+  index tournament_player_states_token unique=0 origin=c partial=0 on (tournament_token, log_file_id, byte_offset): CREATE INDEX tournament_player_states_token ON tournament_player_states (tournament_token, log_file_id, byte_offset)
+table tournament_rounds strict=1 without_rowid=0
+  column 0 account_id INTEGER notnull=1 default=NULL pk=1
+  column 1 mtgo_event_id INTEGER notnull=1 default=NULL pk=2
+  column 2 round INTEGER notnull=1 default=NULL pk=3
+  column 3 bye_count INTEGER notnull=1 default=0 pk=0
+  column 4 match_tokens TEXT notnull=1 default='[]' pk=0
+  column 5 account_match_token TEXT notnull=0 default=NULL pk=0
+  column 6 account_bye INTEGER notnull=1 default=0 pk=0
+  column 7 started_at INTEGER notnull=0 default=NULL pk=0
+  column 8 match_minutes INTEGER notnull=0 default=NULL pk=0
+  column 9 paired_file_id INTEGER notnull=1 default=NULL pk=0
+  column 10 paired_offset INTEGER notnull=1 default=NULL pk=0
+  column 11 paired_at INTEGER notnull=1 default=NULL pk=0
+  check (account_bye IN (0, 1))
+  check (round >= 1)
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_tournament_rounds_1 unique=1 origin=pk partial=0 on (account_id, mtgo_event_id, round)
+table tournament_standings strict=1 without_rowid=0
+  column 0 account_id INTEGER notnull=1 default=NULL pk=1
+  column 1 mtgo_event_id INTEGER notnull=1 default=NULL pk=2
+  column 2 token TEXT notnull=1 default=NULL pk=0
+  column 3 name TEXT notnull=0 default=NULL pk=0
+  column 4 format TEXT notnull=0 default=NULL pk=0
+  column 5 cut_size INTEGER notnull=0 default=NULL pk=0
+  column 6 swiss_rounds INTEGER notnull=0 default=NULL pk=0
+  column 7 round_minutes INTEGER notnull=0 default=NULL pk=0
+  column 8 starts_at INTEGER notnull=0 default=NULL pk=0
+  column 9 status TEXT notnull=1 default=NULL pk=0
+  column 10 round INTEGER notnull=0 default=NULL pk=0
+  column 11 stage TEXT notnull=1 default=NULL pk=0
+  column 12 in_playoffs INTEGER notnull=1 default=0 pk=0
+  column 13 round_started_at INTEGER notnull=0 default=NULL pk=0
+  column 14 round_result_at INTEGER notnull=0 default=NULL pk=0
+  column 15 rank INTEGER notnull=0 default=NULL pk=0
+  column 16 players INTEGER notnull=0 default=NULL pk=0
+  column 17 matches_left INTEGER notnull=0 default=NULL pk=0
+  column 18 byes INTEGER notnull=1 default=0 pk=0
+  column 19 finish TEXT notnull=0 default=NULL pk=0
+  column 20 place INTEGER notnull=0 default=NULL pk=0
+  column 21 finished_at INTEGER notnull=0 default=NULL pk=0
+  column 22 last_transition_at INTEGER notnull=1 default=NULL pk=0
+  column 23 last_event_at INTEGER notnull=1 default=NULL pk=0
+  column 24 rounds_read_file_id INTEGER notnull=0 default=NULL pk=0
+  column 25 rounds_read_offset INTEGER notnull=0 default=NULL pk=0
+  column 26 rounds_login_id INTEGER notnull=0 default=NULL pk=0
+  check ((rounds_read_file_id IS NULL) = (rounds_read_offset IS NULL))
+  check ((status = 'finished') = (finish IS NOT NULL))
+  check (finish IN ('trophied', 'top_cut', 'missed_cut', 'complete', 'dropped', 'eliminated'))
+  check (in_playoffs IN (0, 1))
+  check (stage IN ('swiss', 'top8', 'semifinal', 'final'))
+  check (status IN ('registered', 'playing', 'waiting_for_round', 'bye', 'made_cut', 'finished'))
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete CASCADE match NONE
+  index sqlite_autoindex_tournament_standings_1 unique=1 origin=pk partial=0 on (account_id, mtgo_event_id)
+table tournaments strict=1 without_rowid=0
+  column 0 id INTEGER notnull=0 default=NULL pk=1
+  column 1 mtgo_event_id INTEGER notnull=1 default=NULL pk=0
+  column 2 account_id INTEGER notnull=0 default=NULL pk=0
+  column 3 token TEXT notnull=0 default=NULL pk=0
+  column 4 name TEXT notnull=1 default=NULL pk=0
+  column 5 format TEXT notnull=0 default=NULL pk=0
+  column 6 started_at INTEGER notnull=1 default=NULL pk=0
+  column 7 name_synthesized INTEGER notnull=1 default=1 pk=0
+  column 8 name_checked_at INTEGER notnull=0 default=NULL pk=0
+  check (name_synthesized IN (0, 1))
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete RESTRICT match NONE
+  index sqlite_autoindex_tournaments_1 unique=1 origin=u partial=0 on (mtgo_event_id)
+table untracked_matches strict=1 without_rowid=0
+  column 0 match_token TEXT notnull=1 default=NULL pk=1
+  column 1 account_id INTEGER notnull=1 default=NULL pk=0
+  column 2 skipped_at INTEGER notnull=1 default=NULL pk=0
+  foreign key (account_id) -> accounts (id) on update NO ACTION on delete RESTRICT match NONE
+  index sqlite_autoindex_untracked_matches_1 unique=1 origin=pk partial=0 on (match_token)
+  index untracked_matches_account unique=0 origin=c partial=0 on (account_id): CREATE INDEX untracked_matches_account ON untracked_matches (account_id)

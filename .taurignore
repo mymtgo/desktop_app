@@ -1,0 +1,2 @@
+# The browser extension is its own npm package; keep tauri-cli from treating it as the frontend (it runs pnpm dev/build in the first package.json folder it finds).
+extension/

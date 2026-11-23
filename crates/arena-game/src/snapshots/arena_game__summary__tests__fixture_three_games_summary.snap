@@ -1,0 +1,131 @@
+---
+source: crates/arena-game/src/summary.rs
+assertion_line: 1099
+expression: out
+---
+== game 1
+GameColumns { on_play: Some(false), local_mulligans: Some(1), opp_mulligans: Some(1), turn_count: Some(7), started_at: Some(1793711012944), ended_at: Some(1793711206806) }
+hand sizes: opening Some(7) starting Some(6) opponent opening Some(7) starting Some(6)
+local 66175 side=2 zones
+local 67530 side=2 zones
+local 69396 main=4 zones
+local 69793 main=2 zones
+local 70385 main=1 zones
+local 71820 main=4 zones
+local 73472 main=4 seen=1 hand=1 zones
+local 73905 side=3 zones
+local 75061 main=4 zones
+local 75350 main=4 first_draw=1 seen=1 cast=1 hand=1 exile=1 battlefield=1 cast_turn=4 zones
+local 75662 main=4 zones
+local 76465 side=2 zones
+local 76652 main=3 opening=1 starting=1 seen=1 hand=1 zones
+local 77123 side=2 zones
+local 78598 main=2 zones
+local 79088 main=4 zones
+local 79448 main=3 zones
+local 79464 main=3 zones
+local 80165 main=4 opening=1 starting=1 seen=1 hand=1 zones
+local 80397 side=1 zones
+local 82055 main=2 opening=1 starting=1 seen=1 hand=1 zones
+local 82390 main=3 zones
+local 90348 main=2 opening=2 bottomed=1 starting=1 seen=2 hand=2 zones
+local 90615 main=4 opening=2 starting=2 seen=2 hand=2 battlefield=2 played=2 zones
+local 92090 side=3 zones
+local 95052 main=3 seen=1 hand=1 battlefield=1 played=1 zones
+opponent 73476 seen=1 played=1
+opponent 78331 seen=1
+opponent 78507 seen=1
+opponent 78635 seen=1 played=1
+opponent 79017 seen=1 cast=1 cast_turn=7
+opponent 92370 seen=1 played=1
+opponent 92411 seen=1 cast=1 cast_turn=5
+opponent 96076 seen=1 cast=1 cast_turn=3
+mulligan hand 1: 69396 x1
+mulligan hand 1: 73472 x1
+mulligan hand 1: 75662 x2
+mulligan hand 1: 79448 x1
+mulligan hand 1: 79464 x2
+casts by method: 0
+== game 2
+GameColumns { on_play: Some(true), local_mulligans: Some(0), opp_mulligans: Some(0), turn_count: Some(13), started_at: Some(1793711257119), ended_at: Some(1793711381756) }
+hand sizes: opening Some(7) starting Some(7) opponent opening Some(7) starting Some(7)
+local 66175 side=2 zones
+local 67530 side=2 zones
+local 69396 main=4 seen=1 hand=1 zones
+local 69793 main=2 seen=1 cast=1 hand=1 battlefield=1 cast_turn=9 zones
+local 70385 main=1 zones
+local 71820 main=4 zones
+local 73472 main=4 zones
+local 73905 side=3 zones
+local 75061 main=4 zones
+local 75350 main=4 opening=1 starting=1 seen=1 cast=1 hand=1 battlefield=1 cast_turn=3 zones
+local 75662 main=3 side=1 out=1 zones
+local 76465 side=2 zones
+local 76652 main=3 seen=1 hand=1 zones
+local 77123 side=2 zones
+local 78598 main=2 zones
+local 79088 main=4 opening=1 starting=1 seen=1 hand=1 battlefield=1 played=1 zones
+local 79448 main=3 zones
+local 79464 main=3 seen=1 cast=1 hand=1 battlefield=1 cast_turn=12 zones
+local 80165 main=4 seen=1 cast=1 hand=1 battlefield=1 cast_turn=5 zones
+local 80397 side=1 zones
+local 82055 side=2 out=2 zones
+local 82390 main=3 opening=2 starting=2 seen=2 hand=2 battlefield=1 played=1 zones
+local 90348 main=2 zones
+local 90615 main=4 opening=1 starting=1 seen=1 hand=1 battlefield=1 played=1 zones
+local 92090 main=3 in=3 opening=1 starting=1 seen=2 cast=1 hand=2 battlefield=1 cast_turn=13 zones
+local 95052 main=3 opening=1 starting=1 seen=1 hand=1 battlefield=1 played=1 zones
+opponent 78596 seen=1
+opponent 78615 seen=1
+opponent 79028 seen=1 cast=1 cast_turn=12
+opponent 97535 seen=1 cast=1 cast_turn=4
+opponent 102713 seen=1 played=1
+opponent 102723 seen=1 played=1
+casts by method: 0
+== game 3
+GameColumns { on_play: Some(false), local_mulligans: Some(0), opp_mulligans: Some(0), turn_count: Some(19), started_at: Some(1793711392788), ended_at: Some(1793712013025) }
+hand sizes: opening Some(7) starting Some(7) opponent opening Some(7) starting Some(7)
+local 66175 side=2 zones
+local 67530 side=2 zones
+local 69396 main=4 zones
+local 69793 main=2 zones
+local 70385 main=1 seen=1 hand=1 battlefield=1 played=1 zones
+local 71820 main=3 side=1 out=1 seen=1 cast=1 hand=1 battlefield=1 cast_turn=10 zones
+local 73472 main=4 zones
+local 73905 side=3 zones
+local 75061 main=4 zones
+local 75350 main=4 zones
+local 75662 main=4 opening=1 starting=1 seen=2 cast=2 hand=2 graveyard=2 cast_turn=10 zones
+local 76465 side=2 zones
+local 76652 main=3 opening=1 starting=1 seen=1 cast=1 hand=1 graveyard=1 cast_turn=7 zones
+local 77123 side=2 zones
+local 78598 main=2 first_draw=1 seen=1 cast=1 hand=1 battlefield=1 cast_turn=16 zones
+local 79088 main=4 opening=1 starting=1 seen=1 hand=1 battlefield=1 played=1 zones
+local 79448 main=3 seen=1 hand=1 zones
+local 79464 main=3 seen=1 cast=1 hand=1 graveyard=1 battlefield=1 cast_turn=14 zones
+local 80165 main=4 seen=1 cast=1 hand=1 battlefield=1 cast_turn=18 zones
+local 80397 side=1 zones
+local 82055 side=2 out=2 zones
+local 82390 main=3 seen=1 hand=1 battlefield=1 played=1 zones
+local 90348 main=2 opening=2 starting=2 seen=2 cast=1 hand=2 battlefield=1 cast_turn=8 zones
+local 90615 main=4 opening=1 starting=1 seen=1 hand=1 battlefield=1 played=1 zones
+local 92090 main=3 in=3 opening=1 starting=1 seen=1 cast=1 hand=1 graveyard=1 battlefield=1 cast_turn=12 zones
+local 95052 main=3 seen=1 hand=1 battlefield=1 played=1 zones
+opponent 73476 seen=1 played=1
+opponent 77316 seen=1 cast=1 cast_turn=11
+opponent 78507 seen=1 cast=1 cast_turn=17
+opponent 78549 seen=2 cast=1 cast_turn=17
+opponent 78596 seen=2 cast=1 cast_turn=9
+opponent 78613 seen=1 cast=1 cast_turn=5
+opponent 78635 seen=1 played=1
+opponent 78995 seen=1
+opponent 79016 seen=1 cast=1 cast_turn=11
+opponent 79017 seen=3 cast=2 cast_turn=7
+opponent 92370 seen=2 played=2
+opponent 92411 seen=1 cast=1 cast_turn=19
+opponent 96188 seen=3 played=3
+opponent 96191 seen=1 played=1
+opponent 97535 seen=1 cast=1 cast_turn=3
+opponent 97998 seen=1 played=1
+opponent 106371 seen=1 cast=1 cast_turn=14
+casts by method: 0
