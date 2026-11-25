@@ -21,6 +21,8 @@ const state = vi.hoisted(() => ({
   placeholder: false,
   platform: 'mtgo' as 'mtgo' | 'arena',
   firstRun: null as unknown,
+  wrapped: null as unknown,
+  wrappedDismissed: false,
 }))
 const stub = vi.hoisted(() => async (tag: string) => {
   const { defineComponent, h } = await import('vue')
@@ -79,6 +81,17 @@ vi.mock('@/components/dashboard/MostPickedCard.vue', () => stub('most-picked-car
 vi.mock('@/components/dashboard/LastSessionCard.vue', () => stub('last-session-card'))
 vi.mock('@/components/dashboard/BreakdownCard.vue', () => stub('breakdown-card'))
 vi.mock('@/components/rank/RankCard.vue', () => stub('rank-card'))
+vi.mock('@/components/dashboard/DashboardWrappedCard.vue', () => stub('wrapped-card'))
+vi.mock('@/lib/wrapped/useWrapped', async () => {
+  const { computed } = await import('vue')
+  return {
+    useWrapped: () => ({
+      bundle: computed(() => state.wrapped),
+      dismissed: computed(() => state.wrappedDismissed),
+      dismiss: async () => {},
+    }),
+  }
+})
 
 const { default: DashboardPage } = await import('./DashboardPage.vue')
 
@@ -113,9 +126,27 @@ beforeEach(() => {
   state.placeholder = false
   state.platform = 'mtgo'
   state.firstRun = null
+  state.wrapped = null
+  state.wrappedDismissed = false
 })
 
 describe('the home dashboard page', () => {
+  it('shows the Wrapped card first only while a bundle is out and not dismissed', () => {
+    state.view = view({})
+    expect(tags(mountFake(DashboardPage).root)).not.toContain('wrapped-card')
+    state.wrapped = { cards: [] }
+    expect(tags(mountFake(DashboardPage).root)[0]).toBe('wrapped-card')
+    state.wrappedDismissed = true
+    expect(tags(mountFake(DashboardPage).root)).not.toContain('wrapped-card')
+  })
+
+  it('a first-run dashboard has no Wrapped card', () => {
+    state.view = view({})
+    state.wrapped = { cards: [] }
+    state.firstRun = { kind: 'findMtgo' }
+    expect(tags(mountFake(DashboardPage).root)).not.toContain('wrapped-card')
+  })
+
   it('the arena format switch has no Limited', () => {
     state.platform = 'arena'
     state.view = view({

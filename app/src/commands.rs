@@ -545,6 +545,9 @@ pub async fn save_settings(app: AppHandle, settings: Settings) -> Result<Setting
     // The settings are stored even if tracking could not restart on a new
     // folder, so the window and the UI follow what is stored.
     crate::window::set_close_to_tray(&app, applied.settings.close_to_tray);
+    if let Some(gate) = app.try_state::<crate::usage::UsageGate>() {
+        gate.set(applied.settings.share_usage);
+    }
     crate::window::apply_interface_scale(&app, applied.settings.interface_scale);
     if let Err(error) = (SettingsChanged {
         settings: applied.settings.clone(),

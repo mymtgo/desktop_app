@@ -27,6 +27,8 @@ export const commands = {
 	 *  blocking thread.
 	 */
 	setBetaUpdates: (on: boolean) => typedError<Settings, CommandError>(__TAURI_INVOKE("set_beta_updates", { on })),
+	/**  The UI's way to count an event (page views, features). */
+	trackUsage: (event: UsageEvent) => typedError<null, CommandError>(__TAURI_INVOKE("track_usage", { event })),
 	/**  The page's current status. */
 	recorderStatus: () => typedError<RecorderStatusView, CommandError>(__TAURI_INVOKE("recorder_status")),
 	/**
@@ -153,6 +155,14 @@ export const commands = {
 	 *  Async so the wait for the tracker's commit never blocks the window.
 	 */
 	whatsNewOnStart: (content: string[]) => typedError<WhatsNewAnswer, CommandError>(__TAURI_INVOKE("whats_new_on_start", { content })),
+	wrappedState: () => typedError<WrappedState, CommandError>(__TAURI_INVOKE("wrapped_state")),
+	/**
+	 *  Hides the shown year's dashboard card for good. The page stays
+	 *  reachable. The year comes from the clock here, never from the caller, so
+	 *  a stale page cannot dismiss another year; with no year shown nothing is
+	 *  stored.
+	 */
+	dismissWrapped: () => typedError<WrappedState, CommandError>(__TAURI_INVOKE("dismiss_wrapped")),
 	/**  What the main window shows for the first run. */
 	firstRunState: () => __TAURI_INVOKE<FirstRunState>("first_run_state"),
 	/**
@@ -1424,6 +1434,18 @@ export type ArchetypeLinkView = {
 	name: string,
 };
 
+/**
+ *  How an opponent's archetype is drawn, as on the Metagame page's tile:
+ *  one of its cards' art, its colours and the cards it is built on.
+ */
+export type ArchetypeLook = {
+	art: Art,
+	/**  Colour identity letters in WUBRG order; empty for colourless. */
+	colors: string[],
+	/**  Up to five of the archetype's key cards. */
+	cards: KeyCard[],
+};
+
 /**  The archetype Matches tab (0.x `decks/archetypes/Matches`). */
 export type ArchetypeMatchesView = {
 	page: MatchPage,
@@ -1499,6 +1521,16 @@ export type ArchetypeTrendsView = {
  */
 export type ArchetypesChanged = Record<string, never>;
 
+/**
+ *  A card or deck image, from the same three sources the app's deck views
+ *  use: the remote art crop, the downloaded file and the deck's own cover.
+ */
+export type Art = {
+	remote: string | null,
+	local: string | null,
+	custom: string | null,
+};
+
 /**  A match a manual league can link (0.x `AvailableMatchesController`). */
 export type AvailableMatchView = {
 	token: string,
@@ -1535,6 +1567,12 @@ export type BackgroundImport =
 "failed" | 
 /**  0.x's file is not an image the card takes, or is over 5 MiB. */
 "refused";
+
+/**
+ *  The year's banned and restricted cards, shown as the cards themselves.
+ *  Like `MagicYearCard`, the page holds the facts per year.
+ */
+export type BannedCard = Record<string, never>;
 
 /**
  *  `store::BestOf` as the UI sees it: an Arena match's kind (`"bo1"` or
@@ -1584,6 +1622,23 @@ export type CardArchetypeView = {
 	maindeck: boolean,
 	sideboard: boolean,
 	deckCount: number,
+};
+
+export type CardCountCard = {
+	name: string,
+	/**  Opening hands it was in, or times it was sided in. */
+	count: number,
+	/**  Out of: games with a known opening hand, or games after sideboarding. */
+	games: number,
+	/**  The art crop, faint behind the card. */
+	art: Art,
+	/**  The full card image, the card's centrepiece. */
+	image: Art,
+	/**
+	 *  Honourable mentions: the next cards by the same measure, best first,
+	 *  at most three.
+	 */
+	runnersUp: RunnerUp[],
 };
 
 /**  The card's summary numbers. */
@@ -1825,6 +1880,11 @@ export type ColourShareView = {
 	/**  Percent of the window's runs with known colours. */
 	share: number,
 	record: RecordView,
+};
+
+export type ComebacksCard = {
+	winsAfterMulligan: number,
+	quickestWinTurns: number | null,
 };
 
 export type CommandError = 
@@ -2082,6 +2142,34 @@ export type DeckArchetypeView = {
 	isCustom: boolean,
 };
 
+export type DeckCard = {
+	name: string,
+	formatLabel: string,
+	matches: number,
+	wins: number,
+	losses: number,
+	/**  0 to 100; only when 50 or more. */
+	winRate: number | null,
+	trophies: number,
+	art: Art,
+	/**
+	 *  Colour identity letters in WUBRG order, e.g. `["R", "W"]`; empty for
+	 *  colourless.
+	 */
+	colors: string[],
+	/**
+	 *  Up to five of the deck's key cards (its most played non-land cards),
+	 *  shown in a row.
+	 */
+	cards: KeyCard[],
+	/**
+	 *  The player's place among MyMTGO players of the deck's archetype by
+	 *  matches played (the API's percentiles, phase 4). Never by win rate:
+	 *  Wrapped ranks how much, not how well.
+	 */
+	rank: DeckRank | null,
+};
+
 /**
  *  A card of the registered deck the manual edit dialogs offer (0.x
  *  `DeckCardOption`).
@@ -2206,6 +2294,13 @@ export type DeckListView = {
 	unclassifiedCount: number,
 	/**  The header band when an archetype (or Unclassified) is chosen. */
 	archetypeHeader: ArchetypeHeaderView | null,
+};
+
+export type DeckRank = {
+	/**  The archetype's name, which may differ from the deck's own name. */
+	archetype: string,
+	/**  "Top N%", 1 to 100; the card only shows it when it is 25 or less. */
+	topPercent: number,
 };
 
 /**
@@ -2668,6 +2763,20 @@ export type ExportFormat = "csv" | "json";
  */
 export type ExportSource = { kind: "list"; list: number | null } | { kind: "decklist"; cards: ExportCard[] };
 
+export type FavouriteFormat = {
+	label: string,
+	matches: number,
+	/**  0 to 100. */
+	percent: number,
+	/**  The art of the player's most played deck in this format. */
+	art: Art,
+};
+
+/**  The features counted by `FeatureUsed`, one name each. */
+export type Feature = 
+/**  "Copy as image" anywhere in the app. */
+"copyImage";
+
 export type FileView = {
 	path: string,
 	size: number,
@@ -2769,11 +2878,31 @@ export type FormatOptionView = {
 	count: number,
 };
 
+export type FormatShare = {
+	label: string,
+	matches: number,
+	/**  0 to 100. */
+	percent: number,
+};
+
 /**  One option of the format switch (after Constructed and Limited). */
 export type FormatSwitchOptionView = {
 	/**  `modern`: the switch's value and `?format=`. */
 	key: string,
 	label: string,
+};
+
+/**
+ *  The player's format of choice front and centre, the rest as honourable
+ *  mentions.
+ */
+export type FormatsCard = {
+	favourite: FavouriteFormat,
+	/**
+	 *  The other formats played, most matches first; empty when the player
+	 *  stuck to one.
+	 */
+	mentions: FormatShare[],
 };
 
 export type GameChangeView = {
@@ -3437,6 +3566,12 @@ export type IntegrationsView = {
 	endstepStatus: EndstepStatusView,
 };
 
+/**  One card of a deck, by name, with its full card image. */
+export type KeyCard = {
+	name: string,
+	image: Art,
+};
+
 /**  The two Arena ladders. */
 export type LadderView = "constructed" | "limited";
 
@@ -3914,6 +4049,12 @@ export type LegacyImportInfo = {
 	running: boolean,
 };
 
+export type LimitedCard = {
+	drafts: number,
+	colourPair: string | null,
+	bestRecord: string | null,
+};
+
 /**  One Cards page row (0.x `BuildLimitedCardRows`). */
 export type LimitedCardRowView = {
 	catalogId: number,
@@ -4304,6 +4445,13 @@ export type LiveMatchView = {
 	token: string,
 	platform: PlatformView,
 };
+
+/**
+ *  The opening card: the year in Magic itself (sets, bans, Pro Tours,
+ *  qualifier seasons). The page holds those facts per year, so the card
+ *  carries nothing; it marks where the story starts.
+ */
+export type MagicYearCard = Record<string, never>;
 
 /**  The manage screen's query (route query, remembered by the UI). */
 export type ManageQueryInput = {
@@ -4812,6 +4960,15 @@ export type MatchUpdated = {
 	summary: MatchSummary,
 };
 
+export type MatchupCard = {
+	archetype: string,
+	matches: number,
+	wins: number,
+	/**  0 to 100. */
+	winRate: number,
+	look: ArchetypeLook,
+};
+
 /**  The Matchups drawer (0.x `GetArchetypeMatchupDetail`). */
 export type MatchupDetailView = {
 	matchWinRate: number,
@@ -4966,6 +5123,13 @@ export type MetagameTileView = {
 	cards: TileCardView[],
 };
 
+export type MostFacedCard = {
+	archetype: string,
+	matches: number,
+	uniqueArchetypes: number,
+	look: ArchetypeLook,
+};
+
 /**  Most picked (spec 4.8): the newest set's picks and the sets to switch to. */
 export type MostPickedView = {
 	/**  Newest first; the UI adds All. */
@@ -5004,6 +5168,35 @@ export type MtgrReplayView = {
 	cards: MtgrReplayCard[],
 	/**  Each printing of those cards, so a card shows the printing played. */
 	printings: MtgrReplayPrinting[],
+};
+
+/**
+ *  The player's MVP: the card with the highest personal impact (the API's
+ *  Impact measure, made personal): the player's win rate in games they cast
+ *  it, minus their win rate in all games with the decks that ran it.
+ */
+export type MvpCardCard = {
+	name: string,
+	/**  Times cast. */
+	cast: number,
+	/**  Games it was cast in. */
+	games: number,
+	/**  Win rate in games where it was cast; only when 50 or more. */
+	winRate: number | null,
+	/**
+	 *  Percentage points the card added, always above 0 (the card is not
+	 *  made otherwise).
+	 */
+	impact: number,
+	/**  The art crop, faint behind the card. */
+	art: Art,
+	/**  The full card image, the card's centrepiece. */
+	image: Art,
+	/**
+	 *  Honourable mentions: the next cards by the same measure, best first,
+	 *  at most three.
+	 */
+	runnersUp: RunnerUp[],
 };
 
 /**  One matchup note (0.x `ArchetypeNoteData`). */
@@ -5412,6 +5605,14 @@ export type PlatformContextView = {
 /**  `store::Platform` as the UI sees it (`"mtgo"`, `"arena"` or `"endstep"`). */
 export type PlatformView = "mtgo" | "arena" | "endstep";
 
+export type PlayDrawCard = {
+	/**  The better side; the card only celebrates. */
+	side: PlaySide,
+	/**  0 to 100; the card is only made when it is 50 or more. */
+	winRate: number,
+	games: number,
+};
+
 /**  On the play or on the draw (0.x `card_stats_play_draw`). */
 export type PlayDrawKey = "play" | "draw";
 
@@ -5429,6 +5630,25 @@ export type PlayDrawView = {
 	otdRate: number,
 	/**  Games whose play or draw is known. */
 	playDrawGames: number,
+};
+
+export type PlayPeriod = 
+/**  5am to noon. */
+"morning" | 
+/**  Noon to 5pm. */
+"afternoon" | 
+/**  5pm to 10pm. */
+"evening" | 
+/**  10pm to 5am. */
+"night";
+
+export type PlaySide = "play" | "draw";
+
+export type PlayerType = "grinder" | "deckLoyalist" | "comebackKid" | "limitedLover" | "formatExplorer" | "allRounder";
+
+export type PlayerTypeCard = {
+	label: PlayerType,
+	pills: string[],
 };
 
 export type PoolCardView = {
@@ -5931,6 +6151,17 @@ export type RevealedCard = {
 	quantity: number,
 };
 
+/**
+ *  The archetype that beat the player most often. It carries no win rate:
+ *  the card celebrates the wins, never the losing record.
+ */
+export type RivalCard = {
+	archetype: string,
+	matches: number,
+	wins: number,
+	look: ArchetypeLook,
+};
+
 /**  A match's deck, for the archetype Matches tab's Deck column. */
 export type RowDeckView = {
 	token: string,
@@ -6052,6 +6283,15 @@ export type RunSource =
 "imported";
 
 export type RunStateView = "active" | "complete" | "partial" | "dropped";
+
+/**
+ *  A card just behind the one a card features: its name and its number by the
+ *  same measure (impact points, opening hands or times sided in).
+ */
+export type RunnerUp = {
+	name: string,
+	value: number,
+};
 
 /**  One saved query; the name is its key. */
 export type SavedQuery = {
@@ -6250,6 +6490,11 @@ export type Settings = {
 	 *  a settings save keeps the stored value.
 	 */
 	endstepEnabled: boolean,
+	/**
+	 *  "Share anonymous usage data" (usage analytics spec, default on):
+	 *  off, `usage::track` sends nothing. Offline mode stops it too.
+	 */
+	shareUsage: boolean,
 };
 
 /**  Settings were stored (by any window). Replace the cached settings. */
@@ -6476,6 +6721,15 @@ export type TopMatchupView = {
 	count: number,
 };
 
+export type Totals = {
+	matches: number,
+	games: number,
+	wins: number,
+	losses: number,
+	draws: number,
+	hours: number,
+};
+
 /**
  *  A tournament card's own numbers (event overlay spec 7). Unknown values
  *  are `null`, never guessed.
@@ -6577,6 +6831,13 @@ export type TrackerRestarting = {
 	reason: string,
 };
 
+export type TrophiesCard = {
+	leagueTrophies: number,
+	leagueRuns: number,
+	top8s: number,
+	bestFinish: string | null,
+};
+
 /**  The main deck cards of one type. */
 export type TypeCountView = {
 	type: string,
@@ -6645,6 +6906,17 @@ export type UpdateStatusChanged = {
 	status: UpdateStatus,
 };
 
+/**  A usage event: the only things the app ever counts. */
+export type UsageEvent = 
+/**  Once per launch, after startup. */
+{ kind: "appStarted" } | 
+/**  A route change; `page` is the route's name. */
+{ kind: "pageViewed"; page: string } | 
+/**  A feature was used. */
+{ kind: "featureUsed"; feature: Feature } | 
+/**  A Wrapped card was copied as an image; `card` is its kind only. */
+{ kind: "wrappedCardCopied"; card: WrappedCardKind };
+
 /**  One list of the edit page. */
 export type VariantView = {
 	list: number,
@@ -6674,6 +6946,27 @@ export type WhatsNewAnswer =
  */
 "wait" | "nothing";
 
+export type WhenYouPlayCard = {
+	/**  0 is Monday. */
+	peakWeekday: number,
+	/**  0 to 23, local time. */
+	peakHour: number,
+	/**  1 to 12. */
+	busiestMonth: number,
+	/**  Matches started in each local hour, 24 entries. */
+	byHour: number[],
+	/**
+	 *  The part of the day with the most matches (`when::play_period`); the
+	 *  card's scene and name.
+	 */
+	period: PlayPeriod,
+	/**
+	 *  An average Saturday or Sunday beat an average weekday
+	 *  (`when::prefers_weekends`).
+	 */
+	weekends: boolean,
+};
+
 export type WinLossView = {
 	wins: number,
 	losses: number,
@@ -6685,6 +6978,105 @@ export type WinRateDeltaView = {
 	previousTotal: number,
 	/**  `None` for all time and for an empty previous window. */
 	delta: number | null,
+};
+
+export type WrapCard = Record<string, never>;
+
+export type WrappedBundle = {
+	version: number,
+	year: number,
+	window: YearWindow,
+	builtAtMs: number,
+	/**
+	 *  The player's first MyMTGO Wrapped: the opening card says it may look
+	 *  light.
+	 */
+	firstYear: boolean,
+	totals: Totals,
+	cards: WrappedCard[],
+};
+
+/**  One card of the story, tagged by `kind`. */
+export type WrappedCard = { kind: "magicYear" } | { kind: "banned" } | {
+	kind: "yearInNumbers",
+} & YearInNumbersCard | {
+	kind: "formats",
+} & FormatsCard | {
+	kind: "whenYouPlay",
+} & WhenYouPlayCard | {
+	kind: "deckOfYear",
+} & DeckCard | {
+	kind: "bestDeck",
+} & DeckCard | {
+	kind: "mvpCard",
+} & MvpCardCard | {
+	kind: "openingHand",
+} & CardCountCard | {
+	kind: "sideboardHero",
+} & CardCountCard | {
+	kind: "mostFaced",
+} & MostFacedCard | {
+	kind: "bestMatchup",
+} & MatchupCard | {
+	kind: "toughestRival",
+} & RivalCard | {
+	kind: "comebacks",
+} & ComebacksCard | {
+	kind: "playDraw",
+} & PlayDrawCard | {
+	kind: "trophies",
+} & TrophiesCard | {
+	kind: "limited",
+} & LimitedCard | {
+	kind: "playerType",
+} & PlayerTypeCard | { kind: "wrap" };
+
+/**
+ *  The kinds of Wrapped card, as the UI names them (`WrappedCard`'s `kind`
+ *  tag). A closed list, so nothing but a card kind is ever sent. The UI
+ *  passes `card.kind` straight in, so a new card kind that is missing here
+ *  fails the type check.
+ */
+export type WrappedCardKind = "magicYear" | "banned" | "yearInNumbers" | "formats" | "whenYouPlay" | "deckOfYear" | "bestDeck" | "mvpCard" | "openingHand" | "sideboardHero" | "mostFaced" | "bestMatchup" | "toughestRival" | "comebacks" | "playDraw" | "trophies" | "limited" | "playerType" | "wrap";
+
+/**  What the Wrapped page and the dashboard card read. */
+export type WrappedState = {
+	/**  The Wrapped year shown now; `None` outside December. */
+	year: number | null,
+	/**  The player closed this year's dashboard card. */
+	dismissed: boolean,
+	/**
+	 *  This year's bundle; `None` below the 30-match floor, and always
+	 *  `None` when `year` is.
+	 */
+	bundle: WrappedBundle | null,
+};
+
+export type YearInNumbersCard = {
+	matches: number,
+	games: number,
+	hours: number,
+	daysPlayed: number,
+	/**
+	 *  Matches started on each local day of the counted year, 1 January
+	 *  first, one entry per day up to 30 November: the card's activity grid.
+	 */
+	byDay: number[],
+	/**
+	 *  The player's place among MyMTGO players by matches played, as a
+	 *  "top N%" (1 to 100). Set from the API's percentiles (phase 4); the
+	 *  card only shows it when it is 50 or less.
+	 */
+	topPercent: number | null,
+};
+
+/**
+ *  The counted year: from 1 January (inclusive) to 1 December (exclusive),
+ *  local midnights, as UTC milliseconds.
+ */
+export type YearWindow = {
+	startMs: number,
+	endMs: number,
 };
 
 export type ZoneDiffView = {

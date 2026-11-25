@@ -74,6 +74,18 @@ pub fn action_for(endstep_enabled: bool, installed_before: bool) -> HostAction {
     }
 }
 
+/// Set to `1` to let a debug build register the Endstep helper. Off by
+/// default: the browsers know one helper per user, so a dev build that
+/// registered its own would take Endstep captures away from the installed
+/// app until the installed app starts again.
+pub const DEV_REGISTER_ENV: &str = "MYMTGO_DEV_ENDSTEP";
+
+/// Whether this build may touch the browser registration: always for a
+/// release build, only with `MYMTGO_DEV_ENDSTEP=1` for a debug build.
+pub fn may_register(debug_build: bool, dev_register_env: Option<&str>) -> bool {
+    !debug_build || dev_register_env == Some("1")
+}
+
 /// Whether the helper folder (`<data dir>/endstep`) exists: an install, by
 /// this build or an earlier one, has run.
 pub fn helper_installed_before(data_dir: &Path) -> bool {
@@ -110,7 +122,16 @@ pub fn spawn_sync(
             let one_at_a_time = HOST_LOCK
                 .lock()
                 .unwrap_or_else(|poisoned| poisoned.into_inner());
-            match action_for(stored_enabled(&db_path), helper_installed_before(&data_dir)) {
+            let env = std::env::var(DEV_REGISTER_ENV).ok();
+            let action = if may_register(cfg!(debug_assertions), env.as_deref()) {
+                action_for(stored_enabled(&db_path), helper_installed_before(&data_dir))
+            } else {
+                tracing::info!(
+                    "debug build: the Endstep helper is not registered (set {DEV_REGISTER_ENV}=1)"
+                );
+                HostAction::Nothing
+            };
+            match action {
                 HostAction::Install => match install(&data_dir) {
                     Ok(installed) => {
                         helper_missing
@@ -460,6 +481,15 @@ fn write_registry(key: &str, _manifest_path: &Path) -> Result<(), String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_debug_build_registers_the_helper_only_when_asked() {
+        assert!(may_register(false, None));
+        assert!(may_register(false, Some("0")));
+        assert!(!may_register(true, None));
+        assert!(!may_register(true, Some("0")));
+        assert!(may_register(true, Some("1")));
+    }
     use fixture_tools::TestDir;
 
     fn file_targets(dir: &TestDir) -> Vec<Target> {

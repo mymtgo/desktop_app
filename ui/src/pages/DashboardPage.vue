@@ -3,6 +3,7 @@ import { LayoutDashboard } from 'lucide-vue-next'
 import { computed } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import BreakdownCard from '@/components/dashboard/BreakdownCard.vue'
+import DashboardWrappedCard from '@/components/dashboard/DashboardWrappedCard.vue'
 import LastSessionCard from '@/components/dashboard/LastSessionCard.vue'
 import LeagueCard from '@/components/dashboard/LeagueCard.vue'
 import LeagueResultsCard from '@/components/dashboard/LeagueResultsCard.vue'
@@ -25,6 +26,7 @@ import { hasFeature } from '@/lib/platformFeatures'
 import { useHomeDashboard, useLegacyImport, useStatus } from '@/lib/queries'
 import { firstRunState } from '@/lib/status'
 import { normalizeTimeframe } from '@/lib/timeframes'
+import { useWrapped } from '@/lib/wrapped/useWrapped'
 
 /**
  * The home page (dashboard redesign spec): one fixed page of cards for the
@@ -48,6 +50,9 @@ const leagues = computed(() => hasFeature(platform.value, 'leagues'))
 const choices = computed(() => formatChoices(dashboard.value?.formats ?? [], platform.value))
 // Arena hides the switch once the dashboard shows the account has one format.
 const formatSwitch = computed(() => !dashboard.value || showFormatSwitch(dashboard.value.formats, platform.value))
+
+// This year's Wrapped, above Results while it is out (Wrapped spec).
+const { bundle: wrapped, dismissed: wrappedDismissed, dismiss: dismissWrapped } = useWrapped()
 
 const { data: status } = useStatus()
 const { data: legacy } = useLegacyImport()
@@ -108,6 +113,7 @@ function chooseFormat(value: string) {
     </div>
 
     <div v-else class="grid grid-cols-1 items-start gap-4 lg:grid-cols-3">
+      <DashboardWrappedCard v-if="wrapped && !wrappedDismissed" class="lg:col-span-3" :bundle="wrapped" @dismiss="dismissWrapped" />
       <div class="flex flex-col gap-4 lg:col-span-2">
         <ResultsCard
           v-if="dashboard.results"

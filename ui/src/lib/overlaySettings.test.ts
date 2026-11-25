@@ -62,6 +62,7 @@ function settings(overrides: Partial<Settings> = {}): Settings {
   return {
     logFolder: null,
     closeToTray: true,
+    shareUsage: true,
     mtgoDataFolder: null,
     hideArchivedDecks: true,
     decksPerPage: 12,

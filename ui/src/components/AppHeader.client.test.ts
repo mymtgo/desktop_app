@@ -12,6 +12,7 @@ const state = vi.hoisted(() => ({
   context: { current: 'mtgo', mtgo: true, arena: false, switchable: false } as PlatformContextView,
   switchedPlatforms: [] as string[],
   info: { productName: 'Qapp', prerelease: true } as { productName: string; prerelease: boolean } | null,
+  wrapped: null as { year: number } | null,
 }))
 
 vi.mock('vue-router', async () => {
@@ -48,6 +49,7 @@ vi.mock('@/composables/usePlatformContext', () => ({
     },
   }),
 }))
+vi.mock('@/lib/wrapped/useWrapped', () => ({ useWrapped: () => ({ bundle: ref(state.wrapped) }) }))
 vi.mock('@/composables/useToast', () => ({ useToast: () => ({ add: () => {} }) }))
 // The menu as plain elements: the fake renderer has no portal or popper.
 vi.mock('@/components/ui/dropdown-menu', async () => {
@@ -76,6 +78,7 @@ beforeEach(() => {
   state.context = { current: 'mtgo', mtgo: true, arena: false, endstep: false, switchable: false }
   state.switchedPlatforms = []
   state.info = { productName: 'Qapp', prerelease: true }
+  state.wrapped = null
 })
 
 function mount() {
@@ -83,6 +86,22 @@ function mount() {
   expect(mounted.warnings).toEqual([])
   return mounted
 }
+
+describe('the header Wrapped link', () => {
+  const wrappedLinks = (root: Parameters<typeof findAll>[0]) =>
+    findAll(root, (node) => node.props['data-wrapped-link'] !== undefined)
+
+  it('sits after the last section while a bundle is out', () => {
+    state.wrapped = { year: 2026 }
+    const links = wrappedLinks(mount().root)
+    expect(links).toHaveLength(1)
+    expect(textOf(links[0]!)).toContain('2026 Wrapped')
+  })
+
+  it('is not there without a bundle, dev builds included', () => {
+    expect(wrappedLinks(mount().root)).toHaveLength(0)
+  })
+})
 
 describe('the header account switcher', () => {
   it('shows nothing without a current account', () => {
@@ -182,8 +201,15 @@ describe('the top nav (issue #332)', () => {
 })
 
 describe('the platform context', () => {
+  // The platform's sections; the Wrapped link is tested on its own.
   const navLabels = () =>
-    findAll(mount().root, (node) => node.tag === 'a' && String(node.props.class).includes('rounded-md border px-3'))
+    findAll(
+      mount().root,
+      (node) =>
+        node.tag === 'a' &&
+        String(node.props.class).includes('rounded-md border px-3') &&
+        node.props['data-wrapped-link'] === undefined,
+    )
       .map((node) => textOf(node).trim())
 
   it('the mtgo nav has every page and Import', () => {

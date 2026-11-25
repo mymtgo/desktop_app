@@ -1,0 +1,112 @@
+---
+source: crates/wrapped/src/story.rs
+expression: "readable(&profiles::limited())"
+---
+{
+  "builtAtMs": 1796230800000,
+  "cards": [
+    {
+      "kind": "magicYear"
+    },
+    {
+      "kind": "banned"
+    },
+    {
+      "byDay": "334 days, 60 with matches, 60 matches, busiest day 1",
+      "daysPlayed": 60,
+      "games": 140,
+      "hours": 40,
+      "kind": "yearInNumbers",
+      "matches": 60,
+      "topPercent": null
+    },
+    {
+      "favourite": {
+        "art": {
+          "custom": null,
+          "local": null,
+          "remote": null
+        },
+        "label": "Limited",
+        "matches": 60,
+        "percent": 100
+      },
+      "kind": "formats",
+      "mentions": []
+    },
+    {
+      "busiestMonth": 5,
+      "byHour": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        20,
+        20,
+        20,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "kind": "whenYouPlay",
+      "peakHour": 9,
+      "peakWeekday": 5,
+      "period": "morning",
+      "weekends": true
+    },
+    {
+      "bestFinish": null,
+      "kind": "trophies",
+      "leagueRuns": 1,
+      "leagueTrophies": 1,
+      "top8s": 0
+    },
+    {
+      "bestRecord": "3-0",
+      "colourPair": "Selesnya",
+      "drafts": 6,
+      "kind": "limited"
+    },
+    {
+      "kind": "playerType",
+      "label": "limitedLover",
+      "pills": [
+        "6 drafts",
+        "Selesnya",
+        "3-0"
+      ]
+    },
+    {
+      "kind": "wrap"
+    }
+  ],
+  "firstYear": true,
+  "totals": {
+    "draws": 0,
+    "games": 140,
+    "hours": 40,
+    "losses": 20,
+    "matches": 60,
+    "wins": 40
+  },
+  "version": 1,
+  "window": {
+    "endMs": 1796112000000,
+    "startMs": 1767254400000
+  },
+  "year": 2026
+}

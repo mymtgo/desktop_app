@@ -9,6 +9,7 @@ import {
   Layers2,
   List,
   Settings,
+  Sparkles,
   Swords,
   Trophy,
 } from 'lucide-vue-next'
@@ -24,6 +25,7 @@ import { navItemActive } from '@/lib/appNav'
 import { errorMessage, unwrap } from '@/lib/commands'
 import type { Feature } from '@/lib/platformFeatures'
 import { useAccounts, useAppInfo } from '@/lib/queries'
+import { useWrapped } from '@/lib/wrapped/useWrapped'
 
 const route = useRoute()
 const router = useRouter()
@@ -71,6 +73,10 @@ const allNav: { label: string; icon: Component; to: string; feature?: Feature }[
 // What the current platform has no data for is left out (arena spec section 15).
 const nav = computed(() => allNav.filter((item) => item.feature === undefined || hasFeature(item.feature)))
 
+// This year's Wrapped, after Cards while it is out (December).
+const { bundle: wrapped } = useWrapped()
+const wrappedLabel = computed(() => (wrapped.value ? `${wrapped.value.year} Wrapped` : null))
+
 /** A section stays active on its sub-pages (a deck's pages, its matches included, sit under /decks). */
 function isActive(to: string): boolean {
   return navItemActive(route.path, to)
@@ -101,6 +107,20 @@ function isActive(to: string): boolean {
         >
           <component :is="item.icon" class="size-4" />
           {{ item.label }}
+        </RouterLink>
+        <RouterLink
+          v-if="wrappedLabel"
+          data-wrapped-link
+          to="/wrapped"
+          class="relative inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors"
+          :class="
+            isActive('/wrapped')
+              ? 'border-black text-white shadow-[inset_0_0_12px_-2px_rgb(56_189_248_/_35%)] outline-[1px] outline-white/10'
+              : 'bevel border-black/60 text-white shadow-[inset_0_0_10px_-3px_rgb(56_189_248_/_30%)] hover:bg-accent/50'
+          "
+        >
+          <Sparkles class="size-4 text-sky-300/80" />
+          {{ wrappedLabel }}
         </RouterLink>
       </nav>
     </div>

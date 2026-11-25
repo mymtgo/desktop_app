@@ -4,13 +4,19 @@
 import { Copy, Download, Loader2 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { useScreenshot } from '@/composables/useScreenshot'
+import { trackUsage } from '@/lib/usage'
 
 const props = defineProps<{ target: HTMLElement | null; fileName: string }>()
+// After a copy starts, for a page that counts what was copied.
+const emit = defineEmits<{ copied: [] }>()
 
 const { capture, capturing, save, saving, saveOffered } = useScreenshot()
 
 function copy() {
-  if (props.target) void capture(props.target, props.fileName)
+  if (!props.target) return
+  void capture(props.target, props.fileName)
+  trackUsage({ kind: 'featureUsed', feature: 'copyImage' })
+  emit('copied')
 }
 </script>
 

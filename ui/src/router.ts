@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import CardsPage from '@/pages/CardsPage.vue'
 import DeckLayout from '@/layouts/DeckLayout.vue'
 import DashboardPage from '@/pages/DashboardPage.vue'
+import WrappedPage from '@/pages/WrappedPage.vue'
 import DecksPage from '@/pages/DecksPage.vue'
 import ArchetypeCardStatsTab from '@/pages/decks/archetypes/CardStatsTab.vue'
 import ArchetypeMatchesTab from '@/pages/decks/archetypes/MatchesTab.vue'
@@ -38,6 +39,7 @@ import MetagamePage from '@/pages/metagame/MetagamePage.vue'
 import OpponentsPage from '@/pages/OpponentsPage.vue'
 import SettingsLayout from '@/layouts/SettingsLayout.vue'
 import AccountPage from '@/pages/settings/AccountPage.vue'
+import { trackUsage } from '@/lib/usage'
 import AdvancedPage from '@/pages/settings/AdvancedPage.vue'
 import ArchivesPage from '@/pages/settings/ArchivesPage.vue'
 import GeneralPage from '@/pages/settings/GeneralPage.vue'
@@ -65,6 +67,7 @@ export const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'dashboard', component: DashboardPage },
+    { path: '/wrapped', name: 'wrapped', component: WrappedPage },
     { path: '/matches', name: 'matches', component: MatchesPage },
     { path: '/matches/:token', name: 'match', component: MatchPage },
     { path: '/decks', name: 'decks', component: DecksPage },
@@ -196,3 +199,9 @@ router.beforeEach(async (to) => {
   }
 })
 
+// Anonymous usage counts (usage analytics spec): one page view per route,
+// not per filter or query change on the same page.
+router.afterEach((to, from, failure) => {
+  if (failure || typeof to.name !== 'string' || to.name === from.name) return
+  trackUsage({ kind: 'pageViewed', page: to.name })
+})

@@ -12,6 +12,32 @@
 
 use std::path::{Path, PathBuf};
 
+/// The identifier of a release build. It names the data folder, the
+/// keychain service and the single instance lock, and never changes.
+pub const RELEASE_IDENTIFIER: &str = "com.mymtgo.desktop";
+
+/// The identifier of a debug build (`tauri dev`, `cargo run`): its own data
+/// folder, keychain entries and single instance lock, so a dev build never
+/// migrates, signs in over or blocks the installed app on the same machine.
+pub const DEV_IDENTIFIER: &str = "com.mymtgo.desktop.dev";
+
+/// The launch at login entry's name in a debug build (a release build's is
+/// the product name).
+pub const DEV_LAUNCH_NAME: &str = "MyMTGO Dev";
+
+/// The identifier this build runs under. `tauri.conf.json` holds the release
+/// one; `lib.rs` puts this one in the config before the app is built.
+pub const APP_IDENTIFIER: &str = identifier_for(cfg!(debug_assertions));
+
+/// The identifier for a debug or a release build.
+pub const fn identifier_for(debug_build: bool) -> &'static str {
+    if debug_build {
+        DEV_IDENTIFIER
+    } else {
+        RELEASE_IDENTIFIER
+    }
+}
+
 /// The product name of every beta up to the rename. Written only here and in
 /// the installer hook (`app/installer/hooks.nsh`).
 pub const BETA_PRODUCT_NAME: &str = "MyMTGO Beta";
@@ -128,6 +154,14 @@ pub fn fix_linux_autostart(app: &tauri::AppHandle) {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_debug_build_has_its_own_identifier() {
+        assert_eq!(identifier_for(false), "com.mymtgo.desktop");
+        assert_eq!(identifier_for(true), "com.mymtgo.desktop.dev");
+        // Tests are debug builds.
+        assert_eq!(APP_IDENTIFIER, DEV_IDENTIFIER);
+    }
     use std::cell::Cell;
 
     #[test]

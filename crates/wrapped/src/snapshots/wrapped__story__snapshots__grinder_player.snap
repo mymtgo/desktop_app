@@ -1,0 +1,387 @@
+---
+source: crates/wrapped/src/story.rs
+expression: "readable(&profiles::grinder())"
+---
+{
+  "builtAtMs": 1796220000000,
+  "cards": [
+    {
+      "kind": "magicYear"
+    },
+    {
+      "kind": "banned"
+    },
+    {
+      "byDay": "334 days, 334 with matches, 600 matches, busiest day 2",
+      "daysPlayed": 334,
+      "games": 1220,
+      "hours": 446,
+      "kind": "yearInNumbers",
+      "matches": 600,
+      "topPercent": null
+    },
+    {
+      "favourite": {
+        "art": {
+          "custom": null,
+          "local": null,
+          "remote": "https://cards.example.test/art/Boros Energy.jpg"
+        },
+        "label": "Modern",
+        "matches": 400,
+        "percent": 67
+      },
+      "kind": "formats",
+      "mentions": [
+        {
+          "label": "Pauper",
+          "matches": 150,
+          "percent": 25
+        },
+        {
+          "label": "Limited",
+          "matches": 50,
+          "percent": 8
+        }
+      ]
+    },
+    {
+      "busiestMonth": 1,
+      "byHour": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "kind": "whenYouPlay",
+      "peakHour": 19,
+      "peakWeekday": 4,
+      "period": "evening",
+      "weekends": true
+    },
+    {
+      "art": {
+        "custom": null,
+        "local": null,
+        "remote": "https://cards.example.test/art/Boros Energy.jpg"
+      },
+      "cards": [
+        {
+          "image": {
+            "custom": null,
+            "local": null,
+            "remote": "https://cards.example.test/full/Ragavan, Nimble Pilferer.jpg"
+          },
+          "name": "Ragavan, Nimble Pilferer"
+        },
+        {
+          "image": {
+            "custom": null,
+            "local": null,
+            "remote": "https://cards.example.test/full/Guide of Souls.jpg"
+          },
+          "name": "Guide of Souls"
+        },
+        {
+          "image": {
+            "custom": null,
+            "local": null,
+            "remote": "https://cards.example.test/full/Ocelot Pride.jpg"
+          },
+          "name": "Ocelot Pride"
+        },
+        {
+          "image": {
+            "custom": null,
+            "local": null,
+            "remote": "https://cards.example.test/full/Galvanic Discharge.jpg"
+          },
+          "name": "Galvanic Discharge"
+        },
+        {
+          "image": {
+            "custom": null,
+            "local": null,
+            "remote": "https://cards.example.test/full/Phlage, Titan of Fire's Fury.jpg"
+          },
+          "name": "Phlage, Titan of Fire's Fury"
+        }
+      ],
+      "colors": [
+        "R",
+        "W"
+      ],
+      "formatLabel": "Modern",
+      "kind": "deckOfYear",
+      "losses": 141,
+      "matches": 400,
+      "name": "Boros Energy",
+      "rank": null,
+      "trophies": 2,
+      "winRate": 63,
+      "wins": 251
+    },
+    {
+      "art": {
+        "custom": null,
+        "local": null,
+        "remote": "https://cards.example.test/art/Phlage, Titan of Fire's Fury.jpg"
+      },
+      "cast": 225,
+      "games": 150,
+      "image": {
+        "custom": null,
+        "local": null,
+        "remote": "https://cards.example.test/full/Phlage, Titan of Fire's Fury.jpg"
+      },
+      "impact": 10,
+      "kind": "mvpCard",
+      "name": "Phlage, Titan of Fire's Fury",
+      "runnersUp": [
+        {
+          "name": "Ragavan, Nimble Pilferer",
+          "value": 5
+        },
+        {
+          "name": "Galvanic Discharge",
+          "value": 3
+        },
+        {
+          "name": "Ocelot Pride",
+          "value": 2
+        }
+      ],
+      "winRate": 70
+    },
+    {
+      "art": {
+        "custom": null,
+        "local": null,
+        "remote": "https://cards.example.test/art/Guide of Souls.jpg"
+      },
+      "count": 480,
+      "games": 780,
+      "image": {
+        "custom": null,
+        "local": null,
+        "remote": "https://cards.example.test/full/Guide of Souls.jpg"
+      },
+      "kind": "openingHand",
+      "name": "Guide of Souls",
+      "runnersUp": [
+        {
+          "name": "Ocelot Pride",
+          "value": 431
+        },
+        {
+          "name": "Galvanic Discharge",
+          "value": 402
+        },
+        {
+          "name": "Ragavan, Nimble Pilferer",
+          "value": 366
+        }
+      ]
+    },
+    {
+      "art": {
+        "custom": null,
+        "local": null,
+        "remote": "https://cards.example.test/art/Wear // Tear.jpg"
+      },
+      "count": 71,
+      "games": 400,
+      "image": {
+        "custom": null,
+        "local": null,
+        "remote": "https://cards.example.test/full/Wear // Tear.jpg"
+      },
+      "kind": "sideboardHero",
+      "name": "Wear // Tear",
+      "runnersUp": [
+        {
+          "name": "Blood Moon",
+          "value": 58
+        },
+        {
+          "name": "Surgical Extraction",
+          "value": 32
+        },
+        {
+          "name": "Wrath of the Skies",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "archetype": "Domain Zoo",
+      "kind": "mostFaced",
+      "look": {
+        "art": {
+          "custom": null,
+          "local": null,
+          "remote": "https://cards.example.test/art/Domain Zoo.jpg"
+        },
+        "cards": [
+          {
+            "image": {
+              "custom": null,
+              "local": null,
+              "remote": "https://cards.example.test/full/Scion of Draco.jpg"
+            },
+            "name": "Scion of Draco"
+          },
+          {
+            "image": {
+              "custom": null,
+              "local": null,
+              "remote": "https://cards.example.test/full/Territorial Kavu.jpg"
+            },
+            "name": "Territorial Kavu"
+          }
+        ],
+        "colors": [
+          "R",
+          "G",
+          "W"
+        ]
+      },
+      "matches": 138,
+      "uniqueArchetypes": 4
+    },
+    {
+      "archetype": "Domain Zoo",
+      "kind": "bestMatchup",
+      "look": {
+        "art": {
+          "custom": null,
+          "local": null,
+          "remote": "https://cards.example.test/art/Domain Zoo.jpg"
+        },
+        "cards": [
+          {
+            "image": {
+              "custom": null,
+              "local": null,
+              "remote": "https://cards.example.test/full/Scion of Draco.jpg"
+            },
+            "name": "Scion of Draco"
+          },
+          {
+            "image": {
+              "custom": null,
+              "local": null,
+              "remote": "https://cards.example.test/full/Territorial Kavu.jpg"
+            },
+            "name": "Territorial Kavu"
+          }
+        ],
+        "colors": [
+          "R",
+          "G",
+          "W"
+        ]
+      },
+      "matches": 138,
+      "winRate": 75,
+      "wins": 104
+    },
+    {
+      "archetype": "Eldrazi Ramp",
+      "kind": "toughestRival",
+      "look": {
+        "art": {
+          "custom": null,
+          "local": null,
+          "remote": "https://cards.example.test/art/Eldrazi Ramp.jpg"
+        },
+        "cards": [
+          {
+            "image": {
+              "custom": null,
+              "local": null,
+              "remote": "https://cards.example.test/full/Thought-Knot Seer.jpg"
+            },
+            "name": "Thought-Knot Seer"
+          },
+          {
+            "image": {
+              "custom": null,
+              "local": null,
+              "remote": "https://cards.example.test/full/Ugin, the Spirit Dragon.jpg"
+            },
+            "name": "Ugin, the Spirit Dragon"
+          }
+        ],
+        "colors": []
+      },
+      "matches": 137,
+      "wins": 57
+    },
+    {
+      "kind": "comebacks",
+      "quickestWinTurns": 5,
+      "winsAfterMulligan": 62
+    },
+    {
+      "games": 550,
+      "kind": "playDraw",
+      "side": "draw",
+      "winRate": 61
+    },
+    {
+      "bestFinish": "Top 8, Modern Challenge, 14 Sep",
+      "kind": "trophies",
+      "leagueRuns": 3,
+      "leagueTrophies": 2,
+      "top8s": 1
+    },
+    {
+      "kind": "playerType",
+      "label": "grinder",
+      "pills": [
+        "600 matches",
+        "2 trophies",
+        "Boros Energy"
+      ]
+    },
+    {
+      "kind": "wrap"
+    }
+  ],
+  "firstYear": false,
+  "totals": {
+    "draws": 8,
+    "games": 1220,
+    "hours": 446,
+    "losses": 236,
+    "matches": 600,
+    "wins": 356
+  },
+  "version": 1,
+  "window": {
+    "endMs": 1796101200000,
+    "startMs": 1767243600000
+  },
+  "year": 2026
+}

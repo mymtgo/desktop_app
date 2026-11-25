@@ -1,0 +1,143 @@
+---
+source: crates/wrapped/src/story.rs
+expression: "readable(&profiles::light())"
+---
+{
+  "builtAtMs": 1796202000000,
+  "cards": [
+    {
+      "kind": "magicYear"
+    },
+    {
+      "kind": "banned"
+    },
+    {
+      "byDay": "334 days, 30 with matches, 30 matches, busiest day 1",
+      "daysPlayed": 30,
+      "games": 72,
+      "hours": 20,
+      "kind": "yearInNumbers",
+      "matches": 30,
+      "topPercent": null
+    },
+    {
+      "favourite": {
+        "art": {
+          "custom": null,
+          "local": null,
+          "remote": "https://cards.example.test/art/Mono Red Burn.jpg"
+        },
+        "label": "Modern",
+        "matches": 30,
+        "percent": 100
+      },
+      "kind": "formats",
+      "mentions": []
+    },
+    {
+      "busiestMonth": 3,
+      "byHour": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        30,
+        0,
+        0,
+        0
+      ],
+      "kind": "whenYouPlay",
+      "peakHour": 20,
+      "peakWeekday": 0,
+      "period": "evening",
+      "weekends": false
+    },
+    {
+      "art": {
+        "custom": null,
+        "local": null,
+        "remote": "https://cards.example.test/art/Mono Red Burn.jpg"
+      },
+      "cards": [
+        {
+          "image": {
+            "custom": null,
+            "local": null,
+            "remote": "https://cards.example.test/full/Lightning Bolt.jpg"
+          },
+          "name": "Lightning Bolt"
+        },
+        {
+          "image": {
+            "custom": null,
+            "local": null,
+            "remote": "https://cards.example.test/full/Goblin Guide.jpg"
+          },
+          "name": "Goblin Guide"
+        },
+        {
+          "image": {
+            "custom": null,
+            "local": null,
+            "remote": "https://cards.example.test/full/Monastery Swiftspear.jpg"
+          },
+          "name": "Monastery Swiftspear"
+        }
+      ],
+      "colors": [
+        "R"
+      ],
+      "formatLabel": "Modern",
+      "kind": "deckOfYear",
+      "losses": 11,
+      "matches": 30,
+      "name": "Mono Red Burn",
+      "rank": null,
+      "trophies": 0,
+      "winRate": 60,
+      "wins": 18
+    },
+    {
+      "kind": "playerType",
+      "label": "deckLoyalist",
+      "pills": [
+        "30 matches",
+        "Mono Red Burn"
+      ]
+    },
+    {
+      "kind": "wrap"
+    }
+  ],
+  "firstYear": true,
+  "totals": {
+    "draws": 1,
+    "games": 72,
+    "hours": 20,
+    "losses": 11,
+    "matches": 30,
+    "wins": 18
+  },
+  "version": 1,
+  "window": {
+    "endMs": 1796083200000,
+    "startMs": 1767225600000
+  },
+  "year": 2026
+}

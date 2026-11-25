@@ -15,7 +15,7 @@ describe('What\'s new in 1.4', () => {
     const mounted = mountFake(Page)
     expect(mounted.warnings).toEqual([])
     const text = textOf(mounted.root).replace(/\s+/g, ' ')
-    for (const feature of ['MyMTGO 1.4', 'New', 'MTG Arena', 'Endstep', 'Everywhere', 'Changes', 'Reporting problems', 'Showcase Challenges', 'strip under the card', 'live preview', 'instead of always saying CHALLENGER', 'dots sized by matches', 'last 7 days played', 'archetypes you played', '80% to 150%', 'Spark rank', 'second account behind', 'end on the clock', 'Restore brings it back', 'grey and dashed', 'says what it lists', 'github.com/mymtgo/desktop_app', 'exactly the size of the card', 'cumulative win rate line', 'Challenge or Qualifier']) {
+    for (const feature of ['MyMTGO 1.4', 'New', 'MTG Arena', 'Endstep', 'Everywhere', 'Changes', 'Reporting problems', 'Showcase Challenges', 'strip under the card', 'live preview', 'instead of always saying CHALLENGER', 'dots sized by matches', 'last 7 days played', 'archetypes you played', '80% to 150%', 'Spark rank', 'second account behind', 'end on the clock', 'Restore brings it back', 'grey and dashed', 'says what it lists', 'github.com/mymtgo/desktop_app', 'exactly the size of the card', 'cumulative win rate line', 'Challenge or Qualifier', 'MyMTGO Wrapped arrives on 1 December', 'Share anonymous usage data']) {
       expect(text).toContain(feature)
     }
     expect(text).not.toContain('\u2014')

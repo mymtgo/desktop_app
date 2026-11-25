@@ -44,9 +44,11 @@ pub mod summary;
 pub mod support;
 pub mod timezone;
 pub mod updates;
+pub mod usage;
 pub mod whats_new;
 pub mod window;
 pub mod worker_thread;
+pub mod wrapped;
 
 use std::path::Path;
 use std::sync::atomic::AtomicBool;
@@ -57,7 +59,6 @@ use tauri::{App, AppHandle, Manager, RunEvent};
 use crate::bridge::{Shared, lock};
 use crate::commands::{AppState, Startup};
 use crate::window::WindowPrefs;
-use tauri_plugin_autostart::MacosLauncher;
 
 /// The windows whose initial restore the window-state plugin skips: the
 /// overlays, the replay window and the data console. Their manager places them itself from the
@@ -108,10 +109,7 @@ pub fn run() {
         .plugin(tauri_plugin_single_instance::init(|app, _argv, _cwd| {
             show_main(app);
         }))
-        .plugin(tauri_plugin_autostart::init(
-            MacosLauncher::LaunchAgent,
-            None,
-        ))
+        .plugin(autostart())
         .plugin(window_state())
         .manage(WindowPrefs::default())
         .manage(archetypes::cache::ArchetypeCaches::default())
@@ -123,6 +121,7 @@ pub fn run() {
         .on_window_event(window::on_window_event)
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(usage_plugin())
         // Rust side only (`external::open_external`): no injected click
         // handler, and no capability grants the plugin's JS commands.
         .plugin(
@@ -208,6 +207,14 @@ pub fn run() {
             let close_to_tray = close_to_tray_at_start(&startup);
             app.manage(api_state(app, &startup));
             let tracking = matches!(startup, Startup::Ready(_));
+            // "Share anonymous usage data", off until the settings are read.
+            let share_usage = match &startup {
+                Startup::Ready(state) => commands::read_settings(state)
+                    .map(|settings| settings.share_usage)
+                    .unwrap_or(false),
+                _ => false,
+            };
+            app.manage(usage::UsageGate::new(share_usage));
             if let Startup::Ready(state) = &startup {
                 let settings = commands::read_settings(state);
                 if let Some(images) =
@@ -258,15 +265,47 @@ pub fn run() {
                 window::apply_interface_scale(app.handle(), settings.interface_scale);
             }
             updates::start_checking(app.handle().clone());
+            usage::track(app.handle(), &usage::UsageEvent::AppStarted);
             Ok(())
         })
-        .build(tauri::generate_context!())
+        .build(context())
         .expect("the app failed to start");
     app.run(|handle, event| {
         if let RunEvent::Exit = event {
             prepare_exit(handle);
         }
     });
+}
+
+/// Aptabase when a key was built in (usage analytics spec); otherwise an
+/// empty plugin, so a build without the key sends nothing.
+fn usage_plugin() -> tauri::plugin::TauriPlugin<tauri::Wry> {
+    match usage::app_key() {
+        Some(key) => tauri_plugin_aptabase::Builder::new(key).build(),
+        None => tauri::plugin::Builder::new("usage-off").build(),
+    }
+}
+
+/// Launch at login. A debug build names its entry `identity::DEV_LAUNCH_NAME`,
+/// so its switch never reads or replaces the installed app's entry, which is
+/// named after the product. macOS uses the plugin's default Launch Agent
+/// (`macos_launcher` exists only in macOS builds, so it is not called here).
+fn autostart() -> tauri::plugin::TauriPlugin<tauri::Wry> {
+    let builder = tauri_plugin_autostart::Builder::new();
+    if cfg!(debug_assertions) {
+        builder.app_name(identity::DEV_LAUNCH_NAME).build()
+    } else {
+        builder.build()
+    }
+}
+
+/// The Tauri context with this build's identifier: a debug build gets its own
+/// data folder, keychain service and single instance lock
+/// (`identity::APP_IDENTIFIER`).
+fn context() -> tauri::Context<tauri::Wry> {
+    let mut context = tauri::generate_context!();
+    context.config_mut().identifier = identity::APP_IDENTIFIER.to_string();
+    context
 }
 
 /// Whether closing the window hides it to the tray when the app starts.
@@ -576,7 +615,8 @@ mod tests {
     }
 
     // "Copy as image" (`html-to-image`) fetches each picture to inline it,
-    // so the card images the Metagame tiles show must be fetchable too.
+    // so the card images the Metagame tiles show must be fetchable too, and
+    // Wrapped's art, which loads through Scryfall's API redirects.
     #[test]
     fn fetches_reach_only_the_app_ipc_the_card_image_hosts_and_the_card_scheme() {
         let csp = config()["app"]["security"]["csp"]
@@ -590,7 +630,7 @@ mod tests {
             .expect("connect-src");
         assert_eq!(
             connect_src,
-            "connect-src 'self' ipc: http://ipc.localhost https://cards.scryfall.io https://cards.mymtgo.com card: http://card.localhost"
+            "connect-src 'self' ipc: http://ipc.localhost https://cards.scryfall.io https://api.scryfall.com https://cards.mymtgo.com card: http://card.localhost"
         );
     }
 

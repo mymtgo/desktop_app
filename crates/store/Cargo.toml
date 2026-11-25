@@ -13,6 +13,7 @@ decks.workspace = true
 game-detail.workspace = true
 arena-game.workspace = true
 arena-match.workspace = true
+wrapped.workspace = true
 mtgr.workspace = true
 endstep-capture.workspace = true
 endstep-protocol.workspace = true

@@ -2,6 +2,7 @@
 /** A page's name by route name. */
 export const PAGES: Record<string, string> = {
   dashboard: 'Dashboard',
+  wrapped: 'Wrapped',
   matches: 'Matches',
   match: 'Match',
   decks: 'Decks',

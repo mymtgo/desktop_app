@@ -64,6 +64,7 @@ mod sync_player;
 pub mod sync_sources;
 pub mod synced_sources;
 pub mod tournament_sync;
+pub mod wrapped_read;
 pub mod write;
 pub mod writer;
 

@@ -18,8 +18,9 @@ use sha2::{Digest, Sha256};
 use crate::api::random::random_bytes;
 use crate::bridge::lock;
 
-/// The keychain service every entry is stored under.
-pub const SERVICE: &str = "com.mymtgo.desktop";
+/// The keychain service every entry is stored under: the app identifier, so a
+/// dev build never reads or overwrites the installed app's sign-in.
+pub const SERVICE: &str = crate::identity::APP_IDENTIFIER;
 pub const API_KEY: &str = "api_key";
 pub const ACCESS_TOKEN: &str = "access_token";
 pub const REFRESH_TOKEN: &str = "refresh_token";

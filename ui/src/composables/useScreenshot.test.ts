@@ -18,7 +18,17 @@ const DATA_URL =
 /** A data URL whose length grows with `size`. */
 const pngOfSize = (size: number) => `data:image/png;base64,${btoa('x'.repeat(size * 3))}`
 
-const element = {} as HTMLElement
+/** A stand-in element that records its attributes. */
+function fakeElement() {
+  const attributes = new Set<string>()
+  return {
+    attributes,
+    setAttribute: (name: string) => void attributes.add(name),
+    removeAttribute: (name: string) => void attributes.delete(name),
+  }
+}
+
+const element = fakeElement() as unknown as HTMLElement
 
 function lastToast() {
   const { toasts } = useToast()
@@ -47,6 +57,24 @@ describe('useScreenshot (0.x useScreenshot, spec section 9)', () => {
     expect(lastToast()).toMatchObject({ type: 'success', title: 'Copied!', message: 'Screenshot copied to clipboard' })
     expect(shot.saveOffered.value).toBe(false)
     expect(shot.capturing.value).toBe(false)
+  })
+
+  it('marks the element as capturing only while it renders, so a watermark can show', async () => {
+    const target = fakeElement()
+    const seen: boolean[] = []
+    toPng.mockImplementation(async () => {
+      seen.push(target.attributes.has('data-capturing'))
+      return DATA_URL
+    })
+    const shot = useScreenshot({ writeImage: async () => {} })
+    await shot.capture(target as unknown as HTMLElement, 'wrapped')
+    expect(seen.length).toBeGreaterThan(0)
+    expect(seen.every(Boolean)).toBe(true)
+    expect(target.attributes.has('data-capturing')).toBe(false)
+
+    toPng.mockRejectedValue(new Error('draw failed'))
+    await shot.capture(target as unknown as HTMLElement, 'wrapped')
+    expect(target.attributes.has('data-capturing')).toBe(false)
   })
 
   it('captures again until the result stops changing and keeps the last', async () => {

@@ -1,9 +1,9 @@
 [workspace]
 resolver = "3"
-members = ["crates/mtgo-protocol", "crates/mtgo-match", "crates/fixture-tools", "crates/mtgo-log", "crates/store", "crates/tracker", "crates/log-player", "crates/release-tools", "crates/importer", "crates/decks", "crates/leagues", "crates/game-detail", "crates/mtgo-history", "crates/limited", "crates/mymtgo-api", "crates/sync-bundles", "crates/cards", "crates/overlay", "crates/replay", "crates/archetypes", "crates/support", "crates/arena-protocol", "crates/arena-match", "crates/arena-log", "crates/arena-game", "crates/mtgr", "crates/recorder", "crates/endstep-capture", "crates/endstep-host", "crates/endstep-protocol", "crates/endstep-match", "app"]
+members = ["crates/mtgo-protocol", "crates/mtgo-match", "crates/fixture-tools", "crates/mtgo-log", "crates/store", "crates/tracker", "crates/log-player", "crates/release-tools", "crates/importer", "crates/decks", "crates/leagues", "crates/game-detail", "crates/mtgo-history", "crates/limited", "crates/mymtgo-api", "crates/sync-bundles", "crates/cards", "crates/overlay", "crates/replay", "crates/archetypes", "crates/support", "crates/arena-protocol", "crates/arena-match", "crates/arena-log", "crates/arena-game", "crates/mtgr", "crates/recorder", "crates/endstep-capture", "crates/endstep-host", "crates/endstep-protocol", "crates/endstep-match", "crates/wrapped", "app"]
 
 [workspace.package]
-version = "1.4.0-rc.1"
+version = "1.4.0"
 edition = "2024"
 publish = false
 
@@ -51,6 +51,8 @@ tauri-plugin-window-state = "2.5"
 tauri-plugin-dialog = "2.8"
 tauri-plugin-updater = "2.13"
 tauri-plugin-opener = "2.7"
+# Anonymous usage counts (usage analytics spec, owner 2026-11-25).
+tauri-plugin-aptabase = "1.3"
 # Release candidates with unstable APIs: pinned exactly (spec 3).
 tauri-specta = { version = "=2.0.0-rc.25", features = ["derive", "typescript"] }
 specta = { version = "=2.0.0-rc.25", features = ["derive"] }
@@ -73,6 +75,7 @@ sync-bundles = { path = "crates/sync-bundles" }
 replay = { path = "crates/replay" }
 cards = { path = "crates/cards" }
 overlay = { path = "crates/overlay" }
+wrapped = { path = "crates/wrapped" }
 archetypes = { path = "crates/archetypes" }
 support = { path = "crates/support" }
 arena-protocol = { path = "crates/arena-protocol" }

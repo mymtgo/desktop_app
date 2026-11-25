@@ -11,6 +11,7 @@ import { Spinner } from '@/components/ui/spinner'
 import { Switch } from '@/components/ui/switch'
 import { commands, events, type PendingReports } from '@/bindings'
 import { useOfflineModeSwitch } from '@/composables/useOfflineMode'
+import { useSaveSettings } from '@/composables/useSaveSettings'
 import { useTauriEvents } from '@/composables/useTauriEvents'
 import {
   archetypeCatalogWarning,
@@ -21,11 +22,21 @@ import {
   showPendingMatches,
   submitPendingLabel,
 } from '@/lib/api'
+import { useSettings } from '@/lib/queries'
 
 // 0.x OfflineModeCard, with its warning while no downloaded archetype is
 // held (0.x `hasArchetypeCatalog`), and offline the archetype download
 // (`OfflineArchetypes`) that fixes it. The pending matches line and its submit button show only while match reports
 // are live (MATCH_REPORTS_LIVE, on since #9) and offline mode is off.
+// "Share anonymous usage data" (usage analytics spec): a stored setting,
+// on by default; offline mode stops it as well.
+const { data: settings } = useSettings()
+const { saving: savingUsage, save } = useSaveSettings()
+
+function setShareUsage(on: boolean) {
+  if (settings.value) void save({ ...settings.value, shareUsage: on })
+}
+
 const now = useNow({ scheduler: (update) => useIntervalFn(update, 60_000) })
 
 const blocked = computed(() => rejoinBlocked(state.value, now.value.getTime()))
@@ -110,6 +121,16 @@ onMounted(async () => {
         <Spinner v-if="submitting" />
         {{ submitPendingLabel(pending.count, submitting) }}
       </Button>
+    </div>
+    <div v-if="settings" class="flex items-center justify-between gap-4">
+      <div class="space-y-1">
+        <Label>Share anonymous usage data</Label>
+        <p class="text-sm text-muted-foreground">
+          Counts which pages and features get used, to help decide what to improve. No account, username, deck or match data is
+          ever sent, and nothing at all while offline mode is on.
+        </p>
+      </div>
+      <Switch :model-value="settings.shareUsage" :disabled="savingUsage" @update:model-value="setShareUsage" />
     </div>
     <Separator />
     <DataDisclosure />

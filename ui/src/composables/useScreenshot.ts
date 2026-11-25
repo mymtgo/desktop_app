@@ -49,7 +49,7 @@ async function renderStable(element: HTMLElement, options: Parameters<typeof toP
  * the clipboard, with 0.x's toasts. The bundled Mana face is embedded so
  * mana symbols draw in the image. When the clipboard refuses (WebKitGTK),
  * `saveOffered` turns on and `save()` writes the PNG through the save
- * dialog instead.
+ * dialog instead. The element carries `data-capturing` while it renders.
  */
 export function useScreenshot(options: { writeImage?: ImageWriter } = {}) {
   const writeImage = options.writeImage ?? clipboardWriter
@@ -66,7 +66,15 @@ export function useScreenshot(options: { writeImage?: ImageWriter } = {}) {
     try {
       // Only the Mana face is embedded (mana symbols); the rest use system fonts.
       const fontEmbedCSS = await manaFontEmbedCss()
-      const dataUrl = await renderStable(element, { pixelRatio: 2, includeQueryParams: true, fontEmbedCSS })
+      // `data-capturing` while it renders: CSS can show what only the image
+      // carries (the Wrapped watermark). html-to-image reads computed styles.
+      element.setAttribute('data-capturing', '')
+      let dataUrl: string
+      try {
+        dataUrl = await renderStable(element, { pixelRatio: 2, includeQueryParams: true, fontEmbedCSS })
+      } finally {
+        element.removeAttribute('data-capturing')
+      }
       const bytes = dataUrlBytes(dataUrl)
       const blob = new Blob([bytes as BlobPart], { type: 'image/png' })
       try {

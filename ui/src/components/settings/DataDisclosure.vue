@@ -50,7 +50,15 @@
             Matches you enter by hand are not reported.
           </p>
           <p>
-            Your opponent's decklist goes with that data: the cards the app saw them use, up to four copies of each. This is another
+            MTG Arena matches are reported the same way, to the same place: your Arena username (such as Name#12345) and Arena user
+            ID, the result, format, timestamp, app version, your decklist by Arena card ID and its archetype, your opponent's Arena name,
+            and the same per game data. An Arena report also carries the event name, whether it was best of one or best of three, the
+            match type (such as limited), the season, and your rank when it was last seen: ladder, rank and tier, step, Mythic
+            percentile or placement, and when it was observed. For a draft or sealed run it carries the run's token and number, and for
+            a Brawl match both players' commanders. Endstep matches are not reported.
+          </p>
+          <p>
+            Your opponent's decklist goes with both kinds of report: the cards the app saw them use, up to four copies of each. This is another
             player's data rather than yours, and it is submitted so the community archetype database stays current.
           </p>
           <p>
@@ -67,7 +75,7 @@
             your own account.
           </p>
           <p>
-            Per game, per card statistics are sent with your deck's archetype and the archetype they were observed against, the format,
+            For MTGO matches only, per game, per card statistics are sent with your deck's archetype and the archetype they were observed against, the format,
             the result, whether you were on the play, whether it was a sideboarded game and the date. They carry no username or match ID.
             To show a tournament's real name, the app sends its MTGO event ID; the name is looked up from mymtgo's own tournament
             records, not read back from what you sent.
@@ -75,6 +83,12 @@
           <p>
             None of this needs a MyMTGO account: signed out, it goes with this device's identifier (see below). Matches played while
             offline mode was on are sent once you turn it off.
+          </p>
+          <p>
+            Anonymous usage counts go to Aptabase, an analytics service hosted in the EU, unless you turn off "Share anonymous usage
+            data": that the app started, which pages you open and which features you use (such as copying an image), with your
+            operating system, its version, your language and the app version. They carry no account, username, device identifier,
+            deck, card, match or file name.
           </p>
         </section>
 
@@ -196,6 +210,6 @@
 
     <p class="text-xs text-foreground">Leaving offline mode switched off means you agree to your data being sent as described above.</p>
 
-    <p class="text-xs text-muted-foreground/70 italic">Last updated: 19 November 2026</p>
+    <p class="text-xs text-muted-foreground/70 italic">Last updated: 25 November 2026</p>
   </div>
 </template>

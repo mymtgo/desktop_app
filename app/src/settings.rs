@@ -12,6 +12,8 @@ use serde::{Deserialize, Serialize};
 
 pub const LOG_FOLDER: &str = "log_folder";
 pub const CLOSE_TO_TRAY: &str = "close_to_tray";
+/// "Share anonymous usage data" (usage analytics spec, default on).
+pub const SHARE_USAGE: &str = "share_usage";
 pub const MTGO_DATA_FOLDER: &str = "mtgo_data_folder";
 /// The Storage page's Watcher (release spec 4.1; 0.x `watcher_active`).
 pub const WATCHER_ACTIVE: &str = "watcher_active";
@@ -215,6 +217,9 @@ pub struct Settings {
     /// The Endstep switch (default off). Only `set_integration` changes it;
     /// a settings save keeps the stored value.
     pub endstep_enabled: bool,
+    /// "Share anonymous usage data" (usage analytics spec, default on):
+    /// off, `usage::track` sends nothing. Offline mode stops it too.
+    pub share_usage: bool,
 }
 
 /// The risk notice as accepted: the notice wording version, the recorder's
@@ -289,6 +294,7 @@ impl Default for Settings {
             recorder_acceptance: None,
             arena_enabled: None,
             endstep_enabled: false,
+            share_usage: true,
         }
     }
 }
@@ -318,6 +324,7 @@ impl Settings {
                         settings.close_to_tray = flag;
                     }
                 }
+                SHARE_USAGE => read_bool(value, &mut settings.share_usage),
                 MTGO_DATA_FOLDER => {
                     if let Ok(folder) = serde_json::from_str::<Option<String>>(value) {
                         settings.mtgo_data_folder = folder;
@@ -409,6 +416,7 @@ impl Settings {
         vec![
             (LOG_FOLDER.to_string(), json(&self.log_folder)),
             (CLOSE_TO_TRAY.to_string(), json(&self.close_to_tray)),
+            (SHARE_USAGE.to_string(), json(&self.share_usage)),
             (MTGO_DATA_FOLDER.to_string(), json(&self.mtgo_data_folder)),
             (
                 HIDE_ARCHIVED_DECKS.to_string(),
@@ -1057,6 +1065,7 @@ mod tests {
             }),
             arena_enabled: Some(false),
             endstep_enabled: true,
+            share_usage: false,
         };
         assert_eq!(Settings::from_rows(&settings.to_rows()), settings);
         assert_eq!(
@@ -1064,6 +1073,7 @@ mod tests {
             rows(&[
                 ("log_folder", "\"C:/Users/Q/AppData/Local/Apps/2.0\""),
                 ("close_to_tray", "false"),
+                ("share_usage", "false"),
                 ("mtgo_data_folder", "null"),
                 ("hide_archived_decks", "false"),
                 ("decks_per_page", "48"),
@@ -1177,6 +1187,7 @@ mod tests {
                 "activeAccount": null,
                 "logFolder": null,
                 "closeToTray": true,
+                "shareUsage": true,
                 "mtgoDataFolder": null,
                 "hideArchivedDecks": true,
                 "decksPerPage": 12,

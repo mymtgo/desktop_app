@@ -2,7 +2,7 @@
 import { LifeBuoy, PanelsTopLeft, Plug, Sparkles, TrendingUp, Wrench } from 'lucide-vue-next'
 
 // What's new in 1.4: the event overlay for Challenges and other Swiss events,
-// and the win rate trend. It ships on edge as 1.4.0-rc.N first. Grouped, one
+// the win rate trend and MyMTGO Wrapped. It ships on edge as 1.4.0-rc.N first. Grouped, one
 // sentence a point.
 
 // Data, not markup: a long static list compiles to one static block, which
@@ -20,6 +20,7 @@ const groups = [
       'Recent sessions replaces the last 20 results: your last 7 days played, each with its record and win rate.',
       'Hovering the home chart lists the archetypes you played in that period.',
       'Interface scale (Settings, General) zooms the main window from 80% to 150%, for large or 4K screens.',
+      'MyMTGO Wrapped arrives on 1 December: your year in Magic as a story of cards, from your deck of the year to your MVP card, across MTGO, Arena and Endstep. It needs 30 matches this year, and each card copies as an image to share.',
     ],
   },
   {
@@ -53,6 +54,7 @@ const groups = [
     points: [
       'The Classic event overlay window is now exactly the size of the card, so the card sits slightly up and left of where it was. Move the window back if you need to.',
       'The cumulative win rate line is gone; the trend line replaces it.',
+      'MyMTGO now counts anonymous usage (which pages and features are used, never your names, decks or matches). Turn it off with Share anonymous usage data in Settings; offline mode always stops it.',
     ],
   },
   {
