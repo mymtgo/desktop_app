@@ -775,9 +775,11 @@ table outbox strict=1 without_rowid=0
   column 8 last_error TEXT notnull=0 default=NULL pk=0
   column 9 sent_at INTEGER notnull=0 default=NULL pk=0
   column 10 created_at INTEGER notnull=1 default=NULL pk=0
+  column 11 sent_linked INTEGER notnull=0 default=NULL pk=0
   check ((status = 'sending') = (claimed_at IS NOT NULL))
   check ((status = 'sent') = (sent_at IS NOT NULL))
   check (kind IN ('match_report', 'tournament_observation', 'card_stats'))
+  check (sent_linked IN (0, 1))
   check (status IN ('pending', 'sending', 'sent', 'failed', 'skipped'))
   index outbox_due unique=0 origin=c partial=1 on (kind, created_at): CREATE INDEX outbox_due ON outbox (kind, created_at) WHERE status = 'pending'
   index sqlite_autoindex_outbox_1 unique=1 origin=u partial=0 on (kind, subject)

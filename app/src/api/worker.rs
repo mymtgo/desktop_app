@@ -21,8 +21,8 @@ use tracker::OutboxEditor;
 use crate::api::attest::attest_known_accounts;
 use crate::api::session::ApiState;
 use crate::api::shipping::{
-    enqueue_card_stats, enqueue_observations, enqueue_reports, name_tournaments, ship_card_stats,
-    ship_observations, ship_reports,
+    enqueue_card_stats, enqueue_observations, enqueue_reports, name_tournaments,
+    requeue_device_reports, ship_card_stats, ship_observations, ship_reports,
 };
 use crate::api::tokens::recover_unauthorized;
 use crate::commands::{Startup, ready};
@@ -182,7 +182,10 @@ pub fn ship_with(
             Ok(response) if response.status == 429 => break,
             Err(ApiError::RateLimited(_)) => break,
             Ok(response) if response.is_success() => {
-                outcome.sent += mark(editor, sent(kind, &subjects, now_ms));
+                // A report the API ignored (another claim governs its player)
+                // still counts as linked: sending it again changes nothing.
+                let linked = used.is_some();
+                outcome.sent += mark(editor, sent(kind, &subjects, now_ms, linked));
                 forget(&mut unsent, &subjects);
                 continue;
             }
@@ -298,11 +301,12 @@ fn split_bearer(
     }
 }
 
-fn sent(kind: OutboxKind, subjects: &[String], now_ms: i64) -> OutboxEdit {
+fn sent(kind: OutboxKind, subjects: &[String], now_ms: i64, linked: bool) -> OutboxEdit {
     OutboxEdit::Sent {
         kind,
         subjects: subjects.to_vec(),
         now_ms,
+        linked,
     }
 }
 
@@ -527,6 +531,7 @@ impl<'a> Worker<'a> {
             // `CARD_STATS_LIVE` (both on as shipped) are on; the archetypes
             // they need are the stored `match_archetypes` rows.
             Job::EnqueueReports => {
+                requeue_device_reports(self.api, editor);
                 if let Some(reader) = self.read() {
                     enqueue_reports(editor, &reader, now_ms);
                 }

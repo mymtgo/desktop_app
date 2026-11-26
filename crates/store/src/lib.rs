@@ -284,6 +284,10 @@ const LATER_MIGRATIONS: &[&str] = &[
     // holds was played in) and drafts.tournament_name (the event's name from
     // the log). Filled by the league sync's refold, no backfill.
     include_str!("migrations/0029_draft_tournaments.sql"),
+    // outbox.sent_linked: whether a sent row carried the account's bearer,
+    // so reports sent signed out go again once signed in. This device's
+    // reports sent before it are marked 1 (never sent again).
+    include_str!("migrations/0030_outbox_sent_linked.sql"),
 ];
 
 /// Embedded migrations: the baseline, then `LATER_MIGRATIONS`. The runner
@@ -2017,6 +2021,50 @@ mod tests {
             1,
             "its draft lets go of it"
         );
+    }
+
+    #[test]
+    fn migration_0030_marks_reports_already_sent_as_linked_and_keeps_rows() {
+        let dir = TestDir::new("store-migration-0030");
+        let path = dir.join("mymtgo.sqlite");
+        baseline_with_rows(&path);
+        {
+            let mut conn = Connection::open(&path).expect("open");
+            conn.execute_batch("PRAGMA foreign_keys = OFF;")
+                .expect("foreign keys off");
+            migrations()
+                .to_version(&mut conn, 29)
+                .expect("migration 29");
+            conn.execute_batch(
+                "INSERT INTO outbox (kind, subject, payload, status, attempts, sent_at,
+                     created_at)
+                 VALUES ('match_report', 'q-sent-here', X'', 'sent', 1, 50, 40),
+                        ('match_report', 'q-sent-elsewhere', X'', 'sent', 0, 50, 50),
+                        ('match_report', 'q-pending', X'01', 'pending', 0, NULL, 60),
+                        ('card_stats', 'q-stats', X'', 'sent', 1, 50, 70);",
+            )
+            .expect("rows");
+        }
+
+        let conn = open_writer(&path).expect("the migration runs");
+        assert_eq!(count(&conn, "PRAGMA user_version"), migration_count());
+        assert_eq!(
+            strings(
+                &conn,
+                "SELECT subject, status, coalesce(sent_linked, -1) FROM outbox
+                 WHERE ?1 = ?1 ORDER BY id",
+                ""
+            ),
+            vec![
+                vec!["q-sent-here", "sent", "1"],
+                vec!["q-sent-elsewhere", "sent", "-1"],
+                vec!["q-pending", "pending", "-1"],
+                vec!["q-stats", "sent", "-1"],
+            ],
+            "reports this device sent before are never sent again"
+        );
+        let bad = conn.execute("UPDATE outbox SET sent_linked = 2", []);
+        assert!(bad.is_err(), "sent_linked is 0 or 1");
     }
 
     #[test]

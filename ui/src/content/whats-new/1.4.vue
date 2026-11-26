@@ -3,7 +3,8 @@ import { Bug, LifeBuoy, PanelsTopLeft, Plug, Sparkles, TrendingUp, Wrench } from
 
 // What's new in 1.4: the event overlay for Challenges and other Swiss events,
 // the win rate trend and MyMTGO Wrapped. It ships on edge as 1.4.0-rc.N first. Grouped, one
-// sentence a point. 1.4.1 adds a Fixes group: #897, #898, #900, #901 and #899.
+// sentence a point. 1.4.1 adds a Fixes group: #897, #898, #900, #901 and #899;
+// 1.4.2 adds #904.
 
 // Data, not markup: a long static list compiles to one static block, which
 // the test renderer cannot mount.
@@ -66,6 +67,7 @@ const groups = [
       '1.4.1: the Decks page sorts archetypes by matches played and hides the ones you never played behind "Show N without matches".',
       '1.4.1: card stats mark Seen and sideboard numbers as estimated for imported matches that only have MTGO\'s game log.',
       '1.4.1: anonymous usage also counts the days, weeks and months the app is used and how long ago it was installed, still with no identifier.',
+      '1.4.2: matches reported while you are signed out of MyMTGO are now sent again when you sign back in, so they count on your profile.',
     ],
   },
   {

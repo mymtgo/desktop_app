@@ -578,6 +578,7 @@ mod tests {
                 kind: OutboxKind::MatchReport,
                 subjects: vec!["q-v1".to_string()],
                 now_ms: 7,
+                linked: false,
             },
         )
         .expect("sent");

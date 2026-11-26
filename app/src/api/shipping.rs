@@ -151,6 +151,31 @@ pub fn enqueue_reports(editor: &OutboxEditor, reader: &Connection, now_ms: i64) 
     enqueue(editor, rows, outcome)
 }
 
+/// Signed in, drop the match reports this device sent in device mode, so
+/// `enqueue_reports` queues them again and they go with the bearer: the API
+/// ties a report to the account only then. Signed out, nothing changes.
+pub fn requeue_device_reports(api: &ApiState, editor: &OutboxEditor) -> u32 {
+    if !api.session().linked() {
+        return 0;
+    }
+    match editor.edit(OutboxEdit::RequeueDeviceReports) {
+        Ok(OutboxOutcome::Updated(count)) => {
+            if count > 0 {
+                tracing::info!(count, "match reports sent signed out go again signed in");
+            }
+            count
+        }
+        Ok(other) => {
+            tracing::warn!(?other, "an outbox requeue answered something else");
+            0
+        }
+        Err(error) => {
+            tracing::warn!(%error, "could not requeue the match reports sent signed out");
+            0
+        }
+    }
+}
+
 /// Ship one claim of match reports (0.x `SubmitMatchToApi`): one JSON
 /// request per match; a 401 recovers and retries once; any other refusal
 /// is logged and the row waits for its next attempt.
@@ -947,6 +972,80 @@ mod tests {
             of_kind(&state, "match_report")
                 .iter()
                 .all(|row| row.status == "sent")
+        );
+    }
+
+    /// `api` signed in with the bearer `q-access`.
+    fn signed_in_api(base_url: &str) -> TestApi {
+        let key_valid = (NOW + DAY).to_string();
+        let token_valid = (NOW + 7 * DAY).to_string();
+        let rows = [
+            ("api_device_id", r#""test-device""#),
+            ("api_key_expires_at", key_valid.as_str()),
+            ("api_token_expires_at", token_valid.as_str()),
+            (OFFLINE_MODE, "false"),
+        ];
+        let secrets = [
+            ("api_key", "test-key"),
+            ("access_token", "q-access"),
+            ("refresh_token", "q-refresh"),
+        ];
+        test_api(base_url, &rows, &secrets)
+    }
+
+    fn sent_linked(state: &AppState, subject: &str) -> Option<bool> {
+        of_kind(state, "match_report")
+            .into_iter()
+            .find(|row| row.subject == subject)
+            .expect("the report row")
+            .sent_linked
+    }
+
+    // A report sent signed out stays unowned on the API: once signed in, the
+    // device sends it again with the bearer.
+    #[test]
+    fn reports_sent_signed_out_go_again_with_the_bearer_once_signed_in() {
+        let stub = Stub::start(|_| Reply::json(200, "{}"));
+        let (_dir, state, _events) = tracked("shipping-reports-relink");
+        let signed_out = api(&stub.base_url, false);
+        reportable_match(&state, "q-match-1");
+        reportable_match(&state, "q-hidden");
+        enqueue_reports(&editor(&state), &reader(&state), NOW - 1);
+        ship_reports(&signed_out.state, &editor(&state), NOW);
+        assert_eq!(sent_linked(&state, "q-match-1"), Some(false));
+        assert_eq!(
+            requeue_device_reports(&signed_out.state, &editor(&state)),
+            0,
+            "signed out, nothing to gain"
+        );
+        write(
+            &state,
+            "UPDATE matches SET hidden_at = 1 WHERE token = 'q-hidden'",
+        );
+
+        let signed_in = signed_in_api(&stub.base_url);
+        assert_eq!(requeue_device_reports(&signed_in.state, &editor(&state)), 1);
+        assert_eq!(
+            enqueue_reports(&editor(&state), &reader(&state), NOW + 1).queued,
+            1
+        );
+        let outcome = ship_reports(&signed_in.state, &editor(&state), NOW + 2);
+        assert_eq!(outcome.sent, 1);
+        let seen = stub.requests();
+        assert_eq!(seen.len(), 3);
+        assert_eq!(seen[2].header("authorization"), Some("Bearer q-access"));
+        let body: serde_json::Value = serde_json::from_slice(&seen[2].body).expect("json");
+        assert_eq!(body["match_token"], "q-match-1");
+        assert_eq!(sent_linked(&state, "q-match-1"), Some(true));
+        assert_eq!(
+            sent_linked(&state, "q-hidden"),
+            Some(false),
+            "a hidden match is not reported again"
+        );
+        assert_eq!(
+            requeue_device_reports(&signed_in.state, &editor(&state)),
+            0,
+            "sent once with the bearer"
         );
     }
 

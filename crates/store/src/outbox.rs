@@ -24,11 +24,13 @@ pub enum OutboxEdit {
         now_ms: i64,
         limit: u32,
     },
-    /// The API took these claimed rows.
+    /// The API took these claimed rows; `linked` when the request carried
+    /// the account's bearer.
     Sent {
         kind: OutboxKind,
         subjects: Vec<String>,
         now_ms: i64,
+        linked: bool,
     },
     /// Sending these claimed rows failed: an attempt is charged, and the row
     /// waits out its backoff or, at `MAX_ATTEMPTS`, fails for good (a match
@@ -62,6 +64,11 @@ pub enum OutboxEdit {
     /// What the API said about synthesized tournament names (07 spec section
     /// 8). Only rows whose name is still synthesized change.
     NameTournaments { rows: Vec<TournamentName> },
+    /// Signed in: drop the match reports this device sent in device mode, so
+    /// the next enqueue sends them again with the bearer and the API ties
+    /// them to the account. A hidden, detached or incomplete match is not
+    /// reported again. At most `REQUEUE_LIMIT` a run.
+    RequeueDeviceReports,
 }
 
 /// One tournament lookup's result: the real name (a 200), or `None` (a 404:
@@ -107,7 +114,8 @@ pub fn edit_outbox(conn: &mut Connection, edit: &OutboxEdit) -> Result<OutboxOut
             kind,
             subjects,
             now_ms,
-        } => OutboxOutcome::Updated(mark_sent(&tx, *kind, subjects, *now_ms)?),
+            linked,
+        } => OutboxOutcome::Updated(mark_sent(&tx, *kind, subjects, *now_ms, *linked)?),
         OutboxEdit::Failed {
             kind,
             subjects,
@@ -125,6 +133,7 @@ pub fn edit_outbox(conn: &mut Connection, edit: &OutboxEdit) -> Result<OutboxOut
         OutboxEdit::NameTournaments { rows } => {
             OutboxOutcome::Updated(name_tournaments(&tx, rows)?)
         }
+        OutboxEdit::RequeueDeviceReports => OutboxOutcome::Updated(requeue_device_reports(&tx)?),
     };
     tx.commit()?;
     Ok(outcome)
@@ -184,17 +193,35 @@ fn mark_sent(
     kind: OutboxKind,
     subjects: &[String],
     now_ms: i64,
+    linked: bool,
 ) -> Result<u32, StoreError> {
     let mut statement = tx.prepare_cached(
         "UPDATE outbox SET status = 'sent', attempts = attempts + 1, last_error = NULL,
-             sent_at = ?3, claimed_at = NULL, payload = X''
+             sent_at = ?3, claimed_at = NULL, payload = X'', sent_linked = ?4
          WHERE kind = ?1 AND subject = ?2 AND status = 'sending'",
     )?;
     let mut changed = 0;
     for subject in subjects {
-        changed += statement.execute(params![kind.as_str(), subject, now_ms])? as u32;
+        changed += statement.execute(params![kind.as_str(), subject, now_ms, linked])? as u32;
     }
     Ok(changed)
+}
+
+/// Match reports dropped for sending again in one requeue, so a signed-out
+/// history drains a run at a time (`ENQUEUE_LIMIT` per enqueue).
+pub const REQUEUE_LIMIT: u32 = 500;
+
+fn requeue_device_reports(tx: &Transaction) -> Result<u32, StoreError> {
+    let changed = tx.execute(
+        "DELETE FROM outbox WHERE id IN (
+             SELECT o.id FROM outbox o JOIN listed_matches m ON m.token = o.subject
+             WHERE o.kind = 'match_report' AND o.status = 'sent' AND o.sent_linked = 0
+               AND m.state = 'complete'
+             ORDER BY o.id
+             LIMIT ?1)",
+        [REQUEUE_LIMIT],
+    )?;
+    Ok(changed as u32)
 }
 
 fn mark_failed(
@@ -351,13 +378,14 @@ pub struct OutboxRowState {
     pub last_error: Option<String>,
     pub sent_at: Option<i64>,
     pub created_at: i64,
+    pub sent_linked: Option<bool>,
 }
 
 /// Every outbox row, in id order. For tests.
 pub fn rows_for_test(conn: &Connection) -> Result<Vec<OutboxRowState>, StoreError> {
     let mut statement = conn.prepare(
         "SELECT kind, subject, payload, status, attempts, next_attempt_at, claimed_at,
-             last_error, sent_at, created_at
+             last_error, sent_at, created_at, sent_linked
          FROM outbox ORDER BY id",
     )?;
     let rows = statement.query_map([], |row| {
@@ -372,6 +400,7 @@ pub fn rows_for_test(conn: &Connection) -> Result<Vec<OutboxRowState>, StoreErro
             last_error: row.get(7)?,
             sent_at: row.get(8)?,
             created_at: row.get(9)?,
+            sent_linked: row.get(10)?,
         })
     })?;
     let mut all = Vec::new();
@@ -535,6 +564,7 @@ mod tests {
                 kind: OBS,
                 subjects: subjects(&["a"]),
                 now_ms: T + 50,
+                linked: false,
             },
         );
         assert_eq!(count, 1);
@@ -683,6 +713,7 @@ mod tests {
                 kind: OBS,
                 subjects: subjects(&["a"]),
                 now_ms: T,
+                linked: false,
             },
         );
         let count = updated(
@@ -759,6 +790,7 @@ mod tests {
             kind: OBS,
             subjects: subjects(&["a"]),
             now_ms: T,
+            linked: false,
         };
         assert_eq!(updated(&mut conn, sent), 0, "a pending row is not sent");
         let failed = OutboxEdit::Failed {
