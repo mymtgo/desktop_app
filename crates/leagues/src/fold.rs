@@ -894,10 +894,20 @@ impl Fold {
                 apply_manual_drop(&mut building.run, at_ms);
             }
         }
+        let tournament_drafts = if self.limited {
+            self.tournament_drafts()
+        } else {
+            Vec::new()
+        };
         let unlinked_drafts = self
             .drafts
             .iter()
-            .filter(|draft| draft.run.is_none())
+            .filter(|draft| {
+                draft.run.is_none()
+                    && !tournament_drafts
+                        .iter()
+                        .any(|link| link.draft_token == draft.draft.token)
+            })
             .map(|draft| draft.draft.token.clone())
             .collect();
         let runs = self
@@ -908,6 +918,7 @@ impl Fold {
             .collect();
         LeagueFold {
             runs,
+            tournament_drafts,
             unlinked_drafts,
         }
     }

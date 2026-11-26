@@ -16,7 +16,9 @@
 //!
 //! `limited_runs` adds draft and sealed runs to the same fold
 //! (`fold_league_runs`): kinds and round counts, drafts as inputs, pool
-//! guards, placeholder healing and late links (limited spec section 5).
+//! guards, placeholder healing and late links (limited spec section 5), and
+//! places the drafts no league holds in the account's tournaments (a Swiss
+//! Draft is a tournament with a draft and no league).
 //!
 //! `arena_runs` folds one account's Arena course snapshots and limited Arena
 //! matches into runs (`fold_arena_runs`): a run per course, orphans split
@@ -34,7 +36,7 @@
 /// The store's league sync records it in `derivations ('league_fold')` and
 /// refolds every owner when the stored version is lower: bump it whenever a
 /// rule change can change a stored run or draft.
-pub const FOLD_VERSION: i64 = 3;
+pub const FOLD_VERSION: i64 = 4;
 
 pub mod arena_runs;
 pub mod bars;
@@ -59,8 +61,10 @@ pub use fold::{
     fold_runs, is_limited_format_code, panel_round_count,
 };
 pub use limited_runs::{
-    DraftInput, LINK_WINDOW_MS, LeagueFold, LeagueKind, LimitedFacts, LimitedSeed,
-    MIN_PICKS_FOR_LINKAGE, PLACEHOLDER_PREFIX, PanelFormat,
+    DraftInput, DraftTournament, LINK_WINDOW_MS, LeagueFold, LeagueKind, LimitedFacts, LimitedSeed,
+    MIN_PICKS_FOR_LINKAGE, PLACEHOLDER_PREFIX, PanelFormat, TOURNAMENT_DRAFT_WINDOW_MS,
+    TournamentDraft, is_swiss_tournament, is_tournament_run_key, tournament_draft_label,
+    tournament_draft_state, tournament_run_key,
 };
 pub use numbers::{
     Classification, GameMark, InProgress, LeagueKpis, Mark, ResultDistribution, RunInput, RunMatch,

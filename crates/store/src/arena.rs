@@ -1345,11 +1345,14 @@ mod tests {
             .collect::<Result<_, _>>()
             .expect("rows");
         // The tournament tables hold MTGO accounts only (MTGO log facts),
-        // and the merge is for Arena and Endstep renames, so it never meets
-        // their rows; if it did, the move would be undone and logged.
+        // and so does a draft's tournament (`drafts_tournament_id`, unique
+        // per account only while a tournament is set); the merge is for
+        // Arena and Endstep renames, so it never meets their rows. If it
+        // did, the move would be undone and logged.
         assert_eq!(
             found,
             vec![
+                "drafts".to_string(),
                 "synced_arena_runs".to_string(),
                 "tournament_rounds".to_string(),
                 "tournament_standings".to_string(),

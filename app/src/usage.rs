@@ -1,8 +1,8 @@
 //! Anonymous usage counts through Aptabase (usage analytics spec,
 //! `docs/superpowers/specs/2026-11-25-usage-analytics-design.md`).
 //!
-//! Only the events in `UsageEvent` are ever sent, with fixed names and no
-//! player data. Nothing is sent unless a key was built in
+//! Only the events in `UsageEvent` and the period markers of
+//! `usage_marks` are ever sent, with fixed names and no player data. Nothing is sent unless a key was built in
 //! (`APTABASE_APP_KEY` at compile time), "Share anonymous usage data" is on
 //! and offline mode is off. The plugin queues events in memory and sends
 //! them in batches from Rust.
@@ -33,8 +33,6 @@ pub fn app_key() -> Option<&'static str> {
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, specta::Type)]
 #[serde(tag = "kind", rename_all = "camelCase")]
 pub enum UsageEvent {
-    /// Once per launch, after startup.
-    AppStarted,
     /// A route change; `page` is the route's name.
     PageViewed { page: String },
     /// A feature was used.
@@ -140,7 +138,6 @@ pub fn clean_page(page: &str) -> Option<String> {
 /// its checks.
 pub fn event_payload(event: &UsageEvent) -> Option<(&'static str, Option<Value>)> {
     match event {
-        UsageEvent::AppStarted => Some(("app_started", None)),
         UsageEvent::PageViewed { page } => {
             let page = clean_page(page)?;
             Some(("page_viewed", Some(json!({ "page": page }))))
@@ -176,9 +173,8 @@ impl UsageGate {
     }
 }
 
-/// Count one event, if the gate allows it. Never fails: usage counts must
-/// not get in the way of anything.
-pub fn track(app: &AppHandle, event: &UsageEvent) {
+/// Whether an event may be sent right now (see `sends`).
+pub fn gate_open(app: &AppHandle) -> bool {
     let share = app
         .try_state::<UsageGate>()
         .is_some_and(|gate| gate.share());
@@ -186,14 +182,25 @@ pub fn track(app: &AppHandle, event: &UsageEvent) {
     let offline = app
         .try_state::<ApiState>()
         .is_none_or(|api| api.offline_mode().0);
-    if !sends(app_key().is_some(), share, offline) {
+    sends(app_key().is_some(), share, offline)
+}
+
+/// Queue an event by name, if the gate allows it. Callers pass only fixed
+/// names (`UsageEvent` and the `usage_marks` markers). Never fails: usage counts
+/// must not get in the way of anything.
+pub(crate) fn send(app: &AppHandle, name: &str, props: Option<Value>) {
+    if !gate_open(app) {
         return;
     }
-    let Some((name, props)) = event_payload(event) else {
-        return;
-    };
     if let Err(error) = app.track_event(name, props) {
         tracing::debug!(%error, "could not queue a usage event");
+    }
+}
+
+/// Count one event, if the gate allows it.
+pub fn track(app: &AppHandle, event: &UsageEvent) {
+    if let Some((name, props)) = event_payload(event) {
+        send(app, name, props);
     }
 }
 
@@ -233,10 +240,6 @@ mod tests {
 
     #[test]
     fn each_event_has_a_fixed_name_and_small_props() {
-        assert_eq!(
-            event_payload(&UsageEvent::AppStarted),
-            Some(("app_started", None))
-        );
         assert_eq!(
             event_payload(&UsageEvent::PageViewed {
                 page: "dashboard".to_string()

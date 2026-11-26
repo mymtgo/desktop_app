@@ -59,7 +59,7 @@ use crate::api::worker::{WorkerSignal, signal};
 use crate::bridge::lock;
 use crate::cards::worker::CardsSignal;
 use crate::commands::{CommandError, Startup, off_async_workers, ready, storage};
-use crate::events::AppNotification;
+use crate::events::{AppNotification, SyncFinished};
 
 /// The order every run takes the types in.
 pub const SYNC_TYPES: [SyncType; 3] = [SyncType::Deck, SyncType::League, SyncType::Match];
@@ -1746,6 +1746,10 @@ pub struct SyncStatus {
     #[specta(type = Option<specta_typescript::Number>)]
     pub last_synced_at_ms: Option<i64>,
     pub pending: u32,
+    /// Everything a sync will send: `pending` plus the matches still in
+    /// their send hold (`store::api_reads::SEND_HOLD_MS`), which the next
+    /// run skips. The status bar's "queued".
+    pub queued: u32,
     pub pending_by_type: TypeCounts,
     /// The current run's feed, `HH:MM:SS line`, newest last.
     pub activity: Vec<String>,
@@ -1791,10 +1795,17 @@ pub fn sync_status_now(
             format!("{clock} {line}")
         })
         .collect();
+    let pending = pending_by_type.matches + pending_by_type.decks + pending_by_type.leagues;
+    // Counted as if every hold were over: a held match is queued too.
+    let after_every_hold = now_ms.saturating_add(store::api_reads::SEND_HOLD_MS);
+    let held_matches = store::sync::pending_count(conn, SyncType::Match, after_every_hold)
+        .map_err(storage)?
+        .saturating_sub(pending_by_type.matches);
     Ok(SyncStatus {
         linked: api.session().linked(),
         last_synced_at_ms: store::sync::last_synced_at(conn).map_err(storage)?,
-        pending: pending_by_type.matches + pending_by_type.decks + pending_by_type.leagues,
+        pending,
+        queued: pending + held_matches,
         pending_by_type,
         activity,
         syncing: api.sync.syncing(),
@@ -2051,7 +2062,12 @@ pub fn run_app_sync(app: &AppHandle, full: bool, report_unreachable: bool) -> bo
         guides_pulled: &|pairs| announce_pulled_guides(app, &state.db_path, pairs),
         report_unreachable,
     };
-    run_sync(&ctx, full) == RunEnd::Unreachable
+    let end = run_sync(&ctx, full);
+    // The status bar's "Last sync" line reads again after every run.
+    if let Err(error) = (SyncFinished {}).emit(app) {
+        tracing::warn!(%error, "could not announce the finished sync");
+    }
+    end == RunEnd::Unreachable
 }
 
 /// Push `GuidesChanged` for each pulled `(deck MTGO id, archetype uuid)`
@@ -4124,6 +4140,7 @@ mod tests {
                 linked: false,
                 last_synced_at_ms: None,
                 pending: 0,
+                queued: 0,
                 pending_by_type: TypeCounts::default(),
                 activity: Vec::new(),
                 syncing: false,
@@ -4179,6 +4196,22 @@ mod tests {
             json["pendingByType"],
             json!({"match": 0, "deck": 1, "league": 0})
         );
+    }
+
+    /// The status bar's "queued" counts a match still in its send hold too,
+    /// so a match that just ended never reads as synced; `pending` stays
+    /// what the next run sends.
+    #[test]
+    fn queued_counts_matches_still_in_their_send_hold() {
+        let device = device("sync-status-queued");
+        file_deck(&device, "111", true);
+        log_match(&device, "q-old", NOW - DAY, "111");
+        log_match(&device, "q-held", NOW - 2 * 60_000, "111");
+        let api = linked("http://127.0.0.1:1");
+        let status = sync_status_now(&api.state, &reader(&device), Tz::UTC, NOW).expect("status");
+        assert_eq!(status.pending_by_type.matches, 1, "the held match waits");
+        assert_eq!(status.pending, 2);
+        assert_eq!(status.queued, 3);
     }
 
     // Batch 5 review Important 1: a press whose run never starts (the gate

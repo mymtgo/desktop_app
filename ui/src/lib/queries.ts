@@ -520,6 +520,18 @@ export function useStatus() {
   })
 }
 
+/**
+ * The status bar's sync line. Read every minute, so a match leaving its send
+ * hold or a new one completing shows; the bar also refetches it on `SyncFinished`.
+ */
+export function useSyncStatus() {
+  return useQuery({
+    queryKey: keys.syncStatus,
+    queryFn: async () => unwrap(await commands.syncStatus()),
+    refetchInterval: 60_000,
+  })
+}
+
 /** Every account and the current one (release spec 5): the header and the Accounts card. */
 export function useAccounts() {
   return useQuery({

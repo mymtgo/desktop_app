@@ -66,6 +66,7 @@ function row(overrides: Partial<LimitedIndexRowView> = {}): LimitedIndexRowView 
     onDrawRecord: { wins: 1, losses: 0 },
     note: null,
     linked: true,
+    inLeague: true,
     classification: 'FINISH',
     liveRound: null,
     avgMatchSeconds: 1200,

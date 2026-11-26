@@ -67,6 +67,7 @@ const ROW = {
   results: [],
   startedAtMs: null,
   linked: true,
+  inLeague: true,
   userState: null,
   autoState: 'active',
   notes: 'keep',
@@ -119,6 +120,18 @@ describe('the Limited event row', () => {
   it('has no league menu for an unlinked draft', () => {
     const mounted = mountFake(LimitedEventRow, { row: { ...ROW, runKey: null, linked: false, matches: [] } })
     expect(tags(mounted.root)).not.toContain('run-actions')
+  })
+
+  it('has no league menu for a tournament draft, but keeps its deck and matches', () => {
+    const mounted = mountFake(LimitedEventRow, {
+      row: { ...ROW, runKey: 'tournament:19990050', inLeague: false },
+    })
+    expect(mounted.warnings).toEqual([])
+    expect(tags(mounted.root)).not.toContain('run-actions')
+    expect(textOf(mounted.root)).toContain('Deck')
+    expect(tags(mounted.root)).toContain('run-matches-table')
+    const [table] = findAll(mounted.root, (node) => node.tag === 'run-matches-table')
+    expect(table.props['can-unlink']).toBe(false)
   })
 
   it('shows the league menu for a linked run, fed from the row', () => {

@@ -6,7 +6,8 @@ use chrono_tz::Tz;
 use serde::{Deserialize, Serialize};
 use store::Connection;
 use store::card_stats::{
-    ArchetypeOption, CardStatsFilter, DeckWinrate, card_stats, deck_prior, opponent_archetypes,
+    ArchetypeOption, CardStatsFilter, DeckWinrate, card_stats, deck_prior, log_only_games,
+    opponent_archetypes,
 };
 use tauri::{AppHandle, Manager, State};
 use tauri_specta::Event;
@@ -163,6 +164,10 @@ pub struct CardStatsPayload {
     pub archetypes: Vec<ArchetypeOptionView>,
     pub perspective: Perspective,
     pub deck_winrate: DeckWinrateView,
+    /// Games under the filters whose cards come from MTGO's game log alone
+    /// (imported matches with no full log): Seen and sideboarding are
+    /// estimates for them.
+    pub log_only_games: u32,
     /// The `card_stats_trust` setting.
     pub trust: u32,
 }
@@ -270,9 +275,12 @@ pub fn payload(
     filter.best_of = deck_best_of(conn, deck_id, query.best_of)?;
     let stats = card_stats(conn, deck_id, &filter).map_err(storage)?;
     let prior: DeckWinrate = deck_prior(conn, deck_id, &filter).map_err(storage)?;
+    let log_only = log_only_games(conn, deck_id, &filter).map_err(storage)?;
     let archetypes: Vec<ArchetypeOption> =
         opponent_archetypes(conn, deck_id, version_id, filter.best_of).map_err(storage)?;
-    Ok(payload_view(stats, prior, archetypes, query, trust))
+    Ok(payload_view(
+        stats, prior, log_only, archetypes, query, trust,
+    ))
 }
 
 /// The deck index's archetype Card stats tab: the same data over every
@@ -295,15 +303,20 @@ pub fn versions_payload(
         store::card_stats::card_stats_of_versions(conn, version_ids, &filter).map_err(storage)?;
     let prior =
         store::card_stats::deck_prior_of_versions(conn, version_ids, &filter).map_err(storage)?;
+    let log_only = store::card_stats::log_only_games_of_versions(conn, version_ids, &filter)
+        .map_err(storage)?;
     let archetypes =
         store::card_stats::opponent_archetypes_of_versions(conn, version_ids, filter.best_of)
             .map_err(storage)?;
-    Ok(payload_view(stats, prior, archetypes, query, trust))
+    Ok(payload_view(
+        stats, prior, log_only, archetypes, query, trust,
+    ))
 }
 
 fn payload_view(
     stats: Vec<CardStat>,
     prior: DeckWinrate,
+    log_only_games: u32,
     archetypes: Vec<ArchetypeOption>,
     query: &CardStatsQuery,
     trust: u32,
@@ -324,6 +337,7 @@ fn payload_view(
             games: prior.games,
             rate: prior.rate,
         },
+        log_only_games,
         trust,
     }
 }
@@ -548,8 +562,16 @@ mod tests {
         let keys: Vec<&String> = json.as_object().expect("object").keys().collect();
         assert_eq!(
             keys,
-            ["archetypes", "deckWinrate", "perspective", "stats", "trust"]
+            [
+                "archetypes",
+                "deckWinrate",
+                "logOnlyGames",
+                "perspective",
+                "stats",
+                "trust"
+            ]
         );
+        assert_eq!(json["logOnlyGames"], 0, "a log match has its hand");
         assert_eq!(json["perspective"], "mine");
         assert_eq!(json["deckWinrate"]["rate"], 0.5);
         let row = &json["stats"][0];

@@ -14,6 +14,7 @@ import {
   rateTone,
   selectionFormat,
   toggleArchetype,
+  visibleArchetypes,
 } from './deckIndex'
 
 function record(wins: number, losses: number, draws = 0): RecordView {
@@ -138,5 +139,39 @@ describe('the archetype tabs (0.x deckIndexTabs)', () => {
       params: { archetypeId: '7' },
       query: { timeframe: 'week' },
     })
+  })
+})
+
+describe('visibleArchetypes', () => {
+  const played = { ...option('Qplayed', record(3, 1)), id: 1 }
+  const empty = { ...option('Qempty', record(0, 0)), id: 2 }
+  const other = { ...option('Qother', record(0, 0)), id: 3 }
+
+  it('hides archetypes without matches and counts them', () => {
+    const { shown, hiddenCount } = visibleArchetypes([played, empty, other], { showAll: false, selected: null })
+    expect(shown).toEqual([played])
+    expect(hiddenCount).toBe(2)
+  })
+
+  it('keeps the order and shows everything when asked', () => {
+    const { shown, hiddenCount } = visibleArchetypes([empty, played, other], { showAll: true, selected: null })
+    expect(shown).toEqual([empty, played, other])
+    expect(hiddenCount).toBe(2)
+  })
+
+  it('keeps the selected archetype even without matches', () => {
+    const { shown, hiddenCount } = visibleArchetypes([played, empty, other], { showAll: false, selected: '2' })
+    expect(shown).toEqual([played, empty])
+    expect(hiddenCount).toBe(1)
+  })
+
+  it('hides nothing when no archetype has matches', () => {
+    const { shown, hiddenCount } = visibleArchetypes([empty, other], { showAll: false, selected: null })
+    expect(shown).toEqual([empty, other])
+    expect(hiddenCount).toBe(0)
+  })
+
+  it('has no hidden rows when every archetype has matches', () => {
+    expect(visibleArchetypes([played], { showAll: false, selected: null }).hiddenCount).toBe(0)
   })
 })

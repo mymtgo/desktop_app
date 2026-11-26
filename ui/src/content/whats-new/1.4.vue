@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { LifeBuoy, PanelsTopLeft, Plug, Sparkles, TrendingUp, Wrench } from 'lucide-vue-next'
+import { Bug, LifeBuoy, PanelsTopLeft, Plug, Sparkles, TrendingUp, Wrench } from 'lucide-vue-next'
 
 // What's new in 1.4: the event overlay for Challenges and other Swiss events,
 // the win rate trend and MyMTGO Wrapped. It ships on edge as 1.4.0-rc.N first. Grouped, one
-// sentence a point.
+// sentence a point. 1.4.1 adds a Fixes group: #897, #898, #900, #901 and #899.
 
 // Data, not markup: a long static list compiles to one static block, which
 // the test renderer cannot mount.
@@ -55,6 +55,17 @@ const groups = [
       'The Classic event overlay window is now exactly the size of the card, so the card sits slightly up and left of where it was. Move the window back if you need to.',
       'The cumulative win rate line is gone; the trend line replaces it.',
       'MyMTGO now counts anonymous usage (which pages and features are used, never your names, decks or matches). Turn it off with Share anonymous usage data in Settings; offline mode always stops it.',
+    ],
+  },
+  {
+    name: 'Fixes',
+    icon: Bug,
+    points: [
+      '1.4.1: a match you finish is synced to your other devices about 5 minutes later instead of waiting up to 30 minutes, and the status bar shows when the last sync ran and how many matches are queued.',
+      '1.4.1: MTGO Swiss Drafts show on the Limited page with their tournament, record and matches instead of "league unknown".',
+      '1.4.1: the Decks page sorts archetypes by matches played and hides the ones you never played behind "Show N without matches".',
+      '1.4.1: card stats mark Seen and sideboard numbers as estimated for imported matches that only have MTGO\'s game log.',
+      '1.4.1: anonymous usage also counts the days, weeks and months the app is used and how long ago it was installed, still with no identifier.',
     ],
   },
   {

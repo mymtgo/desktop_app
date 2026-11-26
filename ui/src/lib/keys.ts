@@ -11,6 +11,8 @@ export const keys = {
   /** One page of the main list, filtered and sorted (`keys.matches(query.page)` prefixes it). */
   matchList: (query: MatchListQuery) => ['matches', query.page, query] as const,
   status: ['status'] as const,
+  /** The status bar's sync line (`sync_status`); read every minute and after each run (`SyncFinished`). */
+  syncStatus: ['syncStatus'] as const,
   /** Wrapped's year, dismissed flag and bundle (`wrapped_state`). */
   wrappedState: ['wrappedState'] as const,
   /** The Settings "Card data" card's counts; `CardsChanged` refetches them. */

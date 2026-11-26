@@ -39,12 +39,13 @@ use std::collections::{BTreeSet, HashMap, HashSet};
 
 use chrono_tz::Tz;
 use leagues::{
-    DraftInput, FOLD_VERSION, ImportedRunSeed, LeagueInput, LeagueKind, LimitedFacts, LimitedSeed,
-    OrderedInput, PanelFormat, Run, RunState, fold_league_runs, is_limited_format_code,
-    tournament_name,
+    DraftInput, DraftTournament, FOLD_VERSION, ImportedRunSeed, LeagueFold, LeagueInput,
+    LeagueKind, LimitedFacts, LimitedSeed, OrderedInput, PanelFormat, Run, RunState,
+    TournamentDraft, fold_league_runs, is_limited_format_code, tournament_name,
 };
 use limited::{ABANDON_AFTER_MS, Draft, DraftState, Pick, RegisteredDeck, fold_drafts};
 use mtgo_protocol::EventKind;
+use mtgo_protocol::tournament::{TournamentFact, decode_fact};
 use rusqlite::types::Value;
 use rusqlite::{Connection, OptionalExtension, Transaction, params, params_from_iter};
 use serde::{Deserialize, Serialize};
@@ -159,12 +160,24 @@ pub fn sync_owner(
     }
     let mut out = SyncOutcome::default();
     let sources = read_sources(tx, owner)?;
+    let mut leagues_changed = false;
 
-    // 1. Drafts.
+    // 1. Drafts, and the tournaments a draft no league holds may belong to
+    // (their matches' tournament tokens first: the tokens find the
+    // tournaments' own lines).
     let drafts = sync_drafts(tx, owner, tz, now_ms, &mut out)?;
+    let tournaments = match owner {
+        LeagueOwner::Account(account_id) => {
+            leagues_changed |= link_tournament_tokens(tx, account_id)?;
+            draft_tournaments(tx, account_id)?
+        }
+        LeagueOwner::Nobody => LimitedTournaments::default(),
+    };
 
-    // 2. Registered decks of the limited matches.
-    let registered = sync_snapshots(tx, &sources.snapshot_tokens(), &mut out)?;
+    // 2. Registered decks of the limited matches, league and tournament.
+    let mut snapshot_tokens = sources.snapshot_tokens();
+    snapshot_tokens.extend(tournaments.match_tokens.iter().cloned());
+    let registered = sync_snapshots(tx, &snapshot_tokens, &mut out)?;
 
     // 3. The fold, with card facts for the decks and the picks.
     let mut catalog_ids: BTreeSet<u32> = BTreeSet::new();
@@ -186,19 +199,21 @@ pub fn sync_owner(
         cards: card_facts(tx, &catalog_ids)?,
         panels: sources.panels.clone(),
         seeds: sources.limited_seeds.clone(),
+        tournaments: tournaments.inputs.clone(),
     };
-    let mut runs = fold(tx, &sources.inputs, &facts, tz)?;
+    let mut folded = fold(tx, &sources.inputs, &facts, tz)?;
 
     // 4. Rows. A row that took a new key by its matches carries its drop
     // under its old key, which the fold did not see: fold once more.
-    let mut assigned = assign_rows(tx, owner, &runs, now_ms)?;
+    let mut assigned = assign_rows(tx, owner, &folded.runs, now_ms)?;
     if assigned.refold {
-        runs = fold(tx, &sources.inputs, &facts, tz)?;
-        let again = assign_rows(tx, owner, &runs, now_ms)?;
+        folded = fold(tx, &sources.inputs, &facts, tz)?;
+        let again = assign_rows(tx, owner, &folded.runs, now_ms)?;
         assigned.changed |= again.changed;
         assigned.ids = again.ids;
     }
-    let mut leagues_changed = assigned.changed;
+    let runs = folded.runs;
+    leagues_changed |= assigned.changed;
     let mut limited_changed = assigned.changed;
     let (constructed, limited) = write_runs(tx, owner, &runs, &assigned.ids)?;
     leagues_changed |= constructed || limited;
@@ -219,10 +234,12 @@ pub fn sync_owner(
         limited_changed = true;
     }
 
-    // 6. Tournaments: the tournament tokens of the matches, then the rows.
+    // 6. Tournaments, then the drafts played in them.
     if let LeagueOwner::Account(account_id) = owner {
-        leagues_changed |= link_tournament_tokens(tx, account_id)?;
         leagues_changed |= sync_tournaments(tx, account_id, tz)?;
+    }
+    if write_draft_tournaments(tx, owner, &folded.tournament_drafts, &tournaments.names)? {
+        limited_changed = true;
     }
 
     out.leagues_changed |= leagues_changed;
@@ -665,10 +682,10 @@ fn fold(
     inputs: &[OrderedInput],
     facts: &LimitedFacts,
     tz: Tz,
-) -> Result<Vec<Run>, StoreError> {
+) -> Result<LeagueFold, StoreError> {
     let mut all = inputs.to_vec();
     all.extend(manual_drops(tx)?);
-    Ok(fold_league_runs(all, facts.clone(), tz).runs)
+    Ok(fold_league_runs(all, facts.clone(), tz))
 }
 
 // ---- Drafts ------------------------------------------------------------------
@@ -2360,6 +2377,176 @@ fn sync_tournaments(tx: &Transaction, account_id: i64, tz: Tz) -> Result<bool, S
     Ok(changed)
 }
 
+// ---- Tournament drafts ------------------------------------------------------
+
+/// The account's tournaments played in a draft format, as the fold reads
+/// them, with what the sync needs besides.
+#[derive(Default)]
+struct LimitedTournaments {
+    inputs: Vec<DraftTournament>,
+    /// Each event's name from its `EventSyncData_t` line, by event id.
+    names: HashMap<i64, String>,
+    /// Their matches, for their registered decks.
+    match_tokens: Vec<String>,
+}
+
+/// The account's draft tournaments (never sealed: no draft to place, and
+/// their sync lines are not decoded every pass): each event's first listed
+/// match (its format and start) and, read from the newest `EventSyncData_t` line of its
+/// tournament token, the event's name and the draft it names.
+fn draft_tournaments(tx: &Transaction, account_id: i64) -> Result<LimitedTournaments, StoreError> {
+    let mut found = LimitedTournaments::default();
+    let mut tokens: HashMap<i64, String> = HashMap::new();
+    let mut seen: HashSet<i64> = HashSet::new();
+    let mut drafted: HashSet<i64> = HashSet::new();
+    {
+        let mut stmt = tx.prepare_cached(
+            "SELECT m.tournament_event_id, m.format, m.started_at, m.tournament_token, m.token
+             FROM listed_matches m
+             WHERE m.account_id = ?1 AND m.tournament_event_id IS NOT NULL
+                 AND m.state <> 'pending'
+             ORDER BY m.started_at, m.id",
+        )?;
+        let rows = stmt.query_map([account_id], |row| {
+            Ok((
+                row.get::<_, i64>(0)?,
+                row.get::<_, Option<String>>(1)?,
+                row.get::<_, i64>(2)?,
+                row.get::<_, Option<String>>(3)?,
+                row.get::<_, String>(4)?,
+            ))
+        })?;
+        for row in rows {
+            let (event_id, format, started_at, tournament_token, token) = row?;
+            // The first match (in start order) says whether the event is a
+            // draft, and gives its format and start.
+            if seen.insert(event_id)
+                && LeagueKind::from_format_code(format.as_deref()) == LeagueKind::Draft
+            {
+                drafted.insert(event_id);
+                found.inputs.push(DraftTournament {
+                    event_id,
+                    format,
+                    first_match_at: started_at,
+                    draft_token: None,
+                    draft_id: None,
+                });
+            }
+            if !drafted.contains(&event_id) {
+                continue;
+            }
+            found.match_tokens.push(token);
+            if let Some(tournament_token) = tournament_token {
+                tokens.entry(event_id).or_insert(tournament_token);
+            }
+        }
+    }
+    for input in &mut found.inputs {
+        let Some(token) = tokens.get(&input.event_id) else {
+            continue;
+        };
+        let mut stmt = tx.prepare_cached(
+            "SELECT raw, compressed FROM log_events
+             WHERE tournament_token = ?1 AND kind = 'tournament_sync' AND quarantined = 0
+             ORDER BY logged_at DESC, log_file_id DESC, byte_offset DESC",
+        )?;
+        let mut rows = stmt.query([token])?;
+        // The newest snapshot names the draft (a fired draft never unfires,
+        // and every line carries both), so the draft fields come from it
+        // alone; older lines are read only while the event's name is missing.
+        let mut newest_read = false;
+        while let Some(row) = rows.next()? {
+            let text = decode_raw(row.get(0)?, row.get(1)?)?;
+            let Some(TournamentFact::Snapshot(snapshot)) =
+                decode_fact(EventKind::TournamentSync, &text, None)
+            else {
+                continue;
+            };
+            if snapshot.event_id.is_some_and(|id| id != input.event_id) {
+                continue;
+            }
+            if !newest_read {
+                newest_read = true;
+                input.draft_token = snapshot.draft_token;
+                input.draft_id = snapshot.draft_id;
+            }
+            if let Some(name) = snapshot.name {
+                found.names.insert(input.event_id, name);
+                break;
+            }
+        }
+    }
+    Ok(found)
+}
+
+/// `drafts.tournament_id` and `tournament_name` of the owner's drafts: the
+/// tournament row and event name of the tournament holding the draft, else
+/// none. Returns whether anything changed.
+fn write_draft_tournaments(
+    tx: &Transaction,
+    owner: LeagueOwner,
+    links: &[TournamentDraft],
+    names: &HashMap<i64, String>,
+) -> Result<bool, StoreError> {
+    let mut wanted: HashMap<&str, (i64, Option<&str>)> = HashMap::new();
+    for link in links {
+        let id: Option<i64> = tx
+            .prepare_cached("SELECT id FROM tournaments WHERE mtgo_event_id = ?1")?
+            .query_row([link.event_id], |row| row.get(0))
+            .optional()?;
+        if let Some(id) = id {
+            let name = names.get(&link.event_id).map(String::as_str);
+            wanted.insert(link.draft_token.as_str(), (id, name));
+        }
+    }
+    let mut changes: Vec<(i64, Option<i64>, Option<String>)> = Vec::new();
+    {
+        let mut stmt = tx.prepare_cached(
+            "SELECT id, draft_token, tournament_id, tournament_name,
+                 detached_at IS NOT NULL OR league_id IS NOT NULL
+             FROM drafts WHERE account_id IS ?1",
+        )?;
+        let rows = stmt.query_map([owner.account()], |row| {
+            Ok((
+                row.get::<_, i64>(0)?,
+                row.get::<_, String>(1)?,
+                row.get::<_, Option<i64>>(2)?,
+                row.get::<_, Option<String>>(3)?,
+                row.get::<_, bool>(4)?,
+            ))
+        })?;
+        for row in rows {
+            let (id, token, tournament_id, tournament_name, elsewhere) = row?;
+            let desired = if elsewhere {
+                None
+            } else {
+                wanted.get(token.as_str()).copied()
+            };
+            let desired_id = desired.map(|(id, _)| id);
+            let desired_name = desired.and_then(|(_, name)| name).map(str::to_string);
+            if desired_id != tournament_id || desired_name != tournament_name {
+                changes.push((id, desired_id, desired_name));
+            }
+        }
+    }
+    // A tournament holds one draft (a unique index): clear first, then set.
+    for (id, _, _) in &changes {
+        tx.prepare_cached(
+            "UPDATE drafts SET tournament_id = NULL, tournament_name = NULL WHERE id = ?1",
+        )?
+        .execute([id])?;
+    }
+    for (id, tournament_id, tournament_name) in &changes {
+        if tournament_id.is_some() {
+            tx.prepare_cached(
+                "UPDATE drafts SET tournament_id = ?1, tournament_name = ?2 WHERE id = ?3",
+            )?
+            .execute(params![tournament_id, tournament_name, id])?;
+        }
+    }
+    Ok(!changes.is_empty())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -3726,6 +3913,284 @@ mod tests {
         );
         assert_eq!(snapshotted.len(), 2);
         assert!(!snapshotted.iter().any(|row| row.contains(&tokens[0])));
+    }
+
+    const SWISS: i64 = 19_990_050;
+
+    /// Round `round` of Swiss Draft `SWISS`, played by `user` at `at`.
+    fn swiss_round(
+        token: &str,
+        user: &str,
+        round: u32,
+        outcome: mtgo_match::Outcome,
+        at: i64,
+    ) -> MatchView {
+        let mut played = view(token, "Qopponent", at);
+        played.mtgo_match_id = None;
+        for game in &mut played.games {
+            game.mtgo_game_id = None;
+        }
+        played.local_username = user.to_string();
+        played.tournament_event_id = Some(SWISS as u64);
+        played.tournament_round = Some(round);
+        played.format = Some("DFRAFRAFRA".to_string());
+        played.game_structure = Some("FRAx3".to_string());
+        played.match_type = None;
+        played.outcome = outcome;
+        played
+    }
+
+    /// The three rounds of Swiss Draft `SWISS`, from `first_at`, an hour
+    /// apart: won, lost, won.
+    fn swiss_rounds(conn: &mut Connection, first_at: i64) {
+        let mut views = Vec::new();
+        for (round, outcome) in [
+            (1, mtgo_match::Outcome::Win),
+            (2, mtgo_match::Outcome::Loss),
+            (3, mtgo_match::Outcome::Win),
+        ] {
+            views.push(swiss_round(
+                &format!("q-swiss-{round}"),
+                "Qlocal",
+                round,
+                outcome,
+                first_at + i64::from(round - 1) * HOUR,
+            ));
+        }
+        store_views(conn, views);
+    }
+
+    /// A finished draft of no league (`DRAFT`, as the 0.x import stores one),
+    /// 25 minutes long from `started_at`.
+    fn leagueless_draft(conn: &Connection, started_at: i64) {
+        leagueless_draft_of(conn, 5, DRAFT, "Qlocal", started_at);
+    }
+
+    fn leagueless_draft_of(conn: &Connection, id: i64, token: &str, user: &str, started_at: i64) {
+        let account = account_id(conn, user);
+        conn.execute(
+            "INSERT INTO drafts (id, draft_token, account_id, source, state, started_at, ended_at,
+                 imported_from)
+             VALUES (?1, ?2, ?3, 'imported', 'finished', ?4, ?5, ?6)",
+            params![
+                id,
+                token,
+                account,
+                started_at,
+                started_at + 25 * MINUTE,
+                id * 10
+            ],
+        )
+        .expect("draft");
+    }
+
+    fn draft_tournament(conn: &Connection) -> (Option<i64>, Option<String>) {
+        conn.query_row(
+            "SELECT t.mtgo_event_id, d.tournament_name FROM drafts d
+             LEFT JOIN tournaments t ON t.id = d.tournament_id WHERE d.draft_token = ?1",
+            [DRAFT],
+            |row| Ok((row.get(0)?, row.get(1)?)),
+        )
+        .expect("draft")
+    }
+
+    #[test]
+    fn a_swiss_draft_in_progress_is_dropped_by_a_later_match_outside_it() {
+        let (_dir, mut conn) = db("league-sync-swiss-state");
+        // Round 1 only, 12 minutes after the draft ends.
+        store_views(
+            &mut conn,
+            vec![swiss_round(
+                "q-swiss-1",
+                "Qlocal",
+                1,
+                mtgo_match::Outcome::Win,
+                BASE + 37 * MINUTE,
+            )],
+        );
+        leagueless_draft(&conn, BASE);
+        sync(&mut conn, BASE + 5 * HOUR);
+        let account = account_id(&conn, "Qlocal");
+        let filter = crate::leagues::RunFilter {
+            owners: vec![LeagueOwner::Account(account)],
+            ..crate::leagues::RunFilter::default()
+        };
+        let state = |conn: &Connection| {
+            let read = crate::leagues::stored_tournament_drafts(conn, &filter).expect("read");
+            (read[0].run.state, read[0].run.completed_at)
+        };
+        assert_eq!(state(&conn), (RunState::Active, None), "one round played");
+
+        // A constructed match after round 1: the player left the event.
+        store_views(
+            &mut conn,
+            vec![view("q-later", "Qopponent", BASE + 3 * HOUR)],
+        );
+        sync(&mut conn, BASE + 5 * HOUR);
+        assert_eq!(state(&conn), (RunState::Dropped, None));
+    }
+
+    #[test]
+    fn two_accounts_drafting_one_swiss_event_each_keep_their_draft() {
+        let (_dir, mut conn) = db("league-sync-swiss-two-accounts");
+        let mut views = Vec::new();
+        for (user, prefix) in [("Qlocal", "q-a"), ("Qsecond", "q-b")] {
+            for round in 1..=3 {
+                views.push(swiss_round(
+                    &format!("{prefix}-{round}"),
+                    user,
+                    round,
+                    mtgo_match::Outcome::Win,
+                    BASE + 37 * MINUTE + i64::from(round - 1) * HOUR,
+                ));
+            }
+        }
+        store_views(&mut conn, views);
+        leagueless_draft_of(&conn, 5, DRAFT, "Qlocal", BASE);
+        leagueless_draft_of(&conn, 6, "q-draft-0002", "Qsecond", BASE);
+        sync(&mut conn, BASE + 5 * HOUR);
+        assert_eq!(
+            rows_of(
+                &conn,
+                "SELECT d.draft_token, t.mtgo_event_id FROM drafts d
+                 JOIN tournaments t ON t.id = d.tournament_id ORDER BY d.id"
+            ),
+            vec![
+                format!("Text(\"{DRAFT}\") | Integer({SWISS})"),
+                format!("Text(\"q-draft-0002\") | Integer({SWISS})"),
+            ]
+        );
+        let again = sync(&mut conn, BASE + 5 * HOUR);
+        assert!(!again.limited_changed);
+    }
+
+    #[test]
+    fn an_unlinked_swiss_draft_links_to_its_tournament_when_the_fold_version_rises() {
+        let (_dir, mut conn) = db("league-sync-swiss-refold");
+        // Round 1 is paired 12 minutes after the draft ends.
+        swiss_rounds(&mut conn, BASE + 37 * MINUTE);
+        leagueless_draft(&conn, BASE);
+        sync(&mut conn, BASE + 5 * HOUR);
+        assert_eq!(draft_tournament(&conn), (Some(SWISS), None));
+
+        // As an older fold left the database: the draft unlinked.
+        conn.execute_batch(&format!(
+            "UPDATE drafts SET tournament_id = NULL;
+             UPDATE derivations SET version = {} WHERE name = '{LEAGUE_FOLD_DERIVATION}';",
+            FOLD_VERSION - 1
+        ))
+        .expect("an older fold");
+        let filter = |conn: &Connection| crate::leagues::RunFilter {
+            owners: vec![LeagueOwner::Account(account_id(conn, "Qlocal"))],
+            ..crate::leagues::RunFilter::default()
+        };
+        let unlinked = |conn: &Connection| {
+            crate::leagues::stored_limited_runs(conn, &filter(conn))
+                .expect("read")
+                .unlinked_drafts
+        };
+        assert_eq!(unlinked(&conn).len(), 1);
+        assert!(!league_fold_current(&conn, UTC).expect("current"));
+
+        let outcome = sync(&mut conn, BASE + 5 * HOUR);
+        assert!(outcome.limited_changed);
+        assert!(league_fold_current(&conn, UTC).expect("current"));
+        assert_eq!(draft_tournament(&conn), (Some(SWISS), None));
+        assert!(unlinked(&conn).is_empty());
+        let read = crate::leagues::stored_tournament_drafts(&conn, &filter(&conn)).expect("read");
+        assert_eq!(read.len(), 1);
+        let run = &read[0];
+        assert_eq!(run.run.key, "tournament:19990050");
+        assert_eq!(run.run.kind, LeagueKind::Draft);
+        assert_eq!(run.run.set_code.as_deref(), Some("FRA"));
+        assert_eq!(run.run.state, RunState::Complete);
+        assert_eq!(
+            run.run.completed_at,
+            Some(BASE + 37 * MINUTE + 2 * HOUR + 4_000)
+        );
+        assert_eq!(
+            run.draft.as_ref().map(|draft| draft.token.as_str()),
+            Some(DRAFT)
+        );
+        let tokens: Vec<&str> = run.matches.iter().map(|row| row.token.as_str()).collect();
+        assert_eq!(tokens, vec!["q-swiss-1", "q-swiss-2", "q-swiss-3"]);
+        assert!(
+            crate::leagues::stored_limited_runs(&conn, &filter(&conn))
+                .expect("read")
+                .runs
+                .is_empty(),
+            "not a league run"
+        );
+        let by_key = crate::leagues::RunFilter {
+            run_key: Some("tournament:19990050".to_string()),
+            ..filter(&conn)
+        };
+        assert_eq!(
+            crate::leagues::stored_tournament_drafts(&conn, &by_key)
+                .expect("read")
+                .len(),
+            1
+        );
+        // A tournament, not a league: no league row, no match in a league.
+        assert_eq!(
+            rows_of(&conn, "SELECT COUNT(*) FROM leagues"),
+            vec!["Integer(0)"]
+        );
+        assert_eq!(
+            rows_of(
+                &conn,
+                "SELECT COUNT(*) FROM matches WHERE league_id IS NOT NULL"
+            ),
+            vec!["Integer(0)"]
+        );
+        // A second sync writes nothing.
+        let again = sync(&mut conn, BASE + 5 * HOUR);
+        assert!(!again.limited_changed && !again.leagues_changed);
+    }
+
+    #[test]
+    fn a_swiss_draft_links_by_the_draft_its_tournament_line_names() {
+        let (_dir, mut conn) = db("league-sync-swiss-named");
+        // Days after the draft: only the tournament's own line can link it.
+        swiss_rounds(&mut conn, BASE + 3 * 24 * HOUR);
+        leagueless_draft(&conn, BASE);
+        conn.execute("UPDATE matches SET tournament_token = 'q-swiss-event'", [])
+            .expect("tokens");
+        let file = insert_log_file(&conn, &new_log_file("Q/mtgo.log")).expect("file");
+        let line = format!(
+            "15:27:13 [INF] (Game Management|Processing Registered Handler for EventSyncData_t \
+             in TournamentUninitializedState) Message: {{\"EventToken\":\"q-swiss-event\",\
+             \"EventID\":{SWISS},\"GameStructureCd\":\"DFRAFRAFRA\",\
+             \"Description\":\"Q Fracture Swiss Draft\",\"TournamentSyncData\":\
+             {{\"DraftToken\":\"{DRAFT}\",\"DraftID\":7999556}}}} Receiver: Q"
+        );
+        store_events(
+            &mut conn,
+            vec![event_with(
+                file,
+                10,
+                EventKind::TournamentSync,
+                Subjects {
+                    tournament_token: Some("q-swiss-event".to_string()),
+                    ..Subjects::default()
+                },
+                &line,
+            )],
+        );
+        sync(&mut conn, BASE + 4 * 24 * HOUR);
+        assert_eq!(
+            draft_tournament(&conn),
+            (Some(SWISS), Some("Q Fracture Swiss Draft".to_string()))
+        );
+    }
+
+    #[test]
+    fn a_draft_with_no_tournament_soon_after_it_stays_unlinked() {
+        let (_dir, mut conn) = db("league-sync-swiss-far");
+        swiss_rounds(&mut conn, BASE + 3 * 24 * HOUR);
+        leagueless_draft(&conn, BASE);
+        sync(&mut conn, BASE + 4 * 24 * HOUR);
+        assert_eq!(draft_tournament(&conn), (None, None));
     }
 
     #[test]

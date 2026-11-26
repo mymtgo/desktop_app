@@ -23,18 +23,23 @@ use chrono_tz::Tz;
 /// The kind of a stored run (`RunFilter::kinds`, `StoredRun::kind`).
 pub use leagues::LeagueKind;
 use leagues::{
+    DRAFT_ROUNDS, arena_course_id, is_arena_run_key, is_limited_format_code, is_swiss_tournament,
+    panel_round_count, tournament_draft_state, tournament_run_key,
+};
+use leagues::{
     GameResult, LeagueInput, LeagueMatch, OrderedInput, PanelFormat, Run, RunInput, RunMatch,
     RunState, TournamentMatch,
 };
-use leagues::{arena_course_id, is_arena_run_key, is_limited_format_code, panel_round_count};
 use limited::{
-    ABANDON_AFTER_MS, CardFacts, CardFactsMap, Draft, DraftState, RegisteredDeck, panel_play_format,
+    ABANDON_AFTER_MS, CardFacts, CardFactsMap, Draft, DraftState, RegisteredDeck,
+    panel_play_format, set_code_from_play_format,
 };
+use mtgo_match::{MatchState, Outcome};
 use mtgo_protocol::parse_login;
 use rusqlite::{Connection, OptionalExtension, ToSql, Transaction, params};
 
 use crate::league_sync::{LeagueOwner, sync_owner};
-use crate::limited::{registered, stored_cards, stored_drafts};
+use crate::limited::{StoredDraft, registered, stored_cards, stored_drafts};
 use crate::names::{state_from_str, stored_game_result, stored_outcome, stored_state};
 use crate::write::decode_raw;
 use crate::{Platform, StoreError};
@@ -1604,7 +1609,8 @@ pub struct LimitedRuns {
 /// its course's newest observation stated. A fixed number of queries plus
 /// one per Arena run; no log event is read. A removed run and its draft are
 /// left out (its draft is held by a run, so it is not among the unlinked
-/// drafts either).
+/// drafts either). A draft placed in a tournament is not unlinked either: it
+/// is `stored_tournament_drafts`' run.
 pub fn stored_limited_runs(
     conn: &Connection,
     filter: &RunFilter,
@@ -1677,7 +1683,7 @@ pub fn stored_limited_runs(
         let mut found = stored_drafts(
             conn,
             &format!(
-                "d.league_id IS NULL AND {}",
+                "d.league_id IS NULL AND d.tournament_id IS NULL AND {}",
                 owners_sql("d.account_id", &filter.owners)
             ),
             &[],
@@ -1690,6 +1696,222 @@ pub fn stored_limited_runs(
         runs,
         unlinked_drafts,
     })
+}
+
+/// The drafts the league sync placed in a tournament (a Swiss Draft) of the
+/// filter's owners, as limited runs keyed `tournament:{event id}`, newest
+/// first: the draft, the account's listed matches of the tournament with
+/// their registered decks, the event's name, and the state
+/// `leagues::tournament_draft_state` gives. No `leagues` row stands behind
+/// them, so only the Limited pages read them (never the Leagues page). Only
+/// the run with the filter's run key when given; none for a deck. A fixed
+/// number of queries; no log event or standing is read.
+pub fn stored_tournament_drafts(
+    conn: &Connection,
+    filter: &RunFilter,
+) -> Result<Vec<LimitedRun>, StoreError> {
+    if filter.deck_id.is_some() {
+        return Ok(Vec::new());
+    }
+    let mut drafts_filter = format!(
+        "d.tournament_id IS NOT NULL AND {}",
+        owners_sql("d.account_id", &filter.owners)
+    );
+    if let Some(key) = &filter.run_key {
+        let Some(event_id) = key
+            .strip_prefix("tournament:")
+            .and_then(|id| id.parse::<i64>().ok())
+        else {
+            return Ok(Vec::new());
+        };
+        // An integer, so safe to inline.
+        drafts_filter.push_str(&format!(
+            " AND d.tournament_id IN (SELECT id FROM tournaments WHERE mtgo_event_id = {event_id})"
+        ));
+    }
+    let mut drafts: HashMap<i64, StoredDraft> = HashMap::new();
+    for found in stored_drafts(conn, &drafts_filter, &[])? {
+        drafts.insert(found.id, found);
+    }
+    if drafts.is_empty() {
+        return Ok(Vec::new());
+    }
+
+    // (draft id, event id, token, name, format, started at, newer activity,
+    // whether the log named the event).
+    // Newer activity: the account drafted again, or played a match outside
+    // this event after the run's last match (the draft's end when it has
+    // none). Stored matches only, so the state never changes by itself.
+    type EventRow = (
+        i64,
+        i64,
+        Option<String>,
+        String,
+        Option<String>,
+        i64,
+        bool,
+        bool,
+    );
+    let mut events: Vec<EventRow> = Vec::new();
+    {
+        let mut stmt = conn.prepare_cached(&format!(
+            "SELECT d.id, t.mtgo_event_id, t.token, COALESCE(d.tournament_name, t.name),
+                 t.format, t.started_at,
+                 EXISTS (SELECT 1 FROM drafts n
+                     WHERE n.account_id IS d.account_id AND n.detached_at IS NULL
+                         AND n.started_at > d.started_at)
+                 OR EXISTS (SELECT 1 FROM listed_matches o
+                     WHERE o.account_id IS d.account_id AND o.state <> 'pending'
+                         AND (o.tournament_event_id IS NULL
+                             OR o.tournament_event_id <> t.mtgo_event_id)
+                         AND o.started_at > COALESCE(
+                             (SELECT MAX(m.started_at) FROM listed_matches m
+                              WHERE m.tournament_id = d.tournament_id
+                                  AND m.account_id IS d.account_id AND m.state <> 'pending'),
+                             d.ended_at, d.started_at)),
+                 d.tournament_name IS NOT NULL
+             FROM drafts d JOIN tournaments t ON t.id = d.tournament_id
+             WHERE d.detached_at IS NULL AND {drafts_filter}
+             ORDER BY d.id"
+        ))?;
+        let rows = stmt.query_map([], |row| {
+            Ok((
+                row.get(0)?,
+                row.get(1)?,
+                row.get(2)?,
+                row.get(3)?,
+                row.get(4)?,
+                row.get(5)?,
+                row.get(6)?,
+                row.get(7)?,
+            ))
+        })?;
+        for row in rows {
+            events.push(row?);
+        }
+    }
+
+    let joined = "drafts d JOIN listed_matches m ON m.tournament_id = d.tournament_id
+         AND m.account_id IS d.account_id";
+    let matches_filter =
+        format!("d.detached_at IS NULL AND m.state <> 'pending' AND {drafts_filter}");
+    let mut members = grouped(match_rows(
+        conn,
+        &Scope {
+            from: joined,
+            filter: matches_filter.clone(),
+            order: "ORDER BY m.started_at, m.id",
+            limit: "",
+            group: "d.id",
+        },
+        &[],
+    )?);
+
+    // The registered decks of those matches: the sync's wins over 0.x's.
+    let mut decks: HashMap<String, RegisteredDeck> = HashMap::new();
+    {
+        let mut stmt = conn.prepare_cached(&format!(
+            "SELECT m.token, s.cards, s.captured_at FROM {joined}
+             JOIN limited_deck_snapshots s ON s.match_id = m.id
+             WHERE {matches_filter}
+             ORDER BY m.id, s.source = 'registered'"
+        ))?;
+        let rows = stmt.query_map([], |row| {
+            Ok((
+                row.get::<_, String>(0)?,
+                row.get::<_, String>(1)?,
+                row.get::<_, i64>(2)?,
+            ))
+        })?;
+        for row in rows {
+            let (token, cards, captured_at) = row?;
+            let deck = registered(&token, captured_at, stored_cards(&cards)?);
+            decks.insert(token, deck);
+        }
+    }
+
+    let mut runs = Vec::new();
+    for (draft_id, event_id, token, name, format, started_at, newer_activity, named) in events {
+        let Some(found) = drafts.remove(&draft_id) else {
+            continue;
+        };
+        let matches = members.remove(&draft_id).unwrap_or_default();
+        let complete: Vec<&LeagueMatchRow> = matches
+            .iter()
+            .filter(|row| stored_state(&row.state) == MatchState::Complete)
+            .collect();
+        let last_complete_lost = complete
+            .last()
+            .is_some_and(|row| stored_outcome(&row.outcome) == Outcome::Loss);
+        let mut complete_ends: Vec<i64> = complete
+            .iter()
+            .map(|row| row.ended_at.unwrap_or(row.started_at))
+            .collect();
+        complete_ends.sort_unstable();
+        let draft_start = found.draft.started_at_ms;
+        let state = tournament_draft_state(
+            complete_ends.len(),
+            // Only the log's own event name can rule Swiss out: a stored
+            // name alone (0.x, synthesized) keeps the Swiss rule.
+            !named || is_swiss_tournament(Some(&name)),
+            last_complete_lost,
+            newer_activity,
+        );
+        // The last round's end: the third, or an elimination draft's loss.
+        let completed_at = (state == RunState::Complete)
+            .then(|| {
+                complete_ends
+                    .get(DRAFT_ROUNDS - 1)
+                    .or(complete_ends.last())
+                    .copied()
+            })
+            .flatten();
+        let format = matches
+            .first()
+            .and_then(|row| row.format.clone())
+            .or(format);
+        let mut registered: Vec<RegisteredDeck> = matches
+            .iter()
+            .filter_map(|row| decks.get(&row.token).cloned())
+            .collect();
+        registered.sort_by_key(|deck| deck.captured_at_ms);
+        let run = Run {
+            key: tournament_run_key(event_id),
+            token: token.unwrap_or_default(),
+            event_id: Some(event_id),
+            joined_at: None,
+            name,
+            set_code: format.as_deref().and_then(set_code_from_play_format),
+            format,
+            deck_version_id: None,
+            started_at: draft_start.unwrap_or(started_at),
+            state,
+            dropped_at: None,
+            completed_at,
+            match_tokens: matches.iter().map(|row| row.token.clone()).collect(),
+            kind: LeagueKind::Draft,
+            course_id: None,
+            draft_token: Some(found.draft.token.clone()),
+            former_keys: Vec::new(),
+            rounds: None,
+        };
+        runs.push((
+            draft_id,
+            LimitedRun {
+                run,
+                draft: Some(found.draft),
+                matches,
+                registered,
+                source: "log".to_string(),
+                notes: None,
+                user_state: None,
+                stated_pool: None,
+                course_record: None,
+            },
+        ));
+    }
+    runs.sort_by_key(|(id, limited)| std::cmp::Reverse((limited.run.started_at, *id)));
+    Ok(runs.into_iter().map(|(_, limited)| limited).collect())
 }
 
 /// A stored limited run as the Limited pages read it.

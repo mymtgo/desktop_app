@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import {
   baselinePct,
+  estimatedKind,
+  estimatedTooltip,
   inferredTooltip,
+  logOnlyNote,
   pct,
   rawWinPctLabel,
   regenerateMessage,
@@ -94,6 +97,33 @@ describe('messages', () => {
     )
     expect(inferredTooltip(4)).toBe(
       'Includes 4 imported games where only cards seen in the game log count as sided in.',
+    )
+  })
+
+  it('words the note above the table, singular and plural', () => {
+    expect(logOnlyNote(3)).toBe(
+      "3 games here are from imported matches with only MTGO's game log. Seen counts only cards that were cast or played, and sideboard numbers are partial.",
+    )
+    expect(logOnlyNote(1)).toBe(
+      "1 game here is from an imported match with only MTGO's game log. Seen counts only cards that were cast or played, and sideboard numbers are partial.",
+    )
+  })
+
+  it('picks the columns that are estimated', () => {
+    expect(estimatedKind('seenPct')).toBe('seen')
+    expect(estimatedKind('seenWinPct')).toBe('seen')
+    expect(estimatedKind('sbOutPct')).toBe('sideboard')
+    expect(estimatedKind('sbInPct')).toBe('sideboard')
+    expect(estimatedKind('castPct')).toBeNull()
+    expect(estimatedKind('games')).toBeNull()
+  })
+
+  it('words the estimated marker tooltips', () => {
+    expect(estimatedTooltip('seen', 1)).toBe(
+      "Estimated. 1 game here is from an imported match with only MTGO's game log, which never shows your hand, so a card counts as seen only when it was cast or played.",
+    )
+    expect(estimatedTooltip('sideboard', 4)).toBe(
+      "Estimated. 4 games here are from imported matches with only MTGO's game log, so sideboarding is only visible for cards that show up in the log.",
     )
   })
 })

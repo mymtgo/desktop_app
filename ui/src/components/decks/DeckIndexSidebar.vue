@@ -9,7 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Switch } from '@/components/ui/switch'
 import { useArchetypeOptions } from '@/composables/useOpponentArchetype'
 import { acceptsDrag, hasDeckDrag, readDeckDrag } from '@/lib/deckDrag'
-import { archetypeRate, archetypeRowTitle, deckCount, rateTone } from '@/lib/deckIndex'
+import { archetypeRate, archetypeRowTitle, deckCount, rateTone, visibleArchetypes } from '@/lib/deckIndex'
 import { cn } from '@/lib/utils'
 
 /**
@@ -59,6 +59,34 @@ const emit = defineEmits<{
   /** Assign decks (none given: the selection) to an archetype, or clear it (null). */
   assign: [deckIds: number[], archetypeId: number | null]
 }>()
+
+// Archetypes without a match stay hidden until asked for; remembered per viewer.
+const SHOW_EMPTY_KEY = 'mymtgo.deckIndex.showEmptyArchetypes'
+
+function readShowEmpty(): boolean {
+  try {
+    return localStorage.getItem(SHOW_EMPTY_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+const showEmpty = ref(readShowEmpty())
+
+function toggleShowEmpty() {
+  showEmpty.value = !showEmpty.value
+  try {
+    localStorage.setItem(SHOW_EMPTY_KEY, showEmpty.value ? '1' : '0')
+  } catch {
+    // Storage can be blocked; the choice then lasts until the page closes.
+  }
+}
+
+// A deck drag shows every row, so a deck can be dropped on an archetype without matches.
+const dragging = computed(() => props.dragFormat !== null)
+const visible = computed(() =>
+  visibleArchetypes(props.archetypeOptions, { showAll: showEmpty.value || dragging.value, selected: props.archetype }),
+)
 
 // Drop targets (0.x): `dragover` sees only the payload's type, so the
 // highlight and the accept key off it; a row of another format refuses.
@@ -209,7 +237,7 @@ const rowClass = 'flex w-full cursor-pointer items-center gap-2 rounded px-2.5 p
 
       <div class="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-3 pb-3">
         <button
-          v-for="option in archetypeOptions"
+          v-for="option in visible.shown"
           :key="option.id"
           type="button"
           :class="
@@ -253,6 +281,14 @@ const rowClass = 'flex w-full cursor-pointer items-center gap-2 rounded px-2.5 p
               </span>
             </span>
           </span>
+        </button>
+        <button
+          v-if="visible.hiddenCount > 0 && !dragging"
+          type="button"
+          class="cursor-pointer rounded px-2.5 py-1.5 text-left text-xs text-muted-foreground transition-colors hover:text-foreground"
+          @click="toggleShowEmpty"
+        >
+          {{ showEmpty ? 'Hide archetypes without matches' : `Show ${visible.hiddenCount} without matches` }}
         </button>
       </div>
     </section>

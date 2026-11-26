@@ -280,6 +280,10 @@ const LATER_MIGRATIONS: &[&str] = &[
     // tournament_player_states (the InPlayoffs facts). Per device, never
     // synced, a 48-hour window: bare tables, no backfill.
     include_str!("migrations/0028_tournament_standings.sql"),
+    // Swiss Drafts: drafts.tournament_id (the tournament a draft no league
+    // holds was played in) and drafts.tournament_name (the event's name from
+    // the log). Filled by the league sync's refold, no backfill.
+    include_str!("migrations/0029_draft_tournaments.sql"),
 ];
 
 /// Embedded migrations: the baseline, then `LATER_MIGRATIONS`. The runner
@@ -1956,6 +1960,66 @@ mod tests {
     }
 
     #[test]
+    fn migration_0029_adds_the_draft_tournament_columns_and_keeps_rows() {
+        let dir = TestDir::new("store-migration-0029");
+        let path = dir.join("mymtgo.sqlite");
+        baseline_with_rows(&path);
+        {
+            let mut conn = Connection::open(&path).expect("open");
+            conn.execute_batch("PRAGMA foreign_keys = OFF;")
+                .expect("foreign keys off");
+            migrations()
+                .to_version(&mut conn, 28)
+                .expect("migration 28");
+            conn.execute_batch(
+                "INSERT INTO tournaments (id, mtgo_event_id, account_id, name, format, started_at)
+                 VALUES (1, 19990050, 1, 'Q Swiss', 'DFRAFRAFRA', 70),
+                        (2, 19990058, 1, 'Q Swiss 2', 'DFRAFRAFRA', 80);
+                 INSERT INTO drafts (id, draft_token, account_id, source, league_id, state,
+                     started_at)
+                 VALUES (1, 'q-d1', 1, 'log', NULL, 'finished', 40),
+                        (2, 'q-d2', 1, 'log', 1, 'finished', 10);",
+            )
+            .expect("rows");
+        }
+        let drafts = "SELECT id, draft_token, league_id, state, started_at FROM drafts
+                      WHERE ?1 = ?1 ORDER BY id";
+        let before = strings(&Connection::open(&path).expect("open"), drafts, "");
+
+        let conn = open_writer(&path).expect("the migration runs");
+        assert_eq!(count(&conn, "PRAGMA user_version"), migration_count());
+        assert_eq!(strings(&conn, drafts, ""), before);
+        assert_eq!(
+            count(
+                &conn,
+                "SELECT COUNT(*) FROM drafts
+                 WHERE tournament_id IS NULL AND tournament_name IS NULL"
+            ),
+            2,
+            "no backfill: the refold places drafts"
+        );
+        conn.execute(
+            "UPDATE drafts SET tournament_id = 1, tournament_name = 'Q Swiss Draft' WHERE id = 1",
+            [],
+        )
+        .expect("a tournament draft");
+        let twice = conn.execute("UPDATE drafts SET tournament_id = 1 WHERE id = 2", []);
+        assert!(twice.is_err(), "a tournament holds one draft");
+        let unknown = conn.execute("UPDATE drafts SET tournament_id = 9 WHERE id = 2", []);
+        assert!(unknown.is_err(), "a draft names a stored tournament");
+        conn.execute("DELETE FROM tournaments WHERE id = 1", [])
+            .expect("a tournament row can go");
+        assert_eq!(
+            count(
+                &conn,
+                "SELECT COUNT(*) FROM drafts WHERE id = 1 AND tournament_id IS NULL"
+            ),
+            1,
+            "its draft lets go of it"
+        );
+    }
+
+    #[test]
     fn migration_0027_adds_parked_pulls_and_keeps_rows() {
         let dir = TestDir::new("store-migration-0027");
         let path = dir.join("mymtgo.sqlite");
@@ -2926,6 +2990,7 @@ mod tests {
                 "draft_picks.draft_id -> drafts CASCADE",
                 "drafts.account_id -> accounts RESTRICT",
                 "drafts.league_id -> leagues SET NULL",
+                "drafts.tournament_id -> tournaments SET NULL",
                 "limited_deck_snapshots.match_id -> matches CASCADE",
             ]
         );

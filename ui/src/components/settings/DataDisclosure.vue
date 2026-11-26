@@ -87,8 +87,9 @@
           <p>
             Anonymous usage counts go to Aptabase, an analytics service hosted in the EU, unless you turn off "Share anonymous usage
             data": that the app started, which pages you open and which features you use (such as copying an image), with your
-            operating system, its version, your language and the app version. They carry no account, username, device identifier,
-            deck, card, match or file name.
+            operating system, its version, your language and the app version. Once per day, week and month it also counts that the
+            app was used, and how long ago it was installed in broad ranges such as "under a week". They carry no account, username,
+            device identifier, deck, card, match or file name.
           </p>
         </section>
 

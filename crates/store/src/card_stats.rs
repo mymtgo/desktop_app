@@ -736,6 +736,56 @@ fn stats_of(
     Ok(stats)
 }
 
+/// The games under `filter` whose card rows come from MTGO's game log alone
+/// (the imported rule, `imported_detail::reapply_imported_rule`): a history
+/// import or a 0.x copy with 0.x's `imported` flag. Their Seen counts only
+/// cards that were cast or played and their sideboarding only cards that
+/// show in the log. A 0.x match with its own hand and card stats, a live
+/// match and a match pulled from another device (`synced_sources`) are not
+/// counted. Counted per game, whatever its cards.
+pub fn log_only_games(
+    conn: &Connection,
+    deck_id: i64,
+    filter: &CardStatsFilter,
+) -> Result<u32, StoreError> {
+    let version = existing_version(conn, filter.version_id)?;
+    log_only_of(conn, Target::Deck, Value::Integer(deck_id), version, filter)
+}
+
+/// `log_only_games` over these deck versions (the filter's version is
+/// ignored).
+pub fn log_only_games_of_versions(
+    conn: &Connection,
+    version_ids: &[i64],
+    filter: &CardStatsFilter,
+) -> Result<u32, StoreError> {
+    if version_ids.is_empty() {
+        return Ok(0);
+    }
+    let subject = Value::Text(crate::matchups::ids_json(version_ids));
+    log_only_of(conn, Target::Versions, subject, None, filter)
+}
+
+fn log_only_of(
+    conn: &Connection,
+    target: Target,
+    subject: Value,
+    version: Option<i64>,
+    filter: &CardStatsFilter,
+) -> Result<u32, StoreError> {
+    let sql = format!(
+        "SELECT COUNT(DISTINCT g.id) {}
+  AND (m.source = 'history' OR m.legacy_history = 1)
+  AND NOT EXISTS (SELECT 1 FROM synced_sources ss WHERE ss.match_id = m.id)",
+        rows_from(target, "game_cards", false)
+    );
+    let params = bound(&subject, version, filter, Side::Local);
+    let games: i64 = conn
+        .prepare_cached(&sql)?
+        .query_row(params, |row| row.get(0))?;
+    Ok(u32::try_from(games).unwrap_or(u32::MAX))
+}
+
 /// Fill a stat's card data: the printing shown is the highest catalog id
 /// among the printings played in the games read (S8-1), with its card data.
 fn describe(conn: &Connection, stat: &mut CardStat) -> Result<(), StoreError> {
@@ -1941,6 +1991,71 @@ mod tests {
         assert_eq!(main.inferred_games, 2);
         assert_eq!((side.inferred_games, side.sided_in_games), (1, 1));
         assert_eq!(main.postboard_games, 2);
+    }
+
+    /// A match with `source`, `legacy_history` and two games (game 1 on
+    /// the play, game 2 on the draw), each with a local row of card 116.
+    fn log_only_match(conn: &Connection, version_id: i64, source: &str, legacy: bool) -> i64 {
+        let m = match_with(conn, version_id, source, "complete", 1_000);
+        conn.execute(
+            "UPDATE matches SET legacy_history = ?1 WHERE id = ?2",
+            params![legacy, m],
+        )
+        .expect("legacy flag");
+        for on_play in [true, false] {
+            let g = game(conn, m, "win", Some(on_play));
+            local(conn, g, 116, &[]);
+        }
+        m
+    }
+
+    #[test]
+    fn log_only_games_count_only_what_the_imported_rule_wrote() {
+        let (_dir, conn) = db("card-stats-log-only");
+        let deck_id = deck(&conn);
+        let v = version(&conn, deck_id);
+        card(&conn, 116, "q-oracle-main", "Qmain", "Creature");
+        log_only_match(&conn, v, "log", false);
+        log_only_match(&conn, v, "history", false);
+        log_only_match(&conn, v, "imported", true);
+        // A 0.x import with its own hand and card stats, and a pulled match.
+        log_only_match(&conn, v, "imported", false);
+        let pulled = log_only_match(&conn, v, "imported", true);
+        conn.execute(
+            "INSERT INTO synced_sources (match_id, platform, payload) VALUES (?1, 'arena', x'00')",
+            [pulled],
+        )
+        .expect("synced source");
+
+        let all = CardStatsFilter::all();
+        assert_eq!(log_only_games(&conn, deck_id, &all).expect("count"), 4);
+        let on_draw = CardStatsFilter {
+            on_play: Some(false),
+            ..CardStatsFilter::all()
+        };
+        assert_eq!(log_only_games(&conn, deck_id, &on_draw).expect("count"), 2);
+        let postboard = CardStatsFilter {
+            board: Some(Board::Postboard),
+            ..CardStatsFilter::all()
+        };
+        assert_eq!(
+            log_only_games(&conn, deck_id, &postboard).expect("count"),
+            2
+        );
+        let later = CardStatsFilter {
+            timeframe: Range {
+                from_ms: 2_000,
+                to_ms: 3_000,
+            },
+            ..CardStatsFilter::all()
+        };
+        assert_eq!(log_only_games(&conn, deck_id, &later).expect("count"), 0);
+        let versions = log_only_games_of_versions(&conn, &[v], &all).expect("count of versions");
+        assert_eq!(versions, 4);
+        assert_eq!(
+            log_only_games_of_versions(&conn, &[], &all).expect("none"),
+            0
+        );
     }
 
     #[test]

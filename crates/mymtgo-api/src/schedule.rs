@@ -26,9 +26,12 @@ pub const MATCH_REPORTS_LIVE: bool = true;
 /// and games without a player archetype no longer fill the batch (F23).
 pub const CARD_STATS_LIVE: bool = true;
 
-/// A completed match asks for a sync this long after (0.x
-/// `RunSyncJob::dispatch()->delay(now()->addSeconds(30))`).
-pub const SYNC_AFTER_COMPLETION_MS: i64 = 30_000;
+/// A completed match asks for a sync this long after: the store's 5 minute
+/// send hold (`store::api_reads::SEND_HOLD_MS`) plus 30 seconds. A match is
+/// synced only once its hold is over, so an earlier run would skip the very
+/// match that asked for it and leave it to the 30 minute run (0.x waited 30
+/// seconds and had no hold).
+pub const SYNC_AFTER_COMPLETION_MS: i64 = 330_000;
 
 const SECOND: i64 = 1_000;
 const MINUTE: i64 = 60 * SECOND;
@@ -250,15 +253,18 @@ impl LastRuns {
         }
     }
 
-    /// A match completed: on a linked, online device a sync follows 30
-    /// seconds later. Completions close together fold into one run.
+    /// A match completed: on a linked, online device a sync follows once its
+    /// send hold is over (`SYNC_AFTER_COMPLETION_MS`). Completions close
+    /// together fold into one run, moved to the last one's time so it carries
+    /// every match. A sync already due ("Sync now") is left as it is.
     pub fn match_completed(&mut self, now_ms: i64, gate_state: &GateState) {
         if gate(RequestClass::Sync, gate_state) != GateDecision::Send {
             return;
         }
-        if self.sync_at.is_none() {
-            self.sync_at = Some(now_ms + SYNC_AFTER_COMPLETION_MS);
+        if self.sync_at.is_some_and(|at| at <= now_ms) {
+            return;
         }
+        self.sync_at = Some(now_ms + SYNC_AFTER_COMPLETION_MS);
     }
 
     /// "Sync now": a sync is due at once.
@@ -624,17 +630,17 @@ mod tests {
     }
 
     // 0.x SyncSchedulingTest: "schedules a sync when a match completes on a
-    // linked, online device" and "schedules the completion sync about thirty
-    // seconds out".
+    // linked, online device". v1 waits out the 5 minute send hold first, so
+    // the run includes the match that asked for it.
     #[test]
-    fn a_completed_match_schedules_a_sync_thirty_seconds_out() {
+    fn a_completed_match_schedules_a_sync_after_the_send_hold() {
         let schedule = Schedule::default();
         let mut runs = LastRuns::default();
         runs.record(Job::Sync, T);
         let completed = T + MINUTE;
         runs.match_completed(completed, &online());
         let at = completed + SYNC_AFTER_COMPLETION_MS;
-        assert_eq!(SYNC_AFTER_COMPLETION_MS, 30 * SECOND);
+        assert_eq!(SYNC_AFTER_COMPLETION_MS, 5 * MINUTE + 30 * SECOND);
         assert!(!schedule.due(at - 1, &runs, &online()).contains(&Job::Sync));
         assert!(schedule.due(at, &runs, &online()).contains(&Job::Sync));
         runs.record(Job::Sync, at);
@@ -646,17 +652,33 @@ mod tests {
         );
     }
 
-    // 0.x: RunSyncJob is unique while queued, so completions close together
-    // fold into one run.
+    // Completions close together fold into one run, due once the last one's
+    // send hold is over, so that run carries every match.
     #[test]
-    fn completions_close_together_fold_into_one_run() {
+    fn completions_close_together_fold_into_one_run_after_the_last() {
         let schedule = Schedule::default();
         let mut runs = LastRuns::default();
         runs.record(Job::Sync, T);
         runs.match_completed(T + MINUTE, &online());
-        runs.match_completed(T + MINUTE + 20 * SECOND, &online());
+        let last = T + 4 * MINUTE;
+        runs.match_completed(last, &online());
         let first = T + MINUTE + SYNC_AFTER_COMPLETION_MS;
-        assert!(schedule.due(first, &runs, &online()).contains(&Job::Sync));
+        assert!(!schedule.due(first, &runs, &online()).contains(&Job::Sync));
+        let at = last + SYNC_AFTER_COMPLETION_MS;
+        assert!(schedule.due(at, &runs, &online()).contains(&Job::Sync));
+    }
+
+    #[test]
+    fn a_completion_does_not_hold_back_a_sync_now() {
+        let mut runs = LastRuns::default();
+        runs.record(Job::Sync, T);
+        runs.sync_now(T + SECOND);
+        runs.match_completed(T + SECOND, &online());
+        assert!(
+            Schedule::default()
+                .due(T + SECOND, &runs, &online())
+                .contains(&Job::Sync)
+        );
     }
 
     // 0.x SyncSchedulingTest: "does not schedule a completion sync while

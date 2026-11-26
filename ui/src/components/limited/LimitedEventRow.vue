@@ -19,7 +19,7 @@ import { useLimitedRunColours } from '@/lib/queries'
  * One Limited event on the index (0.x `LimitedEventRow`): the Leagues
  * page's header (`LeagueRunHeader`: score, event, kind, state and result
  * dots, the info line) with the packs or picks, deck versions and pick time,
- * the opponents line, Deck and Review draft, and for a linked run the same
+ * the opponents line, Deck and Review draft, and for a league run the same
  * "..." menu as the league card (`LeagueRunActions`, without the copy items:
  * Edit notes, Add matches, Set status, Delete; on Arena, Set status alone) and a "Set by you" badge when
  * the player set the status; expanded, the run's game stats and matches with the opponents' colours
@@ -50,8 +50,8 @@ const matches = computed(() => withOpponentColours(props.row.matches, colours.da
 
 const { saving: unlinking, run: runEdit } = useLeagueEdit()
 
-/** A linked run has a key to manage; an unlinked draft has no run. */
-const managedKey = computed(() => (props.row.linked ? props.row.runKey : null))
+/** A league run has a key to manage; a tournament draft has no league row, an unlinked draft no run. */
+const managedKey = computed(() => (props.row.linked && props.row.inLeague ? props.row.runKey : null))
 
 async function unlinkMatch(token: string) {
   const key = managedKey.value
@@ -89,9 +89,10 @@ const matchRoute = computed(() => {
       <div v-if="info.opponents" class="text-xs text-muted-foreground">{{ info.opponents }}</div>
       <div v-else-if="info.note" class="text-xs text-muted-foreground/70 italic">{{ info.note }}</div>
 
-      <template v-if="managedKey" #actions>
+      <template v-if="row.linked" #actions>
         <div class="flex items-center gap-2">
           <LeagueRunActions
+            v-if="managedKey"
             :run-key="managedKey"
             :match-count="row.matches.length"
             :manual="false"

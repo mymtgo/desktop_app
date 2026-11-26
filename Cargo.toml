@@ -3,7 +3,7 @@ resolver = "3"
 members = ["crates/mtgo-protocol", "crates/mtgo-match", "crates/fixture-tools", "crates/mtgo-log", "crates/store", "crates/tracker", "crates/log-player", "crates/release-tools", "crates/importer", "crates/decks", "crates/leagues", "crates/game-detail", "crates/mtgo-history", "crates/limited", "crates/mymtgo-api", "crates/sync-bundles", "crates/cards", "crates/overlay", "crates/replay", "crates/archetypes", "crates/support", "crates/arena-protocol", "crates/arena-match", "crates/arena-log", "crates/arena-game", "crates/mtgr", "crates/recorder", "crates/endstep-capture", "crates/endstep-host", "crates/endstep-protocol", "crates/endstep-match", "crates/wrapped", "app"]
 
 [workspace.package]
-version = "1.4.0"
+version = "1.4.1"
 edition = "2024"
 publish = false
 

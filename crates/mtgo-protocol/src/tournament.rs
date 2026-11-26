@@ -71,6 +71,11 @@ pub struct EventSnapshot {
     pub results: Vec<RoundResult>,
     /// The account is in `TournamentSyncData.EliminatedPlayers`.
     pub account_eliminated: bool,
+    /// A draft event's draft (`TournamentSyncData.DraftToken`), once fired.
+    pub draft_token: Option<String>,
+    /// Its MTGO draft id (`TournamentSyncData.DraftID`); `None` for 0, which
+    /// MTGO sends before the draft fires.
+    pub draft_id: Option<u64>,
 }
 
 /// One `A-B N` range of the prize text: `min` to `max` players play `rounds`
@@ -275,6 +280,11 @@ fn snapshot(body: &Value, account_login_id: Option<u64>) -> Option<EventSnapshot
                 found.rounds.push(pairing);
             }
         }
+        found.draft_token = text(sync.get("DraftToken"));
+        found.draft_id = sync
+            .get("DraftID")
+            .and_then(Value::as_u64)
+            .filter(|id| *id > 0);
         found.account_eliminated = match account_login_id {
             Some(account) => sync
                 .get("EliminatedPlayers")
@@ -520,6 +530,50 @@ mod tests {
         assert!(!first.in_playoffs);
         assert!(first.rounds.is_empty());
         assert_eq!(snapshots.len(), 3, "the snapshot repeats at login");
+    }
+
+    /// A Swiss Draft's `EventSyncData_t` line, trimmed (no players, no
+    /// prizes).
+    const SWISS_DRAFT_SYNC: &str = concat!(
+        "15:27:13 [INF] (Game Management|Processing Registered Handler for EventSyncData_t in ",
+        "TournamentUninitializedState) Processor: TournamentUninitializedState Message: ",
+        "{\"EventToken\":\"aaaaaaaa-1111-4111-8111-111111111111\",\"EventID\":19990050,",
+        "\"PlayerEventType\":3,\"GameStructureCd\":\"DFRAFRAFRA\",\"Players\":[],",
+        "\"Description\":\"Reality Fracture Swiss Draft\",",
+        "\"TournamentSyncData\":{\"TournamentStructureCd\":\"SWISS\",",
+        "\"DraftServerID\":3999737,\"DraftToken\":\"bbbbbbbb-2222-4222-8222-222222222222\",",
+        "\"DraftID\":7999556,\"DeckBuildingLength\":10}} ",
+        "Receiver: WotC.MtGO.Client.Model.Play.TournamentEvent.Tournament"
+    );
+
+    #[test]
+    fn a_draft_event_snapshot_names_its_draft() {
+        let Some(TournamentFact::Snapshot(snapshot)) =
+            decode_fact(EventKind::TournamentSync, SWISS_DRAFT_SYNC, None)
+        else {
+            panic!("a snapshot")
+        };
+        assert_eq!(snapshot.event_id, Some(19_990_050));
+        assert_eq!(
+            snapshot.name.as_deref(),
+            Some("Reality Fracture Swiss Draft")
+        );
+        assert_eq!(snapshot.format.as_deref(), Some("DFRAFRAFRA"));
+        assert_eq!(
+            snapshot.draft_token.as_deref(),
+            Some("bbbbbbbb-2222-4222-8222-222222222222")
+        );
+        assert_eq!(snapshot.draft_id, Some(7_999_556));
+
+        let unfired = SWISS_DRAFT_SYNC
+            .replace("\"DraftID\":7999556", "\"DraftID\":0")
+            .replace("bbbbbbbb-2222-4222-8222-222222222222", "");
+        let Some(TournamentFact::Snapshot(unfired)) =
+            decode_fact(EventKind::TournamentSync, &unfired, None)
+        else {
+            panic!("a snapshot")
+        };
+        assert_eq!((unfired.draft_token, unfired.draft_id), (None, None));
     }
 
     #[test]

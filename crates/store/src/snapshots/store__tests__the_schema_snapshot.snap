@@ -275,14 +275,18 @@ table drafts strict=1 without_rowid=0
   column 19 imported_from INTEGER notnull=0 default=NULL pk=0
   column 20 imported_league_from INTEGER notnull=0 default=NULL pk=0
   column 21 legacy_draft_id INTEGER notnull=0 default=NULL pk=0
+  column 22 tournament_id INTEGER notnull=0 default=NULL pk=0
+  column 23 tournament_name TEXT notnull=0 default=NULL pk=0
   check ((source = 'imported') = (imported_from IS NOT NULL))
   check (abandons_at IS NULL OR state IN ('connecting', 'picking'))
   check (source IN ('log', 'imported'))
   check (state IN ('connecting', 'picking', 'finished', 'abandoned'))
   foreign key (account_id) -> accounts (id) on update NO ACTION on delete RESTRICT match NONE
   foreign key (league_id) -> leagues (id) on update NO ACTION on delete SET NULL match NONE
+  foreign key (tournament_id) -> tournaments (id) on update NO ACTION on delete SET NULL match NONE
   index drafts_account_id unique=0 origin=c partial=0 on (account_id): CREATE INDEX drafts_account_id ON drafts (account_id)
   index drafts_league_id unique=1 origin=c partial=1 on (league_id): CREATE UNIQUE INDEX drafts_league_id ON drafts (league_id) WHERE league_id IS NOT NULL
+  index drafts_tournament_id unique=1 origin=c partial=1 on (account_id, tournament_id): CREATE UNIQUE INDEX drafts_tournament_id ON drafts (account_id, tournament_id) WHERE tournament_id IS NOT NULL
   index sqlite_autoindex_drafts_1 unique=1 origin=u partial=0 on (draft_token)
   index sqlite_autoindex_drafts_2 unique=1 origin=u partial=0 on (imported_from)
 table endstep_captures strict=1 without_rowid=0

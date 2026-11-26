@@ -578,6 +578,121 @@ fn a_run_row_has_its_record_picks_state_and_pick_time() {
     assert_eq!(set_codes_of(&view.sets), vec!["QHB"]);
 }
 
+/// A finished draft of no league (`q-draft-1`), then the three rounds of
+/// Swiss Draft 19990050 (`DFRAFRAFRA`): round 1 paired 12 minutes after the
+/// draft ends, won, lost, won. Returns the draft's start.
+fn swiss_draft(conn: &Connection) -> i64 {
+    let start = T0 - 5 * HOUR;
+    draft(conn, 1, 0, "finished", Some(start));
+    conn.execute(
+        "UPDATE drafts SET ended_at = ?1 WHERE id = 1",
+        [start + 25 * MINUTE],
+    )
+    .expect("ended");
+    for (round, outcome, games) in [
+        (1, "win", ["win", "win"].as_slice()),
+        (2, "loss", ["loss", "loss"].as_slice()),
+        (3, "win", ["win", "loss", "win"].as_slice()),
+    ] {
+        let token = format!("q-swiss-{round}");
+        let at = start + 37 * MINUTE + (round - 1) * HOUR;
+        played(
+            conn,
+            0,
+            &token,
+            "DFRAFRAFRA",
+            outcome,
+            at,
+            Some(at + 20 * MINUTE),
+            games,
+        );
+        conn.execute(
+            "UPDATE matches SET tournament_event_id = 19990050, tournament_round = ?2,
+                 game_structure = 'FRAx3'
+             WHERE token = ?1",
+            params![token, round],
+        )
+        .expect("a tournament round");
+    }
+    start
+}
+
+#[test]
+fn a_swiss_draft_is_a_linked_row_named_for_its_event() {
+    let (_dir, conn) = db("limited-index-swiss");
+    let start = swiss_draft(&conn);
+    // Named for its event: the log's name, else the tournament row's.
+    gather(&conn, NOW, UTC).expect("sync");
+    conn.execute(
+        "UPDATE tournaments SET name = 'Q Fracture Swiss Draft', name_synthesized = 0",
+        [],
+    )
+    .expect("named");
+
+    let view = the_index(&conn, &index_query(None, None, None));
+    assert_eq!(view.rows.len(), 1);
+    let row = &view.rows[0];
+    assert!(row.linked);
+    assert!(!row.in_league, "no league row to edit");
+    assert_eq!(row.title, "FRA Swiss Draft");
+    assert_eq!(row.run_key.as_deref(), Some("tournament:19990050"));
+    assert_eq!(row.draft_token.as_deref(), Some("q-draft-1"));
+    assert_eq!(row.set_code.as_deref(), Some("FRA"));
+    assert_eq!(row.state, "Complete");
+    assert_eq!((row.wins, row.losses), (2, 1));
+    assert_eq!(
+        row.results,
+        vec![Some(MarkView::W), Some(MarkView::L), Some(MarkView::W)]
+    );
+    assert_eq!(row.matches.len(), 3);
+    assert_eq!(row.started_at_ms, Some(start));
+    assert_eq!(row.note, None);
+    assert_eq!(view.kpis.unlinked, 0);
+    assert_eq!(view.kpis.events, 1);
+
+    // Its pages read it by its key.
+    let matches = matches_page(&conn, "tournament:19990050", NOW, UTC)
+        .expect("matches")
+        .expect("found");
+    assert_eq!(matches.matches.len(), 3);
+
+    // The Limited pages only: not a league run, not on the home dashboard.
+    let leagues = crate::leagues::gather(&conn, &[1]).expect("leagues");
+    assert!(leagues.runs.is_empty());
+    let data = gather(&conn, NOW, UTC).expect("gather");
+    assert!(
+        super::dashboard_runs(&conn, &data, UTC)
+            .expect("runs")
+            .is_empty()
+    );
+}
+
+#[test]
+fn an_unfinished_tournament_draft_is_active_until_another_draft_follows_it() {
+    let (_dir, conn) = db("limited-index-swiss-dropped");
+    swiss_draft(&conn);
+    // Round 1 won: an event of unknown kind plays on after a win.
+    conn.execute(
+        "DELETE FROM matches WHERE token IN ('q-swiss-2', 'q-swiss-3')",
+        [],
+    )
+    .expect("one round");
+    let row = the_index(&conn, &index_query(None, None, None)).rows[0].clone();
+    assert_eq!(
+        (row.title.as_str(), row.state.as_str()),
+        ("FRA Tournament Draft", "Active")
+    );
+
+    draft(&conn, 2, 0, "finished", Some(NOW - 10 * MINUTE));
+    let view = the_index(&conn, &index_query(None, None, None));
+    let swiss = view
+        .rows
+        .iter()
+        .find(|row| row.run_key.as_deref() == Some("tournament:19990050"))
+        .expect("the Swiss Draft");
+    assert_eq!(swiss.state, "Dropped");
+}
+
 #[test]
 fn an_unlinked_draft_is_a_league_unknown_row() {
     let (_dir, conn) = db("limited-index-unlinked");

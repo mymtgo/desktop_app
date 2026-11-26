@@ -1129,6 +1129,7 @@ export const events = {
 	replayGameChanged: makeEvent<ReplayGameChanged>("replay-game-changed"),
 	settingsChanged: makeEvent<SettingsChanged>("settings-changed"),
 	statusChanged: makeEvent<StatusChanged>("status-changed"),
+	syncFinished: makeEvent<SyncFinished>("sync-finished"),
 	trackerRestarting: makeEvent<TrackerRestarting>("tracker-restarting"),
 	updateStatusChanged: makeEvent<UpdateStatusChanged>("update-status-changed"),
 };
@@ -1762,6 +1763,12 @@ export type CardStatsPayload = {
 	archetypes: ArchetypeOptionView[],
 	perspective: Perspective,
 	deckWinrate: DeckWinrateView,
+	/**
+	 *  Games under the filters whose cards come from MTGO's game log alone
+	 *  (imported matches with no full log): Seen and sideboarding are
+	 *  estimates for them.
+	 */
+	logOnlyGames: number,
 	/**  The `card_stats_trust` setting. */
 	trust: number,
 };
@@ -4212,7 +4219,7 @@ export type LimitedIndexRowView = {
 	/**  The run's key; `None` for an unlinked draft. */
 	runKey: string | null,
 	draftToken: string | null,
-	/**  `HOB Draft`, or `Draft (league unknown)`. */
+	/**  `HOB Draft`, `FRA Swiss Draft`, or `Draft (league unknown)`. */
 	title: string,
 	setCode: string | null,
 	/**  `draft` or `sealed`. */
@@ -4262,6 +4269,12 @@ export type LimitedIndexRowView = {
 	note: string | null,
 	/**  A run (true) or an unlinked draft. */
 	linked: boolean,
+	/**
+	 *  A league holds the run, so its "..." menu edits it. False for a
+	 *  draft played in a tournament (a Swiss Draft: no league row to edit)
+	 *  and for an unlinked draft.
+	 */
+	inLeague: boolean,
 	/**  The league run header's score ring (`EMPTY` for an unlinked draft). */
 	classification: ClassificationView,
 	/**  The round being played, for a LIVE run. */
@@ -6660,11 +6673,23 @@ export type Switched = {
 	redirect: string,
 };
 
+/**
+ *  A sync run ended (scheduled, after a match or "Sync now"), whatever it
+ *  did. The status bar reads its sync line again.
+ */
+export type SyncFinished = Record<string, never>;
+
 /**  The Account page's sync status (0.x `SyncController::status`). */
 export type SyncStatus = {
 	linked: boolean,
 	lastSyncedAtMs: number | null,
 	pending: number,
+	/**
+	 *  Everything a sync will send: `pending` plus the matches still in
+	 *  their send hold (`store::api_reads::SEND_HOLD_MS`), which the next
+	 *  run skips. The status bar's "queued".
+	 */
+	queued: number,
 	pendingByType: TypeCounts,
 	/**  The current run's feed, `HH:MM:SS line`, newest last. */
 	activity: string[],
@@ -6908,8 +6933,6 @@ export type UpdateStatusChanged = {
 
 /**  A usage event: the only things the app ever counts. */
 export type UsageEvent = 
-/**  Once per launch, after startup. */
-{ kind: "appStarted" } | 
 /**  A route change; `page` is the route's name. */
 { kind: "pageViewed"; page: string } | 
 /**  A feature was used. */

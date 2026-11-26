@@ -37,7 +37,7 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { TooltipProvider } from '@/components/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useShrinkage } from '@/composables/useShrinkage'
 import {
   CARD_STATS_COLUMNS,
@@ -51,6 +51,7 @@ import {
 } from '@/lib/cardStats/columns'
 import { readStored, writeStored } from '@/lib/browserStorage'
 import { ALL, filtersDiffer, type CardStatsFilters } from '@/lib/cardStats/filters'
+import { estimatedKind, estimatedTooltip, logOnlyNote } from '@/lib/cardStats/format'
 import { DEFAULT_SORT, nextSort, sortEntries, type SortKey, type SortState } from '@/lib/cardStats/sort'
 import {
   FILTER_KEYS,
@@ -87,6 +88,9 @@ const perspective = computed(() => props.payload.perspective)
 const archetypes = computed(() => props.payload.archetypes)
 /** The deck's win rate, the shrinkage prior (a half without games). */
 const deckRate = computed(() => props.payload.deckWinrate.rate ?? 0.5)
+/** Games under the filters that come from MTGO's game log alone (imported matches). */
+const logOnlyGames = computed(() => props.payload.logOnlyGames)
+const logOnlyText = computed(() => logOnlyNote(logOnlyGames.value))
 
 function setFilter(patch: Partial<CardStatsFilters>) {
   filters.value = { ...filters.value, ...patch }
@@ -370,6 +374,10 @@ function onImageMove(event: MouseEvent) {
     </div>
   </div>
 
+  <p v-if="logOnlyGames > 0 && !loading && stats.length" class="shrink-0 text-xs text-muted-foreground">
+    {{ logOnlyText }}
+  </p>
+
   <Card v-if="loading" class="gap-0 overflow-hidden p-0">
     <CardContent class="flex flex-col gap-2 px-4 py-4">
       <Skeleton class="h-8 w-full" />
@@ -420,7 +428,16 @@ function onImageMove(event: MouseEvent) {
                   @click="toggleSort(col.key)"
                 >
                   <span class="inline-flex items-center justify-end gap-1">
-                    {{ col.label }} <component :is="sortIcon(col.key)" class="size-3" />
+                    {{ col.label }}
+                    <Tooltip v-if="logOnlyGames > 0 && estimatedKind(col.key)">
+                      <TooltipTrigger as-child>
+                        <sup class="cursor-default font-normal text-muted-foreground">est.</sup>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" class="max-w-xs text-xs font-normal">
+                        {{ estimatedTooltip(estimatedKind(col.key) ?? 'seen', logOnlyGames) }}
+                      </TooltipContent>
+                    </Tooltip>
+                    <component :is="sortIcon(col.key)" class="size-3" />
                   </span>
                 </TableHead>
               </template>
@@ -472,6 +489,7 @@ function onImageMove(event: MouseEvent) {
             :trust="trust"
             :visible-columns="effectiveColumns"
             :perspective="perspective"
+            :log-only-games="logOnlyGames"
           />
         </ContextMenuTrigger>
         <ContextMenuPortal>

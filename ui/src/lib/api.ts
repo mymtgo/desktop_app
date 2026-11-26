@@ -141,6 +141,28 @@ export function lastSyncedText(ms: number | null): string {
   return new Date(ms).toLocaleString()
 }
 
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+/** `HH:MM` today, else `D Mon HH:MM`, in local time. */
+function syncClock(ms: number, nowMs: number): string {
+  const at = new Date(ms)
+  const now = new Date(nowMs)
+  const time = `${String(at.getHours()).padStart(2, '0')}:${String(at.getMinutes()).padStart(2, '0')}`
+  const sameDay = at.getFullYear() === now.getFullYear() && at.getMonth() === now.getMonth() && at.getDate() === now.getDate()
+  return sameDay ? time : `${at.getDate()} ${MONTHS[at.getMonth()]} ${time}`
+}
+
+/**
+ * The status bar's sync line, `Last sync: 23:00 · 2 queued`; null when the
+ * device is not linked. `queued` counts the matches still in their 5 minute
+ * send hold, so a match that just ended never reads as synced.
+ */
+export function syncBarText(sync: SyncStatus | null | undefined, nowMs: number): string | null {
+  if (!sync?.linked) return null
+  const last = `Last sync: ${sync.lastSyncedAtMs === null ? 'never' : syncClock(sync.lastSyncedAtMs, nowMs)}`
+  return sync.queued > 0 ? `${last} · ${sync.queued} queued` : last
+}
+
 /** The "Waiting in the cloud" row: checking only until the first answer. */
 export function cloudText(loading: boolean, download: TypeCounts | null): string {
   if (loading && !download) return 'Checking...'

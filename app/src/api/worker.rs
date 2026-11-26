@@ -37,7 +37,8 @@ pub const ACCOUNTS_CHECK_MS: i64 = 60_000;
 /// What wakes the worker.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum WorkerSignal {
-    /// A log match became complete: a sync follows 30 seconds later.
+    /// A log match became complete: a sync follows once its send hold is
+    /// over (`SYNC_AFTER_COMPLETION_MS`).
     MatchCompleted,
     /// Offline mode changed: run what is due now.
     GateChanged,
@@ -1464,23 +1465,29 @@ mod tests {
         );
     }
 
+    /// The sync a completed match asks for runs after that match's send
+    /// hold; an earlier run would skip the match and leave it to the 30
+    /// minute run.
     #[test]
-    fn a_completed_match_asks_for_a_sync_thirty_seconds_out() {
+    fn a_completed_match_asks_for_a_sync_after_its_send_hold() {
         let api = linked("http://127.0.0.1:1");
         let source = || None;
         let mut worker = Worker::new(&api.state, &source, &no_reader);
         worker.runs.record(Job::Sync, NOW);
-        worker.note(WorkerSignal::MatchCompleted, NOW + 1_000);
+        let completed = NOW + 1_000;
+        worker.note(WorkerSignal::MatchCompleted, completed);
         let gate = api.state.gate_now();
         let schedule = Schedule::default();
+        let held_until = completed + store::api_reads::SEND_HOLD_MS;
         assert!(
             !schedule
-                .due(NOW + 30_999, &worker.runs, &gate)
-                .contains(&Job::Sync)
+                .due(held_until, &worker.runs, &gate)
+                .contains(&Job::Sync),
+            "the match is still held"
         );
         assert!(
             schedule
-                .due(NOW + 31_000, &worker.runs, &gate)
+                .due(held_until + 30_000, &worker.runs, &gate)
                 .contains(&Job::Sync)
         );
     }

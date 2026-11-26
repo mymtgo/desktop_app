@@ -38,6 +38,22 @@ export function toggleArchetype(current: string | null, value: string): string |
   return current === value ? null : value
 }
 
+/**
+ * The sidebar's archetype rows: those without a match are hidden (and
+ * counted) unless `showAll`, but the selected one stays. Nothing is hidden
+ * while no archetype has a match, so a new player never sees an empty list.
+ */
+export function visibleArchetypes(
+  options: DeckArchetypeOptionView[],
+  { showAll, selected }: { showAll: boolean; selected: string | null },
+): { shown: DeckArchetypeOptionView[]; hiddenCount: number } {
+  const anyPlayed = options.some((option) => option.record.total > 0)
+  const hidable = (option: DeckArchetypeOptionView) =>
+    anyPlayed && option.record.total === 0 && selected !== String(option.id)
+  const hiddenCount = options.filter(hidable).length
+  return { shown: showAll ? options : options.filter((option) => !hidable(option)), hiddenCount }
+}
+
 /** A row's rate: `-` before any match. */
 export function archetypeRate(record: RecordView): string {
   return record.total === 0 ? '-' : `${record.winRate}%`

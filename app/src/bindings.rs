@@ -14,7 +14,8 @@ use crate::events::{
     GuidesChanged, HistoryImportsChanged, HistoryScanChanged, ImportProgressChanged,
     LeaguesChanged, LimitedChanged, MatchArchetypesChanged, MatchAttention, MatchDetected,
     MatchPreviewed, MatchRemoved, MatchUpdated, MetagameSharesReady, OfflineModeChanged,
-    RankChanged, SettingsChanged, StatusChanged, TrackerRestarting, UpdateStatusChanged,
+    RankChanged, SettingsChanged, StatusChanged, SyncFinished, TrackerRestarting,
+    UpdateStatusChanged,
 };
 use crate::external;
 use crate::first_run;
@@ -280,6 +281,7 @@ pub fn builder() -> tauri_specta::Builder<tauri::Wry> {
             HistoryScanChanged,
             HistoryImportsChanged,
             ApiChanged,
+            SyncFinished,
             OfflineModeChanged,
             AppNotification,
             CardsChanged,

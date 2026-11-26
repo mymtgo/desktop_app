@@ -6,7 +6,9 @@
 //! Every read takes the stored limited runs
 //! (`store::leagues::stored_limited_runs`: the draft and sealed runs the
 //! league sync stored, with their drafts, listed matches and registered
-//! decks; a page showing one run reads it alone by its key) and the games'
+//! decks; plus `stored_tournament_drafts`: the drafts played in a tournament,
+//! a Swiss Draft, which the home dashboard leaves out; a page showing one run
+//! reads it alone by its key) and the games'
 //! stored cards, never a log event, and computes the pages with the
 //! `limited` crate, as 0.x's `BuildLimitedIndex`, `GetLimitedEventSharedProps`,
 //! `BuildDraftReview`, `ComputeCrossDraftCardStats`, `BuildDeckEvolution`,
@@ -16,7 +18,8 @@
 //! Whose runs: the current account's (every account's when there is none),
 //! plus the 0.x runs and drafts the import could not match to an account,
 //! as the Leagues page. A run is named by its run key (`0x:{id}`,
-//! `draft:{token}` or a derived key); an unknown key, or a constructed run's,
+//! `draft:{token}`, `tournament:{event id}` or a derived key); an unknown
+//! key, or a constructed run's,
 //! is not found (`None`), as 0.x answered 404.
 //!
 //! Card data may be missing (#6, #7): a card with no row shows as `#id`,
@@ -27,7 +30,10 @@ use std::collections::{BTreeMap, BTreeSet, HashMap};
 use chrono::DateTime;
 use chrono_tz::Tz;
 use decks::stats::Range;
-use leagues::{LeagueKind, RunState, RunSummary, summarize_limited_run};
+use leagues::{
+    LeagueKind, RunState, RunSummary, is_tournament_run_key, summarize_limited_run,
+    tournament_draft_label,
+};
 use limited::{
     CardFacts, CardFactsMap, CardRowsInput, CastStats, CompletedMatch, CrossDraftStats, Draft,
     DraftState, EvolutionInput, OtherDraft, Pick, RegisteredCard, RunPool, cross_draft_card_stats,
@@ -38,7 +44,10 @@ use limited::{
 use serde::{Deserialize, Serialize};
 use store::decks::{CardRow, card_infos};
 use store::league_sync::LeagueOwner;
-use store::leagues::{LeagueMatchRow, LimitedRun, RunFilter, notes_by_match, stored_limited_runs};
+use store::leagues::{
+    LeagueMatchRow, LimitedRun, RunFilter, notes_by_match, stored_limited_runs,
+    stored_tournament_drafts,
+};
 use store::limited::{DraftNoteEdit, DraftNoteOutcome, PickNote, pick_note_rows};
 use store::names::game_won;
 use store::{Connection, StoreError};
@@ -119,7 +128,7 @@ pub struct LimitedIndexRowView {
     /// The run's key; `None` for an unlinked draft.
     pub run_key: Option<String>,
     pub draft_token: Option<String>,
-    /// `HOB Draft`, or `Draft (league unknown)`.
+    /// `HOB Draft`, `FRA Swiss Draft`, or `Draft (league unknown)`.
     pub title: String,
     pub set_code: Option<String>,
     /// `draft` or `sealed`.
@@ -161,6 +170,10 @@ pub struct LimitedIndexRowView {
     pub note: Option<String>,
     /// A run (true) or an unlinked draft.
     pub linked: bool,
+    /// A league holds the run, so its "..." menu edits it. False for a
+    /// draft played in a tournament (a Swiss Draft: no league row to edit)
+    /// and for an unlinked draft.
+    pub in_league: bool,
     /// The league run header's score ring (`EMPTY` for an unlinked draft).
     pub classification: ClassificationView,
     /// The round being played, for a LIVE run.
@@ -762,11 +775,17 @@ fn limited_filter(conn: &Connection, run_key: Option<&str>) -> Result<RunFilter,
     })
 }
 
-/// Every stored limited run and unlinked draft the pages read.
+/// Every stored limited run (league runs and tournament drafts) and
+/// unlinked draft the pages read.
 pub fn gather(conn: &Connection) -> Result<Gathered, StoreError> {
-    let found = stored_limited_runs(conn, &limited_filter(conn, None)?)?;
+    let filter = limited_filter(conn, None)?;
+    let found = stored_limited_runs(conn, &filter)?;
+    let mut runs = found.runs;
+    runs.extend(stored_tournament_drafts(conn, &filter)?);
+    // Stable: equal starts keep league runs first.
+    runs.sort_by_key(|limited| std::cmp::Reverse(limited.run.started_at));
     let mut gathered = Gathered {
-        runs: found.runs,
+        runs,
         unlinked: found.unlinked_drafts,
     };
     // Stable: equal starts keep the stored order.
@@ -779,7 +798,11 @@ pub fn gather(conn: &Connection) -> Result<Gathered, StoreError> {
 /// The stored limited run `key` alone (a constructed run's key, or one of
 /// another account's, is none).
 fn run_by_key(conn: &Connection, key: &str) -> Result<Option<LimitedRun>, StoreError> {
-    let found = stored_limited_runs(conn, &limited_filter(conn, Some(key))?)?;
+    let filter = limited_filter(conn, Some(key))?;
+    if is_tournament_run_key(key) {
+        return Ok(stored_tournament_drafts(conn, &filter)?.into_iter().next());
+    }
+    let found = stored_limited_runs(conn, &filter)?;
     Ok(found.runs.into_iter().next())
 }
 
@@ -1040,15 +1063,19 @@ fn picks_recorded(run: &LimitedRun) -> bool {
 
 /// `trim(set_code.' '.Kind)`, or the format's name in place of the code
 /// (`Vintage Cube Draft`). An Arena run has its own name, from its event
-/// (`Arena Direct · EOE Sealed`).
+/// (`Arena Direct · EOE Sealed`); a tournament draft is named for its event
+/// (`FRA Swiss Draft`).
 fn run_title(run: &LimitedRun) -> String {
     if leagues::is_arena_run_key(&run.run.key) && !run.run.name.is_empty() {
         return run.run.name.clone();
     }
+    let kind = if is_tournament_run_key(&run.run.key) {
+        tournament_draft_label(Some(&run.run.name))
+    } else {
+        kind_label(run.run.kind)
+    };
     let set = set_label(run).unwrap_or_default();
-    format!("{set} {}", kind_label(run.run.kind))
-        .trim()
-        .to_string()
+    format!("{set} {kind}").trim().to_string()
 }
 
 /// The name MTGO gives the run's format when it is more than one set
@@ -1206,6 +1233,7 @@ fn run_row(
         on_draw_record: win_loss_view(summary.on_draw),
         note,
         linked: true,
+        in_league: !is_tournament_run_key(&run.run.key),
         classification: classification_view(summary.classification),
         live_round: summary.live_round,
         avg_match_seconds: summary.avg_match_seconds,
@@ -1250,6 +1278,7 @@ fn unlinked_row(draft: &Draft) -> LimitedIndexRowView {
         on_draw_record: WinLossView { wins: 0, losses: 0 },
         note: Some("Will link when a match or pool grant arrives".to_string()),
         linked: false,
+        in_league: false,
         classification: ClassificationView::Empty,
         live_round: None,
         avg_match_seconds: None,
@@ -2408,9 +2437,15 @@ pub fn dashboard_runs(
     data: &Gathered,
     tz: Tz,
 ) -> Result<Vec<DashboardLeagueRun>, StoreError> {
-    let shown = shown_runs(&data.runs);
+    // A tournament draft shows on the Limited pages only.
+    let league_runs: Vec<&LimitedRun> = data
+        .runs
+        .iter()
+        .filter(|limited| !is_tournament_run_key(&limited.run.key))
+        .collect();
+    let shown = shown_runs(&league_runs);
     let mut ids = BTreeSet::new();
-    for (index, limited) in data.runs.iter().enumerate() {
+    for (index, limited) in league_runs.iter().enumerate() {
         registered_ids(limited, &mut ids);
         if shown.contains(&index)
             && let Some(draft) = &limited.draft
@@ -2421,7 +2456,7 @@ pub fn dashboard_runs(
     let cards = Cards::read(conn, &ids)?;
     let mut set_names: HashMap<String, Option<String>> = HashMap::new();
     let mut runs = Vec::new();
-    for (index, limited) in data.runs.iter().enumerate() {
+    for (index, limited) in league_runs.iter().copied().enumerate() {
         let set_name = match (&limited.run.set_code, format_name(limited)) {
             (_, Some(name)) => Some(name),
             (Some(code), None) => {
@@ -2446,7 +2481,7 @@ pub fn dashboard_runs(
 /// The runs whose art and first pick the dashboard shows: the two newest
 /// (Recent drafts), the newest Active one and the newest other one (League
 /// in progress). `runs` is newest first.
-fn shown_runs(runs: &[LimitedRun]) -> BTreeSet<usize> {
+fn shown_runs(runs: &[&LimitedRun]) -> BTreeSet<usize> {
     let mut shown: BTreeSet<usize> = (0..runs.len().min(2)).collect();
     if let Some(index) = runs
         .iter()

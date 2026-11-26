@@ -75,6 +75,7 @@ const SECTIONS: Section[] = [
     title: 'Seen %',
     paragraphs: [
       'The percentage of games where this card left your library, whether drawn naturally, tutored, milled, or exiled. Any card that appeared in your hand, on the battlefield, in the graveyard, in exile, or on the stack counts as "seen." The number in brackets is the raw count of games seen.',
+      "Matches imported from MTGO's game history have only MTGO's game log, which never shows your hand, so a card there counts as seen only once it was cast or played. When such games are in the current filters, Seen % and Seen Win % are marked est. and a note above the table says how many.",
     ],
     example:
       '54% (28) means the card was seen in 28 games. Seen % is usually higher than Cast % since it includes cards drawn but never cast.',
@@ -99,6 +100,7 @@ const SECTIONS: Section[] = [
     title: 'SB In %',
     paragraphs: [
       'The percentage of postboard games (games 2 and 3) where this card was sided into your deck from the sideboard. The number in brackets is the count of games it was brought in. Only applies to postboard games.',
+      "In imported matches with only MTGO's game log, sideboarding is visible only for cards that show up in the log, so SB In % and SB Out % can be low or missing for those games and are marked est.",
     ],
     example:
       "75% (6) means the card was sided in for 6 postboard games. A high SB In % on a sideboard card shows it's frequently relevant in your meta.",

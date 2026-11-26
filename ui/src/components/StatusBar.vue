@@ -8,7 +8,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useOfflineMode } from '@/composables/useOfflineMode'
 import { usePlatformContext } from '@/composables/usePlatformContext'
 import { useWhatsNewUrl } from '@/composables/useWhatsNew'
-import { useIntegrationsQuery, useStatus } from '@/lib/queries'
+import { events } from '@/bindings'
+import { useTauriEvents } from '@/composables/useTauriEvents'
+import { syncBarText } from '@/lib/api'
+import { useIntegrationsQuery, useStatus, useSyncStatus } from '@/lib/queries'
 import { newestEventMs, sinceText, statusWarnings, trackingState } from '@/lib/status'
 
 const { data: status } = useStatus()
@@ -17,10 +20,14 @@ const offlineMode = useOfflineMode()
 const { platform } = usePlatformContext()
 const whatsNewUrl = useWhatsNewUrl()
 const now = useNow({ scheduler: (update) => useIntervalFn(update, 1000) })
+const { data: sync, refetch: refetchSync } = useSyncStatus()
+useTauriEvents(() => [events.syncFinished.listen(() => void refetchSync())])
 
 const state = computed(() => (status.value ? trackingState(status.value, platform.value, integrations?.value?.endstepStatus.connection) : { tone: 'idle' as const, text: 'Starting' }))
 const since = computed(() => (status.value ? sinceText(newestEventMs(status.value, platform.value), now.value.getTime()) : ''))
 const warnings = computed(() => (status.value ? statusWarnings(status.value, platform.value) : []))
+// Hidden while offline: no sync runs, and the Offline mode badge says so.
+const syncText = computed(() => (offlineMode.value ? null : syncBarText(sync.value, now.value.getTime())))
 const dot = computed(
   () =>
     ({ ok: 'bg-success', warn: 'bg-warning', error: 'bg-destructive', idle: 'bg-muted-foreground' })[state.value.tone],
@@ -42,6 +49,10 @@ const dot = computed(
     </template>
     <div class="h-3 w-px bg-border" />
     <span>{{ since }}</span>
+    <template v-if="syncText">
+      <div class="h-3 w-px bg-border" />
+      <span data-test="sync-status">{{ syncText }}</span>
+    </template>
     <template v-if="warnings.length > 0">
       <div class="h-3 w-px bg-border" />
       <TooltipProvider>

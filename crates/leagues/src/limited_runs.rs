@@ -115,6 +115,109 @@ pub struct LimitedSeed {
     pub course_id: Option<i64>,
 }
 
+/// A tournament of the account played in a draft format (`DFRAFRAFRA`, a
+/// Swiss Draft): its first match's format and start, and the draft its
+/// `EventSyncData_t` line names (`TournamentSyncData.DraftToken`,
+/// `DraftID`), when one was read.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct DraftTournament {
+    pub event_id: i64,
+    pub format: Option<String>,
+    pub first_match_at: i64,
+    pub draft_token: Option<String>,
+    pub draft_id: Option<u64>,
+}
+
+/// A draft the fold placed in a tournament rather than a league.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct TournamentDraft {
+    pub draft_token: String,
+    pub event_id: i64,
+}
+
+/// A draft with no other evidence joins the draft tournament whose first
+/// match starts at most this long after the draft ends: MTGO gives ten
+/// minutes of deck building (`DeckBuildingLength`), then pairs round 1. The
+/// hour leaves room for a slow pod, and stays under the length of a draft
+/// (about 40 minutes of picks) plus that wait, so two drafts in a row cannot
+/// both reach one tournament first.
+pub const TOURNAMENT_DRAFT_WINDOW_MS: i64 = 60 * 60 * 1000;
+
+/// The run key of a tournament draft (`tournament:{event id}`).
+pub fn tournament_run_key(event_id: i64) -> String {
+    format!("tournament:{event_id}")
+}
+
+pub fn is_tournament_run_key(key: &str) -> bool {
+    key.starts_with("tournament:")
+}
+
+/// A tournament draft's state, from the stored matches alone so it never
+/// changes once they stop changing. Complete once it holds the three
+/// complete matches of a Swiss Draft, or, in an event that is not Swiss (an
+/// elimination draft), once its last complete match was lost. Else Dropped
+/// when the account moved on (`newer_activity`: a newer draft, or a match
+/// outside this event after the run's last match), else Active.
+pub fn tournament_draft_state(
+    complete_matches: usize,
+    swiss: bool,
+    last_complete_lost: bool,
+    newer_activity: bool,
+) -> RunState {
+    if complete_matches >= DRAFT_ROUNDS || (!swiss && last_complete_lost) {
+        RunState::Complete
+    } else if newer_activity {
+        RunState::Dropped
+    } else {
+        RunState::Active
+    }
+}
+
+/// Whether a tournament is a Swiss event, from its name in the log.
+pub fn is_swiss_tournament(event_name: Option<&str>) -> bool {
+    event_name.is_some_and(|name| name.to_ascii_lowercase().contains("swiss"))
+}
+
+/// What a tournament draft is called after its set (`FRA Swiss Draft`),
+/// from the event's name in the log.
+pub fn tournament_draft_label(event_name: Option<&str>) -> &'static str {
+    if is_swiss_tournament(event_name) {
+        "Swiss Draft"
+    } else {
+        "Tournament Draft"
+    }
+}
+
+/// Whether the tournament's log names the draft: its token, or its MTGO
+/// draft id (never 0, which MTGO sends before the draft fires).
+fn names_draft(tournament: &DraftTournament, draft: &Draft) -> bool {
+    let by_token = tournament
+        .draft_token
+        .as_deref()
+        .is_some_and(|token| token.eq_ignore_ascii_case(&draft.token));
+    let by_id =
+        matches!((tournament.draft_id, draft.draft_id), (Some(a), Some(b)) if a == b && a != 0);
+    by_token || by_id
+}
+
+/// When a draft ended: its end, else its last pick.
+fn draft_end(draft: &Draft) -> Option<i64> {
+    draft.ended_at_ms.or_else(|| {
+        draft
+            .picks
+            .iter()
+            .filter_map(|pick| pick.picked_at_ms)
+            .max()
+    })
+}
+
+/// Whether a link already holds the draft or the tournament.
+fn taken(links: &[TournamentDraft], draft_token: &str, event_id: i64) -> bool {
+    links
+        .iter()
+        .any(|link| link.draft_token == draft_token || link.event_id == event_id)
+}
+
 /// What the limited rules read besides the league inputs.
 #[derive(Debug, Clone, Default)]
 pub struct LimitedFacts {
@@ -130,13 +233,17 @@ pub struct LimitedFacts {
     /// Limited seeds by their key (`0x:{id}`); a seed without one is
     /// constructed.
     pub seeds: HashMap<String, LimitedSeed>,
+    /// The account's tournaments, for drafts no league holds.
+    pub tournaments: Vec<DraftTournament>,
 }
 
-/// The fold's result: every run in mint order, and the tokens of the drafts
-/// no run holds (0.x "Draft (league unknown)" rows), in fold order.
+/// The fold's result: every run in mint order, the drafts placed in a
+/// tournament (by draft token), and the tokens of the drafts neither holds
+/// (0.x "Draft (league unknown)" rows), in fold order.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct LeagueFold {
     pub runs: Vec<Run>,
+    pub tournament_drafts: Vec<TournamentDraft>,
     pub unlinked_drafts: Vec<String>,
 }
 
@@ -632,6 +739,82 @@ impl Fold {
             .and_then(|draft| set_code_from_picks(draft, &self.facts.cards))
             .filter(|code| !code.is_empty());
         self.runs[index].run.set_code = guess;
+    }
+
+    /// The drafts no run holds that were played in one of the account's
+    /// tournaments (a Swiss Draft has no league). A tournament whose log
+    /// names the draft (its token or draft id) takes it. Otherwise a finished
+    /// draft of no league goes to the draft tournament of its set whose first match starts
+    /// within `TOURNAMENT_DRAFT_WINDOW_MS` after the draft ends, nearest
+    /// first. One draft per tournament; ties break by event id, then draft
+    /// token, so the input order never matters.
+    pub(crate) fn tournament_drafts(&self) -> Vec<TournamentDraft> {
+        let mut drafts: Vec<&Draft> = self
+            .drafts
+            .iter()
+            .filter(|found| found.run.is_none() && !found.pinned)
+            .map(|found| &found.draft)
+            .collect();
+        drafts.sort_by(|a, b| a.token.cmp(&b.token));
+        let mut tournaments: Vec<&DraftTournament> = self.facts.tournaments.iter().collect();
+        tournaments.sort_by_key(|tournament| tournament.event_id);
+        tournaments.dedup_by_key(|tournament| tournament.event_id);
+
+        let mut links: Vec<TournamentDraft> = Vec::new();
+        for tournament in &tournaments {
+            for draft in &drafts {
+                if names_draft(tournament, draft)
+                    && !taken(&links, &draft.token, tournament.event_id)
+                {
+                    links.push(TournamentDraft {
+                        draft_token: draft.token.clone(),
+                        event_id: tournament.event_id,
+                    });
+                }
+            }
+        }
+
+        let mut pairs: Vec<(i64, i64, &str)> = Vec::new();
+        for tournament in &tournaments {
+            if LeagueKind::from_format_code(tournament.format.as_deref()) != LeagueKind::Draft {
+                continue;
+            }
+            let tournament_set = tournament
+                .format
+                .as_deref()
+                .and_then(set_code_from_play_format);
+            for draft in &drafts {
+                // A draft MTGO tied to a league is never a Swiss Draft.
+                if draft.state != DraftState::Finished || draft.league_event_id.is_some() {
+                    continue;
+                }
+                let Some(ended_at) = draft_end(draft) else {
+                    continue;
+                };
+                let gap = tournament.first_match_at - ended_at;
+                if !(0..=TOURNAMENT_DRAFT_WINDOW_MS).contains(&gap) {
+                    continue;
+                }
+                let draft_set = set_code_from_picks(draft, &self.facts.cards);
+                if let (Some(draft_set), Some(tournament_set)) = (&draft_set, &tournament_set)
+                    && !draft_set.eq_ignore_ascii_case(tournament_set)
+                {
+                    continue;
+                }
+                pairs.push((gap, tournament.event_id, draft.token.as_str()));
+            }
+        }
+        pairs.sort();
+        for (_, event_id, token) in pairs {
+            if taken(&links, token, event_id) {
+                continue;
+            }
+            links.push(TournamentDraft {
+                draft_token: token.to_string(),
+                event_id,
+            });
+        }
+        links
     }
 
     /// The format of the latest panel view of `event_id` at or before

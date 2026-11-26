@@ -93,6 +93,10 @@ pub const AUTOSTART_FROM_0X_APPLIED: &str = "autostart_from_0x_applied";
 /// sections 7 and 14). Default unset. Not a `Settings` field: only the start
 /// command writes it.
 pub const WHATS_NEW_SEEN_VERSION: &str = "whats_new_seen_version";
+/// The usage period markers (usage analytics spec): JSON of
+/// `usage_marks::UsageMarks`. Not a `Settings` field: only the usage
+/// markers write it.
+pub const USAGE_MARKS: &str = "usage_marks";
 /// The first run's 0.x answer (release spec section 13.2): `"migrate"` or
 /// `"fresh"`, unset until chosen. Once set, the question is never asked
 /// again. Not a `Settings` field: the first run writes it.
@@ -757,6 +761,16 @@ pub fn whats_new_seen_version(rows: &[(String, String)]) -> Option<String> {
 /// The row that records `version` as the What's new last shown or seeded.
 pub fn whats_new_seen_version_row(version: &str) -> (String, String) {
     (WHATS_NEW_SEEN_VERSION.to_string(), json(&version))
+}
+
+/// The stored usage markers; unset or unreadable is `None`.
+pub fn usage_marks(rows: &[(String, String)]) -> Option<crate::usage_marks::UsageMarks> {
+    own_row(rows, USAGE_MARKS)
+        .and_then(|value| serde_json::from_str::<crate::usage_marks::UsageMarks>(value).ok())
+}
+
+pub fn usage_marks_row(marks: &crate::usage_marks::UsageMarks) -> (String, String) {
+    (USAGE_MARKS.to_string(), json(marks))
 }
 
 /// The first run's saved 0.x answer; a value that is not one is unset.

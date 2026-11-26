@@ -68,9 +68,9 @@ pub struct DeckArchetypeOption {
 
 /// The sidebar's archetype rows: every archetype a deck in scope has, with
 /// the decks and their complete matches (0.x
-/// `BuildDeckSidebarOptions::archetypeOptions`). The one played last comes
-/// first; ties and never-played ones go by name in any case, then format
-/// (0.x sorted by name only).
+/// `BuildDeckSidebarOptions::archetypeOptions`). The most complete matches
+/// come first; ties go to the one played last, then by name in any case,
+/// then format (0.x sorted by name only).
 pub fn archetype_options(
     conn: &Connection,
     scope: &DeckScope,
@@ -113,9 +113,12 @@ GROUP BY a.id",
         options.push(row?);
     }
     options.sort_by(|a, b| {
-        // Newest first; `None` (never played) sorts below every time.
-        b.last_played_at
-            .cmp(&a.last_played_at)
+        // Most played first, then newest first; `None` (never played)
+        // sorts below every time.
+        b.record
+            .total
+            .cmp(&a.record.total)
+            .then_with(|| b.last_played_at.cmp(&a.last_played_at))
             .then_with(|| a.name.to_lowercase().cmp(&b.name.to_lowercase()))
             .then_with(|| {
                 let a_format = a.format.as_deref().unwrap_or("").to_lowercase();
@@ -668,10 +671,11 @@ mod tests {
         );
     }
 
-    // v1: the archetype whose decks were played last comes first; one
-    // never played goes after every played one, by name.
+    // v1: the archetype with the most complete matches comes first; equal
+    // counts go to the one played last, and one never played goes after
+    // every played one, by name.
     #[test]
-    fn archetype_rows_sort_by_their_decks_last_complete_match() {
+    fn archetype_rows_sort_by_matches_played_then_last_played() {
         let (_dir, conn) = db("index-options-recent");
         let qaffinity = archetype(&conn, "Qaffinity", "modern", None);
         let qburn = archetype(&conn, "Qburn", "modern", None);
@@ -679,11 +683,22 @@ mod tests {
         let qzoo = archetype(&conn, "Qzoo", "modern", None);
         let burn = version(&conn, deck(&conn, None, "CMODERN", Some(qburn)));
         complete(&conn, burn, "win", MARCH_15);
+        // Qpile has the most matches, all older than the rest.
+        let qpile = archetype(&conn, "Qpile", "modern", None);
+        let pile = version(&conn, deck(&conn, None, "CMODERN", Some(qpile)));
+        for _ in 0..4 {
+            complete(&conn, pile, "win", MARCH_15 - 9_000);
+        }
         // Qtron's newest match is in its second deck.
         let tron_old = version(&conn, deck(&conn, None, "CMODERN", Some(qtron)));
         complete(&conn, tron_old, "win", MARCH_15 - 1_000);
         let tron_new = version(&conn, deck(&conn, None, "CMODERN", Some(qtron)));
         complete(&conn, tron_new, "loss", MARCH_15 + 1_000);
+        // Qmost ties Qtron on two matches but was played earlier.
+        let qmost = archetype(&conn, "Qmost", "modern", None);
+        let most = version(&conn, deck(&conn, None, "CMODERN", Some(qmost)));
+        complete(&conn, most, "win", MARCH_15 - 2_000);
+        complete(&conn, most, "win", MARCH_15 - 3_000);
         // An unfinished match does not count as played.
         let zoo = version(&conn, deck(&conn, None, "CMODERN", Some(qzoo)));
         played(&conn, zoo, "in_progress", "win", MARCH_15 + 5_000);
@@ -694,7 +709,10 @@ mod tests {
             .into_iter()
             .map(|row| row.name)
             .collect();
-        assert_eq!(rows, ["Qtron", "Qburn", "Qaffinity", "Qzoo"]);
+        assert_eq!(
+            rows,
+            ["Qpile", "Qtron", "Qmost", "Qburn", "Qaffinity", "Qzoo"]
+        );
     }
 
     // "respects the format filter and excludes limited decks from archetype

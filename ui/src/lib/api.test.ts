@@ -29,6 +29,7 @@ import {
   freePlanText,
   lastErrorText,
   lastSyncedText,
+  syncBarText,
   notSyncedText,
   rejectionsText,
   showDeckSlots,
@@ -182,6 +183,7 @@ const syncStatus: SyncStatus = {
   linked: true,
   lastSyncedAtMs: null,
   pending: 3,
+  queued: 3,
   pendingByType: { match: 2, deck: 1, league: 0 },
   activity: [],
   syncing: false,
@@ -212,6 +214,19 @@ describe('the sync card (0.x SyncCard)', () => {
   it('says when it last synced', () => {
     expect(lastSyncedText(null)).toBe('Never synced yet')
     expect(lastSyncedText(1_800_000_000_000)).toBe(new Date(1_800_000_000_000).toLocaleString())
+  })
+
+  // The status bar: when the last sync ran and how much waits, held matches included.
+  it('says when it last synced and what is queued for the status bar', () => {
+    const now = new Date(2027, 0, 14, 23, 30).getTime()
+    const today = new Date(2027, 0, 14, 23, 0).getTime()
+    const earlier = new Date(2027, 0, 12, 9, 5).getTime()
+    expect(syncBarText({ ...syncStatus, lastSyncedAtMs: today, queued: 2 }, now)).toBe('Last sync: 23:00 · 2 queued')
+    expect(syncBarText({ ...syncStatus, lastSyncedAtMs: today, queued: 0 }, now)).toBe('Last sync: 23:00')
+    expect(syncBarText({ ...syncStatus, lastSyncedAtMs: earlier, queued: 1 }, now)).toBe('Last sync: 12 Jan 09:05 · 1 queued')
+    expect(syncBarText({ ...syncStatus, lastSyncedAtMs: null, queued: 0 }, now)).toBe('Last sync: never')
+    expect(syncBarText({ ...syncStatus, linked: false }, now)).toBeNull()
+    expect(syncBarText(undefined, now)).toBeNull()
   })
 
   it('says what waits in the cloud', () => {

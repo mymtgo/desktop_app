@@ -7,7 +7,7 @@ import WinPct from '@/components/cards/WinPct.vue'
 import { Card } from '@/components/ui/card'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { CARD_STATS_COLUMNS, CASTING_METHOD_COLUMNS, type CardStatsColumnKey, type Visibility } from '@/lib/cardStats/columns'
-import { inferredTooltip, pct, rawWinPctLabel, shrunkWinPct, winRateClass } from '@/lib/cardStats/format'
+import { estimatedKind, estimatedTooltip, inferredTooltip, pct, rawWinPctLabel, shrunkWinPct, winRateClass } from '@/lib/cardStats/format'
 import type { Perspective, ShrinkKey } from '@/lib/cardStats/shrinkage'
 
 const props = defineProps<{
@@ -18,6 +18,8 @@ const props = defineProps<{
   prior: number
   trust: number
   visibleColumns: Visibility
+  /** Games from MTGO's game log alone: Seen and the sideboard numbers are estimates. */
+  logOnlyGames?: number
   perspective: Perspective
 }>()
 
@@ -128,7 +130,17 @@ const winColour = (key: ShrinkKey) => winRateClass(winPct(key), props.perspectiv
 
       <dl class="flex flex-col gap-y-1 text-xs tabular-nums">
         <div v-for="field in fields" :key="field.key" class="flex items-baseline justify-between gap-2">
-          <dt class="truncate text-muted-foreground">{{ field.label }}</dt>
+          <dt class="truncate text-muted-foreground">
+            {{ field.label }}
+            <Tooltip v-if="logOnlyGames && estimatedKind(field.key)">
+              <TooltipTrigger as-child>
+                <sup class="cursor-default">est.</sup>
+              </TooltipTrigger>
+              <TooltipContent side="top" class="max-w-xs text-xs">
+                {{ estimatedTooltip(estimatedKind(field.key) ?? 'seen', logOnlyGames) }}
+              </TooltipContent>
+            </Tooltip>
+          </dt>
           <dd class="shrink-0 text-right">
             <WinPct
               v-if="field.render.kind === 'winpct'"

@@ -11,9 +11,11 @@
 use chrono::NaiveDateTime;
 use chrono_tz::Tz;
 use leagues::{
-    Classification, DraftInput, ImportedRunSeed, LeagueFold, LeagueInput, LeagueKind, LeagueMatch,
-    LimitedFacts, LimitedSeed, Mark, OrderedInput, PanelFormat, Run, RunInput, RunMatch, RunState,
-    fold_league_runs, fold_runs, is_limited_format_code, summarize_limited_run,
+    Classification, DraftInput, DraftTournament, ImportedRunSeed, LeagueFold, LeagueInput,
+    LeagueKind, LeagueMatch, LimitedFacts, LimitedSeed, Mark, OrderedInput, PanelFormat, Run,
+    RunInput, RunMatch, RunState, TOURNAMENT_DRAFT_WINDOW_MS, fold_league_runs, fold_runs,
+    is_limited_format_code, is_tournament_run_key, summarize_limited_run, tournament_draft_label,
+    tournament_draft_state, tournament_run_key,
 };
 use limited::{CardFacts, Draft, DraftState, Pick, RegisteredCard, RegisteredDeck};
 use mtgo_match::{MatchState, Outcome};
@@ -1608,4 +1610,233 @@ fn a_picks_guess_stands_when_no_format_code_names_the_set() {
     ));
     let fold = log.fold();
     assert_eq!(fold.runs[0].set_code.as_deref(), Some("PRM"));
+}
+
+// Swiss Drafts: a draft played in a tournament, not a league
+
+const SWISS: i64 = 19_990_050;
+const SWISS_2: i64 = 19_990_058;
+
+/// A draft-format tournament of the account whose first match starts at
+/// `first_match_at`; its `EventSyncData_t` names no draft.
+fn swiss(event_id: i64, format: &str, first_match_at: i64) -> DraftTournament {
+    DraftTournament {
+        event_id,
+        format: Some(format.to_string()),
+        first_match_at,
+        draft_token: None,
+        draft_id: None,
+    }
+}
+
+/// A finished draft picking cards 2000..=2041 with no league, 25 minutes
+/// long, MTGO draft id 7999556.
+fn swiss_draft(log: &mut Log, token: &str, started_at: i64) {
+    let mut found = draft(token, None, None, 2000..=2041, started_at);
+    found.draft_id = Some(7_999_556);
+    log.draft(found);
+}
+
+fn linked(fold: &LeagueFold) -> Vec<(&str, i64)> {
+    fold.tournament_drafts
+        .iter()
+        .map(|link| (link.draft_token.as_str(), link.event_id))
+        .collect()
+}
+
+#[test]
+fn a_swiss_draft_links_to_the_draft_tournament_that_starts_after_it() {
+    let mut log = Log::default();
+    log.known(2000..=2041, Some("FRA"));
+    swiss_draft(&mut log, DRAFT_TOKEN, base());
+    // The draft ends at 12:25; deck building; round 1 at 12:37.
+    log.facts
+        .tournaments
+        .push(swiss(SWISS, "DFRAFRAFRA", base() + 37 * MINUTE));
+    let fold = log.fold();
+    assert_eq!(linked(&fold), vec![(DRAFT_TOKEN, SWISS)]);
+    assert!(fold.unlinked_drafts.is_empty());
+    // A tournament is not a league: no run.
+    assert!(fold.runs.is_empty());
+}
+
+#[test]
+fn a_swiss_draft_links_by_the_draft_token_its_tournament_names() {
+    let mut log = Log::default();
+    swiss_draft(&mut log, DRAFT_TOKEN, base());
+    // Named by its EventSyncData_t line: no time or set rule applies.
+    let mut named = swiss(SWISS, "DFRAFRAFRA", base() + 5 * DAY);
+    named.draft_token = Some(DRAFT_TOKEN.to_uppercase());
+    log.facts.tournaments.push(named);
+    log.facts
+        .tournaments
+        .push(swiss(SWISS_2, "DFRAFRAFRA", base() + 30 * MINUTE));
+    assert_eq!(linked(&log.fold()), vec![(DRAFT_TOKEN, SWISS)]);
+}
+
+#[test]
+fn a_swiss_draft_links_by_the_draft_id_its_tournament_names() {
+    let mut log = Log::default();
+    swiss_draft(&mut log, DRAFT_TOKEN, base());
+    let mut named = swiss(SWISS, "DFRAFRAFRA", base() + 5 * DAY);
+    named.draft_id = Some(7_999_556);
+    log.facts.tournaments.push(named);
+    assert_eq!(linked(&log.fold()), vec![(DRAFT_TOKEN, SWISS)]);
+}
+
+#[test]
+fn a_draft_stays_unlinked_without_a_same_set_tournament_soon_after_it() {
+    for (format, first_match_at) in [
+        // Too late: past the window.
+        (
+            "DFRAFRAFRA",
+            base() + 25 * MINUTE + TOURNAMENT_DRAFT_WINDOW_MS + MINUTE,
+        ),
+        // Before the draft ended.
+        ("DFRAFRAFRA", base() + 20 * MINUTE),
+        // Another set.
+        ("DHOBHOBHOB", base() + 37 * MINUTE),
+        // Sealed, not a draft.
+        ("S6FRA", base() + 37 * MINUTE),
+        // Constructed.
+        ("CMODERN", base() + 37 * MINUTE),
+    ] {
+        let mut log = Log::default();
+        log.known(2000..=2041, Some("FRA"));
+        swiss_draft(&mut log, DRAFT_TOKEN, base());
+        log.facts
+            .tournaments
+            .push(swiss(SWISS, format, first_match_at));
+        let fold = log.fold();
+        assert!(linked(&fold).is_empty(), "{format} at {first_match_at}");
+        assert_eq!(fold.unlinked_drafts, vec![DRAFT_TOKEN.to_string()]);
+    }
+}
+
+#[test]
+fn each_swiss_draft_takes_the_nearest_tournament_once_in_any_order() {
+    let mut log = Log::default();
+    log.known(2000..=2041, Some("FRA"));
+    swiss_draft(&mut log, DRAFT_TOKEN, base());
+    swiss_draft(&mut log, DRAFT_TOKEN_2, base() + 45 * MINUTE);
+    // Both tournaments start within an hour of the first draft's end; the
+    // second is the second draft's.
+    log.facts
+        .tournaments
+        .push(swiss(SWISS_2, "DFRAFRAFRA", base() + 82 * MINUTE));
+    log.facts
+        .tournaments
+        .push(swiss(SWISS, "DFRAFRAFRA", base() + 37 * MINUTE));
+    let fold = log.fold();
+    let mut links = linked(&fold);
+    links.sort();
+    let mut expected = vec![(DRAFT_TOKEN, SWISS), (DRAFT_TOKEN_2, SWISS_2)];
+    expected.sort();
+    assert_eq!(links, expected);
+
+    let mut reversed = log.clone();
+    reversed.facts.drafts.reverse();
+    reversed.facts.tournaments.reverse();
+    let mut again = linked(&reversed.fold())
+        .into_iter()
+        .map(|(token, event)| (token.to_string(), event))
+        .collect::<Vec<_>>();
+    again.sort();
+    let mut first = links
+        .into_iter()
+        .map(|(token, event)| (token.to_string(), event))
+        .collect::<Vec<_>>();
+    first.sort();
+    assert_eq!(again, first);
+}
+
+#[test]
+fn a_league_draft_never_links_to_a_tournament() {
+    let mut log = Log::default();
+    log.known(2000..=2041, Some("FRA"));
+    log.joined(TOKEN, EVENT, base() - MINUTE);
+    let mut league = draft(DRAFT_TOKEN, Some(EVENT), Some(COURSE), 2000..=2041, base());
+    league.draft_id = Some(7_999_556);
+    log.draft(league);
+    let mut named = swiss(SWISS, "DFRAFRAFRA", base() + 37 * MINUTE);
+    named.draft_id = Some(7_999_556);
+    log.facts.tournaments.push(named);
+    let fold = log.fold();
+    assert!(linked(&fold).is_empty());
+    assert_eq!(fold.runs.len(), 1);
+    assert_eq!(fold.runs[0].draft_token.as_deref(), Some(DRAFT_TOKEN));
+}
+
+#[test]
+fn a_league_draft_with_no_run_never_falls_back_to_a_tournament() {
+    let mut log = Log::default();
+    log.known(2000..=2041, Some("FRA"));
+    // MTGO named a league the fold cannot place (an id past i64), so no run
+    // holds the draft: it is still a league's draft, never a Swiss Draft.
+    let mut league = draft(DRAFT_TOKEN, None, Some(COURSE), 2000..=2041, base());
+    league.league_event_id = Some(u64::MAX);
+    log.draft(league);
+    log.facts
+        .tournaments
+        .push(swiss(SWISS, "DFRAFRAFRA", base() + 37 * MINUTE));
+    let fold = log.fold();
+    assert!(linked(&fold).is_empty());
+    assert_eq!(fold.unlinked_drafts, vec![DRAFT_TOKEN.to_string()]);
+}
+
+#[test]
+fn a_tournament_draft_state_comes_from_its_matches() {
+    // (complete matches, swiss, last complete lost, newer activity).
+    // Three rounds complete it, whatever came after.
+    assert_eq!(
+        tournament_draft_state(3, true, false, false),
+        RunState::Complete
+    );
+    assert_eq!(
+        tournament_draft_state(3, true, true, true),
+        RunState::Complete
+    );
+    // A Swiss event plays on after a loss.
+    assert_eq!(
+        tournament_draft_state(1, true, true, false),
+        RunState::Active
+    );
+    // An elimination event ends at the first loss.
+    assert_eq!(
+        tournament_draft_state(1, false, true, false),
+        RunState::Complete
+    );
+    assert_eq!(
+        tournament_draft_state(2, false, false, false),
+        RunState::Active
+    );
+    assert_eq!(
+        tournament_draft_state(0, false, false, false),
+        RunState::Active
+    );
+    // A newer draft or a match outside the event drops it.
+    assert_eq!(
+        tournament_draft_state(2, true, false, true),
+        RunState::Dropped
+    );
+    assert_eq!(
+        tournament_draft_state(0, true, false, true),
+        RunState::Dropped
+    );
+}
+
+#[test]
+fn a_tournament_draft_has_its_key_and_label() {
+    assert_eq!(tournament_run_key(SWISS), "tournament:19990050");
+    assert!(is_tournament_run_key("tournament:19990050"));
+    assert!(!is_tournament_run_key("draft:19990050"));
+    assert_eq!(
+        tournament_draft_label(Some("Reality Fracture Swiss Draft")),
+        "Swiss Draft"
+    );
+    assert_eq!(
+        tournament_draft_label(Some("No Holds Barred Cube Elimination Draft")),
+        "Tournament Draft"
+    );
+    assert_eq!(tournament_draft_label(None), "Tournament Draft");
 }

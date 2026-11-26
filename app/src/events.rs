@@ -191,6 +191,12 @@ pub struct MetagameSharesReady {
 #[serde(rename_all = "camelCase")]
 pub struct ApiChanged {}
 
+/// A sync run ended (scheduled, after a match or "Sync now"), whatever it
+/// did. The status bar reads its sync line again.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, specta::Type, Event)]
+#[serde(rename_all = "camelCase")]
+pub struct SyncFinished {}
+
 /// Offline mode was switched (by the user or a 0.x import). Replace the
 /// offline mode card's state; the status bar follows `StatusChanged`.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, specta::Type, Event)]

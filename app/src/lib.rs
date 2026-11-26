@@ -45,6 +45,7 @@ pub mod support;
 pub mod timezone;
 pub mod updates;
 pub mod usage;
+pub mod usage_marks;
 pub mod whats_new;
 pub mod window;
 pub mod worker_thread;
@@ -265,7 +266,9 @@ pub fn run() {
                 window::apply_interface_scale(app.handle(), settings.interface_scale);
             }
             updates::start_checking(app.handle().clone());
-            usage::track(app.handle(), &usage::UsageEvent::AppStarted);
+            if matches!(&*app.state::<Startup>(), Startup::Ready(_)) {
+                usage_marks::start(app.handle());
+            }
             Ok(())
         })
         .build(context())
